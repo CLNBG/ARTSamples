@@ -1,3 +1,3 @@
 group "HardwareVendorDemo/ART"
-  include "ARTSamples/PCI9757/VC/Advanced"
+  include "PCI9757/VC/Advanced"
 group ""
