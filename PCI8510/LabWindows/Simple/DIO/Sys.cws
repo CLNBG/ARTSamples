@@ -1,0 +1,106 @@
+[Workspace Header]
+Version = 700
+Pathname = "/e/新建文件夹 (2)/PCI8510/Sample/LabWindows/Simple/DIO/Sys.cws"
+CVI Dir = "/c/program files/national instruments/cvi70"
+IVI Standard Root Dir = "/C/Program Files/IVI"
+VXIplug&play Framework Dir = "/c/vxipnp/winnt"
+Number of Projects = 1
+Active Project = 1
+Project 0001 = "Sys.prj"
+Drag Bar Left = 248
+Window Top = 40
+Window Left = 0
+Window Bottom = 752
+Window Right = 1024
+Maximized = True
+Maximized Children = True
+Max Number Of Errors = 20
+Track Include File Dependencies = True
+Prompt For Missing Includes = True
+Stop On First Error File = False
+Bring Up Err Win For Warnings = True
+Show Build Dialog = False
+Save Changes Before Running = "Always"
+Hide Windows = False
+Global Hot Key = False
+Break At First Statement = False
+Sort Type = "File Name"
+Number of Opened Files = 3
+MainColumnWidth = 225
+FileDateColumnWidth = 70
+FileSizeColumnWidth = 70
+StatusColumnWidth = 70
+
+[Project Header 0001]
+Version = 700
+Platform Code = 4
+Build Configuration = "Release"
+Warn User If Debugging Release = 1
+Batch Build Release = False
+Batch Build Debug = False
+
+[File 0001]
+Path = "/e/新建文件夹 (2)/PCI8510/Sample/LabWindows/Simple/DIO/Sys.c"
+File Type = "CSource"
+Disk Date = 3466560362
+In Projects = "1,"
+Window Top = 30
+Window Docked = True
+Window Z-Order = 1
+Source Window State = "1,40,41,40,53,54,53,0,0,125,0,0,0,0,0,53,9,0,38,0,"
+
+[File 0002]
+Path = "/e/新建文件夹 (2)/PCI8510/Sample/LabWindows/Simple/DIO/CONIO.H"
+File Type = "Include"
+Disk Date = 3324535308
+In Projects = "1,"
+Window Top = 32
+Window Left = 6
+Window Docked = True
+Window Z-Order = 3
+
+[File 0003]
+Path = "/e/新建文件夹 (2)/PCI8510/Sample/LabWindows/Simple/DIO/PCI8510.h"
+File Type = "Include"
+Disk Date = 3463109171
+In Projects = "1,"
+Window Top = 62
+Window Left = 22
+Window Docked = True
+Window Z-Order = 2
+
+[File 0004]
+Path = "/e/新建文件夹 (2)/PCI8510/Sample/LabWindows/Simple/DIO/PCI8510_32.lib"
+File Type = "Library"
+Disk Date = 3462936304
+In Projects = "1,"
+
+[Build Options 0001]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Debugging Level = "Standard"
+Break On Library Errors = True
+Break On First Chance Exceptions = False
+
+[SCC Options 0001]
+Use global settings = True
+SCC Provider = ""
+SCC Project = ""
+Local Path = ""
+Auxiliary Path = ""
+Perform Same Action For .h File As For .uir File = "Ask"
+Username = ""
+Comment = ""
+Use Default Username = False
+Use Default Comment = True
+Suppress CVI Error Messages = False
+
+[DLL Debugging Support 0001]
+External Process Path = ""
+
+[DLLs Used By Executable 0001]
+DLL 0001 = "/C/WINDOWS/system32/PCI8510_32.dll"
+
+[Command Line Args 0001]
+Command Line Args = ""
+
