@@ -72,7 +72,7 @@ END_MESSAGE_MAP()
 void CMdiClient::AddHandle(HWND hWnd)
 {
 	ASSERT(m_pWndTabs != NULL);
-	// �����б�
+	// 添加列表
 	m_pWndTabs->AddHandle(hWnd);
 }
 
@@ -102,89 +102,89 @@ LRESULT CMdiClient::OnMDIDestroy(WPARAM wParam, LPARAM lParam)
 
 BOOL CMdiClient::OnEraseBkgnd(CDC* pDC) 
 {
-	// ���ı䴰�ڴ�С���ƶ����״δ���ʱ���˺��������ã����������ڵı���
+	// 当改变窗口大小或被移动或首次创建时，此函数被调用，它创建窗口的背景
 	CRect rect;
-	// ȡ�������ڿͻ�������
+	// 取得主窗口客户区矩形
 	GetClientRect(&rect);	
 	
-	// �������ǰɫ��Ϊ0, m_crBkColor�ڹ��캯���г�ʼ��
+	// 如果背景前色不为0, m_crBkColor在构造函数中初始化
 	if (m_crBkColor != 0)
 	{
 
 		CBrush NewBrush(m_crBkColor); 
-		// ����ˢ�ӵ���ʼԭ��
+		// 设置刷子的起始原点
 		pDC->SetBrushOrg(0, 0);
-		// ѡ����ˢ�ӣ��ҽ�ԭˢ��ת����CBrush��
+		// 选择新刷子，且将原刷子转换成CBrush类
 		CBrush* pOldBrush = static_cast<CBrush*>(pDC->SelectObject(&NewBrush));  
-		// �Կ�����ʽ���ƴ��ڱ���
+		// 以拷贝方式绘制窗口背景
 		pDC->PatBlt(rect.left, rect.top, rect.Width(), rect.Height(), PATCOPY); 		
 		pDC->SelectObject(pOldBrush);
-		// ɾ����ˢ�Ӷ���
+		// 删除新刷子对象
 		NewBrush.DeleteObject();
 	}
 
     CRect rcDataBox;
-	CString strLogo = "����̩�Ƽ�";
+	CString strLogo = "阿尔泰科技";
 	CFont fontLogo;
 	TEXTMETRIC tm;
 	
-	// ����һ��32λ������ڶ���32λ������ˣ��ٳ��Ե�����32λ�������ȡ��
+	// 将第一个32位参数与第二个32位参数相乘，再除以第三个32位数，最后取商
 	int fontSize = -MulDiv(18, pDC->GetDeviceCaps(LOGPIXELSY), 72);
 	
-	// ��������
+	// 创建字体
 	fontLogo.CreateFont(fontSize, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE,
 		ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, 
 		FIXED_PITCH | FF_ROMAN, _T("Times New Roman"));
 
-	// ���ñ���ģʽΪ��͸����ʽ��OPAQUE��
+	// 设置背景模式为不透明方式（OPAQUE）
 	pDC->SetBkMode(OPAQUE);		
 	
-	// ѡ��������
+	// 选择新字体
 	CFont* oldFont = pDC->SelectObject(&fontLogo);
 	CRect st(0, 0, 0, 0);
 	
-	// ȡ�ø����ַ���strLogo�ľ�������
+	// 取得给定字符串strLogo的矩形区域
 	CSize sz = pDC->GetTextExtent(strLogo, strLogo.GetLength());
-	// ���ݵ�ǰ���壬�����ѡ����Ķ���
+	// 根据当前字体，获得所选字体的度量
 	pDC->GetTextMetrics(&tm);
 
 	// Calculate the box size by subtracting the text width and height from the
 	// window size.  Also subtract 20% of the average character size to keep the
 	// logo from printing into the borders...
 
-	// ȡ�ÿͻ���
+	// 取得客户区
 	GetClientRect(&rcDataBox);
 	
 	rcDataBox.left = rcDataBox.right  - sz.cx - tm.tmAveCharWidth;
 	rcDataBox.top  = rcDataBox.bottom - sz.cy - st.bottom - tm.tmHeight;
 	
 	CRect rcSave = rcDataBox;		
-	// ���ñ���ģʽΪ͸����ʽ��TRANSPARENT��
+	// 设置背景模式为透明方式（TRANSPARENT）
 	pDC->SetBkMode(TRANSPARENT); 
 	rcSave = rcDataBox;
 	
 	// shift logo box right, and print black...
 	rcDataBox.left   += tm.tmAveCharWidth / 5;
-	// ��������ɫ����ɫ��
+	// 设置文字色（黑色）
 	COLORREF oldColor = pDC->SetTextColor(RGB(0, 0, 0));
-	// ���������ֵĵײ�����
+	// 绘制立体字的底层文字
 	pDC->DrawText(strLogo, strLogo.GetLength(), &rcDataBox, 
 		DT_VCENTER | DT_SINGLELINE | DT_CENTER);
 	
 	rcDataBox = rcSave;
 	
-	// ����ƫ������λ��Ϊ��ǰ������ȵ�25%
+	// 向左偏移文体位置为当前字体宽度的25%
 	rcDataBox.left -= tm.tmAveCharWidth /4;
-	// ���������ֵ��в�����ɫΪ��ɫ
+	// 设置立体字的中层字体色为白色
 	pDC->SetTextColor(RGB(255, 255, 255));
-	// �����в���
+	// 绘制中层字
 	pDC->DrawText(strLogo, strLogo.GetLength(), &rcDataBox, 
 		DT_VCENTER | DT_SINGLELINE | DT_CENTER);
 	
 	rcDataBox = rcSave;
-	// ��������Ϊϵͳɫ
+	// 设置文字为系统色
 	pDC->SetTextColor(GetSysColor(COLOR_BTNFACE));
-	// ��ԭλ�û����ϲ�����
+	// 在原位置绘制上层文字
 	pDC->DrawText(strLogo, strLogo.GetLength(), &rcDataBox, 
 		DT_VCENTER | DT_SINGLELINE | DT_CENTER);
 	
@@ -193,7 +193,7 @@ BOOL CMdiClient::OnEraseBkgnd(CDC* pDC)
 	pDC->SetTextColor(oldColor);   
 	pDC->SetBkMode(OPAQUE);	
 	fontLogo.DeleteObject();
-    // �ͷŹ���DC�ʹ���DC��ʹ����Ӧ�ó������ʹ�ã�����DC��˽��DC��Ӱ��	
+    // 释放公共DC和窗口DC，使其他应用程序可以使用，对类DC和私有DC无影响	
 	ReleaseDC(pDC);
 	
     return TRUE;	
@@ -202,10 +202,10 @@ BOOL CMdiClient::OnEraseBkgnd(CDC* pDC)
 
 void CMdiClient::OnSize(UINT nType, int cx, int cy) 
 {
-	// ���ͻ�����仯ʱ�������á�������֡���ڱ����ʱ��Ҳ���������Ϣ
+	// 当客户区域变化时，被调用。即当子帧窗口被最大化时，也会产生此消息
 	CWnd::OnSize(nType, cx, cy);
 	
-	// ���Ӧ�ó����������򱣴������С���������ɷ���
+	// 如果应用程序当启动，则保存这个大小参数，即可返回
     if ((m_sizeClient.cx == 0) && (m_sizeClient.cy == 0))
 	{
         m_sizeClient.cx = cx;
@@ -214,16 +214,16 @@ void CMdiClient::OnSize(UINT nType, int cx, int cy)
         return;
 	}	
 
-    // ����ͻ����ڴ�Сδ�����仯���򷵻�
+    // 如果客户窗口大小未发生变化，则返回
     if ((m_sizeClient.cx == cx) && (m_sizeClient.cy == cy))
     { 
         return;
     }	
 
-	// ������ֵ
+	// 保存新值
     m_sizeClient.cx = cx;
     m_sizeClient.cy = cy;
-	// ǿ���ػ�
+	// 强制重绘
     RedrawWindow(NULL, NULL, 
         RDW_INVALIDATE | RDW_ERASE | RDW_ERASENOW | RDW_ALLCHILDREN);    
 	

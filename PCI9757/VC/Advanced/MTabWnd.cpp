@@ -65,7 +65,7 @@ END_MESSAGE_MAP()
 
 BOOL CMDITabFrameWnd::CreateTabs(void) 
 {
-	// m_wndTabsÊÇCControlBarÅÉÉúÀà
+	// m_wndTabsæ˜¯CControlBaræ´¾ç”Ÿç±»
 	if (!m_wndTabs.Create(this, 
 		WS_VISIBLE | WS_CHILD | CBRS_TOP | WS_EX_WINDOWEDGE, 
 		IDC_MDI_TAB_CTRL_BAR))
@@ -79,7 +79,7 @@ BOOL CMDITabFrameWnd::CreateTabs(void)
 	ASSERT(m_hWndMDIClient != NULL);
 
 
-	// Í¨¹ı×¢²ám_hWndMDIClient´°¿ÚÀà£¬±ã¿ÉÒÔÊ¹ËüµÃµ½Ìí¼ÓºÍÒÆÈ¥TAB¿Ø¼şµÄÏûÏ¢
+	// é€šè¿‡æ³¨å†Œm_hWndMDIClientçª—å£ç±»ï¼Œä¾¿å¯ä»¥ä½¿å®ƒå¾—åˆ°æ·»åŠ å’Œç§»å»TABæ§ä»¶çš„æ¶ˆæ¯
 	if (!m_wndMdiClient.SubclassWindow(m_hWndMDIClient))
 	{
 		TRACE("Failed to subclass MDI client\n");
