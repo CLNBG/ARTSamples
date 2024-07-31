@@ -1,15 +1,15 @@
-project "HDPS_2C"
+project "Sys_8510"
     kind "WindowedApp"
     language "C++"
-    cppdialect "C++11"
+    cppdialect "C++17"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
     
     pchheader "StdAfx.h"
-    pchsource "%{wks.location}/NMROSCore/vendor/Camera/HDPS/StdAfx.cpp"
+    pchsource "%{wks.location}/NMROSCore/vendor/ART/ARTSamples/PCI8510/VC/Advanced/StdAfx.cpp"
     
-    characterset ("ASCII")
+    characterset ("Unicode")
     
     defines
     {
@@ -20,6 +20,23 @@ project "HDPS_2C"
     {
       "MFC"
     }
+
+    includedirs
+    {
+        "%{IncludeDir.ART}",
+    }
+    libdirs
+    {
+        "%{wks.location}/NMROSCore/vendor/ART/libs/PCI8510",
+    }
+    links
+    {
+        "PCI8510_64.lib",
+    }
+		debugenvs
+  	{
+    		"path=" .. os.getenv("path") .. ";" .. "%{dllDir.PCI8510}"
+  	}
 
     files
     {

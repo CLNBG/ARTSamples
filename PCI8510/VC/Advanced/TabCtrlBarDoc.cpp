@@ -33,7 +33,7 @@
 #include "stdafx.h"
 #include <afxpriv.h>
 //#include <..\src\afximpl.h>
-#include <..\ce\atlmfc\src\mfc\afximpl.h>
+#include "afximpl.h"
 
 #include "resource.h"
 #include "TabCtrlBarDoc.h"
@@ -74,7 +74,7 @@ BOOL CTabCtrlBarDoc::Create(CWnd* pParentWnd, DWORD dwStyle, UINT nID)
 	m_dwStyle = CBRS_ALL;
 	// translate MFC style bits to windows style bits
 	dwStyle &= ~CBRS_ALL;
-	dwStyle |= CCS_NOPARENTALIGN|CCS_NOMOVEY|CCS_NODIVIDER|CCS_NORESIZE;
+	dwStyle |= CCS_NOPARENTALIGN | CCS_NOMOVEY | CCS_NODIVIDER | CCS_NORESIZE;
 	if (pParentWnd->GetStyle() & WS_THICKFRAME)
 		dwStyle |= SBARS_SIZEGRIP;
 
@@ -90,19 +90,19 @@ BOOL CTabCtrlBarDoc::Create(CWnd* pParentWnd, DWORD dwStyle, UINT nID)
 /////////////////////////////////////////////////////////////////////////////
 // CTabCtrlBarDoc message handlers
 
-int CTabCtrlBarDoc::OnCreate(LPCREATESTRUCT lpCreateStruct) 
+int CTabCtrlBarDoc::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CControlBar::OnCreate(lpCreateStruct) == -1)
 		return -1;
-	
+
 	CRect rect; rect.SetRectEmpty();
 	//Create the Tab Control
-	if (!m_tabctrl.Create(WS_VISIBLE|WS_CHILD, rect, this, IDC_MDI_TAB_CTRL))
+	if (!m_tabctrl.Create(WS_VISIBLE | WS_CHILD, rect, this, IDC_MDI_TAB_CTRL))
 	{
 		TRACE0("Unable to create tab control bar\n");
 		return -1;
 	}
- 
+
 	// set "regular" GUI-font
 	// Use a smaller font for smaller tabs
 	CFont* font = CFont::FromHandle((HFONT)::GetStockObject(DEFAULT_GUI_FONT));
@@ -111,7 +111,7 @@ int CTabCtrlBarDoc::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-void CTabCtrlBarDoc::OnSize(UINT nType, int cx, int cy) 
+void CTabCtrlBarDoc::OnSize(UINT nType, int cx, int cy)
 {
 	CControlBar::OnSize(nType, cx, cy);
 	CRect rect;
@@ -119,7 +119,7 @@ void CTabCtrlBarDoc::OnSize(UINT nType, int cx, int cy)
 	{
 		GetWindowRect(rect);
 		m_tabctrl.AdjustRect(TRUE, &rect);
-		m_tabctrl.SetWindowPos(&wndTop, 0, 0, rect.Width()-7, rect.Height(), SWP_SHOWWINDOW);
+		m_tabctrl.SetWindowPos(&wndTop, 0, 0, rect.Width() - 7, rect.Height(), SWP_SHOWWINDOW);
 	}
 }
 
@@ -134,25 +134,25 @@ void CTabCtrlBarDoc::SetTitles(void)
 {
 	CString csName;
 	TC_ITEM tci;
-	TCHAR buf[MAX_PATH+1];
-	CMDIFrameWnd* pMainframe = ((CMDIFrameWnd *)AfxGetMainWnd());
+	TCHAR buf[MAX_PATH + 1];
+	CMDIFrameWnd* pMainframe = ((CMDIFrameWnd*)AfxGetMainWnd());
 	if (pMainframe == NULL)
 		return;	// no official mainframe window yet
 
 	CMDIChildWnd* pActive = pMainframe->MDIGetActive(NULL);
-	
+
 	// update all tab labels if neccessary
 	int numitems = m_tabctrl.GetItemCount();
 	for (int item = 0; item < numitems; item++)
 	{
 		csName.Empty();
-		tci.mask = TCIF_PARAM|TCIF_TEXT;
+		tci.mask = TCIF_PARAM | TCIF_TEXT;
 		tci.pszText = buf;
 		tci.cchTextMax = MAX_PATH;
 		if (!m_tabctrl.GetItem(item, &tci))
 			continue;	// skip bad ones (never saw one yet)
 
-		CWnd *pFrame = FromHandle((HWND) tci.lParam);
+		CWnd* pFrame = FromHandle((HWND)tci.lParam);
 		ASSERT(pFrame != NULL);
 		if (pFrame->IsKindOf(RUNTIME_CLASS(CMDIChildWnd)))
 		{
@@ -180,9 +180,9 @@ void CTabCtrlBarDoc::AddHandle(HWND hWnd)
 	if (pFrame->IsKindOf(RUNTIME_CLASS(CMDIChildWnd)))
 	{
 		TC_ITEM tci;
-		tci.mask = TCIF_PARAM|TCIF_TEXT;
+		tci.mask = TCIF_PARAM | TCIF_TEXT;
 		tci.pszText = L"";
-		tci.lParam = (long) hWnd;
+		tci.lParam = (long)hWnd;
 		m_tabctrl.InsertItem(m_tabctrl.GetItemCount(), &tci);
 	}
 }
@@ -197,7 +197,7 @@ void CTabCtrlBarDoc::RemoveHandle(HWND hWnd)
 	{
 		tci.mask = TCIF_PARAM;
 		m_tabctrl.GetItem(item, &tci);
-		if (tci.lParam == (long) hWnd)
+		if (tci.lParam == (long)hWnd)
 		{
 			m_tabctrl.DeleteItem(item);
 			break;
@@ -207,7 +207,7 @@ void CTabCtrlBarDoc::RemoveHandle(HWND hWnd)
 
 // The user clicked onto a tab.
 // Now select a new MDI child frame
-void CTabCtrlBarDoc::OnSelchange(NMHDR* pNMHDR, LRESULT* pResult) 
+void CTabCtrlBarDoc::OnSelchange(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	int idx = m_tabctrl.GetCurSel();
 
@@ -215,7 +215,7 @@ void CTabCtrlBarDoc::OnSelchange(NMHDR* pNMHDR, LRESULT* pResult)
 	tci.mask = TCIF_PARAM;
 	if (m_tabctrl.GetItem(idx, &tci))
 	{
-		CWnd* pFrame = FromHandle((HWND) tci.lParam);
+		CWnd* pFrame = FromHandle((HWND)tci.lParam);
 		ASSERT(pFrame != NULL);
 		ASSERT_KINDOF(CMDIChildWnd, pFrame);
 		((CMDIFrameWnd*)AfxGetMainWnd())->MDIActivate(pFrame);
@@ -254,7 +254,7 @@ CSize CTabCtrlBarDoc::CalcFixedLayout(BOOL, BOOL bHorz)
 	CSize size;
 	size.cx = 32767;
 	size.cy = tm.tmHeight - tm.tmInternalLeading - 1
-		+ rgBorders[1] * 2 + ::GetSystemMetrics(SM_CYBORDER) * (2+3)
+		+ rgBorders[1] * 2 + ::GetSystemMetrics(SM_CYBORDER) * (2 + 3)
 		- rect.Height();
 
 	return size;
