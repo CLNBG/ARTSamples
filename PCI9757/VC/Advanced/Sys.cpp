@@ -12,33 +12,33 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CSysApp
 BEGIN_MESSAGE_MAP(CSysApp, CWinApp)
-//{{AFX_MSG_MAP(CSysApp)
-ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
-ON_UPDATE_COMMAND_UI(IDM_CloseFile, OnUpdateCloseFile)
-ON_UPDATE_COMMAND_UI(IDM_DataFileNew, OnUpdateDataFileNew)
-ON_COMMAND(IDM_CloseFile, OnCloseFile)
-ON_COMMAND(IDM_DataFileNew, OnDataFileNew)
-ON_COMMAND(IDM_StartDeviceAD, OnStartDeviceAD)
-ON_COMMAND(IDM_StopDeviceAD, OnStopDeviceAD)
-ON_UPDATE_COMMAND_UI(IDM_StopDeviceAD, OnUpdateStopDeviceAD)
-ON_COMMAND(IDM_Open_AD, OnOpenAD)
-ON_UPDATE_COMMAND_UI(IDM_Open_AD, OnUpdateOpenAD)
-ON_COMMAND(IDM_OpenADHist, OnOpenADHist)
-ON_UPDATE_COMMAND_UI(IDM_OpenADHist, OnUpdateADHist)
-ON_UPDATE_COMMAND_UI(IDM_StartDeviceAD, OnUpdateStartDeviceAD)
-ON_UPDATE_COMMAND_UI(IDM_MDataSave, OnUpdateDataSave)
-ON_UPDATE_COMMAND_UI(IDM_MDigitalShow, OnUpdateDigitalShow)
-ON_UPDATE_COMMAND_UI(IDM_MGraphicShow, OnUpdateGraphicShow)
-ON_COMMAND(IDM_MDataSave, OnMDataSave)
-ON_COMMAND(IDM_MDigitalShow, OnMDigitalShow)
-ON_COMMAND(IDM_MGraphicShow, OnMGraphicShow)
-ON_COMMAND(IDM_ListDeviceDlg, OnListDeviceDlg)
-ON_COMMAND(IDM_Dma_Mode, OnDmaMode)
-ON_UPDATE_COMMAND_UI(IDM_Dma_Mode, OnUpdateDmaMode)
-ON_COMMAND(IDM_Npt_Mode, OnNptMode)
-ON_UPDATE_COMMAND_UI(IDM_Npt_Mode, OnUpdateNptMode)
-ON_COMMAND(IDM_Half_Mode, OnHalfMode)
-ON_UPDATE_COMMAND_UI(IDM_Half_Mode, OnUpdateHalfMode)
+	//{{AFX_MSG_MAP(CSysApp)
+	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
+	ON_UPDATE_COMMAND_UI(IDM_CloseFile, OnUpdateCloseFile)
+	ON_UPDATE_COMMAND_UI(IDM_DataFileNew, OnUpdateDataFileNew)
+	ON_COMMAND(IDM_CloseFile, OnCloseFile)
+	ON_COMMAND(IDM_DataFileNew, OnDataFileNew)
+	ON_COMMAND(IDM_StartDeviceAD, OnStartDeviceAD)
+	ON_COMMAND(IDM_StopDeviceAD, OnStopDeviceAD)
+	ON_UPDATE_COMMAND_UI(IDM_StopDeviceAD, OnUpdateStopDeviceAD)
+	ON_COMMAND(IDM_Open_AD, OnOpenAD)
+	ON_UPDATE_COMMAND_UI(IDM_Open_AD, OnUpdateOpenAD)
+	ON_COMMAND(IDM_OpenADHist, OnOpenADHist)
+	ON_UPDATE_COMMAND_UI(IDM_OpenADHist, OnUpdateADHist)
+	ON_UPDATE_COMMAND_UI(IDM_StartDeviceAD, OnUpdateStartDeviceAD)
+	ON_UPDATE_COMMAND_UI(IDM_MDataSave, OnUpdateDataSave)
+	ON_UPDATE_COMMAND_UI(IDM_MDigitalShow, OnUpdateDigitalShow)
+	ON_UPDATE_COMMAND_UI(IDM_MGraphicShow, OnUpdateGraphicShow)
+	ON_COMMAND(IDM_MDataSave, OnMDataSave)
+	ON_COMMAND(IDM_MDigitalShow, OnMDigitalShow)
+	ON_COMMAND(IDM_MGraphicShow, OnMGraphicShow)
+	ON_COMMAND(IDM_ListDeviceDlg, OnListDeviceDlg)
+	ON_COMMAND(IDM_Dma_Mode, OnDmaMode)
+	ON_UPDATE_COMMAND_UI(IDM_Dma_Mode, OnUpdateDmaMode)
+	ON_COMMAND(IDM_Npt_Mode, OnNptMode)
+	ON_UPDATE_COMMAND_UI(IDM_Npt_Mode, OnUpdateNptMode)
+	ON_COMMAND(IDM_Half_Mode, OnHalfMode)
+	ON_UPDATE_COMMAND_UI(IDM_Half_Mode, OnUpdateHalfMode)
 	ON_COMMAND(IDM_INT_Mode, OnINTMode)
 	ON_UPDATE_COMMAND_UI(IDM_INT_Mode, OnUpdateINTMode)
 	//}}AFX_MSG_MAP
@@ -48,7 +48,7 @@ ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
 // Standard print setup command
 ON_COMMAND(ID_FILE_PRINT_SETUP, CWinApp::OnFilePrintSetup)
 //ON_COMMAND(IDM_ADCalibration, &CSysApp::OnADCalibration)
-ON_COMMAND(IDM_ADCalibration,OnADCalibration)
+ON_COMMAND(IDM_ADCalibration, OnADCalibration)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -76,91 +76,91 @@ BOOL CSysApp::InitInstance()
 	TCHAR szMutex[256];
 	BOOL bCreate = FALSE;
 	HANDLE hDevice = INVALID_HANDLE_VALUE;
-	m_CurrentDeviceID = 0;   // ÷∏∂®µ±«∞…Ë±∏µƒID±Í æ∑˚
+	m_CurrentDeviceID = 0;   // ÊåáÂÆöÂΩìÂâçËÆæÂ§áÁöÑIDÊ†áÁ§∫Á¨¶
 	int DeviceCount;
-	hDevice = PCI9757_CreateDevice(0); // ¥¥Ω®…Ë±∏∂‘œÛ£¨±£¥Ê‘⁄App÷–£¨ø…π©∆‰À˚»Œ∫Œ◊”¥∞ÃÂªÚ◊”π¶ƒ‹ π”√
-	if (hDevice != INVALID_HANDLE_VALUE)  // »Áπ˚…Ë±∏æ‰±˙”––ß
+	hDevice = PCI9757_CreateDevice(0); // ÂàõÂª∫ËÆæÂ§áÂØπË±°Ôºå‰øùÂ≠òÂú®App‰∏≠ÔºåÂèØ‰æõÂÖ∂‰ªñ‰ªª‰ΩïÂ≠êÁ™ó‰ΩìÊàñÂ≠êÂäüËÉΩ‰ΩøÁî®
+	if (hDevice != INVALID_HANDLE_VALUE)  // Â¶ÇÊûúËÆæÂ§áÂè•ÊüÑÊúâÊïà
 	{
 		DeviceCount = PCI9757_GetDeviceCount(hDevice);
-		PCI9757_ReleaseDevice(hDevice);	
+		PCI9757_ReleaseDevice(hDevice);
 	}
 	else
 	{
-		DeviceCount = 0; // »Áπ˚√ª”–¥¥Ω®≥…π¶£¨‘Ú»œŒ™…Ë±∏ ˝¡øŒ™0
-	}	
-	
-	for (int DeviceID=0; DeviceID<DeviceCount; DeviceID++)
+		DeviceCount = 0; // Â¶ÇÊûúÊ≤°ÊúâÂàõÂª∫ÊàêÂäüÔºåÂàôËÆ§‰∏∫ËÆæÂ§áÊï∞Èáè‰∏∫0
+	}
+
+	for (int DeviceID = 0; DeviceID < DeviceCount; DeviceID++)
 	{
-		_stprintf_s(szMutex, _T("PCI9757-%d") , DeviceID);
-		
-		// ¥¥Ω®ª•≥‚∂‘œÛ
-		m_hMutex=::CreateMutex(NULL, NULL, szMutex);  // m_pszExeNameŒ™±æ≥Ã–Úµƒ÷¥––√˚
-		if (GetLastError() == ERROR_ALREADY_EXISTS)      // µ⁄∂˛¥Œ¥¥Ω®”¶”√≥Ã–Ú
+		_stprintf_s(szMutex, _T("PCI9757-%d"), DeviceID);
+
+		// ÂàõÂª∫‰∫íÊñ•ÂØπË±°
+		m_hMutex = ::CreateMutex(NULL, NULL, szMutex);  // m_pszExeName‰∏∫Êú¨Á®ãÂ∫èÁöÑÊâßË°åÂêç
+		if (GetLastError() == ERROR_ALREADY_EXISTS)      // Á¨¨‰∫åÊ¨°ÂàõÂª∫Â∫îÁî®Á®ãÂ∫è
 		{
 			bCreate = FALSE;
-			continue;  // »Áπ˚“—æ≠¥¥Ω®£¨‘ÚºÃ–¯œ¬“ª∏ˆ…Ë±∏µƒ”¶”√≥Ã–Ú¥¥Ω®
+			continue;  // Â¶ÇÊûúÂ∑≤ÁªèÂàõÂª∫ÔºåÂàôÁªßÁª≠‰∏ã‰∏Ä‰∏™ËÆæÂ§áÁöÑÂ∫îÁî®Á®ãÂ∫èÂàõÂª∫
 		}
 		else
-		{ 	
+		{
 			bCreate = TRUE;
 			m_CurrentDeviceID = DeviceID;
 			break;
 		}
-		
+
 	}
-	
-	if (DeviceCount!=0)
+
+	if (DeviceCount != 0)
 	{
-		if (bCreate==FALSE)  // µ±∏√ µ¿˝≤ªƒ‹±ª¥¥Ω® ±
+		if (bCreate == FALSE)  // ÂΩìËØ•ÂÆû‰æã‰∏çËÉΩË¢´ÂàõÂª∫Êó∂
 		{
-			AfxMessageBox(_T("∂‘≤ª∆£¨ƒ˙µƒÀ˘”–…Ë±∏“—±ªœ‡”¶≥Ã–Úπ‹¿Ì£¨ƒ˙≤ªƒ‹‘Ÿ¥¥Ω®–¬ µ¿˝...") , MB_ICONWARNING, 0);
-			return FALSE; 
+			AfxMessageBox(_T("ÂØπ‰∏çËµ∑ÔºåÊÇ®ÁöÑÊâÄÊúâËÆæÂ§áÂ∑≤Ë¢´Áõ∏Â∫îÁ®ãÂ∫èÁÆ°ÁêÜÔºåÊÇ®‰∏çËÉΩÂÜçÂàõÂª∫Êñ∞ÂÆû‰æã..."), MB_ICONWARNING, 0);
+			return FALSE;
 		}
 		m_hDevice = PCI9757_CreateDevice(m_CurrentDeviceID);
 	}
 	///////////////////////////////////////////////
-	// ≈–∂œ”√ªßµƒœ‘ æ∆˜ƒ£ Ω «∑ÒŒ™1024*768
-	int Len = GetSystemMetrics(SM_CXSCREEN);  // »°µ√∆¡ƒªøÌ∂»
-	if (Len<1024) // »Áπ˚∆¡ƒªøÌ∂»¥Û–°1024£¨‘Ú
+	// Âà§Êñ≠Áî®Êà∑ÁöÑÊòæÁ§∫Âô®Ê®°ÂºèÊòØÂê¶‰∏∫1024*768
+	int Len = GetSystemMetrics(SM_CXSCREEN);  // ÂèñÂæóÂ±èÂπïÂÆΩÂ∫¶
+	if (Len < 1024) // Â¶ÇÊûúÂ±èÂπïÂÆΩÂ∫¶Â§ßÂ∞è1024ÔºåÂàô
 	{
-		if (AfxMessageBox(_T("«Î◊Ó∫√ π”√1024*768ªÚ“‘…œµƒœ‘ æ∆˜∑÷±Ê¬ £¨ºÃ–¯¬£ø") , MB_ICONWARNING|MB_YESNO, 0) == IDNO)	
+		if (AfxMessageBox(_T(""), MB_ICONWARNING | MB_YESNO, 0) == IDNO)
 		{
 			ExitInstance();
 			return FALSE;
 		}
 	}
-	
-	// ”¶”√≥Ã–Ú’˝≥£¥¥Ω®¥˙¬Î£∫
+
+	// Â∫îÁî®Á®ãÂ∫èÊ≠£Â∏∏ÂàõÂª∫‰ª£Á†ÅÔºö
 	AfxEnableControlContainer();
-	
+
 #ifdef _AFXDLL
 	Enable3dControls();			// Call this when using MFC in a shared DLL
 #else
-//	Enable3dControlsStatic();	// Call this when linking to MFC statically
+	//	Enable3dControlsStatic();	// Call this when linking to MFC statically
 #endif
-	
+
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
-	
+
 	LoadStdProfileSettings(16);  // Load standard INI file options (including MRU)
-	
-	// ÃÌº”AD≤…ºØƒ£∞Â
+
+	// Ê∑ªÂä†ADÈááÈõÜÊ®°Êùø
 	pADTemplate = new CMultiDocTemplate(
 		IDR_AD,
 		RUNTIME_CLASS(CADDoc),
 		RUNTIME_CLASS(CADFrm), // custom MDI child frame
 		RUNTIME_CLASS(CADDigitView));
 	AddDocTemplate(pADTemplate);
-	
-	// ÃÌº”¿˙ ∑ ˝æ›ªÿ∑≈ƒ£∞Â
+
+	// Ê∑ªÂä†ÂéÜÂè≤Êï∞ÊçÆÂõûÊîæÊ®°Êùø
 	pHistDataTemplate = new CMultiDocTemplate(
 		IDR_ADHist,
 		RUNTIME_CLASS(CADHistDoc),
 		RUNTIME_CLASS(CADHistFrm), // custom MDI child frame
 		RUNTIME_CLASS(CADHistDigitView));
 	AddDocTemplate(pHistDataTemplate);
-	
+
 	// Enable DDE Execute open
-	// »√WINDOWSµ«º«∏√≥Ã–Úµƒ»± ° ˝æ›Œƒº˛√˚¿©’π√˚
+	// ËÆ©WINDOWSÁôªËÆ∞ËØ•Á®ãÂ∫èÁöÑÁº∫ÁúÅÊï∞ÊçÆÊñá‰ª∂ÂêçÊâ©Â±ïÂêç
 	EnableShellOpen();
 	RegisterShellFileTypes(TRUE);
 	// Parse command line for standard shell commands, DDE, file open
@@ -178,23 +178,23 @@ BOOL CSysApp::InitInstance()
 
 	// The main window has been initialized, so show and update it.
 	// pMainFrame->ShowWindow(m_nCmdShow);
-	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED); //  π÷˜¥∞ø⁄◊Ó¥ÛªØ
+	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED); // ‰Ωø‰∏ªÁ™óÂè£ÊúÄÂ§ßÂåñ
 	pMainFrame->UpdateWindow();
 
 	// Enable drag/drop open
-	m_pMainWnd->DragAcceptFiles(); // ÷ß≥÷Õœ∑≈π¶ƒ‹
-	::SetProp(m_pMainWnd->GetSafeHwnd(), szMutex, (HANDLE)1);	
-	
+	m_pMainWnd->DragAcceptFiles(); // ÊîØÊåÅÊãñÊîæÂäüËÉΩ
+	::SetProp(m_pMainWnd->GetSafeHwnd(), szMutex, (HANDLE)1);
+
 	CString MainFrmName;
 	TCHAR str[256];
-	LONG DeviceLgcID=0, DevicePhysID=0;
+	LONG DeviceLgcID = 0, DevicePhysID = 0;
 	PCI9757_GetDeviceCurrentID(m_hDevice, &DeviceLgcID, &DevicePhysID);
-	_stprintf_s(str, _T("PCI9757-%d-%d ") , m_CurrentDeviceID,DevicePhysID);
+	_stprintf_s(str, _T("PCI9757-%d-%d "), m_CurrentDeviceID, DevicePhysID);
 	MainFrmName = pMainFrame->GetTitle();
-	MainFrmName = str+MainFrmName;
+	MainFrmName = str + MainFrmName;
 	pMainFrame->SetTitle(MainFrmName);
-	OnOpenAD();		// ¥Úø™AD≤…ºØƒ£∞Â
-	m_ADFrm->BringWindowToTop();	// Ω´ADƒ£∞Â÷√”⁄∆¡ƒª∂•∂À
+	OnOpenAD();		// ÊâìÂºÄADÈááÈõÜÊ®°Êùø
+	m_ADFrm->BringWindowToTop();	// Â∞ÜADÊ®°ÊùøÁΩÆ‰∫éÂ±èÂπïÈ°∂Á´Ø
 	return TRUE;
 }
 
@@ -205,18 +205,18 @@ class CAboutDlg : public CDialog
 {
 public:
 	CAboutDlg();
-	
+
 	// Dialog Data
 	//{{AFX_DATA(CAboutDlg)
 	enum { IDD = IDD_ABOUTBOX };
 	//}}AFX_DATA
-	
+
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CAboutDlg)
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
-	
+
 	// Implementation
 protected:
 	//{{AFX_MSG(CAboutDlg)
@@ -239,9 +239,9 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
-//{{AFX_MSG_MAP(CAboutDlg)
-// No message handlers
-//}}AFX_MSG_MAP
+	//{{AFX_MSG_MAP(CAboutDlg)
+	// No message handlers
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 // App command to run the dialog
@@ -253,7 +253,7 @@ void CSysApp::OnAppAbout()
 
 /////////////////////////////////////////////////////////////////////////////
 // CSysApp message handlers
-void CSysApp::OnUpdateOpenAD(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateOpenAD(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
 	//	pCmdUI->Enable(this->m_bCreateADFrm==FALSE?1:0);
@@ -267,127 +267,127 @@ void CSysApp::OnOpenAD(void)
 		return;
 	}
 
-	// »°µ√≤Ÿ◊˜œµÕ≥∞Ê±æ
+	// ÂèñÂæóÊìç‰ΩúÁ≥ªÁªüÁâàÊú¨
 	DWORD	dwVersion = GetVersion();
 	// Get the Windows version.
-	DWORD dwWindowsMajorVersion =  (DWORD)(LOBYTE(LOWORD(dwVersion)));
+	DWORD dwWindowsMajorVersion = (DWORD)(LOBYTE(LOWORD(dwVersion)));
 	// Get the build number.
 // 	if ((dwVersion < 0x80000000) || (dwWindowsMajorVersion < 4)) // Windows NT
-// 		gl_nSampleMode = DMA_MODE;		// DMA∑Ω Ω
+// 		gl_nSampleMode = DMA_MODE;		// DMAÊñπÂºè
 // 	else                                // Windows Me/98/95
-		gl_nSampleMode = DMA_MODE;		// ∑«ø’∑Ω Ω
+	gl_nSampleMode = DMA_MODE;		// ÈùûÁ©∫ÊñπÂºè
 
-	BeginWaitCursor();  // ø™ º¬©∂∑ Û±Í
+	BeginWaitCursor();  // ÂºÄÂßãÊºèÊñóÈº†Ê†á
 	CDocument* pDoc;
-	pDoc = pADTemplate->CreateNewDocument();  // ¥¥Ω®–¬Œƒµµ
-	m_pADDoc = (CADDoc*)pDoc;  // ±£¥ÊŒƒµµ∂‘œÛ µ¿˝‘⁄App¿‡≥…‘±÷–
+	pDoc = pADTemplate->CreateNewDocument();  // ÂàõÂª∫Êñ∞ÊñáÊ°£
+	m_pADDoc = (CADDoc*)pDoc;  // ‰øùÂ≠òÊñáÊ°£ÂØπË±°ÂÆû‰æãÂú®AppÁ±ªÊàêÂëò‰∏≠
 
-	// ¥¥Ω®∏√Œƒµµ∂‘œÛµƒ◊”÷°¥∞ø⁄
+	// ÂàõÂª∫ËØ•ÊñáÊ°£ÂØπË±°ÁöÑÂ≠êÂ∏ßÁ™óÂè£
 	m_ADFrm = (CADFrm*)pADTemplate->CreateNewFrame(pDoc, NULL);
-	
-	// ≥ı ºªØFRAME◊”÷°¥∞ø⁄£¨≤¢¥¥Ω®Œƒµµ µ¿˝, «“¥•∑¢FRAMEµƒOnUpdate∫Ø ˝
-  	pADTemplate->InitialUpdateFrame(m_ADFrm, pDoc);
-	// …Ë÷√ƒ¨»œµƒŒƒµµ±ÍÃ‚
-	pDoc->SetTitle(_T("AD ˝≤…≤‚ ‘"));
+
+	// ÂàùÂßãÂåñFRAMEÂ≠êÂ∏ßÁ™óÂè£ÔºåÂπ∂ÂàõÂª∫ÊñáÊ°£ÂÆû‰æã, ‰∏îËß¶ÂèëFRAMEÁöÑOnUpdateÂáΩÊï∞
+	pADTemplate->InitialUpdateFrame(m_ADFrm, pDoc);
+	// ËÆæÁΩÆÈªòËÆ§ÁöÑÊñáÊ°£Ê†áÈ¢ò
+	pDoc->SetTitle(_T("ADÊï∞ÈááÊµãËØï"));
 
 	if (gl_pADStatusView != NULL)
 	{
-		// Ω´≤Œ ˝≈‰÷√ ”Õº¿‡º”»ÎŒƒµµ¡–±Ì£¨“‘±„∏˙’˝≥£ ”Õº“ª—˘±ªŒƒµµ¿‡π‹¿Ì
-		pDoc->AddView((CView*)gl_pADStatusView); 
+		// Â∞ÜÂèÇÊï∞ÈÖçÁΩÆËßÜÂõæÁ±ªÂä†ÂÖ•ÊñáÊ°£ÂàóË°®Ôºå‰ª•‰æøË∑üÊ≠£Â∏∏ËßÜÂõæ‰∏ÄÊ†∑Ë¢´ÊñáÊ°£Á±ªÁÆ°ÁêÜ
+		pDoc->AddView((CView*)gl_pADStatusView);
 	}
 
 	if (gl_pParaCfgView != NULL)
 	{
-		// Ω´≤Œ ˝≈‰÷√ ”Õº¿‡º”»ÎŒƒµµ¡–±Ì£¨“‘±„∏˙’˝≥£ ”Õº“ª—˘±ªŒƒµµ¿‡π‹¿Ì
+		// Â∞ÜÂèÇÊï∞ÈÖçÁΩÆËßÜÂõæÁ±ªÂä†ÂÖ•ÊñáÊ°£ÂàóË°®Ôºå‰ª•‰æøË∑üÊ≠£Â∏∏ËßÜÂõæ‰∏ÄÊ†∑Ë¢´ÊñáÊ°£Á±ªÁÆ°ÁêÜ
 		pDoc->AddView((CView*)gl_pParaCfgView);
 	}
 
 	m_bCreateADFrm = TRUE;
-	EndWaitCursor(); // Õ£÷π¬©∂∑ Û±Í
+	EndWaitCursor(); // ÂÅúÊ≠¢ÊºèÊñóÈº†Ê†á
 }
 
-// ¥Úø™¿˙ ∑Œƒµµ
-void CSysApp::OnOpenADHist() 
+// ÊâìÂºÄÂéÜÂè≤ÊñáÊ°£
+void CSysApp::OnOpenADHist()
 {
 
-	BeginWaitCursor();  // ø™ º¬©∂∑ Û±Í
+	BeginWaitCursor();  // ÂºÄÂßãÊºèÊñóÈº†Ê†á
 	CFileOpenDlg FileOpenDlg;
 	CFile m_File;
 	CString strFileName;
-	// µØ≥ˆŒƒº˛∂‘ª∞øÚ
+	// ÂºπÂá∫Êñá‰ª∂ÂØπËØùÊ°Ü
 	if (!(DoPromptFileName(strFileName, IDS_ADHist,
-		OFN_HIDEREADONLY, TRUE, NULL))) 
-		return;	
+		OFN_HIDEREADONLY, TRUE, NULL)))
+		return;
 
-	TCHAR* pFileName = strFileName.GetBuffer(sizeof(strFileName)); // ¿‡–Õ◊™ªª
-	if (!m_File.Open(pFileName, CFile::modeRead)) // ¥Úø™Œƒº˛
+	TCHAR* pFileName = strFileName.GetBuffer(sizeof(strFileName)); // Á±ªÂûãËΩ¨Êç¢
+	if (!m_File.Open(pFileName, CFile::modeRead)) // ÊâìÂºÄÊñá‰ª∂
 	{
-		AfxMessageBox(_T("Œƒº˛¥Úø™¥ÌŒÛªÚŒﬁ¥ÀŒƒº˛!"));
+		AfxMessageBox(_T("Êñá‰ª∂ÊâìÂºÄÈîôËØØÊàñÊó†Ê≠§Êñá‰ª∂!"));
 		return;
 	}
-	m_File.Close();	
+	m_File.Close();
 
 	m_strFilePath = strFileName;
 	m_pADHistDoc = (CADHistDoc*)pHistDataTemplate->OpenDocumentFile(strFileName);
-	EndWaitCursor(); // Õ£÷π¬©∂∑ Û±Í
+	EndWaitCursor(); // ÂÅúÊ≠¢ÊºèÊñóÈº†Ê†á
 }
 
-void CSysApp::OnUpdateADHist(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateADHist(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
-	
+
 }
 
-// ¥”◊ÓΩ¸¥Úø™µƒŒƒº˛÷–¥Úø™Œƒº˛
-CDocument* CSysApp::OpenDocumentFile(LPCTSTR lpszFileName) 
-{	
-	BeginWaitCursor();  // ø™ º¬©∂∑ Û±Í
+// ‰ªéÊúÄËøëÊâìÂºÄÁöÑÊñá‰ª∂‰∏≠ÊâìÂºÄÊñá‰ª∂
+CDocument* CSysApp::OpenDocumentFile(LPCTSTR lpszFileName)
+{
+	BeginWaitCursor();  // ÂºÄÂßãÊºèÊñóÈº†Ê†á
 	CFileOpenDlg FileOpenDlg;
 	CFile File;
 	int nRet = 0;
 	BOOL bFileAvailable = TRUE;
 	FILE_HEADER FileHeader;
-	if (File.Open(lpszFileName, CFile::modeRead)) // »Áπ˚Œƒº˛¥Úø™≥…π¶
+	if (File.Open(lpszFileName, CFile::modeRead)) // Â¶ÇÊûúÊñá‰ª∂ÊâìÂºÄÊàêÂäü
 	{
 		File.Seek(0, CFile::begin);
-		File.Read((WORD*)&FileHeader, sizeof(FileHeader)); // ∂¡»°Œƒº˛Õ∑
+		File.Read((WORD*)&FileHeader, sizeof(FileHeader)); // ËØªÂèñÊñá‰ª∂Â§¥
 		File.Close();
 		if ((FileHeader.DeviceNum) != DEFAULT_DEVICE_NUM)
 		{
 			memset(&(FileHeader.ADPara), 0x00, sizeof(FileHeader.ADPara));
 
-			if (AfxMessageBox(_T("¥ÀŒƒº˛≤¢∑«PCI9757∞Âø®≈‰Ã◊Œƒº˛,  «∑ÒºÃ–¯?") , MB_OKCANCEL) == IDCANCEL)
+			if (AfxMessageBox(_T("Ê≠§Êñá‰ª∂Âπ∂ÈùûPCI9757ÊùøÂç°ÈÖçÂ•óÊñá‰ª∂, ÊòØÂê¶ÁªßÁª≠?"), MB_OKCANCEL) == IDCANCEL)
 				return NULL;
-			bFileAvailable = FALSE; // Œƒº˛Œﬁ–ß
-			
-		}
-		
-		m_pADHistDoc = (CADHistDoc*)pHistDataTemplate->OpenDocumentFile(lpszFileName); // Œ™NULL ±≤ª“˝∑¢CHistDataFrm::OpenDocumentFile
+			bFileAvailable = FALSE; // Êñá‰ª∂Êó†Êïà
 
-		return m_pADHistDoc; // ∑µªÿŒƒµµ÷∏’Î
+		}
+
+		m_pADHistDoc = (CADHistDoc*)pHistDataTemplate->OpenDocumentFile(lpszFileName); // ‰∏∫NULLÊó∂‰∏çÂºïÂèëCHistDataFrm::OpenDocumentFile
+
+		return m_pADHistDoc; // ËøîÂõûÊñáÊ°£ÊåáÈíà
 	}
 	else
 	{
-		AfxMessageBox(_T("Œƒº˛¥Úø™¥ÌŒÛªÚŒﬁ¥ÀŒƒº˛!"));
+		AfxMessageBox(_T("Êñá‰ª∂ÊâìÂºÄÈîôËØØÊàñÊó†Ê≠§Êñá‰ª∂!"));
 		return NULL;
 	}
 
-	EndWaitCursor(); // Õ£÷π¬©∂∑ Û±Í
+	EndWaitCursor(); // ÂÅúÊ≠¢ÊºèÊñóÈº†Ê†á
 	return NULL;
 }
 
-int CSysApp::ExitInstance() 
+int CSysApp::ExitInstance()
 {
 	// TODO: Add your specialized code here and/or call the base class
 	ReleaseMutex(m_hMutex);
 
-	if(m_hDevice != INVALID_HANDLE_VALUE)
+	if (m_hDevice != INVALID_HANDLE_VALUE)
 	{
-		PCI9757_ReleaseDevice(m_hDevice ); //  Õ∑≈…Ë±∏∂‘œÛ
+		PCI9757_ReleaseDevice(m_hDevice); // ÈáäÊîæËÆæÂ§áÂØπË±°
 		m_hDevice = INVALID_HANDLE_VALUE;
 	}
 
-	if(gl_hEvent != INVALID_HANDLE_VALUE)
+	if (gl_hEvent != INVALID_HANDLE_VALUE)
 	{
 		PCI9757_ReleaseSystemEvent(gl_hEvent);
 	}
@@ -395,61 +395,61 @@ int CSysApp::ExitInstance()
 }
 
 
-void CSysApp::OnUpdateDataFileNew(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateDataFileNew(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->Enable((!gl_bDeviceADRun)&&gl_bCreateFile);
-	
+	pCmdUI->Enable((!gl_bDeviceADRun) && gl_bCreateFile);
+
 }
 
-void CSysApp::OnCloseFile() 
+void CSysApp::OnCloseFile()
 {
 	// TODO: Add your command handler code here
 	m_pADDoc->OnCloseFile();
 }
 
-void CSysApp::OnDataFileNew() 
+void CSysApp::OnDataFileNew()
 {
 	// TODO: Add your command handler code here
 	m_pADDoc->OnDataFileNew();
 }
 
-void CSysApp::OnStartDeviceAD() 
+void CSysApp::OnStartDeviceAD()
 {
 	// TODO: Add your command handler code here
 	m_pADDoc->StartDeviceAD();
 }
 
-void CSysApp::OnUpdateStartDeviceAD(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateStartDeviceAD(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->Enable(gl_bDeviceADRun==FALSE?1:0);	
+	pCmdUI->Enable(gl_bDeviceADRun == FALSE ? 1 : 0);
 }
 
-void CSysApp::OnStopDeviceAD() 
+void CSysApp::OnStopDeviceAD()
 {
 	// TODO: Add your command handler code here
 	m_pADDoc->StopDeviceAD();
 }
 
-void CSysApp::OnUpdateStopDeviceAD(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateStopDeviceAD(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->Enable(gl_bDeviceADRun == TRUE ? 1:0);		
+	pCmdUI->Enable(gl_bDeviceADRun == TRUE ? 1 : 0);
 }
 
-void CSysApp::OnUpdateCloseFile(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateCloseFile(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->SetRadio (FALSE); 
+	pCmdUI->SetRadio(FALSE);
 	if ((gl_nProcMode == PROC_MODE_SAVE) && (gl_bCreateDevice))
 		pCmdUI->Enable(FALSE);
 	else
 		pCmdUI->Enable(!gl_bCloseFile);
-	
+
 }
 
-void CSysApp::OnUpdateDataSave(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateDataSave(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
 	if (gl_pADStatusView != NULL)
@@ -457,135 +457,135 @@ void CSysApp::OnUpdateDataSave(CCmdUI* pCmdUI)
 
 	if (gl_bCreateFile)
 		pCmdUI->Enable(FALSE);
-	
-	pCmdUI->SetCheck(gl_nProcMode == PROC_MODE_SAVE ? 1:0);	
+
+	pCmdUI->SetCheck(gl_nProcMode == PROC_MODE_SAVE ? 1 : 0);
 }
 
-void CSysApp::OnUpdateDigitalShow(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateDigitalShow(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->SetCheck(gl_nProcMode == PROC_MODE_DIGIT ? 1:0);
+	pCmdUI->SetCheck(gl_nProcMode == PROC_MODE_DIGIT ? 1 : 0);
 	gl_pADStatusView->SetDlgCheck();
-	
-    CADDoc* pDoc = theApp.m_pADDoc; 
-    // ‘⁄œﬂ≥Ã÷–»°µ√ ”Õº÷∏’Î
-    CADDigitView* pDigitView = (CADDigitView*)(CWnd::FromHandle(pDoc->m_hWndDigit)); 
-	if (gl_nProcMode == PROC_MODE_SAVE) // »Áπ˚Œ™¥Ê≈Ã¥¶¿Ì∑Ω Ω
+
+	CADDoc* pDoc = theApp.m_pADDoc;
+	// Âú®Á∫øÁ®ã‰∏≠ÂèñÂæóËßÜÂõæÊåáÈíà
+	CADDigitView* pDigitView = (CADDigitView*)(CWnd::FromHandle(pDoc->m_hWndDigit));
+	if (gl_nProcMode == PROC_MODE_SAVE) // Â¶ÇÊûú‰∏∫Â≠òÁõòÂ§ÑÁêÜÊñπÂºè
 	{
 		pDigitView->EnableWindow(FALSE);
 	}
 	else
 	{
 		pDigitView->EnableWindow(TRUE);
-	}		
+	}
 }
 
-void CSysApp::OnUpdateGraphicShow(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateGraphicShow(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
 	gl_pADStatusView->SetDlgCheck();
-	pCmdUI->SetCheck(gl_nProcMode == PROC_MODE_WAVE ? 1:0);
-    CADDoc* pDoc = theApp.m_pADDoc;
-	
-    // ‘⁄œﬂ≥Ã÷–»°µ√ ”Õº÷∏’Î	
-    CADWaveView* pWaveView=(CADWaveView*)(CWnd::FromHandle(pDoc->m_hWndWave)); 
-	
-	if (gl_nProcMode == PROC_MODE_SAVE) // »Áπ˚Œ™¥Ê≈Ã¥¶¿Ì∑Ω Ω
+	pCmdUI->SetCheck(gl_nProcMode == PROC_MODE_WAVE ? 1 : 0);
+	CADDoc* pDoc = theApp.m_pADDoc;
+
+	// Âú®Á∫øÁ®ã‰∏≠ÂèñÂæóËßÜÂõæÊåáÈíà	
+	CADWaveView* pWaveView = (CADWaveView*)(CWnd::FromHandle(pDoc->m_hWndWave));
+
+	if (gl_nProcMode == PROC_MODE_SAVE) // Â¶ÇÊûú‰∏∫Â≠òÁõòÂ§ÑÁêÜÊñπÂºè
 	{
 		pWaveView->EnableWindow(FALSE);
 	}
 	else
 	{
 		pWaveView->EnableWindow(TRUE);
-	}	
-	
+	}
+
 }
 
-void CSysApp::OnMDataSave() 
+void CSysApp::OnMDataSave()
 {
 	// TODO: Add your command handler code here
 	gl_nProcMode = PROC_MODE_SAVE;
 	gl_pADStatusView->SetDlgCheck();
 }
 
-void CSysApp::OnMDigitalShow() 
+void CSysApp::OnMDigitalShow()
 {
 	// TODO: Add your command handler code here
 	gl_nProcMode = PROC_MODE_DIGIT;
 	gl_pADStatusView->SetDlgCheck();
 }
 
-void CSysApp::OnMGraphicShow() 
+void CSysApp::OnMGraphicShow()
 {
 	// TODO: Add your command handler code here
 	gl_nProcMode = PROC_MODE_WAVE;
 	gl_pADStatusView->SetDlgCheck();
 }
 
-void CSysApp::OnListDeviceDlg() 
+void CSysApp::OnListDeviceDlg()
 {
 	// TODO: Add your command handler code here
-	PCI9757_ListDeviceDlg(m_hDevice); // ¡–±Ì∏√¿‡…Ë±∏
+	PCI9757_ListDeviceDlg(m_hDevice); // ÂàóË°®ËØ•Á±ªËÆæÂ§á
 }
 
-void CSysApp::OnDmaMode() 
+void CSysApp::OnDmaMode()
 {
 	// TODO: Add your command handler code here
-	gl_nSampleMode = DMA_MODE; // DMA∑Ω Ω
+	gl_nSampleMode = DMA_MODE; // DMAÊñπÂºè
 }
 
-void CSysApp::OnUpdateDmaMode(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateDmaMode(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->SetCheck(gl_nSampleMode == DMA_MODE ? 1:0);
+	pCmdUI->SetCheck(gl_nSampleMode == DMA_MODE ? 1 : 0);
 	pCmdUI->Enable(!gl_bDeviceADRun);
 }
 
-void CSysApp::OnNptMode() 
+void CSysApp::OnNptMode()
 {
 	// TODO: Add your command handler code here
-	gl_nSampleMode = NPT_MODE; // ∑«ø’∑Ω Ω
+	gl_nSampleMode = NPT_MODE; // ÈùûÁ©∫ÊñπÂºè
 }
 
-void CSysApp::OnUpdateNptMode(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateNptMode(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->SetCheck(gl_nSampleMode == NPT_MODE ? 1:0);
-	pCmdUI->Enable(!gl_bDeviceADRun);	
+	pCmdUI->SetCheck(gl_nSampleMode == NPT_MODE ? 1 : 0);
+	pCmdUI->Enable(!gl_bDeviceADRun);
 }
 
-void CSysApp::OnHalfMode() 
+void CSysApp::OnHalfMode()
 {
 	// TODO: Add your command handler code here
-	gl_nSampleMode = HALF_MODE; // ∑«ø’∑Ω Ω
+	gl_nSampleMode = HALF_MODE; // ÈùûÁ©∫ÊñπÂºè
 }
 
-void CSysApp::OnUpdateHalfMode(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateHalfMode(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->SetCheck(gl_nSampleMode == HALF_MODE ? 1:0);
-	pCmdUI->Enable(!gl_bDeviceADRun);	
+	pCmdUI->SetCheck(gl_nSampleMode == HALF_MODE ? 1 : 0);
+	pCmdUI->Enable(!gl_bDeviceADRun);
 }
 
 
-void CSysApp::OnINTMode() 
+void CSysApp::OnINTMode()
 {
 	// TODO: Add your command handler code here
-	gl_nSampleMode = INT_MODE; // ÷–∂œ∑Ω Ω
-	
+	gl_nSampleMode = INT_MODE; // ‰∏≠Êñ≠ÊñπÂºè
+
 }
 
-void CSysApp::OnUpdateINTMode(CCmdUI* pCmdUI) 
+void CSysApp::OnUpdateINTMode(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->SetCheck(gl_nSampleMode == INT_MODE ? 1:0);
-	pCmdUI->Enable(!gl_bDeviceADRun);	
-	
+	pCmdUI->SetCheck(gl_nSampleMode == INT_MODE ? 1 : 0);
+	pCmdUI->Enable(!gl_bDeviceADRun);
+
 }
 
 void CSysApp::OnADCalibration()
 {
-	// TODO: ‘⁄¥ÀÃÌº”√¸¡Ó¥¶¿Ì≥Ã–Ú¥˙¬Î
+	// TODO: Âú®Ê≠§Ê∑ªÂä†ÂëΩ‰ª§Â§ÑÁêÜÁ®ãÂ∫è‰ª£Á†Å
 	CDlgCalibration dlg;
 	dlg.DoModal();
 }

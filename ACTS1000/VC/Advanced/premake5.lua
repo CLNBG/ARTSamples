@@ -1,4 +1,4 @@
-project "Sys_9757"
+project "Sys_8916"
     kind "WindowedApp"
     language "C++"
     cppdialect "C++17"
@@ -7,9 +7,9 @@ project "Sys_9757"
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
     
     pchheader "StdAfx.h"
-    pchsource "%{wks.location}/NMROSCore/vendor/ART/ARTSamples/PCI9757/VC/Advanced/StdAfx.cpp"
+    pchsource "%{wks.location}/NMROSCore/vendor/ART/ARTSamples/ACTS1000/VC/Advanced/StdAfx.cpp"
     
-    characterset ("ASCII")
+    characterset ("Unicode")
     
     defines
     {
@@ -27,17 +27,12 @@ project "Sys_9757"
     }
     libdirs
     {
-        "%{wks.location}/NMROSCore/vendor/ART/libs/PCI9757",
+        "%{wks.location}/NMROSCore/vendor/ART/libs/ACTS1000",
     }
     links
     {
-        "PCI9757_64.lib",
+        "ACTS1000_64.lib",
     }
-		debugenvs
-  	{
-    		"path=" .. os.getenv("path") .. ";" .. "%{dllDir.PCI9757}"
-  	}
-
     files
     {
         "**.h",
