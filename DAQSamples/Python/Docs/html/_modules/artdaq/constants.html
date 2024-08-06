@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.constants &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>artdaq.constants</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for artdaq.constants</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="c1"># Constants</span>
+<span class="n">AUTO</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">CFG_DEFAULT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">DEFAULT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">READ_ALL_AVAILABLE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">WAIT_INFINITELY</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+
+
+<span class="c1"># Enums</span>
+<div class="viewcode-block" id="ACExcitWireMode"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ACExcitWireMode">[docs]</a><span class="k">class</span> <span class="nc">ACExcitWireMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FOUR_WIRE</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1">#: 4-wire.</span>
+    <span class="n">FIVE_WIRE</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1">#: 5-wire.</span>
+    <span class="n">SIX_WIRE</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1">#: 6-wire.</span></div>
+
+
+<div class="viewcode-block" id="ADCTimingMode"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ADCTimingMode">[docs]</a><span class="k">class</span> <span class="nc">ADCTimingMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">AUTOMATIC</span> <span class="o">=</span> <span class="mi">16097</span>  <span class="c1">#: Uses the most appropriate supported timing mode based on the Sample Clock Rate.</span>
+    <span class="n">HIGH_RESOLUTION</span> <span class="o">=</span> <span class="mi">10195</span>  <span class="c1">#: Increases resolution and noise rejection while decreasing conversion rate.</span>
+    <span class="n">HIGH_SPEED</span> <span class="o">=</span> <span class="mi">14712</span>  <span class="c1">#: Increases conversion rate while decreasing resolution.</span>
+    <span class="n">BEST_50_HZ_REJECTION</span> <span class="o">=</span> <span class="mi">14713</span>  <span class="c1">#: Improves 50 Hz noise rejection while decreasing noise rejection at other frequencies.</span>
+    <span class="n">BEST_60_HZ_REJECTION</span> <span class="o">=</span> <span class="mi">14714</span>  <span class="c1">#: Improves 60 Hz noise rejection while decreasing noise rejection at other frequencies.</span>
+    <span class="n">CUSTOM</span> <span class="o">=</span> <span class="mi">10137</span>  <span class="c1">#: Use **ai_adc_custom_timing_mode** to specify a custom value controlling the tradeoff between speed and resolution.</span></div>
+
+
+<div class="viewcode-block" id="AOIdleOutputBehavior"><a class="viewcode-back" href="../../constants.html#artdaq.constants.AOIdleOutputBehavior">[docs]</a><span class="k">class</span> <span class="nc">AOIdleOutputBehavior</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ZERO_VOLTS</span> <span class="o">=</span> <span class="mi">12526</span>  <span class="c1">#: Generate 0 V.</span>
+    <span class="n">HIGH_IMPEDANCE</span> <span class="o">=</span> <span class="mi">12527</span>  <span class="c1">#: Set the channel to high-impedance, effectively disconnecting the analog output circuitry from the I/O connector.</span>
+    <span class="n">MAINTAIN_EXISTING_VALUE</span> <span class="o">=</span> <span class="mi">12528</span>  <span class="c1">#: Continue generating the current value.</span></div>
+
+
+<div class="viewcode-block" id="AOPowerUpOutputBehavior"><a class="viewcode-back" href="../../constants.html#artdaq.constants.AOPowerUpOutputBehavior">[docs]</a><span class="k">class</span> <span class="nc">AOPowerUpOutputBehavior</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">VOLTAGE</span> <span class="o">=</span> <span class="mi">10322</span>  <span class="c1">#: Voltage output.</span>
+    <span class="n">CURRENT</span> <span class="o">=</span> <span class="mi">10134</span>  <span class="c1">#: Current output.</span>
+    <span class="n">HIGH_IMPEDANCE</span> <span class="o">=</span> <span class="mi">12527</span>  <span class="c1">#: High-impedance state.</span></div>
+
+
+<div class="viewcode-block" id="AccelChargeSensitivityUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.AccelChargeSensitivityUnits">[docs]</a><span class="k">class</span> <span class="nc">AccelChargeSensitivityUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">PICO_COULOMBS_PER_G</span> <span class="o">=</span> <span class="mi">16099</span>  <span class="c1">#: PicoCoulombs per g.</span>
+    <span class="n">PICO_COULOMBS_PER_METERS_PER_SECOND_SQUARED</span> <span class="o">=</span> <span class="mi">16100</span>  <span class="c1">#: PicoCoulombs per m/s^2.</span>
+    <span class="n">PICO_COULOMBS_PER_INCHES_PER_SECOND_SQUARED</span> <span class="o">=</span> <span class="mi">16101</span>  <span class="c1">#: PicoCoulombs per in/s^2.</span></div>
+
+
+<div class="viewcode-block" id="AccelSensitivityUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.AccelSensitivityUnits">[docs]</a><span class="k">class</span> <span class="nc">AccelSensitivityUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">M_VOLTS_PER_G</span> <span class="o">=</span> <span class="mi">12509</span>  <span class="c1">#: mVolts/g.</span>
+    <span class="n">VOLTS_PER_G</span> <span class="o">=</span> <span class="mi">12510</span>  <span class="c1">#: Volts/g.</span></div>
+
+
+<div class="viewcode-block" id="AccelUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.AccelUnits">[docs]</a><span class="k">class</span> <span class="nc">AccelUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="mi">10186</span>  <span class="c1">#: 1 g is approximately equal to 9.81 m/s/s.</span>
+    <span class="n">METERS_PER_SECOND_SQUARED</span> <span class="o">=</span> <span class="mi">12470</span>  <span class="c1">#: Meters per second per second.</span>
+    <span class="n">INCHES_PER_SECOND_SQUARED</span> <span class="o">=</span> <span class="mi">12471</span>  <span class="c1">#: Inches per second per second.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="AcquisitionType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.AcquisitionType">[docs]</a><span class="k">class</span> <span class="nc">AcquisitionType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FINITE</span> <span class="o">=</span> <span class="mi">10178</span>  <span class="c1">#: Acquire or generate a finite number of samples.</span>
+    <span class="n">CONTINUOUS</span> <span class="o">=</span> <span class="mi">10123</span>  <span class="c1">#: Acquire or generate samples until you stop the task.</span>
+    <span class="n">HW_TIMED_SINGLE_POINT</span> <span class="o">=</span> <span class="mi">12522</span>  <span class="c1">#: Acquire or generate samples continuously using hardware timing without a buffer. Hardware timed single point sample mode is supported only for the sample clock and change detection timing types.</span></div>
+
+
+<div class="viewcode-block" id="Action"><a class="viewcode-back" href="../../constants.html#artdaq.constants.Action">[docs]</a><span class="k">class</span> <span class="nc">Action</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">COMMIT</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: Commit</span>
+    <span class="n">CANCEL</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: Cancel</span></div>
+
+
+<div class="viewcode-block" id="ActiveLevel"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ActiveLevel">[docs]</a><span class="k">class</span> <span class="nc">ActiveLevel</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ABOVE</span> <span class="o">=</span> <span class="mi">10093</span>  <span class="c1">#: Pause the measurement or generation while the signal is above the threshold.</span>
+    <span class="n">BELOW</span> <span class="o">=</span> <span class="mi">10107</span>  <span class="c1">#: Pause the measurement or generation while the signal is below the threshold.</span></div>
+
+
+<div class="viewcode-block" id="ActiveOrInactiveEdgeSelection"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ActiveOrInactiveEdgeSelection">[docs]</a><span class="k">class</span> <span class="nc">ActiveOrInactiveEdgeSelection</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ACTIVE</span> <span class="o">=</span> <span class="mi">14617</span>  <span class="c1">#: Active edges.</span>
+    <span class="n">INACTIVE</span> <span class="o">=</span> <span class="mi">14618</span>  <span class="c1">#: Inactive edges.</span></div>
+
+
+<div class="viewcode-block" id="AngleUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.AngleUnits">[docs]</a><span class="k">class</span> <span class="nc">AngleUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">DEGREES</span> <span class="o">=</span> <span class="mi">10146</span>  <span class="c1">#: Degrees.</span>
+    <span class="n">RADIANS</span> <span class="o">=</span> <span class="mi">10273</span>  <span class="c1">#: Radians.</span>
+    <span class="n">TICKS</span> <span class="o">=</span> <span class="mi">10304</span>  <span class="c1">#: Ticks.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="AngularVelocityUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.AngularVelocityUnits">[docs]</a><span class="k">class</span> <span class="nc">AngularVelocityUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">RPM</span> <span class="o">=</span> <span class="mi">16080</span>  <span class="c1">#: Revolutions per minute.</span>
+    <span class="n">RADIANS_PER_SECOND</span> <span class="o">=</span> <span class="mi">16081</span>  <span class="c1">#: Radians per second.</span>
+    <span class="n">DEGREES_PER_SECOND</span> <span class="o">=</span> <span class="mi">16082</span>  <span class="c1">#: Degrees per second.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="BusType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.BusType">[docs]</a><span class="k">class</span> <span class="nc">BusType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">PCI</span> <span class="o">=</span> <span class="mi">12582</span>  <span class="c1">#: PCI.</span>
+    <span class="n">PCIE</span> <span class="o">=</span> <span class="mi">13612</span>  <span class="c1">#: PCI Express.</span>
+    <span class="n">PXI</span> <span class="o">=</span> <span class="mi">12583</span>  <span class="c1">#: PXI.</span>
+    <span class="n">PXIE</span> <span class="o">=</span> <span class="mi">14706</span>  <span class="c1">#: PXI Express.</span>
+    <span class="n">SCXI</span> <span class="o">=</span> <span class="mi">12584</span>  <span class="c1">#: SCXI.</span>
+    <span class="n">SCC</span> <span class="o">=</span> <span class="mi">14707</span>  <span class="c1">#: SCC.</span>
+    <span class="n">PC_CARD</span> <span class="o">=</span> <span class="mi">12585</span>  <span class="c1">#: PC Card/PCMCIA.</span>
+    <span class="n">USB</span> <span class="o">=</span> <span class="mi">12586</span>  <span class="c1">#: USB.</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="mi">12588</span>  <span class="c1">#: Unknown bus type.</span>
+    <span class="n">COMPACT_DAQ</span> <span class="o">=</span> <span class="mi">14637</span>  <span class="c1">#: CompactDAQ.</span>
+    <span class="n">TCPIP</span> <span class="o">=</span> <span class="mi">14828</span>  <span class="c1">#: TCP/IP.</span>
+    <span class="n">SWITCH_BLOCK</span> <span class="o">=</span> <span class="mi">15870</span>  <span class="c1">#: SwitchBlock.</span></div>
+
+
+
+<div class="viewcode-block" id="CalibrationTerminalConfig"><a class="viewcode-back" href="../../constants.html#artdaq.constants.CalibrationTerminalConfig">[docs]</a><span class="k">class</span> <span class="nc">CalibrationTerminalConfig</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">DIFF</span> <span class="o">=</span> <span class="mi">10106</span>  <span class="c1">#: Differential</span>
+    <span class="n">PSEUDO_DIFF</span> <span class="o">=</span> <span class="mi">12529</span>  <span class="c1">#: Pseudodifferential</span></div>
+
+
+<div class="viewcode-block" id="ChannelType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ChannelType">[docs]</a><span class="k">class</span> <span class="nc">ChannelType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ANALOG_INPUT</span> <span class="o">=</span> <span class="mi">10100</span>  <span class="c1">#: Analog input channel.</span>
+    <span class="n">ANALOG_OUTPUT</span> <span class="o">=</span> <span class="mi">10102</span>  <span class="c1">#: Analog output channel.</span>
+    <span class="n">DIGITAL_IN</span> <span class="o">=</span> <span class="mi">10151</span>  <span class="c1">#: Digital input channel.</span>
+    <span class="n">DIGITAL_OUTPUT</span> <span class="o">=</span> <span class="mi">10153</span>  <span class="c1">#: Digital output channel.</span>
+    <span class="n">COUNTER</span> <span class="o">=</span> <span class="mi">10131</span>  <span class="c1">#: Counter input channel.</span></div>
+
+
+<div class="viewcode-block" id="ChargeUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ChargeUnits">[docs]</a><span class="k">class</span> <span class="nc">ChargeUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">COULOMBS</span> <span class="o">=</span> <span class="mi">16102</span>  <span class="c1">#: Coulombs.</span>
+    <span class="n">PICO_COULOMBS</span> <span class="o">=</span> <span class="mi">16103</span>  <span class="c1">#: PicoCoulombs.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="CountDirection"><a class="viewcode-back" href="../../constants.html#artdaq.constants.CountDirection">[docs]</a><span class="k">class</span> <span class="nc">CountDirection</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">COUNT_UP</span> <span class="o">=</span> <span class="mi">10128</span>  <span class="c1">#: Increment counter.</span>
+    <span class="n">COUNT_DOWN</span> <span class="o">=</span> <span class="mi">10124</span>  <span class="c1">#: Decrement counter.</span>
+    <span class="n">EXTERNAL_SOURCE</span> <span class="o">=</span> <span class="mi">10326</span>  <span class="c1">#: The state of a digital line controls the count direction. Each counter has a default count direction terminal.</span></div>
+
+
+<div class="viewcode-block" id="CounterFrequencyMethod"><a class="viewcode-back" href="../../constants.html#artdaq.constants.CounterFrequencyMethod">[docs]</a><span class="k">class</span> <span class="nc">CounterFrequencyMethod</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">LOW_FREQUENCY_1_COUNTER</span> <span class="o">=</span> <span class="mi">10105</span>  <span class="c1">#: Use one counter that uses a constant timebase to measure the input signal.</span>
+    <span class="n">HIGH_FREQUENCY_2_COUNTERS</span> <span class="o">=</span> <span class="mi">10157</span>  <span class="c1">#: Use two counters, one of which counts pulses of the signal to measure during the specified measurement time.</span>
+    <span class="n">LARGE_RANGE_2_COUNTERS</span> <span class="o">=</span> <span class="mi">10205</span>  <span class="c1">#: Use one counter to divide the frequency of the input signal to create a lower-frequency signal that the second counter can more easily measure.</span>
+    <span class="n">DYNAMIC_AVERAGING</span> <span class="o">=</span> <span class="mi">16065</span>  <span class="c1">#: Uses one counter and automatically configures the counter settings based on the range of frequencies to be measured. During the acquisition, the counter dynamically adjusts the number of periods that are averaged to balance measurement accuracy and latency.</span></div>
+
+
+<div class="viewcode-block" id="Coupling"><a class="viewcode-back" href="../../constants.html#artdaq.constants.Coupling">[docs]</a><span class="k">class</span> <span class="nc">Coupling</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">AC</span> <span class="o">=</span> <span class="mi">10045</span>  <span class="c1">#: Remove the DC offset from the signal.</span>
+    <span class="n">DC</span> <span class="o">=</span> <span class="mi">10050</span>  <span class="c1">#: Allow Art-DAQmx to measure all of the signal.</span>
+    <span class="n">GND</span> <span class="o">=</span> <span class="mi">10066</span>  <span class="c1">#: Remove the signal from the measurement and measure only ground.</span></div>
+
+
+<div class="viewcode-block" id="CurrentShuntResistorLocation"><a class="viewcode-back" href="../../constants.html#artdaq.constants.CurrentShuntResistorLocation">[docs]</a><span class="k">class</span> <span class="nc">CurrentShuntResistorLocation</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">LET_DRIVER_CHOOSE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1">#: </span>
+    <span class="n">INTERNAL</span> <span class="o">=</span> <span class="mi">10200</span>  <span class="c1">#: Use the built-in shunt resistor of the device.</span>
+    <span class="n">EXTERNAL</span> <span class="o">=</span> <span class="mi">10167</span>  <span class="c1">#: Use a shunt resistor external to the device. You must specify the value of the shunt resistor by using **ai_current_shunt_resistance**.</span></div>
+
+
+<div class="viewcode-block" id="CurrentUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.CurrentUnits">[docs]</a><span class="k">class</span> <span class="nc">CurrentUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">AMPS</span> <span class="o">=</span> <span class="mi">10342</span>  <span class="c1">#: Amperes.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span>
+    <span class="n">FROM_TEDS</span> <span class="o">=</span> <span class="mi">12516</span>  <span class="c1">#: Units defined by TEDS information associated with the channel.</span></div>
+
+
+<div class="viewcode-block" id="DigitalDriveType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.DigitalDriveType">[docs]</a><span class="k">class</span> <span class="nc">DigitalDriveType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ACTIVE_DRIVE</span> <span class="o">=</span> <span class="mi">12573</span>  <span class="c1">#: Drive the output pin to approximately 0 V for logic low and +3.3 V or +5 V, depending on the device, for logic high.</span>
+    <span class="n">OPEN_COLLECTOR</span> <span class="o">=</span> <span class="mi">12574</span>  <span class="c1">#: Drive the output pin to 0 V for logic low. For logic high, the output driver assumes a high-impedance state and does not drive a voltage.</span></div>
+
+
+<div class="viewcode-block" id="DigitalPatternCondition"><a class="viewcode-back" href="../../constants.html#artdaq.constants.DigitalPatternCondition">[docs]</a><span class="k">class</span> <span class="nc">DigitalPatternCondition</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">PATTERN_MATCHES</span> <span class="o">=</span> <span class="mi">10254</span>  <span class="c1">#: Trigger when the physical channels match the specified pattern.</span>
+    <span class="n">PATTERN_DOES_NOT_MATCH</span> <span class="o">=</span> <span class="mi">10253</span>  <span class="c1">#: Trigger when the physical channels do not match the specified pattern.</span></div>
+
+
+<div class="viewcode-block" id="DigitalWidthUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.DigitalWidthUnits">[docs]</a><span class="k">class</span> <span class="nc">DigitalWidthUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">SAMPLE_CLOCK_PERIODS</span> <span class="o">=</span> <span class="mi">10286</span>  <span class="c1">#: Complete periods of the Sample Clock.</span>
+    <span class="n">SECONDS</span> <span class="o">=</span> <span class="mi">10364</span>  <span class="c1">#: Seconds.</span>
+    <span class="n">TICKS</span> <span class="o">=</span> <span class="mi">10304</span>  <span class="c1">#: Timebase ticks.</span></div>
+
+
+<div class="viewcode-block" id="EddyCurrentProxProbeSensitivityUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.EddyCurrentProxProbeSensitivityUnits">[docs]</a><span class="k">class</span> <span class="nc">EddyCurrentProxProbeSensitivityUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">MIL</span> <span class="o">=</span> <span class="mi">14836</span>  <span class="c1">#: mVolts/mil.</span>
+    <span class="n">IL</span> <span class="o">=</span> <span class="mi">14837</span>  <span class="c1">#: Volts/mil.</span>
+    <span class="n">MILLIMETER</span> <span class="o">=</span> <span class="mi">14838</span>  <span class="c1">#: mVolts/mMeter.</span>
+    <span class="n">ILLIMETER</span> <span class="o">=</span> <span class="mi">14839</span>  <span class="c1">#: Volts/mMeter.</span>
+    <span class="n">MICRON</span> <span class="o">=</span> <span class="mi">14840</span>  <span class="c1">#: mVolts/micron.</span></div>
+
+
+<div class="viewcode-block" id="Edge"><a class="viewcode-back" href="../../constants.html#artdaq.constants.Edge">[docs]</a><span class="k">class</span> <span class="nc">Edge</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">RISING</span> <span class="o">=</span> <span class="mi">10280</span>  <span class="c1">#: Rising edge(s).</span>
+    <span class="n">FALLING</span> <span class="o">=</span> <span class="mi">10171</span>  <span class="c1">#: Falling edge(s).</span></div>
+
+
+<div class="viewcode-block" id="EncoderType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.EncoderType">[docs]</a><span class="k">class</span> <span class="nc">EncoderType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">X_1</span> <span class="o">=</span> <span class="mi">10090</span>  <span class="c1">#: If signal A leads signal B, count the rising edges of signal A. If signal B leads signal A, count the falling edges of signal A.</span>
+    <span class="n">X_2</span> <span class="o">=</span> <span class="mi">10091</span>  <span class="c1">#: Count the rising and falling edges of signal A.</span>
+    <span class="n">X_4</span> <span class="o">=</span> <span class="mi">10092</span>  <span class="c1">#: Count the rising and falling edges of signal A and signal B.</span>
+    <span class="n">TWO_PULSE_COUNTING</span> <span class="o">=</span> <span class="mi">10313</span>  <span class="c1">#: Two pulse counting.</span></div>
+
+
+<div class="viewcode-block" id="EncoderZIndexPhase"><a class="viewcode-back" href="../../constants.html#artdaq.constants.EncoderZIndexPhase">[docs]</a><span class="k">class</span> <span class="nc">EncoderZIndexPhase</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">AHIGH_BHIGH</span> <span class="o">=</span> <span class="mi">10040</span>  <span class="c1">#: Reset the measurement when signal A and signal B are high.</span>
+    <span class="n">AHIGH_BLOW</span> <span class="o">=</span> <span class="mi">10041</span>  <span class="c1">#: Reset the measurement when signal A is high and signal B is low.</span>
+    <span class="n">ALOW_BHIGH</span> <span class="o">=</span> <span class="mi">10042</span>  <span class="c1">#: Reset the measurement when signal A is low and signal B high.</span>
+    <span class="n">ALOW_BLOW</span> <span class="o">=</span> <span class="mi">10043</span>  <span class="c1">#: Reset the measurement when signal A and signal B are low.</span></div>
+
+
+<div class="viewcode-block" id="EveryNSamplesEventType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.EveryNSamplesEventType">[docs]</a><span class="k">class</span> <span class="nc">EveryNSamplesEventType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ACQUIRED_INTO_BUFFER</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: Acquired Into Buffer</span>
+    <span class="n">TRANSFERRED_FROM_BUFFER</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: Transferred From Buffer</span></div>
+
+
+<div class="viewcode-block" id="ExcitationDCorAC"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ExcitationDCorAC">[docs]</a><span class="k">class</span> <span class="nc">ExcitationDCorAC</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">USE_DC</span> <span class="o">=</span> <span class="mi">10050</span>  <span class="c1">#: DC excitation.</span>
+    <span class="n">USE_AC</span> <span class="o">=</span> <span class="mi">10045</span>  <span class="c1">#: AC excitation.</span></div>
+
+
+<div class="viewcode-block" id="ExcitationIdleOutputBehavior"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ExcitationIdleOutputBehavior">[docs]</a><span class="k">class</span> <span class="nc">ExcitationIdleOutputBehavior</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ZERO_VOLTS_OR_AMPERES</span> <span class="o">=</span> <span class="mi">12526</span>  <span class="c1">#: Drive excitation output to zero.</span>
+    <span class="n">MAINTAIN_EXISTING_VALUE</span> <span class="o">=</span> <span class="mi">12528</span>  <span class="c1">#: Continue generating the current value.</span></div>
+
+
+<div class="viewcode-block" id="ExcitationSource"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ExcitationSource">[docs]</a><span class="k">class</span> <span class="nc">ExcitationSource</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">INTERNAL</span> <span class="o">=</span> <span class="mi">10200</span>  <span class="c1">#: Use the built-in excitation source of the device. If you select this value, you must specify the amount of excitation.</span>
+    <span class="n">EXTERNAL</span> <span class="o">=</span> <span class="mi">10167</span>  <span class="c1">#: Use an excitation source other than the built-in excitation source of the device. If you select this value, you must specify the amount of excitation.</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">10230</span>  <span class="c1">#: Supply no excitation to the channel.</span></div>
+
+
+<div class="viewcode-block" id="ExcitationVoltageOrCurrent"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ExcitationVoltageOrCurrent">[docs]</a><span class="k">class</span> <span class="nc">ExcitationVoltageOrCurrent</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">USE_VOLTAGE</span> <span class="o">=</span> <span class="mi">10322</span>  <span class="c1">#: Voltage excitation.</span>
+    <span class="n">USE_CURRENT</span> <span class="o">=</span> <span class="mi">10134</span>  <span class="c1">#: Current excitation.</span></div>
+
+
+<div class="viewcode-block" id="ExportAction"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ExportAction">[docs]</a><span class="k">class</span> <span class="nc">ExportAction</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">PULSE</span> <span class="o">=</span> <span class="mi">10265</span>  <span class="c1">#: Send a pulse to the terminal.</span>
+    <span class="n">TOGGLE</span> <span class="o">=</span> <span class="mi">10307</span>  <span class="c1">#: Toggle the state of the terminal from low to high or from high to low.</span></div>
+
+<div class="viewcode-block" id="FillMode"><a class="viewcode-back" href="../../constants.html#artdaq.constants.FillMode">[docs]</a><span class="k">class</span> <span class="nc">FillMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">GROUP_BY_CHANNEL</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: Group by Channel</span>
+    <span class="n">GROUP_BY_SCAN_NUMBER</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: Group by Scan Number</span></div>
+
+
+<div class="viewcode-block" id="FilterResponse"><a class="viewcode-back" href="../../constants.html#artdaq.constants.FilterResponse">[docs]</a><span class="k">class</span> <span class="nc">FilterResponse</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">CONSTANT_GROUP_DELAY</span> <span class="o">=</span> <span class="mi">16075</span>  <span class="c1">#: Constant group delay filter response.</span>
+    <span class="n">BUTTERWORTH</span> <span class="o">=</span> <span class="mi">16076</span>  <span class="c1">#: Butterworth filter response.</span>
+    <span class="n">ELLIPTICAL</span> <span class="o">=</span> <span class="mi">16077</span>  <span class="c1">#: Elliptical filter response.</span>
+    <span class="n">HARDWARE_DEFINED</span> <span class="o">=</span> <span class="mi">10191</span>  <span class="c1">#: Use the hardware-defined filter response.</span></div>
+
+
+<div class="viewcode-block" id="FilterType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.FilterType">[docs]</a><span class="k">class</span> <span class="nc">FilterType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">LOWPASS</span> <span class="o">=</span> <span class="mi">16071</span>  <span class="c1">#: Lowpass filter.</span>
+    <span class="n">HIGHPASS</span> <span class="o">=</span> <span class="mi">16072</span>  <span class="c1">#: Highpass filter.</span>
+    <span class="n">BANDPASS</span> <span class="o">=</span> <span class="mi">16073</span>  <span class="c1">#: Bandpass filter.</span>
+    <span class="n">NOTCH</span> <span class="o">=</span> <span class="mi">16074</span>  <span class="c1">#: Notch filter.</span>
+    <span class="n">CUSTOM</span> <span class="o">=</span> <span class="mi">10137</span>  <span class="c1">#: Custom filter.</span></div>
+
+
+<div class="viewcode-block" id="FrequencyUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.FrequencyUnits">[docs]</a><span class="k">class</span> <span class="nc">FrequencyUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">HZ</span> <span class="o">=</span> <span class="mi">10373</span>  <span class="c1">#: Hertz.</span>
+    <span class="n">TICKS</span> <span class="o">=</span> <span class="mi">10304</span>  <span class="c1">#: Timebase ticks.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="InputDataTransferCondition"><a class="viewcode-back" href="../../constants.html#artdaq.constants.InputDataTransferCondition">[docs]</a><span class="k">class</span> <span class="nc">InputDataTransferCondition</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ON_BOARD_MEMORY_MORE_THAN_HALF_FULL</span> <span class="o">=</span> <span class="mi">10237</span>  <span class="c1">#: Transfer data from the device when more than half of the onboard memory of the device fills.</span>
+    <span class="n">ON_BOARD_MEMORY_NOT_EMPTY</span> <span class="o">=</span> <span class="mi">10241</span>  <span class="c1">#: Transfer data from the device when there is data in the onboard memory.</span>
+    <span class="n">ONBOARD_MEMORY_CUSTOM_THRESHOLD</span> <span class="o">=</span> <span class="mi">12577</span>  <span class="c1">#: Transfer data from the device when the number of samples specified with **ai_data_xfer_custom_threshold** are in the device FIFO.</span>
+    <span class="n">WHEN_ACQUISITION_COMPLETE</span> <span class="o">=</span> <span class="mi">12546</span>  <span class="c1">#: Transfer data when the acquisition is complete.</span></div>
+
+
+
+<div class="viewcode-block" id="LengthUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.LengthUnits">[docs]</a><span class="k">class</span> <span class="nc">LengthUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">METERS</span> <span class="o">=</span> <span class="mi">10219</span>  <span class="c1">#: Meters.</span>
+    <span class="n">INCHES</span> <span class="o">=</span> <span class="mi">10379</span>  <span class="c1">#: Inches.</span>
+    <span class="n">TICKS</span> <span class="o">=</span> <span class="mi">10304</span>  <span class="c1">#: Ticks.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="Level"><a class="viewcode-back" href="../../constants.html#artdaq.constants.Level">[docs]</a><span class="k">class</span> <span class="nc">Level</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">HIGH</span> <span class="o">=</span> <span class="mi">10192</span>  <span class="c1">#: Logic high.</span>
+    <span class="n">LOW</span> <span class="o">=</span> <span class="mi">10214</span>  <span class="c1">#: Logic low.</span>
+    <span class="n">NO_CHANGE</span> <span class="o">=</span> <span class="mi">10160</span>  <span class="c1">#: Do not change the state of the lines. On some devices, you can select this value only for entire ports.</span>
+    <span class="n">TRISTATE</span> <span class="o">=</span> <span class="mi">10310</span>  <span class="c1">#: High-impedance state. You can select this state only on devices with bidirectional lines.  You cannot select this state for dedicated digital output lines. On some devices, you can select this value only for entire ports.</span></div>
+
+
+<div class="viewcode-block" id="LineGrouping"><a class="viewcode-back" href="../../constants.html#artdaq.constants.LineGrouping">[docs]</a><span class="k">class</span> <span class="nc">LineGrouping</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">CHAN_PER_LINE</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: One Channel For Each Line</span>
+    <span class="n">CHAN_FOR_ALL_LINES</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: One Channel For All Lines</span></div>
+
+
+<div class="viewcode-block" id="LoggingMode"><a class="viewcode-back" href="../../constants.html#artdaq.constants.LoggingMode">[docs]</a><span class="k">class</span> <span class="nc">LoggingMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">OFF</span> <span class="o">=</span> <span class="mi">10231</span>  <span class="c1">#: Disable logging for the task.</span>
+    <span class="n">LOG</span> <span class="o">=</span> <span class="mi">15844</span>  <span class="c1">#: Enable logging for the task. You cannot read data using DAQmx Read when using this mode. If you require access to the data, read from the TDMS file.</span>
+    <span class="n">LOG_AND_READ</span> <span class="o">=</span> <span class="mi">15842</span>  <span class="c1">#: Enable both logging and reading data for the task. You must use DAQmx Read to read samples for Art-DAQmx to stream them to disk.</span></div>
+
+
+<div class="viewcode-block" id="LoggingOperation"><a class="viewcode-back" href="../../constants.html#artdaq.constants.LoggingOperation">[docs]</a><span class="k">class</span> <span class="nc">LoggingOperation</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">OPEN</span> <span class="o">=</span> <span class="mi">10437</span>  <span class="c1">#: Open an existing TDMS file, and append data to that file. If the file does not exist, Art-DAQmx returns an error.</span>
+    <span class="n">OPEN_OR_CREATE</span> <span class="o">=</span> <span class="mi">15846</span>  <span class="c1">#: Open an existing TDMS file, and append data to that file. If the file does not exist, Art-DAQmx creates a new TDMS file.</span>
+    <span class="n">CREATE_OR_REPLACE</span> <span class="o">=</span> <span class="mi">15847</span>  <span class="c1">#: Create a new TDMS file, or replace an existing TDMS file.</span>
+    <span class="n">CREATE</span> <span class="o">=</span> <span class="mi">15848</span>  <span class="c1">#: Create a new TDMS file. If the file already exists, Art-DAQmx returns an error.</span></div>
+
+
+<div class="viewcode-block" id="LogicFamily"><a class="viewcode-back" href="../../constants.html#artdaq.constants.LogicFamily">[docs]</a><span class="k">class</span> <span class="nc">LogicFamily</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">TWO_POINT_FIVE_V</span> <span class="o">=</span> <span class="mi">14620</span>  <span class="c1">#: Compatible with 2.5 V CMOS signals.</span>
+    <span class="n">THREE_POINT_THREE_V</span> <span class="o">=</span> <span class="mi">14621</span>  <span class="c1">#: Compatible with LVTTL signals.</span>
+    <span class="n">FIVE_V</span> <span class="o">=</span> <span class="mi">14619</span>  <span class="c1">#: Compatible with TTL and 5 V CMOS signals.</span></div>
+
+
+<div class="viewcode-block" id="LogicLvlBehavior"><a class="viewcode-back" href="../../constants.html#artdaq.constants.LogicLvlBehavior">[docs]</a><span class="k">class</span> <span class="nc">LogicLvlBehavior</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">PULL_UP</span> <span class="o">=</span> <span class="mi">16064</span>  <span class="c1">#: High logic.</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">10230</span>  <span class="c1">#: Supply no excitation to the channel.</span></div>
+
+
+<div class="viewcode-block" id="MIOAIConvertTimebaseSource"><a class="viewcode-back" href="../../constants.html#artdaq.constants.MIOAIConvertTimebaseSource">[docs]</a><span class="k">class</span> <span class="nc">MIOAIConvertTimebaseSource</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">SAMPLE_TIMEBASE</span> <span class="o">=</span> <span class="mi">10284</span>  <span class="c1">#: Use the same source as Sample Clock timebase.</span>
+    <span class="n">EIGHT_M_HZ_TIMEBASE</span> <span class="o">=</span> <span class="mi">16023</span>  <span class="c1">#: Use the onboard 8 MHz timebase.</span>
+    <span class="n">ONE_HUNDRED_M_HZ_TIMEBASE</span> <span class="o">=</span> <span class="mi">15857</span>  <span class="c1">#: Use the onboard 100 MHz timebase.</span>
+    <span class="n">MASTER_TIMEBASE</span> <span class="o">=</span> <span class="mi">10282</span>  <span class="c1">#: Use the same source as the Master Timebase.</span>
+    <span class="n">TWENTY_M_HZ_TIMEBASE</span> <span class="o">=</span> <span class="mi">12537</span>  <span class="c1">#: Use the onboard 20 MHz timebase.</span>
+    <span class="n">EIGHTY_M_HZ_TIMEBASE</span> <span class="o">=</span> <span class="mi">14636</span>  <span class="c1">#: Use the onboard 80 MHz timebase.</span></div>
+
+
+<div class="viewcode-block" id="ModulationType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ModulationType">[docs]</a><span class="k">class</span> <span class="nc">ModulationType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">AM</span> <span class="o">=</span> <span class="mi">14756</span>  <span class="c1">#: Amplitude modulation.</span>
+    <span class="n">FM</span> <span class="o">=</span> <span class="mi">14757</span>  <span class="c1">#: Frequency modulation.</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">10230</span>  <span class="c1">#: No modulation.</span></div>
+
+
+<div class="viewcode-block" id="OutputDataTransferCondition"><a class="viewcode-back" href="../../constants.html#artdaq.constants.OutputDataTransferCondition">[docs]</a><span class="k">class</span> <span class="nc">OutputDataTransferCondition</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ON_BOARD_MEMORY_EMPTY</span> <span class="o">=</span> <span class="mi">10235</span>  <span class="c1">#: Transfer data to the device only when there is no data in the onboard memory of the device.</span>
+    <span class="n">ON_BOARD_MEMORY_HALF_FULL_OR_LESS</span> <span class="o">=</span> <span class="mi">10239</span>  <span class="c1">#: Transfer data to the device any time the onboard memory is less than half full.</span>
+    <span class="n">ON_BOARD_MEMORY_LESS_THAN_FULL</span> <span class="o">=</span> <span class="mi">10242</span>  <span class="c1">#: Transfer data to the device any time the onboard memory of the device is not full.</span></div>
+
+
+<div class="viewcode-block" id="OverflowBehavior"><a class="viewcode-back" href="../../constants.html#artdaq.constants.OverflowBehavior">[docs]</a><span class="k">class</span> <span class="nc">OverflowBehavior</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">TOP_TASK_AND_ERROR</span> <span class="o">=</span> <span class="mi">15862</span>  <span class="c1">#: Stop task and return an error.</span>
+    <span class="n">GNORE_OVERRUNS</span> <span class="o">=</span> <span class="mi">15863</span>  <span class="c1">#: Art-DAQmx ignores Sample Clock overruns, and the task continues to run.</span></div>
+
+
+<div class="viewcode-block" id="OverwriteMode"><a class="viewcode-back" href="../../constants.html#artdaq.constants.OverwriteMode">[docs]</a><span class="k">class</span> <span class="nc">OverwriteMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">OVERWRITE_UNREAD_SAMPLES</span> <span class="o">=</span> <span class="mi">10252</span>  <span class="c1">#: When an acquisition encounters unread data in the buffer, the acquisition continues and overwrites the unread samples with new ones. You can read the new samples by setting **relative_to** to **ReadRelativeTo.MOST_RECENT_SAMPLE** and setting **offset** to the appropriate number of samples.</span>
+    <span class="n">DO_NOT_OVERWRITE_UNREAD_SAMPLES</span> <span class="o">=</span> <span class="mi">10159</span>  <span class="c1">#: The acquisition stops when it encounters a sample in the buffer that you have not read.</span></div>
+
+
+<div class="viewcode-block" id="PathCapability"><a class="viewcode-back" href="../../constants.html#artdaq.constants.PathCapability">[docs]</a><span class="k">class</span> <span class="nc">PathCapability</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">PATH_AVAILABLE</span> <span class="o">=</span> <span class="mi">10431</span>  <span class="c1">#: </span>
+    <span class="n">PATH_ALREADY_EXISTS</span> <span class="o">=</span> <span class="mi">10432</span>  <span class="c1">#: </span>
+    <span class="n">PATH_UNSUPPORTED</span> <span class="o">=</span> <span class="mi">10433</span>  <span class="c1">#: </span>
+    <span class="n">CHANNEL_IN_USE</span> <span class="o">=</span> <span class="mi">10434</span>  <span class="c1">#: </span>
+    <span class="n">CHANNEL_SOURCE_CONFLICT</span> <span class="o">=</span> <span class="mi">10435</span>  <span class="c1">#: </span>
+    <span class="n">CHANNEL_RESERVED_FOR_ROUTING</span> <span class="o">=</span> <span class="mi">10436</span>  <span class="c1">#: </span></div>
+
+
+<div class="viewcode-block" id="Polarity"><a class="viewcode-back" href="../../constants.html#artdaq.constants.Polarity">[docs]</a><span class="k">class</span> <span class="nc">Polarity</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ACTIVE_HIGH</span> <span class="o">=</span> <span class="mi">10095</span>  <span class="c1">#: High state is the active state.</span>
+    <span class="n">ACTIVE_LOW</span> <span class="o">=</span> <span class="mi">10096</span>  <span class="c1">#: Low state is the active state.</span></div>
+
+
+<div class="viewcode-block" id="PowerUpChannelType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.PowerUpChannelType">[docs]</a><span class="k">class</span> <span class="nc">PowerUpChannelType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">CHANNEL_VOLTAGE</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: Voltage Channel</span>
+    <span class="n">CHANNEL_CURRENT</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: Current Channel</span>
+    <span class="n">CHANNEL_HIGH_IMPEDANCE</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: High-Impedance Channel</span></div>
+
+
+<div class="viewcode-block" id="PowerUpStates"><a class="viewcode-back" href="../../constants.html#artdaq.constants.PowerUpStates">[docs]</a><span class="k">class</span> <span class="nc">PowerUpStates</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">HIGH</span> <span class="o">=</span> <span class="mi">10192</span>  <span class="c1">#: Logic high.</span>
+    <span class="n">LOW</span> <span class="o">=</span> <span class="mi">10214</span>  <span class="c1">#: Logic low.</span>
+    <span class="n">TRISTATE</span> <span class="o">=</span> <span class="mi">10310</span>  <span class="c1">#: High-impedance state. You can select this state only on devices with bidirectional lines.  You cannot select this state for dedicated digital output lines. On some devices, you can select this value only for entire ports.</span></div>
+
+
+<div class="viewcode-block" id="PressureUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.PressureUnits">[docs]</a><span class="k">class</span> <span class="nc">PressureUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">PASCALS</span> <span class="o">=</span> <span class="mi">10081</span>  <span class="c1">#: Pascals.</span>
+    <span class="n">POUNDS_PER_SQ_INCH</span> <span class="o">=</span> <span class="mi">15879</span>  <span class="c1">#: Pounds per square inch.</span>
+    <span class="n">BAR</span> <span class="o">=</span> <span class="mi">15880</span>  <span class="c1">#: Bar.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="ReadRelativeTo"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ReadRelativeTo">[docs]</a><span class="k">class</span> <span class="nc">ReadRelativeTo</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST_SAMPLE</span> <span class="o">=</span> <span class="mi">10424</span>  <span class="c1">#: Start reading samples relative to the first sample acquired.</span>
+    <span class="n">CURRENT_READ_POSITION</span> <span class="o">=</span> <span class="mi">10425</span>  <span class="c1">#: Start reading samples relative to the last sample returned by the previous read. For the first read operation, this position is the first sample acquired or the first pretrigger sample if you configured a reference trigger for the task.</span>
+    <span class="n">REFERENCE_TRIGGER</span> <span class="o">=</span> <span class="mi">10426</span>  <span class="c1">#: Start reading samples relative to the first sample after the reference trigger occurred.</span>
+    <span class="n">FIRST_PRETRIGGER_SAMPLE</span> <span class="o">=</span> <span class="mi">10427</span>  <span class="c1">#: Start reading samples relative to the first pretrigger sample. You specify the number of pretrigger samples to acquire when you configure a reference trigger.</span>
+    <span class="n">MOST_RECENT_SAMPLE</span> <span class="o">=</span> <span class="mi">10428</span>  <span class="c1">#: Start reading samples relative to the next sample acquired. For example, use this value and set **offset** to -1 to read the last sample acquired.</span></div>
+
+
+<div class="viewcode-block" id="RegenerationMode"><a class="viewcode-back" href="../../constants.html#artdaq.constants.RegenerationMode">[docs]</a><span class="k">class</span> <span class="nc">RegenerationMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ALLOW_REGENERATION</span> <span class="o">=</span> <span class="mi">10097</span>  <span class="c1">#: Allow Art-DAQmx to regenerate samples that the device previously generated. When you choose this value, the write marker returns to the beginning of the buffer after the device generates all samples currently in the buffer.</span>
+    <span class="n">DONT_ALLOW_REGENERATION</span> <span class="o">=</span> <span class="mi">10158</span>  <span class="c1">#: Do not allow Art-DAQmx to regenerate samples the device previously generated. When you choose this value, Art-DAQmx waits for you to write more samples to the buffer or until the timeout expires.</span></div>
+
+
+<div class="viewcode-block" id="ResistanceConfiguration"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ResistanceConfiguration">[docs]</a><span class="k">class</span> <span class="nc">ResistanceConfiguration</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">TWO_WIRE</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: 2-wire mode.</span>
+    <span class="n">THREE_WIRE</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1">#: 3-wire mode.</span>
+    <span class="n">FOUR_WIRE</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1">#: 4-wire mode.</span></div>
+
+
+<div class="viewcode-block" id="ResistanceUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ResistanceUnits">[docs]</a><span class="k">class</span> <span class="nc">ResistanceUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">OHMS</span> <span class="o">=</span> <span class="mi">10384</span>  <span class="c1">#: Ohms.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span>
+    <span class="n">FROM_TEDS</span> <span class="o">=</span> <span class="mi">12516</span>  <span class="c1">#: Units defined by TEDS information associated with the channel.</span></div>
+
+
+<div class="viewcode-block" id="ResistorState"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ResistorState">[docs]</a><span class="k">class</span> <span class="nc">ResistorState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">PULL_UP</span> <span class="o">=</span> <span class="mi">15950</span>  <span class="c1">#: pull up state for pull up/pull down resistors</span>
+    <span class="n">PULL_DOWN</span> <span class="o">=</span> <span class="mi">15951</span>  <span class="c1">#: pull down state for pull up pull down resistors</span></div>
+
+
+<div class="viewcode-block" id="ResolutionType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ResolutionType">[docs]</a><span class="k">class</span> <span class="nc">ResolutionType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">BITS</span> <span class="o">=</span> <span class="mi">10109</span>  <span class="c1">#: Bits.</span></div>
+
+
+<div class="viewcode-block" id="SampClkOverrunBehavior"><a class="viewcode-back" href="../../constants.html#artdaq.constants.SampClkOverrunBehavior">[docs]</a><span class="k">class</span> <span class="nc">SampClkOverrunBehavior</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">REPEAT_LAST_SAMPLE</span> <span class="o">=</span> <span class="mi">16062</span>  <span class="c1">#: Repeat the last sample.</span>
+    <span class="n">RETURN_SENTINEL_VALUE</span> <span class="o">=</span> <span class="mi">16063</span>  <span class="c1">#: Return the sentinel value.</span></div>
+
+
+<div class="viewcode-block" id="SampleInputDataWhen"><a class="viewcode-back" href="../../constants.html#artdaq.constants.SampleInputDataWhen">[docs]</a><span class="k">class</span> <span class="nc">SampleInputDataWhen</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">HANDSHAKE_TRIGGER_ASSERTS</span> <span class="o">=</span> <span class="mi">12552</span>  <span class="c1">#: Latch data when the Handshake Trigger asserts.</span>
+    <span class="n">HANDSHAKE_TRIGGER_DEASSERTS</span> <span class="o">=</span> <span class="mi">12553</span>  <span class="c1">#: Latch data when the Handshake Trigger deasserts.</span></div>
+
+
+<div class="viewcode-block" id="SampleTimingType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.SampleTimingType">[docs]</a><span class="k">class</span> <span class="nc">SampleTimingType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">SAMPLE_CLOCK</span> <span class="o">=</span> <span class="mi">10388</span>  <span class="c1">#: Acquire or generate samples on the specified edge of the sample clock.</span>
+    <span class="n">BURST_HANDSHAKE</span> <span class="o">=</span> <span class="mi">12548</span>  <span class="c1">#: Determine sample timing using burst handshaking between the device and a peripheral device.</span>
+    <span class="n">HANDSHAKE</span> <span class="o">=</span> <span class="mi">10389</span>  <span class="c1">#: Determine sample timing by using digital handshaking between the device and a peripheral device.</span>
+    <span class="n">IMPLICIT</span> <span class="o">=</span> <span class="mi">10451</span>  <span class="c1">#: Configure only the duration of the task.</span>
+    <span class="n">ON_DEMAND</span> <span class="o">=</span> <span class="mi">10390</span>  <span class="c1">#: Acquire or generate a sample on each read or write operation. This timing type is also referred to as static or software-timed.</span>
+    <span class="n">CHANGE_DETECTION</span> <span class="o">=</span> <span class="mi">12504</span>  <span class="c1">#: Acquire samples when a change occurs in the state of one or more digital input lines. The lines must be contained within a digital input channel.</span>
+    <span class="n">PIPELINED_SAMPLE_CLOCK</span> <span class="o">=</span> <span class="mi">14668</span>  <span class="c1">#: Device acquires or generates samples on each sample clock edge, but does not respond to certain triggers until a few sample clock edges later. Pipelining allows higher data transfer rates at the cost of increased trigger response latency.  Refer to the device documentation for information about which triggers pipelining affects. This timing type allows handshaking with some devices using the Pause trigger, the Ready for Transfer event, or the Data Active event. Refer to the device documentation for more information.</span></div>
+
+
+<div class="viewcode-block" id="ScaleType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ScaleType">[docs]</a><span class="k">class</span> <span class="nc">ScaleType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">LINEAR</span> <span class="o">=</span> <span class="mi">10447</span>  <span class="c1">#: Scale values by using the equation y=mx+b, where x is a prescaled value and y is a scaled value.</span>
+    <span class="n">MAP_RANGES</span> <span class="o">=</span> <span class="mi">10448</span>  <span class="c1">#: Scale values proportionally from a range of pre-scaled values to a range of scaled values.</span>
+    <span class="n">POLYNOMIAL</span> <span class="o">=</span> <span class="mi">10449</span>  <span class="c1">#: Scale values by using an Nth order polynomial equation.</span>
+    <span class="n">TABLE</span> <span class="o">=</span> <span class="mi">10450</span>  <span class="c1">#: Map a list of pre-scaled values to a list of corresponding scaled values, with all other values scaled proportionally.</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">10230</span>  <span class="c1">#: Do not scale electrical values to physical units.</span>
+    <span class="n">TWO_POINT_LINEAR</span> <span class="o">=</span> <span class="mi">15898</span>  <span class="c1">#: You provide two pairs of electrical values and their corresponding physical values. Art-DAQmx uses those values to calculate the slope and y-intercept of a linear equation and uses that equation to scale electrical values to physical values.</span></div>
+
+
+<div class="viewcode-block" id="ScanRepeatMode"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ScanRepeatMode">[docs]</a><span class="k">class</span> <span class="nc">ScanRepeatMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FINITE</span> <span class="o">=</span> <span class="mi">10172</span>  <span class="c1">#: The task advances through the scan list one time only. Art-DAQmx ignores any Advance Triggers after completing the scan list.</span>
+    <span class="n">CONTINUOUS</span> <span class="o">=</span> <span class="mi">10117</span>  <span class="c1">#: The task returns to the beginning of the scan list when it reaches the end of the scan list.</span></div>
+
+
+<div class="viewcode-block" id="Sense"><a class="viewcode-back" href="../../constants.html#artdaq.constants.Sense">[docs]</a><span class="k">class</span> <span class="nc">Sense</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">LOCAL</span> <span class="o">=</span> <span class="mi">16095</span>  <span class="c1">#: Local.</span>
+    <span class="n">REMOTE</span> <span class="o">=</span> <span class="mi">16096</span>  <span class="c1">#: Remote.</span></div>
+
+
+<div class="viewcode-block" id="Signal"><a class="viewcode-back" href="../../constants.html#artdaq.constants.Signal">[docs]</a><span class="k">class</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">AI_CONVERT_CLOCK</span> <span class="o">=</span> <span class="mi">12484</span>
+    <span class="n">SAMPLE_CLOCK</span> <span class="o">=</span> <span class="mi">12487</span>
+    <span class="n">REFERENCE_CLOCK</span> <span class="o">=</span> <span class="mi">12535</span>
+    <span class="n">PAUSE_TRIGGER</span> <span class="o">=</span> <span class="mi">12489</span>
+    <span class="n">REFERENCE_TRIGGER</span> <span class="o">=</span> <span class="mi">12490</span>
+    <span class="n">START_TRIGGER</span> <span class="o">=</span> <span class="mi">12491</span>
+    <span class="n">COUNTER_OUTPUT_EVENT</span> <span class="o">=</span> <span class="mi">12494</span>
+    <span class="n">SAMPLE_CLOCK_TIMEBASE</span> <span class="o">=</span> <span class="mi">12495</span>
+    <span class="n">SYNC_PULSE_EVENT</span> <span class="o">=</span> <span class="mi">12496</span></div>
+
+
+
+<div class="viewcode-block" id="Slope"><a class="viewcode-back" href="../../constants.html#artdaq.constants.Slope">[docs]</a><span class="k">class</span> <span class="nc">Slope</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">RISING</span> <span class="o">=</span> <span class="mi">10280</span>  <span class="c1">#: Trigger on the rising slope of the signal.</span>
+    <span class="n">FALLING</span> <span class="o">=</span> <span class="mi">10171</span>  <span class="c1">#: Trigger on the falling slope of the signal.</span></div>
+
+
+<div class="viewcode-block" id="SoftwareTrigger"><a class="viewcode-back" href="../../constants.html#artdaq.constants.SoftwareTrigger">[docs]</a><span class="k">class</span> <span class="nc">SoftwareTrigger</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ADVANCE_TRIGGER</span> <span class="o">=</span> <span class="mi">12488</span>  <span class="c1">#: Place holder enum to make editting internal enum easier.</span></div>
+
+
+<div class="viewcode-block" id="SourceSelection"><a class="viewcode-back" href="../../constants.html#artdaq.constants.SourceSelection">[docs]</a><span class="k">class</span> <span class="nc">SourceSelection</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">INTERNAL</span> <span class="o">=</span> <span class="mi">10200</span>  <span class="c1">#: Internal to the device.</span>
+    <span class="n">EXTERNAL</span> <span class="o">=</span> <span class="mi">10167</span>  <span class="c1">#: External to the device.</span></div>
+
+
+<div class="viewcode-block" id="SyncType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.SyncType">[docs]</a><span class="k">class</span> <span class="nc">SyncType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">10230</span>  <span class="c1">#: Disables trigger skew correction.</span>
+    <span class="n">MASTER</span> <span class="o">=</span> <span class="mi">15888</span>  <span class="c1">#: Device is the source for shared clocks and triggers.</span>
+    <span class="n">SLAVE</span> <span class="o">=</span> <span class="mi">15889</span>  <span class="c1">#: Device uses clocks and triggers from the master device.</span></div>
+
+
+<div class="viewcode-block" id="TEDSUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.TEDSUnits">[docs]</a><span class="k">class</span> <span class="nc">TEDSUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span>
+    <span class="n">FROM_TEDS</span> <span class="o">=</span> <span class="mi">12516</span>  <span class="c1">#: Units defined by TEDS information associated with the channel.</span></div>
+
+
+<div class="viewcode-block" id="TaskMode"><a class="viewcode-back" href="../../constants.html#artdaq.constants.TaskMode">[docs]</a><span class="k">class</span> <span class="nc">TaskMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">TASK_START</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: Start</span>
+    <span class="n">TASK_STOP</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: Stop</span>
+    <span class="n">TASK_VERIFY</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: Verify</span>
+    <span class="n">TASK_COMMIT</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1">#: Commit</span>
+    <span class="n">TASK_RESERVE</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1">#: Reserve</span>
+    <span class="n">TASK_UNRESERVE</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1">#: Unreserve</span>
+    <span class="n">TASK_ABORT</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1">#: Abort</span></div>
+
+
+<div class="viewcode-block" id="TemperatureUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.TemperatureUnits">[docs]</a><span class="k">class</span> <span class="nc">TemperatureUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">DEG_C</span> <span class="o">=</span> <span class="mi">10143</span>  <span class="c1">#: Degrees Celsius.</span>
+    <span class="n">DEG_F</span> <span class="o">=</span> <span class="mi">10144</span>  <span class="c1">#: Degrees Fahrenheit.</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="mi">10325</span>  <span class="c1">#: Kelvins.</span>
+    <span class="n">DEG_R</span> <span class="o">=</span> <span class="mi">10145</span>  <span class="c1">#: Degrees Rankine.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="TerminalConfiguration"><a class="viewcode-back" href="../../constants.html#artdaq.constants.TerminalConfiguration">[docs]</a><span class="k">class</span> <span class="nc">TerminalConfiguration</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">DEFAULT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1">#: Default.</span>
+    <span class="n">RSE</span> <span class="o">=</span> <span class="mi">10083</span>  <span class="c1">#: Referenced Single-Ended.</span>
+    <span class="n">NRSE</span> <span class="o">=</span> <span class="mi">10078</span>  <span class="c1">#: Non-Referenced Single-Ended.</span>
+    <span class="n">DIFFERENTIAL</span> <span class="o">=</span> <span class="mi">10106</span>  <span class="c1">#: Differential.</span>
+    <span class="n">PSEUDODIFFERENTIAL</span> <span class="o">=</span> <span class="mi">12529</span>  <span class="c1">#: Pseudodifferential.</span></div>
+
+
+<div class="viewcode-block" id="TimeUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.TimeUnits">[docs]</a><span class="k">class</span> <span class="nc">TimeUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">SECONDS</span> <span class="o">=</span> <span class="mi">10364</span>  <span class="c1">#: Seconds.</span>
+    <span class="n">TICKS</span> <span class="o">=</span> <span class="mi">10304</span>  <span class="c1">#: Timebase ticks.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="TorqueUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.TorqueUnits">[docs]</a><span class="k">class</span> <span class="nc">TorqueUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">NEWTON_METERS</span> <span class="o">=</span> <span class="mi">15881</span>  <span class="c1">#: Newton meters.</span>
+    <span class="n">FOOT_POUNDS</span> <span class="o">=</span> <span class="mi">15884</span>  <span class="c1">#: Pound-feet.</span>
+    <span class="n">INCH_POUNDS</span> <span class="o">=</span> <span class="mi">15883</span>  <span class="c1">#: Pound-inches.</span>
+    <span class="n">INCH_OUNCES</span> <span class="o">=</span> <span class="mi">15882</span>  <span class="c1">#: Ounce-inches.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="TriggerType"><a class="viewcode-back" href="../../constants.html#artdaq.constants.TriggerType">[docs]</a><span class="k">class</span> <span class="nc">TriggerType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">10230</span>  <span class="c1">#: Disable reference triggering for the task.</span>
+    <span class="n">ANALOG_LEVEL</span> <span class="o">=</span> <span class="mi">10101</span>  <span class="c1">#: Pause the measurement or generation while an analog signal is above or below a level.</span>
+    <span class="n">ANALOG_WINDOW</span> <span class="o">=</span> <span class="mi">10103</span>  <span class="c1">#: Trigger when an analog signal enters or leaves a range of values.</span>
+    <span class="n">DIGITAL_EDGE</span> <span class="o">=</span> <span class="mi">10150</span>  <span class="c1">#: Trigger on a rising or falling edge of a digital pulse.</span>
+    <span class="n">DIGITAL_LEVEL</span> <span class="o">=</span> <span class="mi">10152</span>  <span class="c1">#: Pause the measurement or generation while a digital signal is at either a high or low state.</span>
+    <span class="n">DIGITAL_PATTERN</span> <span class="o">=</span> <span class="mi">10398</span>  <span class="c1">#: Pause the measurement or generation while digital physical channels either match or do not match a digital pattern.</span>
+    <span class="n">SOFTWARE</span> <span class="o">=</span> <span class="mi">10292</span>  <span class="c1">#: Advance to the next entry in a scan list when you call DAQmx Send Software Trigger.</span>
+    <span class="n">ANALOG_EDGE</span> <span class="o">=</span> <span class="mi">10099</span>  <span class="c1">#: Trigger when an analog signal crosses a threshold.</span>
+    <span class="n">INTERLOCKED</span> <span class="o">=</span> <span class="mi">12549</span>  <span class="c1">#: Use the Handshake Trigger as a control signal for asynchronous handshaking, such as 8255 handshaking.</span></div>
+
+
+<div class="viewcode-block" id="TriggerUsage"><a class="viewcode-back" href="../../constants.html#artdaq.constants.TriggerUsage">[docs]</a><span class="k">class</span> <span class="nc">TriggerUsage</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ADVANCE</span> <span class="o">=</span> <span class="mi">12488</span>  <span class="c1">#: Advance trigger.</span>
+    <span class="n">PAUSE</span> <span class="o">=</span> <span class="mi">12489</span>  <span class="c1">#: Pause trigger.</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="mi">12490</span>  <span class="c1">#: Reference trigger.</span>
+    <span class="n">START</span> <span class="o">=</span> <span class="mi">12491</span>  <span class="c1">#: Start trigger.</span>
+    <span class="n">HANDSHAKE</span> <span class="o">=</span> <span class="mi">10389</span>  <span class="c1">#: Handshake trigger.</span>
+    <span class="n">ARM_START</span> <span class="o">=</span> <span class="mi">14641</span>  <span class="c1">#: Arm Start trigger.</span></div>
+
+
+<div class="viewcode-block" id="UnderflowBehavior"><a class="viewcode-back" href="../../constants.html#artdaq.constants.UnderflowBehavior">[docs]</a><span class="k">class</span> <span class="nc">UnderflowBehavior</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">HALT_OUTPUT_AND_ERROR</span> <span class="o">=</span> <span class="mi">14615</span>  <span class="c1">#: Stop generating samples and return an error.</span>
+    <span class="n">AUSE_UNTIL_DATA_AVAILABLE</span> <span class="o">=</span> <span class="mi">14616</span>  <span class="c1">#: Pause the task until samples are available in the FIFO.</span></div>
+
+
+<div class="viewcode-block" id="UnitsPreScaled"><a class="viewcode-back" href="../../constants.html#artdaq.constants.UnitsPreScaled">[docs]</a><span class="k">class</span> <span class="nc">UnitsPreScaled</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">VOLTS</span> <span class="o">=</span> <span class="mi">10348</span>  <span class="c1">#: Volts.</span>
+    <span class="n">AMPS</span> <span class="o">=</span> <span class="mi">10342</span>  <span class="c1">#: Amperes.</span>
+    <span class="n">DEG_F</span> <span class="o">=</span> <span class="mi">10144</span>  <span class="c1">#: Degrees Fahrenheit.</span>
+    <span class="n">DEG_C</span> <span class="o">=</span> <span class="mi">10143</span>  <span class="c1">#: Degrees Celsius.</span>
+    <span class="n">DEG_R</span> <span class="o">=</span> <span class="mi">10145</span>  <span class="c1">#: Degrees Rankine.</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="mi">10325</span>  <span class="c1">#: Kelvins.</span>
+    <span class="n">STRAIN</span> <span class="o">=</span> <span class="mi">10299</span>  <span class="c1">#: Strain.</span>
+    <span class="n">OHMS</span> <span class="o">=</span> <span class="mi">10384</span>  <span class="c1">#: Ohms.</span>
+    <span class="n">HERTZ</span> <span class="o">=</span> <span class="mi">10373</span>  <span class="c1">#: Hertz.</span>
+    <span class="n">SECONDS</span> <span class="o">=</span> <span class="mi">10364</span>  <span class="c1">#: Seconds.</span>
+    <span class="n">METERS</span> <span class="o">=</span> <span class="mi">10219</span>  <span class="c1">#: Meters.</span>
+    <span class="n">INCHES</span> <span class="o">=</span> <span class="mi">10379</span>  <span class="c1">#: Inches.</span>
+    <span class="n">DEGREES</span> <span class="o">=</span> <span class="mi">10146</span>  <span class="c1">#: Degrees.</span>
+    <span class="n">RADIANS</span> <span class="o">=</span> <span class="mi">10273</span>  <span class="c1">#: Radians.</span>
+    <span class="n">TICKS</span> <span class="o">=</span> <span class="mi">10304</span>  <span class="c1">#: Ticks.</span>
+    <span class="n">RPM</span> <span class="o">=</span> <span class="mi">16080</span>  <span class="c1">#: Revolutions per minute.</span>
+    <span class="n">RADIANS_PER_SECOND</span> <span class="o">=</span> <span class="mi">16081</span>  <span class="c1">#: Radians per second.</span>
+    <span class="n">DEGREES_PER_SECOND</span> <span class="o">=</span> <span class="mi">16082</span>  <span class="c1">#: Degrees per second.</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="mi">10186</span>  <span class="c1">#: 1 g is approximately equal to 9.81 m/s/s.</span>
+    <span class="n">METERS_PER_SECOND_SQUARED</span> <span class="o">=</span> <span class="mi">12470</span>  <span class="c1">#: Meters per second per second.</span>
+    <span class="n">INCHES_PER_SECOND_SQUARED</span> <span class="o">=</span> <span class="mi">12471</span>  <span class="c1">#: Inches per second per second.</span>
+    <span class="n">METERS_PER_SECOND</span> <span class="o">=</span> <span class="mi">15959</span>  <span class="c1">#: Meters per second.</span>
+    <span class="n">INCHES_PER_SECOND</span> <span class="o">=</span> <span class="mi">15960</span>  <span class="c1">#: Inches per second.</span>
+    <span class="n">PA</span> <span class="o">=</span> <span class="mi">10081</span>  <span class="c1">#: Pascals.</span>
+    <span class="n">NEWTONS</span> <span class="o">=</span> <span class="mi">15875</span>  <span class="c1">#: Newtons.</span>
+    <span class="n">POUNDS</span> <span class="o">=</span> <span class="mi">15876</span>  <span class="c1">#: Pounds.</span>
+    <span class="n">KILOGRAM_FORCE</span> <span class="o">=</span> <span class="mi">15877</span>  <span class="c1">#: Kilograms-force.</span>
+    <span class="n">BAR</span> <span class="o">=</span> <span class="mi">15880</span>  <span class="c1">#: Bar.</span>
+    <span class="n">POUNDS_PER_SQ_INCH</span> <span class="o">=</span> <span class="mi">15879</span>  <span class="c1">#: Pounds per square inch.</span>
+    <span class="n">NEWTON_METERS</span> <span class="o">=</span> <span class="mi">15881</span>  <span class="c1">#: Newton meters.</span>
+    <span class="n">INCH_OUNCES</span> <span class="o">=</span> <span class="mi">15882</span>  <span class="c1">#: Ounce-inches.</span>
+    <span class="n">INCH_POUNDS</span> <span class="o">=</span> <span class="mi">15883</span>  <span class="c1">#: Pound-inches.</span>
+    <span class="n">FOOT_POUNDS</span> <span class="o">=</span> <span class="mi">15884</span>  <span class="c1">#: Pound-feet.</span>
+    <span class="n">VOLTS_PER_VOLT</span> <span class="o">=</span> <span class="mi">15896</span>  <span class="c1">#: Volts per volt.</span>
+    <span class="n">M_VOLTS_PER_VOLT</span> <span class="o">=</span> <span class="mi">15897</span>  <span class="c1">#: Millivolts per volt.</span>
+    <span class="n">COULOMBS</span> <span class="o">=</span> <span class="mi">16102</span>  <span class="c1">#: Coulombs.</span>
+    <span class="n">PICO_COULOMBS</span> <span class="o">=</span> <span class="mi">16103</span>  <span class="c1">#: PicoCoulombs.</span>
+    <span class="n">FROM_TEDS</span> <span class="o">=</span> <span class="mi">12516</span>  <span class="c1">#: Units defined by TEDS information associated with the channel.</span></div>
+
+
+<div class="viewcode-block" id="UsageTypeAI"><a class="viewcode-back" href="../../constants.html#artdaq.constants.UsageTypeAI">[docs]</a><span class="k">class</span> <span class="nc">UsageTypeAI</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">VOLTAGE</span> <span class="o">=</span> <span class="mi">10322</span>  <span class="c1">#: Voltage measurement.</span>
+    <span class="n">VOLTAGE_ACRMS</span> <span class="o">=</span> <span class="mi">10350</span>  <span class="c1">#: Voltage RMS measurement.</span>
+    <span class="n">VOLTAGE_CUSTOM_WITH_EXCITATION</span> <span class="o">=</span> <span class="mi">10323</span>  <span class="c1">#: Voltage measurement with an excitation source. You can use this measurement type for custom sensors that require excitation, but you must use a custom scale to scale the measured voltage.</span>
+    <span class="n">CURRENT</span> <span class="o">=</span> <span class="mi">10134</span>  <span class="c1">#: Current measurement.</span>
+    <span class="n">CURRENT_ACRMS</span> <span class="o">=</span> <span class="mi">10351</span>  <span class="c1">#: Current RMS measurement.</span>
+    <span class="n">FREQUENCY_VOLTAGE</span> <span class="o">=</span> <span class="mi">10181</span>  <span class="c1">#: Frequency measurement using a frequency to voltage converter.</span>
+    <span class="n">RESISTANCE</span> <span class="o">=</span> <span class="mi">10278</span>  <span class="c1">#: Resistance measurement.</span>
+    <span class="n">TEMPERATURE_THERMOCOUPLE</span> <span class="o">=</span> <span class="mi">10303</span>  <span class="c1">#: Temperature measurement using a thermocouple.</span>
+    <span class="n">TEMPERATURE_THERMISTOR</span> <span class="o">=</span> <span class="mi">10302</span>  <span class="c1">#: Temperature measurement using a thermistor.</span>
+    <span class="n">TEMPERATURE_BUILT_IN_SENSOR</span> <span class="o">=</span> <span class="mi">10311</span>  <span class="c1">#: Temperature measurement using a built-in sensor on a terminal block or device. On SCXI modules, for example, this could be the CJC sensor.</span>
+    <span class="n">TEMPERATURE_RTD</span> <span class="o">=</span> <span class="mi">10301</span>  <span class="c1">#: Temperature measurement using an RTD.</span>
+    <span class="n">POSITION_LINEAR_LVDT</span> <span class="o">=</span> <span class="mi">10352</span>  <span class="c1">#: Position measurement using an LVDT.</span>
+    <span class="n">POSITION_ANGULAR_RVDT</span> <span class="o">=</span> <span class="mi">10353</span>  <span class="c1">#: Position measurement using an RVDT.</span>
+    <span class="n">POSITION_EDDY_CURRENT_PROX_PROBE</span> <span class="o">=</span> <span class="mi">14835</span>  <span class="c1">#: Position measurement using an eddy current proximity probe.</span>
+    <span class="n">SOUND_PRESSURE_MICROPHONE</span> <span class="o">=</span> <span class="mi">10354</span>  <span class="c1">#: Sound pressure measurement using a microphone.</span>
+    <span class="n">STRAIN_STRAIN_GAGE</span> <span class="o">=</span> <span class="mi">10300</span>  <span class="c1">#: Strain measurement.</span>
+    <span class="n">ROSETTE_STRAIN_GAGE</span> <span class="o">=</span> <span class="mi">15980</span>  <span class="c1">#: Strain measurement using a rosette strain gage.</span>
+    <span class="n">ACCELERATION_ACCELEROMETER_CURRENT_INPUT</span> <span class="o">=</span> <span class="mi">10356</span>  <span class="c1">#: Acceleration measurement using an accelerometer.</span>
+    <span class="n">ACCELERATION_CHARGE</span> <span class="o">=</span> <span class="mi">16104</span>  <span class="c1">#: Acceleration measurement using a charge-based sensor.</span>
+    <span class="n">ACCELERATION_4_WIRE_DC_VOLTAGE</span> <span class="o">=</span> <span class="mi">16106</span>  <span class="c1">#: Acceleration measurement using a 4 wire DC voltage based sensor.</span>
+    <span class="n">VELOCITY_IEPE_SENSOR</span> <span class="o">=</span> <span class="mi">15966</span>  <span class="c1">#: Velocity measurement using an IEPE Sensor.</span>
+    <span class="n">FORCE_IEPE_SENSOR</span> <span class="o">=</span> <span class="mi">15895</span>  <span class="c1">#: Force measurement using an IEPE Sensor.</span>
+    <span class="n">FORCE_BRIDGE</span> <span class="o">=</span> <span class="mi">15899</span>  <span class="c1">#: Force measurement using a bridge-based sensor.</span>
+    <span class="n">BRIDGE</span> <span class="o">=</span> <span class="mi">15908</span>  <span class="c1">#: Measure voltage ratios from a Wheatstone bridge.</span>
+    <span class="n">TORQUE_BRIDGE</span> <span class="o">=</span> <span class="mi">15905</span>  <span class="c1">#: Torque measurement using a bridge-based sensor.</span>
+    <span class="n">PRESSURE_BRIDGE</span> <span class="o">=</span> <span class="mi">15902</span>  <span class="c1">#: Pressure measurement using a bridge-based sensor.</span>
+    <span class="n">TEDS</span> <span class="o">=</span> <span class="mi">12531</span>  <span class="c1">#: Measurement type defined by TEDS.</span>
+    <span class="n">CHARGE</span> <span class="o">=</span> <span class="mi">16105</span>  <span class="c1">#: Charge measurement.</span></div>
+
+
+<div class="viewcode-block" id="UsageTypeAO"><a class="viewcode-back" href="../../constants.html#artdaq.constants.UsageTypeAO">[docs]</a><span class="k">class</span> <span class="nc">UsageTypeAO</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">VOLTAGE</span> <span class="o">=</span> <span class="mi">10322</span>  <span class="c1">#: Voltage generation.</span>
+    <span class="n">CURRENT</span> <span class="o">=</span> <span class="mi">10134</span>  <span class="c1">#: Current generation.</span>
+    <span class="n">FUNCTION_GENERATION</span> <span class="o">=</span> <span class="mi">14750</span>  <span class="c1">#: Function generation.</span></div>
+
+
+<div class="viewcode-block" id="UsageTypeCI"><a class="viewcode-back" href="../../constants.html#artdaq.constants.UsageTypeCI">[docs]</a><span class="k">class</span> <span class="nc">UsageTypeCI</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FREQUENCY</span> <span class="o">=</span> <span class="mi">10179</span>  <span class="c1">#: Measure the frequency of a digital signal.</span>
+    <span class="n">PERIOD</span> <span class="o">=</span> <span class="mi">10256</span>  <span class="c1">#: Measure the period of a digital signal.</span>
+    <span class="n">PULSE_WIDTH_DIGITAL</span> <span class="o">=</span> <span class="mi">10359</span>  <span class="c1">#: Measure the width of a pulse of a digital signal.</span>
+    <span class="n">PULSE_WIDTH_DIGITAL_TWO_EDGE_SEPARATION</span> <span class="o">=</span> <span class="mi">10267</span>  <span class="c1">#: Measure time between edges of two digital signals.</span>
+    <span class="n">PULSE_WIDTH_DIGITAL_SEMI_PERIOD</span> <span class="o">=</span> <span class="mi">10289</span>  <span class="c1">#: Measure the time between state transitions of a digital signal.</span>
+    <span class="n">PULSE_FREQ</span> <span class="o">=</span> <span class="mi">15864</span>  <span class="c1">#: Pulse measurement, returning the result as frequency and duty cycle.</span>
+    <span class="n">PULSE_TIME</span> <span class="o">=</span> <span class="mi">15865</span>  <span class="c1">#: Pulse measurement, returning the result as high time and low time.</span>
+    <span class="n">PULSE_TICKS</span> <span class="o">=</span> <span class="mi">15866</span>  <span class="c1">#: Pulse measurement, returning the result as high ticks and low ticks.</span>
+    <span class="n">COUNT_EDGES</span> <span class="o">=</span> <span class="mi">10125</span>  <span class="c1">#: Count edges of a digital signal.</span>
+    <span class="n">POSITION_ANGULAR_ENCODER</span> <span class="o">=</span> <span class="mi">10360</span>  <span class="c1">#: Angular position measurement using an angular encoder.</span>
+    <span class="n">POSITION_LINEAR_ENCODER</span> <span class="o">=</span> <span class="mi">10361</span>  <span class="c1">#: Linear position measurement using a linear encoder.</span>
+    <span class="n">TIME_GPS</span> <span class="o">=</span> <span class="mi">10362</span>  <span class="c1">#: Timestamp measurement, synchronizing the counter to a GPS receiver.</span>
+    <span class="n">DUTY_CYCLE</span> <span class="o">=</span> <span class="mi">16070</span>  <span class="c1">#: Measure the duty cycle of a digital signal.</span>
+    <span class="n">VELOCITY_ANGULAR_ENCODER</span> <span class="o">=</span> <span class="mi">16078</span>  <span class="c1">#: Angular velocity measurement using an angular encoder.</span>
+    <span class="n">VELOCITY_LINEAR_ENCODER</span> <span class="o">=</span> <span class="mi">16079</span>  <span class="c1">#: Linear velocity measurement using a linear encoder.</span></div>
+
+
+<div class="viewcode-block" id="UsageTypeCO"><a class="viewcode-back" href="../../constants.html#artdaq.constants.UsageTypeCO">[docs]</a><span class="k">class</span> <span class="nc">UsageTypeCO</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">PULSE_TIME</span> <span class="o">=</span> <span class="mi">10269</span>  <span class="c1">#: Generate pulses defined by the time the pulse is at a low state and the time the pulse is at a high state.</span>
+    <span class="n">PULSE_FREQUENCY</span> <span class="o">=</span> <span class="mi">10119</span>  <span class="c1">#: Generate digital pulses defined by frequency and duty cycle.</span>
+    <span class="n">PULSE_TICKS</span> <span class="o">=</span> <span class="mi">10268</span>  <span class="c1">#: Generate digital pulses defined by the number of timebase ticks that the pulse is at a low state and the number of timebase ticks that the pulse is at a high state.</span></div>
+
+
+<div class="viewcode-block" id="VelocityIEPESensorSensitivityUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.VelocityIEPESensorSensitivityUnits">[docs]</a><span class="k">class</span> <span class="nc">VelocityIEPESensorSensitivityUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">M_VOLTS_PER_MILLIMETER_PER_SECOND</span> <span class="o">=</span> <span class="mi">15963</span>  <span class="c1">#: Millivolts per millimeter per second.</span>
+    <span class="n">M_VOLTS_PER_INCH_PER_SECOND</span> <span class="o">=</span> <span class="mi">15964</span>  <span class="c1">#: Millivolts per inch per second.</span></div>
+
+
+<div class="viewcode-block" id="VelocityUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.VelocityUnits">[docs]</a><span class="k">class</span> <span class="nc">VelocityUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">METERS_PER_SECOND</span> <span class="o">=</span> <span class="mi">15959</span>  <span class="c1">#: Meters per second.</span>
+    <span class="n">INCHES_PER_SECOND</span> <span class="o">=</span> <span class="mi">15960</span>  <span class="c1">#: Inches per second.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span></div>
+
+
+<div class="viewcode-block" id="VoltageUnits"><a class="viewcode-back" href="../../constants.html#artdaq.constants.VoltageUnits">[docs]</a><span class="k">class</span> <span class="nc">VoltageUnits</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">VOLTS</span> <span class="o">=</span> <span class="mi">10348</span>  <span class="c1">#: Volts.</span>
+    <span class="n">FROM_CUSTOM_SCALE</span> <span class="o">=</span> <span class="mi">10065</span>  <span class="c1">#: Units a custom scale specifies. If you select this value, you must specify a custom scale name.</span>
+    <span class="n">FROM_TEDS</span> <span class="o">=</span> <span class="mi">12516</span>  <span class="c1">#: Units defined by TEDS information associated with the channel.</span></div>
+
+
+<div class="viewcode-block" id="WDTTaskAction"><a class="viewcode-back" href="../../constants.html#artdaq.constants.WDTTaskAction">[docs]</a><span class="k">class</span> <span class="nc">WDTTaskAction</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">RESET_TIMER</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: Reset Timer</span>
+    <span class="n">CLEAR_EXPIRATION</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: Clear Expiration</span></div>
+
+
+<div class="viewcode-block" id="WaitMode"><a class="viewcode-back" href="../../constants.html#artdaq.constants.WaitMode">[docs]</a><span class="k">class</span> <span class="nc">WaitMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">WAIT_FOR_INTERRUPT</span> <span class="o">=</span> <span class="mi">12523</span>  <span class="c1">#: Check for available samples when the system receives an interrupt service request. This mode is the most CPU efficient, but results in lower possible sampling rates.</span>
+    <span class="n">POLL</span> <span class="o">=</span> <span class="mi">12524</span>  <span class="c1">#: Repeatedly check for available samples as fast as possible. This mode allows for the highest sampling rates at the expense of CPU efficiency.</span>
+    <span class="n">YIELD</span> <span class="o">=</span> <span class="mi">12525</span>  <span class="c1">#: Repeatedly check for available samples, but yield control to other threads after each check. This mode offers a balance between sampling rate and CPU efficiency.</span>
+    <span class="n">SLEEP</span> <span class="o">=</span> <span class="mi">12547</span>  <span class="c1">#: Check for available samples once per the amount of time specified in **sleep_time**.</span></div>
+
+
+<div class="viewcode-block" id="ToggleIdleState"><a class="viewcode-back" href="../../constants.html#artdaq.constants.ToggleIdleState">[docs]</a><span class="k">class</span> <span class="nc">ToggleIdleState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">LOW</span> <span class="o">=</span> <span class="mi">10214</span>  <span class="c1">#: Low logic.</span>
+    <span class="n">HIGH</span> <span class="o">=</span> <span class="mi">10192</span>  <span class="c1">#: High logic.</span>
+    <span class="n">NO_CHANGE</span> <span class="o">=</span> <span class="mi">10160</span>  <span class="c1">#: Expiration does not affect the state of the counter output. The channels retain their states at the time of the watchdog timer expiration, and no further counter generation runs.</span></div>
+
+
+<div class="viewcode-block" id="WaveformAttributes"><a class="viewcode-back" href="../../constants.html#artdaq.constants.WaveformAttributes">[docs]</a><span class="k">class</span> <span class="nc">WaveformAttributes</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">SAMPLES_ONLY</span> <span class="o">=</span> <span class="mi">10287</span>  <span class="c1">#: Return only samples.</span>
+    <span class="n">SAMPLES_AND_TIMING</span> <span class="o">=</span> <span class="mi">10140</span>  <span class="c1">#: Return the samples and timing information.</span>
+    <span class="n">SAMPLES_TIMING_AND_ATTRIBUTES</span> <span class="o">=</span> <span class="mi">10141</span>  <span class="c1">#: Return the samples, timing information, and other attributes, such as the name of the channel.</span></div>
+
+
+<div class="viewcode-block" id="WindowTriggerCondition1"><a class="viewcode-back" href="../../constants.html#artdaq.constants.WindowTriggerCondition1">[docs]</a><span class="k">class</span> <span class="nc">WindowTriggerCondition1</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ENTERING_WINDOW</span> <span class="o">=</span> <span class="mi">10163</span>  <span class="c1">#: Trigger when the signal enters the window.</span>
+    <span class="n">LEAVING_WINDOW</span> <span class="o">=</span> <span class="mi">10208</span>  <span class="c1">#: Trigger when the signal leaves the window.</span></div>
+
+
+<div class="viewcode-block" id="WindowTriggerCondition2"><a class="viewcode-back" href="../../constants.html#artdaq.constants.WindowTriggerCondition2">[docs]</a><span class="k">class</span> <span class="nc">WindowTriggerCondition2</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">INSIDE_WINDOW</span> <span class="o">=</span> <span class="mi">10199</span>  <span class="c1">#: Pause the measurement or generation while the trigger is inside the window.</span>
+    <span class="n">OUTSIDE_WINDOW</span> <span class="o">=</span> <span class="mi">10251</span>  <span class="c1">#: Pause the measurement or generation while the signal is outside the window.</span></div>
+
+
+<div class="viewcode-block" id="WriteBasicTEDSOptions"><a class="viewcode-back" href="../../constants.html#artdaq.constants.WriteBasicTEDSOptions">[docs]</a><span class="k">class</span> <span class="nc">WriteBasicTEDSOptions</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">WRITE_TO_EEPROM</span> <span class="o">=</span> <span class="mi">12538</span>  <span class="c1">#: blah</span>
+    <span class="n">WRITE_TO_PROM</span> <span class="o">=</span> <span class="mi">12539</span>  <span class="c1">#: blah</span>
+    <span class="n">DO_NOT_WRITE</span> <span class="o">=</span> <span class="mi">12540</span>  <span class="c1">#: blah</span></div>
+
+
+<div class="viewcode-block" id="WriteRelativeTo"><a class="viewcode-back" href="../../constants.html#artdaq.constants.WriteRelativeTo">[docs]</a><span class="k">class</span> <span class="nc">WriteRelativeTo</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST_SAMPLE</span> <span class="o">=</span> <span class="mi">10424</span>  <span class="c1">#: Write samples relative to the first sample.</span>
+    <span class="n">CURRENT_WRITE_POSITION</span> <span class="o">=</span> <span class="mi">10430</span>  <span class="c1">#: Write samples relative to the current position in the buffer.</span></div>
+
+
+<span class="k">class</span> <span class="nc">_Callback</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">SYNCHRONOUS_EVENT_CALLBACKS</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: Synchronous callbacks</span>
+
+
+<span class="k">class</span> <span class="nc">_CouplingTypes</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">AC</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: Device supports AC coupling</span>
+    <span class="n">DC</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: Device supports DC coupling</span>
+    <span class="n">GND</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1">#: Device supports ground coupling</span>
+    <span class="n">HF_REJECT</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1">#: Device supports High Frequency Reject coupling</span>
+    <span class="n">LF_REJECT</span> <span class="o">=</span> <span class="mi">16</span>  <span class="c1">#: Device supports Low Frequency Reject coupling</span>
+    <span class="n">NOISE_REJECT</span> <span class="o">=</span> <span class="mi">32</span>  <span class="c1">#: Device supports Noise Reject coupling</span>
+
+
+<span class="k">class</span> <span class="nc">_Save</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">OVERWRITE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: </span>
+    <span class="n">ALLOW_INTERACTIVE_EDITING</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: </span>
+    <span class="n">ALLOW_INTERACTIVE_DELETION</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1">#: </span>
+
+
+<span class="k">class</span> <span class="nc">_TermCfg</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">RSE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: RSE terminal configuration</span>
+    <span class="n">NRSE</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: NRSE terminal configuration</span>
+    <span class="n">DIFFERENTIAL</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1">#: Differential terminal configuration</span>
+    <span class="n">PSEUDODIFFERENTIAL</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1">#: Pseudodifferential terminal configuration</span>
+
+
+<span class="k">class</span> <span class="nc">_TriggerUsageTypes</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ADVANCE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: Device supports advance triggers</span>
+    <span class="n">PAUSE</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: Device supports pause triggers</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1">#: Device supports reference triggers</span>
+    <span class="n">START</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1">#: Device supports start triggers</span>
+    <span class="n">HANDSHAKE</span> <span class="o">=</span> <span class="mi">16</span>  <span class="c1">#: Device supports handshake triggers</span>
+    <span class="n">ARM_START</span> <span class="o">=</span> <span class="mi">32</span>  <span class="c1">#: Device supports arm start triggers</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

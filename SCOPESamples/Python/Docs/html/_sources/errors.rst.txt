@@ -1,0 +1,6 @@
+errors
+=================
+.. automodule:: ART_SCOPE_Lib.errors
+    :members:
+    :undoc-members:
+    :show-inheritance:

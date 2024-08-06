@@ -1,0 +1,104 @@
+1，VC和CVI例程需依赖于[安装目录\Include]和[安装目录\Lib]文件夹，如需拷贝到其它地方执行，请将上述两个文件夹一同拷贝。
+2，例程常见命名介绍：
+    AI：模拟输入，同Analog In
+    AO：模拟输出，同Analog Out
+    DI: 数字输入，同Digital Input
+    DO: 数字输出，同Digital Output
+    CI: 计数器输入，同Counter Input
+    CO: 计数器输出，同Counter Output
+    Acq：采集，默认为有限点采集
+    Cont：连续，常用于ContAcq，意思是连续采集
+    Gen：生成，多用于AO输出，默认为有限点生成任务，ContGen为连续生成任务
+    Ext：外部，例如Acq_ExtClk，意思是外时钟采集
+    Int：内部，例如Acq_IntClk，意思是内时钟采集
+    Clk：时钟
+    Start：开始触发
+    Ref：参考触发
+    Pause：暂停触发
+    Anlg：模拟，常跟触发一起使用，例如AnlgStart，意思是使用模拟输入信号作为开始触发
+    Dig：数字，常跟触发一起使用，例如DigStartRef，意思是使用数字输入信号作为开始触发和参考触发
+3，以VC例程为例，介绍各示例程序功能
+    Analog In -- 模拟输入
+        Measure Voltage -- 电压测量
+            VC_Acq_ExtClk -- 外时钟采集有限点数据
+            VC_Acq_IntClk -- 内时钟采集有限点数据
+            VC_Acq_IntClk_AnlgStart -- 内时钟采集有限点数据并使用模拟信号作为开始触发
+            VC_Acq_IntClk_DigRef -- 内时钟采集有限点数据并使用数字信号作为参考触发
+            VC_Acq_IntClk_DigStartRef -- 内时钟采集有限点数据并使用数字信号作为开始触发和参考触发
+            VC_ContAcq_ExtClk_DigStart -- 使用外时钟连续采集数据并使用数字信号作为开始触发
+            VC_ContAcq_IntClk -- 内时钟连续采集数据
+            VC_ContAcq_IntClk_AnlgStart -- 使用内时钟连续采集数据并使用模拟信号作为开始触发
+            VC_ContAcq_IntClk_DigStart -- 使用内时钟连续采集数据并使用数字信号作为开始触发
+    Analog Out -- 模拟输出
+        Generate Voltage -- 电压生成
+            VC_ContGen_ExtClk -- 使用外时钟连续生成电压数据
+            VC_ContGen_ExtClk_DigStart -- 使用外时钟连续生成电压数据，并使用数字信号作为开始触发
+            VC_ContGen_IntClk -- 使用内时钟连续生成电压数据
+            VC_ContGen_IntClk_AnlgStart -- 使用内时钟连续生成电压数据，并使用模拟信号作为开始触发
+            VC_MultVoltUpdates_IntClk -- 使用内时钟生成有限点电压数据
+            VC_MultVoltUpdates_IntClk_DigStart -- 使用内时钟生成有限点电压数据，并使用数字信号作为开始触发
+            VC_MultVoltUpdates_SWTimed -- 每次输出一个点电压数据，软件控制多次循环生成
+            VC_Volt_Update -- 单次电压输出更新
+    Counter -- 计数器
+        Count Digital Edges -- 边沿计数
+            VC_CntBufContExtClk -- 使用外部采样时钟进行基于缓冲区的边沿计数测量
+            VC_CntBufContExtClkGate -- 使用外部采样时钟进行基于缓冲区的边沿计数测量，并使用暂停触发控制计数和暂停计数
+            VC_CntDigEdges -- 进行边沿计数测量，基于软件按需要读取当前计数值
+        Generate Pulse -- 脉冲生成
+            Dig Pulse -- 单脉冲生成
+            Dig Pulse Train Cont-Pause Trig -- 基于隐式时钟的连续脉冲输出，并使用数字电平信号控制暂停输出
+            Dig Pulse Train-Cont -- 基于隐式时钟的无缓冲区的连续脉冲输出
+            Dig Pulse Train-Cont-Buff-Ext Clk -- 基于外时钟的带缓冲区的脉冲输出任务
+            Dig Pulse Train-Cont-Buff-Implicit -- 基于隐式时钟的带缓冲区的脉冲输出任务
+            Dig Pulse Train-Cont-Dig Start -- 基于隐式时钟的连续脉冲输出，并使用数字信号控制开始输出
+        Measure Digital Frequency -- 频率测量
+            VC_FreqBuffContLargeRange -- 大范围测量法，基于隐式时钟连续带缓冲测量
+            VC_FreqHighFreqExtClk -- 高频测量法，基于外时钟连续带缓冲测量
+            VC_FreqLowFreq -- 低频测量法，单次测量
+        Measure Period -- 周期测量
+            VC_PeriodBuffContLargeRange -- 大范围测量法，基于隐式时钟连续带缓冲测量
+            VC_PeriodHighFreqExtClk -- 高频测量法，基于外时钟连续带缓冲测量
+            VC_PeriodLowFreq -- 低频测量法，单次测量
+        Measure Position -- 位置编码器测量
+            Angular Position-Buff-Cont -- 使用外时钟的连续带缓冲的角位移编码器测量
+    Digital -- 数字任务
+        Generate Values -- 数字输出
+            VC_ContWriteDigChanDigPause -- 连续数字信号输出，并使用数字信号作为控制暂停输出
+            VC_ContWriteDigPortExtClk -- 按端口使用外时钟连续输出数字信号
+            VC_WriteDigChan -- 按数字线控制输出
+            VC_WriteDigChanExtClk -- 按数字线使用外时钟进行有限点数字信号输出
+            VC_WriteDigPort -- 控制数字端口输出
+        Read Values -- 数字输入
+            VC_ContReadDigChanExtClk -- 使用外时钟连续采样外部数字信号输入，每通道最多包含32路数字输入
+            VC_ReadDigChan -- 数字端口线读取
+            VC_ReadDigChanIntClkDigStart -- 使用内时钟进行有限点数字序列输入采样，并使用数字信号作为开始触发
+            VC_ReadDigPort -- 数字端口按端口读取，每通道最多包含32路输入
+            VC_ContReadDigChanExtClk -- 使用外时钟采样有限点的外部数字信号输入，每通道最多包含32路数字输入
+    Synchronization -- 同步
+        Multi-Device -- 多设备
+            AI_MultiDevice_Synchronization_ExternalClkSource -- 多设备使用相同外部时钟同步
+            AI_MultiDevice_Synchronization_ExternalTrig -- 多设备使用相同外部触发信号同步
+            AI_MultiDevice_Synchronization_MasterAIClk -- 从设备使用主设备输出的采集时钟同步
+            AI_MultiDevice_Synchronization_RefClk -- 参考时钟同步
+            DSA_AI_MultiDevice_Sync -- DSA系列卡同步，使用主采样时钟时基或参考时钟，使用同步脉冲和开始触发进行同步
+        Multi-Function -- 多功能
+            Synch AI-AO -- AI AO任务同步
+                
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+ 

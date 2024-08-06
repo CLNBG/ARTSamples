@@ -1,0 +1,6 @@
+artdaq.task.export_signals
+===========================
+
+.. automodule:: artdaq._task_modules.export_signals
+    :members:
+    :show-inheritance:

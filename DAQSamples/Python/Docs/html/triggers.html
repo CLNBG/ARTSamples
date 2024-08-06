@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.task.triggers &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.task.pause_trigger" href="pause_trigger.html" />
+    <link rel="prev" title="artdaq.task.timing" href="timing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="task.html">artdaq.task</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="channel.html">artdaq.task.channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channel_collection.html">artdaq.task.channel_collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export_signals.html">artdaq.task.export_signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in_stream.html">artdaq.task.in_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="out_stream.html">artdaq.task.out_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing.html">artdaq.task.timing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">artdaq.task.triggers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pause_trigger.html">artdaq.task.pause_trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference_trigger.html">artdaq.task.reference_trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="start_trigger.html">artdaq.task.start_trigger</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="task.html">artdaq.task</a> &raquo;</li>
+      <li>artdaq.task.triggers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/triggers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-artdaq._task_modules.triggers">
+<span id="artdaq-task-triggers"></span><h1>artdaq.task.triggers<a class="headerlink" href="#module-artdaq._task_modules.triggers" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggers.Triggers">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq._task_modules.triggers.</span></span><span class="sig-name descname"><span class="pre">Triggers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_handle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/triggers.html#Triggers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.triggers.Triggers" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the trigger configurations for a DAQmx task.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggers.Triggers.pause_trigger">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pause_trigger</span></span><a class="headerlink" href="#artdaq._task_modules.triggers.Triggers.pause_trigger" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference internal" href="pause_trigger.html#artdaq._task_modules.triggering.pause_trigger.PauseTrigger" title="artdaq._task_modules.triggering.pause_trigger.PauseTrigger"><code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq._task_modules.triggering.pause_trigger.PauseTrigger</span></code></a>:
+Gets the pause trigger configurations for the task.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggers.Triggers.reference_trigger">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reference_trigger</span></span><a class="headerlink" href="#artdaq._task_modules.triggers.Triggers.reference_trigger" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference internal" href="reference_trigger.html#artdaq._task_modules.triggering.reference_trigger.ReferenceTrigger" title="artdaq._task_modules.triggering.reference_trigger.ReferenceTrigger"><code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq._task_modules.triggering.reference_trigger.ReferenceTrigger</span></code></a>:
+Gets the reference trigger configurations for the task.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggers.Triggers.start_trigger">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start_trigger</span></span><a class="headerlink" href="#artdaq._task_modules.triggers.Triggers.start_trigger" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference internal" href="start_trigger.html#artdaq._task_modules.triggering.start_trigger.StartTrigger" title="artdaq._task_modules.triggering.start_trigger.StartTrigger"><code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq._task_modules.triggering.start_trigger.StartTrigger</span></code></a>:
+Gets the start trigger configurations for the task.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pause_trigger.html">artdaq.task.pause_trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference_trigger.html">artdaq.task.reference_trigger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_trigger.html">artdaq.task.start_trigger</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="timing.html" class="btn btn-neutral float-left" title="artdaq.task.timing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pause_trigger.html" class="btn btn-neutral float-right" title="artdaq.task.pause_trigger" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

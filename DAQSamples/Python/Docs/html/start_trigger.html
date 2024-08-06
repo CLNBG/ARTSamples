@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.task.start_trigger &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.types" href="types.html" />
+    <link rel="prev" title="artdaq.task.reference_trigger" href="reference_trigger.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="task.html">artdaq.task</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="channel.html">artdaq.task.channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channel_collection.html">artdaq.task.channel_collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export_signals.html">artdaq.task.export_signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in_stream.html">artdaq.task.in_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="out_stream.html">artdaq.task.out_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing.html">artdaq.task.timing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="triggers.html">artdaq.task.triggers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pause_trigger.html">artdaq.task.pause_trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference_trigger.html">artdaq.task.reference_trigger</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">artdaq.task.start_trigger</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="task.html">artdaq.task</a> &raquo;</li>
+          <li><a href="triggers.html">artdaq.task.triggers</a> &raquo;</li>
+      <li>artdaq.task.start_trigger</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/start_trigger.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-artdaq._task_modules.triggering.start_trigger">
+<span id="artdaq-task-start-trigger"></span><h1>artdaq.task.start_trigger<a class="headerlink" href="#module-artdaq._task_modules.triggering.start_trigger" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggering.start_trigger.StartTrigger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq._task_modules.triggering.start_trigger.</span></span><span class="sig-name descname"><span class="pre">StartTrigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_handle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/triggering/start_trigger.html#StartTrigger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.triggering.start_trigger.StartTrigger" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the start trigger configurations for a DAQ task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggering.start_trigger.StartTrigger.cfg_anlg_edge_start_trig">
+<span class="sig-name descname"><span class="pre">cfg_anlg_edge_start_trig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trigger_source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_slope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Slope.RISING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/triggering/start_trigger.html#StartTrigger.cfg_anlg_edge_start_trig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.triggering.start_trigger.StartTrigger.cfg_anlg_edge_start_trig" title="Permalink to this definition"></a></dt>
+<dd><p>Configures the task to start acquiring or generating samples
+when an analog signal crosses the level you specify.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trigger_source</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Is the name of a virtual
+channel or terminal where there is an analog signal to
+use as the source of the trigger.</p></li>
+<li><p><strong>trigger_slope</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Slope" title="artdaq.constants.Slope"><em>artdaq.constants.Slope</em></a><em>]</em>) – Specifies
+on which slope of the signal to start acquiring or
+generating samples when the signal crosses
+<strong>trigger_level</strong>.</p></li>
+<li><p><strong>trigger_level</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies at what threshold
+to start acquiring or generating samples. Specify this
+value in the units of the measurement or generation. Use
+<strong>trigger_slope</strong> to specify on which slope to trigger
+at this threshold.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggering.start_trigger.StartTrigger.cfg_anlg_window_start_trig">
+<span class="sig-name descname"><span class="pre">cfg_anlg_window_start_trig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_top</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_bottom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_when</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">WindowTriggerCondition1.ENTERING_WINDOW</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/triggering/start_trigger.html#StartTrigger.cfg_anlg_window_start_trig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.triggering.start_trigger.StartTrigger.cfg_anlg_window_start_trig" title="Permalink to this definition"></a></dt>
+<dd><p>Configures the task to start acquiring or generating samples
+when an analog signal enters or leaves a range you specify.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window_top</strong> (<em>float</em>) – Is the upper limit of the window.
+Specify this value in the units of the measurement or
+generation.</p></li>
+<li><p><strong>window_bottom</strong> (<em>float</em>) – Is the lower limit of the window.
+Specify this value in the units of the measurement or
+generation.</p></li>
+<li><p><strong>trigger_source</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Is the name of a virtual
+channel or terminal where there is an analog signal to
+use as the source of the trigger.</p></li>
+<li><p><strong>trigger_when</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.WindowTriggerCondition1" title="artdaq.constants.WindowTriggerCondition1"><em>artdaq.constants.WindowTriggerCondition1</em></a><em>]</em>) – Specifies whether the task starts measuring or
+generating samples when the signal enters the window or
+when it leaves the window. Use <strong>window_bottom</strong> and
+<strong>window_top</strong> to specify the limits of the window.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggering.start_trigger.StartTrigger.cfg_dig_edge_start_trig">
+<span class="sig-name descname"><span class="pre">cfg_dig_edge_start_trig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trigger_source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Edge.RISING</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/triggering/start_trigger.html#StartTrigger.cfg_dig_edge_start_trig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.triggering.start_trigger.StartTrigger.cfg_dig_edge_start_trig" title="Permalink to this definition"></a></dt>
+<dd><p>Configures the task to start acquiring or generating samples on
+a rising or falling edge of a digital signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trigger_source</strong> (<em>str</em>) – Specifies the name of a terminal where
+there is a digital signal to use as the source of the
+trigger.</p></li>
+<li><p><strong>trigger_edge</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Edge" title="artdaq.constants.Edge"><em>artdaq.constants.Edge</em></a><em>]</em>) – Specifies
+on which edge of the digital signal to start acquiring
+or generating samples.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggering.start_trigger.StartTrigger.delay">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delay</span></span><a class="headerlink" href="#artdaq._task_modules.triggering.start_trigger.StartTrigger.delay" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies an amount of time to wait after the Start
+Trigger is received before acquiring or generating the first
+sample. This value is in the units you specify with
+<strong>delay_units</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggering.start_trigger.StartTrigger.delay_units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delay_units</span></span><a class="headerlink" href="#artdaq._task_modules.triggering.start_trigger.StartTrigger.delay_units" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies the
+units of <strong>delay</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="constants.html#artdaq.constants.DigitalWidthUnits" title="artdaq.constants.DigitalWidthUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.constants.DigitalWidthUnits</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggering.start_trigger.StartTrigger.dig_fltr_min_pulse_width">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dig_fltr_min_pulse_width</span></span><a class="headerlink" href="#artdaq._task_modules.triggering.start_trigger.StartTrigger.dig_fltr_min_pulse_width" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies in seconds the minimum pulse width the filter
+recognizes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggering.start_trigger.StartTrigger.disable_start_trig">
+<span class="sig-name descname"><span class="pre">disable_start_trig</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/triggering/start_trigger.html#StartTrigger.disable_start_trig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.triggering.start_trigger.StartTrigger.disable_start_trig" title="Permalink to this definition"></a></dt>
+<dd><p>Configures the task to start acquiring or generating samples
+immediately upon starting the task.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.triggering.start_trigger.StartTrigger.retriggerable">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">retriggerable</span></span><a class="headerlink" href="#artdaq._task_modules.triggering.start_trigger.StartTrigger.retriggerable" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies whether a finite task resets and waits for
+another Start Trigger after the task completes. When you set
+this property to True, the device performs a finite
+acquisition or generation each time the Start Trigger occurs
+until the task stops. The device ignores a trigger if it is
+in the process of acquiring or generating signals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="reference_trigger.html" class="btn btn-neutral float-left" title="artdaq.task.reference_trigger" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="types.html" class="btn btn-neutral float-right" title="artdaq.types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

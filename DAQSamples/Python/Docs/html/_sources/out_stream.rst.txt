@@ -1,0 +1,6 @@
+artdaq.task.out_stream
+=======================
+
+.. automodule:: artdaq._task_modules.out_stream
+    :members:
+    :show-inheritance:

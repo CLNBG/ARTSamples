@@ -1,0 +1,7 @@
+artdaq.stream_readers
+======================
+
+.. automodule:: artdaq.stream_readers
+    :members:
+    :show-inheritance:
+    :inherited-members:

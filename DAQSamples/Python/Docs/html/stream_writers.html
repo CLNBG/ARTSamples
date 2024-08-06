@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.stream_writers &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.task" href="task.html" />
+    <link rel="prev" title="artdaq.stream_readers" href="stream_readers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>artdaq.stream_writers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/stream_writers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-artdaq.stream_writers">
+<span id="artdaq-stream-writers"></span><h1>artdaq.stream_writers<a class="headerlink" href="#module-artdaq.stream_writers" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogMultiChannelWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_writers.</span></span><span class="sig-name descname"><span class="pre">AnalogMultiChannelWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_out_stream</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_start=&lt;artdaq.stream_writers.UnsetAutoStartSentinel</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#AnalogMultiChannelWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.AnalogMultiChannelWriter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_writers.ChannelWriterBase</span></code></p>
+<p>Writes samples to one or more analog output channels in an ArtDAQ
+task.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogMultiChannelWriter.auto_start">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">auto_start</span></span><a class="headerlink" href="#artdaq.stream_writers.AnalogMultiChannelWriter.auto_start" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies if the write method automatically starts the
+task if you did not explicitly start it with the Start
+Task method.</p>
+<p>If you do not specify a value for this parameter, ArtDAQ
+determines its value based on the type of write method used.
+If you use a one sample write method, its value is True;
+conversely, if you use a many sample write method, its value
+is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogMultiChannelWriter.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_writers.AnalogMultiChannelWriter.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogMultiChannelWriter.write_many_sample">
+<span class="sig-name descname"><span class="pre">write_many_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#AnalogMultiChannelWriter.write_many_sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.AnalogMultiChannelWriter.write_many_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more floating-point samples to one or more analog
+output channels in a task.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 2D NumPy array of
+floating-point samples to write to the task.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample to write to each channel.
+The order of the channels in the array corresponds to
+the order in which you add the channels to the task.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote to each channel in the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogMultiChannelWriter.write_one_sample">
+<span class="sig-name descname"><span class="pre">write_one_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#AnalogMultiChannelWriter.write_one_sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.AnalogMultiChannelWriter.write_one_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single floating-point sample to one or more analog
+output channels in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 1D NumPy array of
+floating-point samples to write to the task.</p>
+<p>Each element of the array corresponds to a channel in
+the task. The order of the channels in the array
+corresponds to the order in which you add the channels
+to the task.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogSingleChannelWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_writers.</span></span><span class="sig-name descname"><span class="pre">AnalogSingleChannelWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_out_stream</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_start=&lt;artdaq.stream_writers.UnsetAutoStartSentinel</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#AnalogSingleChannelWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.AnalogSingleChannelWriter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_writers.ChannelWriterBase</span></code></p>
+<p>Writes samples to an analog output channel in an ArtDAQ task.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogSingleChannelWriter.auto_start">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">auto_start</span></span><a class="headerlink" href="#artdaq.stream_writers.AnalogSingleChannelWriter.auto_start" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies if the write method automatically starts the
+task if you did not explicitly start it with the Start
+Task method.</p>
+<p>If you do not specify a value for this parameter, ArtDAQ
+determines its value based on the type of write method used.
+If you use a one sample write method, its value is True;
+conversely, if you use a many sample write method, its value
+is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogSingleChannelWriter.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_writers.AnalogSingleChannelWriter.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogSingleChannelWriter.write_many_sample">
+<span class="sig-name descname"><span class="pre">write_many_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#AnalogSingleChannelWriter.write_many_sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.AnalogSingleChannelWriter.write_many_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more floating-point samples to a single analog
+output channel in a task.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of
+floating-point samples to write to the task. Each
+element of the array corresponds to a sample to write.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogSingleChannelWriter.write_one_sample">
+<span class="sig-name descname"><span class="pre">write_one_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#AnalogSingleChannelWriter.write_one_sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.AnalogSingleChannelWriter.write_one_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single floating-point sample to a single analog output
+channel in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>float</em>) – Specifies the floating-point sample to write
+to the task.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogUnscaledWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_writers.</span></span><span class="sig-name descname"><span class="pre">AnalogUnscaledWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_out_stream</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_start=&lt;artdaq.stream_writers.UnsetAutoStartSentinel</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#AnalogUnscaledWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.AnalogUnscaledWriter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_writers.ChannelWriterBase</span></code></p>
+<p>Writes unscaled samples to one or more analog output channels in
+an ArtDAQ task.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogUnscaledWriter.auto_start">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">auto_start</span></span><a class="headerlink" href="#artdaq.stream_writers.AnalogUnscaledWriter.auto_start" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies if the write method automatically starts the
+task if you did not explicitly start it with the Start
+Task method.</p>
+<p>If you do not specify a value for this parameter, ArtDAQ
+determines its value based on the type of write method used.
+If you use a one sample write method, its value is True;
+conversely, if you use a many sample write method, its value
+is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogUnscaledWriter.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_writers.AnalogUnscaledWriter.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogUnscaledWriter.write_int16">
+<span class="sig-name descname"><span class="pre">write_int16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#AnalogUnscaledWriter.write_int16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.AnalogUnscaledWriter.write_int16" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more unscaled 16-bit integer samples to one or
+more analog output channels in a task.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 2D NumPy array of unscaled
+16-bit integer samples to write to the task.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample to write to each channel.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote to each channel in the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.AnalogUnscaledWriter.write_uint16">
+<span class="sig-name descname"><span class="pre">write_uint16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#AnalogUnscaledWriter.write_uint16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.AnalogUnscaledWriter.write_uint16" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more unscaled 16-bit unsigned integer samples to
+one or more analog output channels in a task.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 2D NumPy array of unscaled
+16-bit unsigned integer samples to write to the task.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample to write to each channel.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote to each channel in the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_writers.CounterWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_writers.</span></span><span class="sig-name descname"><span class="pre">CounterWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_out_stream</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_start=&lt;artdaq.stream_writers.UnsetAutoStartSentinel</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#CounterWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.CounterWriter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_writers.ChannelWriterBase</span></code></p>
+<p>Writes samples to a counter output channel in an ArtDAQ task.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.CounterWriter.auto_start">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">auto_start</span></span><a class="headerlink" href="#artdaq.stream_writers.CounterWriter.auto_start" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies if the write method automatically starts the
+task if you did not explicitly start it with the Start
+Task method.</p>
+<p>If you do not specify a value for this parameter, ArtDAQ
+determines its value based on the type of write method used.
+If you use a one sample write method, its value is True;
+conversely, if you use a many sample write method, its value
+is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.CounterWriter.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_writers.CounterWriter.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.CounterWriter.write_many_sample_pulse_frequency">
+<span class="sig-name descname"><span class="pre">write_many_sample_pulse_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequencies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duty_cycles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#CounterWriter.write_many_sample_pulse_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.CounterWriter.write_many_sample_pulse_frequency" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more pulse samples in terms of frequency to a
+single counter output channel in a task.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frequencies</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of
+floating-point values that holds the frequency portion
+of the pulse samples to write to the task. Each element
+of the array corresponds to a sample to write.</p></li>
+<li><p><strong>duty_cycles</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of
+floating-point values that holds the duty cycle portion
+of the pulse samples to write to the task. Each element
+of the array corresponds to a sample to write.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.CounterWriter.write_many_sample_pulse_ticks">
+<span class="sig-name descname"><span class="pre">write_many_sample_pulse_ticks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">high_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#CounterWriter.write_many_sample_pulse_ticks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.CounterWriter.write_many_sample_pulse_ticks" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more pulse samples in terms of ticks to a single
+counter output channel in a task.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>high_ticks</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of
+32-bit unsigned integer values that holds the high ticks
+portion of the pulse samples to write to the task. Each
+element of the array corresponds to a sample to write.</p></li>
+<li><p><strong>low_ticks</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of
+32-bit unsigned integer values that holds the low ticks
+portion of the pulse samples to write to the task. Each
+element of the array corresponds to a sample to write.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.CounterWriter.write_many_sample_pulse_time">
+<span class="sig-name descname"><span class="pre">write_many_sample_pulse_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">high_times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#CounterWriter.write_many_sample_pulse_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.CounterWriter.write_many_sample_pulse_time" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more pulse samples in terms of time to a single
+counter output channel in a task.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>high_times</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of
+floating-point values that holds the high time portion
+of the pulse samples to write to the task. Each element
+of the array corresponds to a sample to write.</p></li>
+<li><p><strong>low_times</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of
+floating-point values that holds the low time portion
+of the pulse samples to write to the task. Each element
+of the array corresponds to a sample to write.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.CounterWriter.write_one_sample_pulse_frequency">
+<span class="sig-name descname"><span class="pre">write_one_sample_pulse_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duty_cycle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#CounterWriter.write_one_sample_pulse_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.CounterWriter.write_one_sample_pulse_frequency" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a new pulse frequency and duty cycle to a single counter
+output channel in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frequency</strong> (<em>float</em>) – Specifies at what frequency to generate
+pulses.</p></li>
+<li><p><strong>duty_cycle</strong> (<em>float</em>) – Specifies the width of the pulse divided
+by the pulse period. ArtDAQ uses this ratio combined
+with frequency to determine pulse width and the interval
+between pulses.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.CounterWriter.write_one_sample_pulse_ticks">
+<span class="sig-name descname"><span class="pre">write_one_sample_pulse_ticks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">high_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#CounterWriter.write_one_sample_pulse_ticks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.CounterWriter.write_one_sample_pulse_ticks" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a new pulse high tick count and low tick count to a
+single counter output channel in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>high_ticks</strong> (<em>float</em>) – Specifies the number of ticks the pulse
+is high.</p></li>
+<li><p><strong>low_ticks</strong> (<em>float</em>) – Specifies the number of ticks the pulse
+is low.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.CounterWriter.write_one_sample_pulse_time">
+<span class="sig-name descname"><span class="pre">write_one_sample_pulse_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">high_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#CounterWriter.write_one_sample_pulse_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.CounterWriter.write_one_sample_pulse_time" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a new pulse high time and low time to a single counter
+output channel in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>high_time</strong> (<em>float</em>) – Specifies the amount of time the pulse
+is high.</p></li>
+<li><p><strong>low_time</strong> (<em>float</em>) – Specifies the amount of time the pulse
+is low.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_writers.</span></span><span class="sig-name descname"><span class="pre">DigitalMultiChannelWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_out_stream</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_start=&lt;artdaq.stream_writers.UnsetAutoStartSentinel</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalMultiChannelWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_writers.ChannelWriterBase</span></code></p>
+<p>Writes samples to one or more digital output channels in an ArtDAQ
+task.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter.auto_start">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">auto_start</span></span><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter.auto_start" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies if the write method automatically starts the
+task if you did not explicitly start it with the Start
+Task method.</p>
+<p>If you do not specify a value for this parameter, ArtDAQ
+determines its value based on the type of write method used.
+If you use a one sample write method, its value is True;
+conversely, if you use a many sample write method, its value
+is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter.write_many_sample_port_byte">
+<span class="sig-name descname"><span class="pre">write_many_sample_port_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalMultiChannelWriter.write_many_sample_port_byte"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter.write_many_sample_port_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more 8-bit unsigned integer samples to one or more
+digital output channels in a task.</p>
+<p>Use this method for devices with up to 8 lines per port.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 2D NumPy array of 8-bit
+unsigned integer samples to write to the task.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample to write to each channel.
+The order of the channels in the array corresponds to
+the order in which you add the channels to the task.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote to each channel in the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter.write_many_sample_port_uint16">
+<span class="sig-name descname"><span class="pre">write_many_sample_port_uint16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalMultiChannelWriter.write_many_sample_port_uint16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter.write_many_sample_port_uint16" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more 16-bit unsigned integer samples to one or
+more digital output channels in a task.</p>
+<p>Use this method for devices with up to 16 lines per port.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 2D NumPy array of 16-bit
+unsigned integer samples to write to the task.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample to write to each channel.
+The order of the channels in the array corresponds to
+the order in which you add the channels to the task.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote to each channel in the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter.write_many_sample_port_uint32">
+<span class="sig-name descname"><span class="pre">write_many_sample_port_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalMultiChannelWriter.write_many_sample_port_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter.write_many_sample_port_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more 32-bit unsigned integer samples to one or
+more digital output channels in a task.</p>
+<p>Use this method for devices with up to 32 lines per port.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 2D NumPy array of 32-bit
+unsigned integer samples to write to the task.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample to write to each channel.
+The order of the channels in the array corresponds to
+the order in which you add the channels to the task.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote to each channel in the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_multi_line">
+<span class="sig-name descname"><span class="pre">write_one_sample_multi_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalMultiChannelWriter.write_one_sample_multi_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_multi_line" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single boolean sample to one or more digital output
+channels in a task. The channel can contain multiple digital
+lines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 2D NumPy array of boolean
+samples to write to the task.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a line from each channel. The
+order of the channels in the array corresponds to the
+order in which you add the channels to the task.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_one_line">
+<span class="sig-name descname"><span class="pre">write_one_sample_one_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalMultiChannelWriter.write_one_sample_one_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_one_line" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single boolean sample to one or more digital output
+channels in a task. The channel can contain only one digital
+line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 1D NumPy array of boolean
+samples to write to the task.</p>
+<p>Each element in the array corresponds to a channel in
+the task. The order of the channels in the array
+corresponds to the order in which you add the channels
+to the task.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_port_byte">
+<span class="sig-name descname"><span class="pre">write_one_sample_port_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalMultiChannelWriter.write_one_sample_port_byte"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_port_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single 8-bit unsigned integer sample to one or more
+digital output channels in a task.</p>
+<p>Use this method for devices with up to 8 lines per port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 1D NumPy array of 8-bit
+unsigned integer samples to write to the task.</p>
+<p>Each element in the array corresponds to a channel in
+the task. The order of the channels in the array
+corresponds to the order in which you add the channels
+to the task.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_port_uint16">
+<span class="sig-name descname"><span class="pre">write_one_sample_port_uint16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalMultiChannelWriter.write_one_sample_port_uint16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_port_uint16" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single 16-bit unsigned integer sample to one or more
+digital output channels in a task.</p>
+<p>Use this method for devices with up to 16 lines per port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 1D NumPy array of 16-bit
+unsigned integer samples to write to the task.</p>
+<p>Each element in the array corresponds to a channel in
+the task. The order of the channels in the array
+corresponds to the order in which you add the channels
+to the task.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_port_uint32">
+<span class="sig-name descname"><span class="pre">write_one_sample_port_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalMultiChannelWriter.write_one_sample_port_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_port_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single 32-bit unsigned integer sample to one or more
+digital output channels in a task.</p>
+<p>Use this method for devices with up to 32 lines per port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Contains a 1D NumPy array of 32-bit
+unsigned integer samples to write to the task.</p>
+<p>Each element in the array corresponds to a channel in
+the task. The order of the channels in the array
+corresponds to the order in which you add the channels
+to the task.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_writers.</span></span><span class="sig-name descname"><span class="pre">DigitalSingleChannelWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_out_stream</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_start=&lt;artdaq.stream_writers.UnsetAutoStartSentinel</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalSingleChannelWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_writers.ChannelWriterBase</span></code></p>
+<p>Writes samples to a single digital output channel in an ArtDAQ
+task.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter.auto_start">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">auto_start</span></span><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter.auto_start" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies if the write method automatically starts the
+task if you did not explicitly start it with the Start
+Task method.</p>
+<p>If you do not specify a value for this parameter, ArtDAQ
+determines its value based on the type of write method used.
+If you use a one sample write method, its value is True;
+conversely, if you use a many sample write method, its value
+is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter.write_many_sample_port_byte">
+<span class="sig-name descname"><span class="pre">write_many_sample_port_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalSingleChannelWriter.write_many_sample_port_byte"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter.write_many_sample_port_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more 8-bit unsigned integer samples to a single
+digital output channel in a task.</p>
+<p>Use this method for devices with up to 8 lines per port.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of 8-bit
+unsigned integer samples to write to the task. Each
+element of the array corresponds to a sample to write.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter.write_many_sample_port_uint16">
+<span class="sig-name descname"><span class="pre">write_many_sample_port_uint16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalSingleChannelWriter.write_many_sample_port_uint16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter.write_many_sample_port_uint16" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more 16-bit unsigned integer samples to a single
+digital output channel in a task.</p>
+<p>Use this method for devices with up to 16 lines per port.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of 16-bit
+unsigned integer samples to write to the task. Each
+element of the array corresponds to a sample to write.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter.write_many_sample_port_uint32">
+<span class="sig-name descname"><span class="pre">write_many_sample_port_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalSingleChannelWriter.write_many_sample_port_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter.write_many_sample_port_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Writes one or more 32-bit unsigned integer samples to a single
+digital output channel in a task.</p>
+<p>Use this method for devices with up to 32 lines per port.</p>
+<p>If the task uses on-demand timing, this method returns only
+after the device generates all samples. On-demand is the default
+timing type if you do not use the timing property on the task to
+configure a sample timing type. If the task uses any timing type
+other than on-demand, this method returns immediately and does
+not wait for the device to generate all samples. Your
+application must determine if the task is done to ensure that
+the device generated all samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of 32-bit
+unsigned integer samples to write to the task. Each
+element of the array corresponds to a sample to write.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specifies the actual number of samples this method
+successfully wrote.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_multi_line">
+<span class="sig-name descname"><span class="pre">write_one_sample_multi_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalSingleChannelWriter.write_one_sample_multi_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_multi_line" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single boolean sample to a single digital output
+channel in a task. The channel can contain multiple digital
+lines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – Contains a 1D NumPy array of boolean
+samples to write to the task. Each element of the array
+corresponds to a line in the channel.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_one_line">
+<span class="sig-name descname"><span class="pre">write_one_sample_one_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalSingleChannelWriter.write_one_sample_one_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_one_line" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single boolean sample to a single digital output
+channel in a task. The channel can contain only one digital
+line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>int</em>) – Specifies the boolean sample to write to the
+task.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_port_byte">
+<span class="sig-name descname"><span class="pre">write_one_sample_port_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalSingleChannelWriter.write_one_sample_port_byte"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_port_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single 8-bit unsigned integer sample to a single
+digital output channel in a task.</p>
+<p>Use this method for devices with up to 8 lines per port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>int</em>) – Specifies the 8-bit unsigned integer sample to
+write to the task.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_port_uint16">
+<span class="sig-name descname"><span class="pre">write_one_sample_port_uint16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalSingleChannelWriter.write_one_sample_port_uint16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_port_uint16" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single 16-bit unsigned integer sample to a single
+digital output channel in a task.</p>
+<p>Use this method for devices with up to 16 lines per port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>int</em>) – Specifies the 16-bit unsigned integer sample to
+write to the task.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_port_uint32">
+<span class="sig-name descname"><span class="pre">write_one_sample_port_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_writers.html#DigitalSingleChannelWriter.write_one_sample_port_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_port_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Writes a single 32-bit unsigned integer sample to a single
+digital output channel in a task.</p>
+<p>Use this method for devices with up to 32 lines per port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>int</em>) – Specifies the 32-bit unsigned integer sample to
+write to the task.</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for the method to write all samples.
+ArtDAQ performs a timeout check only if the method
+must wait before it writes data. This method returns an
+error if the time elapses. The default timeout is 10
+seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to write the submitted samples. If the method could
+not write all the submitted samples, it returns an error
+and the number of samples successfully written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="stream_readers.html" class="btn btn-neutral float-left" title="artdaq.stream_readers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="task.html" class="btn btn-neutral float-right" title="artdaq.task" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

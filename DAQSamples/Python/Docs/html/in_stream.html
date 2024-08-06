@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.task.in_stream &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.task.out_stream" href="out_stream.html" />
+    <link rel="prev" title="artdaq.task.export_signals" href="export_signals.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="task.html">artdaq.task</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="channel.html">artdaq.task.channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channel_collection.html">artdaq.task.channel_collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export_signals.html">artdaq.task.export_signals</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">artdaq.task.in_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="out_stream.html">artdaq.task.out_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing.html">artdaq.task.timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html">artdaq.task.triggers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="task.html">artdaq.task</a> &raquo;</li>
+      <li>artdaq.task.in_stream</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/in_stream.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-artdaq._task_modules.in_stream">
+<span id="artdaq-task-in-stream"></span><h1>artdaq.task.in_stream<a class="headerlink" href="#module-artdaq._task_modules.in_stream" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq._task_modules.in_stream.InStream">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq._task_modules.in_stream.</span></span><span class="sig-name descname"><span class="pre">InStream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/in_stream.html#InStream"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.in_stream.InStream" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Exposes an input data stream on a DAQ task.</p>
+<p>The input data stream be used to control reading behavior and can be
+used in conjunction with reader classes to read samples from an
+DAQ task.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.in_stream.InStream.auto_start">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">auto_start</span></span><a class="headerlink" href="#artdaq._task_modules.in_stream.InStream.auto_start" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies if DAQ Read automatically starts the task  if
+you did not start the task explicitly by using DAQ Start.
+The default value is True. When  DAQ Read starts a finite
+acquisition task, it also stops the task after reading the
+last sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.in_stream.InStream.channels_to_read">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">channels_to_read</span></span><a class="headerlink" href="#artdaq._task_modules.in_stream.InStream.channels_to_read" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference internal" href="channel.html#artdaq._task_modules.channels.channel.Channel" title="artdaq._task_modules.channels.channel.Channel"><code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq._task_modules.channels.channel.Channel</span></code></a>:
+Specifies a subset of channels in the task from which to
+read.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.in_stream.InStream.di_num_booleans_per_chan">
+<span class="sig-name descname"><span class="pre">di_num_booleans_per_chan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/in_stream.html#InStream.di_num_booleans_per_chan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.in_stream.InStream.di_num_booleans_per_chan" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>int: Indicates the number of booleans per channel that</dt><dd><p>returns in a sample for line-based reads. If a channel has
+fewer lines than this number, the extra booleans are False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.in_stream.InStream.over_write">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">over_write</span></span><a class="headerlink" href="#artdaq._task_modules.in_stream.InStream.over_write" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies whether to
+overwrite samples in the buffer that you have not yet read.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="constants.html#artdaq.constants.OverwriteMode" title="artdaq.constants.OverwriteMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.constants.OverwriteMode</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.in_stream.InStream.timeout">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeout</span></span><a class="headerlink" href="#artdaq._task_modules.in_stream.InStream.timeout" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies the amount of time in seconds to wait for
+samples to become available. If the time elapses, the read
+method returns an error and any samples read before the
+timeout elapsed. The default timeout is 10 seconds. If you
+set timeout to artdaq.WAIT_INFINITELY, the read method
+waits indefinitely. If you set timeout to 0, the read method
+tries once to read the requested samples and returns an error
+if it is unable to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="export_signals.html" class="btn btn-neutral float-left" title="artdaq.task.export_signals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="out_stream.html" class="btn btn-neutral float-right" title="artdaq.task.out_stream" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

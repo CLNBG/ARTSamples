@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.stream_readers &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.stream_writers" href="stream_writers.html" />
+    <link rel="prev" title="artdaq.error_codes" href="error_codes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>artdaq.stream_readers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/stream_readers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-artdaq.stream_readers">
+<span id="artdaq-stream-readers"></span><h1>artdaq.stream_readers<a class="headerlink" href="#module-artdaq.stream_readers" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogMultiChannelReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_readers.</span></span><span class="sig-name descname"><span class="pre">AnalogMultiChannelReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_in_stream</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogMultiChannelReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogMultiChannelReader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_readers.ChannelReaderBase</span></code></p>
+<p>Reads samples from one or more analog input channels in an ArtDAQ
+task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogMultiChannelReader.read_many_sample">
+<span class="sig-name descname"><span class="pre">read_many_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogMultiChannelReader.read_many_sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogMultiChannelReader.read_many_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more floating-point samples from one or more analog
+input channels in a task.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 2D NumPy
+array of floating-point values to hold the samples
+requested. The size of the array must be large enough to
+hold all requested samples from all channels in the
+task; otherwise, an error is thrown.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample from each channel. The
+order of the channels in the array corresponds to the
+order in which you add the channels to the task or to
+the order of the channels you specify with the
+“channels_to_read” property.</p>
+<p>If the size of the array is too large or the array is
+shaped incorrectly, the previous statement may not hold
+true as the samples read may not be separated into rows
+and columns properly. Set the “verify_array_shape”
+property on this channel reader object to True to
+validate that the NumPy array object is shaped properly.
+Setting this property to True may marginally adversely
+impact the performance of the method.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogMultiChannelReader.read_one_sample">
+<span class="sig-name descname"><span class="pre">read_one_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogMultiChannelReader.read_one_sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogMultiChannelReader.read_one_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single floating-point sample from one or more analog
+input channels in a task.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of floating-point values to hold the samples
+requested.</p>
+<p>Each element in the array corresponds to a sample from
+each channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogMultiChannelReader.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_readers.AnalogMultiChannelReader.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogSingleChannelReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_readers.</span></span><span class="sig-name descname"><span class="pre">AnalogSingleChannelReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_in_stream</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogSingleChannelReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogSingleChannelReader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_readers.ChannelReaderBase</span></code></p>
+<p>Reads samples from an analog input channel in an ArtDAQ task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogSingleChannelReader.read_many_sample">
+<span class="sig-name descname"><span class="pre">read_many_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogSingleChannelReader.read_many_sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogSingleChannelReader.read_many_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more floating-point samples from a single analog
+input channel in a task.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of floating-point values to hold the samples
+requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogSingleChannelReader.read_one_sample">
+<span class="sig-name descname"><span class="pre">read_one_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogSingleChannelReader.read_one_sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogSingleChannelReader.read_one_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single floating-point sample from a single analog input
+channel in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates a single floating-point sample from the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogSingleChannelReader.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_readers.AnalogSingleChannelReader.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogUnscaledReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_readers.</span></span><span class="sig-name descname"><span class="pre">AnalogUnscaledReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_in_stream</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogUnscaledReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogUnscaledReader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_readers.ChannelReaderBase</span></code></p>
+<p>Reads unscaled samples from one or more analog input channels in an
+ArtDAQ task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogUnscaledReader.read_int16">
+<span class="sig-name descname"><span class="pre">read_int16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogUnscaledReader.read_int16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogUnscaledReader.read_int16" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more unscaled 16-bit integer samples from one or
+more analog input channels in a task.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 2D NumPy
+array of unscaled 16-bit integer values to hold the
+samples requested. The size of the array must be large
+enough to hold all requested samples from all channels
+in the task; otherwise, an error is thrown.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample from each channel. The
+order of the channels in the array corresponds to the
+order in which you add the channels to the task or to
+the order of the channels you specify with the
+“channels_to_read” property.</p>
+<p>If the size of the array is too large or the array is
+shaped incorrectly, the previous statement may not hold
+true as the samples read may not be separated into rows
+and columns properly. Set the “verify_array_shape”
+property on this channel reader object to True to
+validate that the NumPy array object is shaped properly.
+Setting this property may marginally adversely impact
+the performance of the method.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogUnscaledReader.read_int32">
+<span class="sig-name descname"><span class="pre">read_int32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogUnscaledReader.read_int32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogUnscaledReader.read_int32" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more unscaled 32-bit integer samples from one or
+more analog input channels in a task.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 2D NumPy
+array of unscaled 32-bit integer values to hold the
+samples requested. The size of the array must be large
+enough to hold all requested samples from all channels
+in the task; otherwise, an error is thrown.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample from each channel. The
+order of the channels in the array corresponds to the
+order in which you add the channels to the task or to
+the order of the channels you specify with the
+“channels_to_read” property.</p>
+<p>If the size of the array is too large or the array is
+shaped incorrectly, the previous statement may not hold
+true as the samples read may not be separated into rows
+and columns properly. Set the “verify_array_shape”
+property on this channel reader object to True to
+validate that the NumPy array object is shaped properly.
+Setting this property may marginally adversely impact
+the performance of the method.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogUnscaledReader.read_uint16">
+<span class="sig-name descname"><span class="pre">read_uint16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogUnscaledReader.read_uint16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogUnscaledReader.read_uint16" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more unscaled 16-bit unsigned integer samples from
+one or more analog input channels in a task.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 2D NumPy
+array of unscaled 16-bit unsigned integer values to
+hold the samples requested. The size of the array must
+be large enough to hold all requested samples from all
+channels in the task; otherwise, an error is thrown.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample from each channel. The
+order of the channels in the array corresponds to the
+order in which you add the channels to the task or to
+the order of the channels you specify with the
+“channels_to_read” property.</p>
+<p>If the size of the array is too large or the array is
+shaped incorrectly, the previous statement may not hold
+true as the samples read may not be separated into rows
+and columns properly. Set the “verify_array_shape”
+property on this channel reader object to True to
+validate that the NumPy array object is shaped properly.
+Setting this property may marginally adversely impact
+the performance of the method.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogUnscaledReader.read_uint32">
+<span class="sig-name descname"><span class="pre">read_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#AnalogUnscaledReader.read_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.AnalogUnscaledReader.read_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more unscaled unsigned 32-bit integer samples from
+one or more analog input channels in a task.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 2D NumPy
+array of unscaled 32-bit unsigned integer values to
+hold the samples requested. The size of the array must
+be large enough to hold all requested samples from all
+channels in the task; otherwise, an error is thrown.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample from each channel. The
+order of the channels in the array corresponds to the
+order in which you add the channels to the task or to
+the order of the channels you specify with the
+“channels_to_read” property.</p>
+<p>If the size of the array is too large or the array is
+shaped incorrectly, the previous statement may not hold
+true as the samples read may not be separated into rows
+and columns properly. Set the “verify_array_shape”
+property on this channel reader object to True to
+validate that the NumPy array object is shaped properly.
+Setting this property may marginally adversely impact
+the performance of the method.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_readers.AnalogUnscaledReader.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_readers.AnalogUnscaledReader.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_readers.</span></span><span class="sig-name descname"><span class="pre">CounterReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_in_stream</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_readers.ChannelReaderBase</span></code></p>
+<p>Reads samples from a counter input channel in an ArtDAQ task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.read_many_sample_double">
+<span class="sig-name descname"><span class="pre">read_many_sample_double</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader.read_many_sample_double"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader.read_many_sample_double" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more floating-point samples from a single counter
+input channel in a task.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of floating-point values to hold the samples
+requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.read_many_sample_pulse_frequency">
+<span class="sig-name descname"><span class="pre">read_many_sample_pulse_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequencies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duty_cycles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader.read_many_sample_pulse_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader.read_many_sample_pulse_frequency" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more pulse samples in terms of frequency from a
+single counter input channel in a task.</p>
+<p>This read method accepts preallocated NumPy arrays to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in preallocated arrays is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frequencies</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D
+NumPy array of floating-point values to hold the frequency
+portion of the pulse samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>duty_cycles</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D
+NumPy array of floating-point values to hold the duty
+cycle portion of the pulse samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.read_many_sample_pulse_ticks">
+<span class="sig-name descname"><span class="pre">read_many_sample_pulse_ticks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">high_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader.read_many_sample_pulse_ticks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader.read_many_sample_pulse_ticks" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more pulse samples in terms of ticks from a single
+counter input channel in a task.</p>
+<p>This read method accepts preallocated NumPy arrays to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in preallocated arrays is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>high_ticks</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D
+NumPy array of 32-bit unsigned integer values to hold
+the high ticks portion of the pulse samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>low_ticks</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of 32-bit unsigned integer values to hold the low
+ticks portion of the pulse samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.read_many_sample_pulse_time">
+<span class="sig-name descname"><span class="pre">read_many_sample_pulse_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">high_times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader.read_many_sample_pulse_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader.read_many_sample_pulse_time" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more pulse samples in terms of time from a single
+counter input channel in a task.</p>
+<p>This read method accepts preallocated NumPy arrays to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in preallocated arrays is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>high_times</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D
+NumPy array of floating-point values to hold the high
+time portion of the pulse samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>low_times</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D
+NumPy array of floating-point values to hold the low
+time portion of the pulse samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.read_many_sample_uint32">
+<span class="sig-name descname"><span class="pre">read_many_sample_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader.read_many_sample_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader.read_many_sample_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more 32-bit unsigned integer samples from a single
+counter input channel in a task.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of 32-bit unsigned integer values to hold the
+samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.read_one_sample_double">
+<span class="sig-name descname"><span class="pre">read_one_sample_double</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader.read_one_sample_double"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader.read_one_sample_double" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single floating-point sample from a single counter input
+channel in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Indicates a single floating-point sample from the</dt><dd><p>task.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.read_one_sample_pulse_frequency">
+<span class="sig-name descname"><span class="pre">read_one_sample_pulse_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader.read_one_sample_pulse_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader.read_one_sample_pulse_frequency" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a pulse sample in terms of frequency from a single counter
+input channel in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates a pulse sample in terms of frequency from the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="types.html#artdaq.types.CtrFreq" title="artdaq.types.CtrFreq">artdaq.types.CtrFreq</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.read_one_sample_pulse_ticks">
+<span class="sig-name descname"><span class="pre">read_one_sample_pulse_ticks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader.read_one_sample_pulse_ticks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader.read_one_sample_pulse_ticks" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a pulse sample in terms of ticks from a single counter
+input channel in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates a pulse sample in terms of ticks from the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="types.html#artdaq.types.CtrTick" title="artdaq.types.CtrTick">artdaq.types.CtrTick</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.read_one_sample_pulse_time">
+<span class="sig-name descname"><span class="pre">read_one_sample_pulse_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader.read_one_sample_pulse_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader.read_one_sample_pulse_time" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a pulse sample in terms of time from a single counter
+input channel in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates a pulse sample in terms of time from the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="types.html#artdaq.types.CtrTime" title="artdaq.types.CtrTime">artdaq.types.CtrTime</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.read_one_sample_uint32">
+<span class="sig-name descname"><span class="pre">read_one_sample_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#CounterReader.read_one_sample_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.CounterReader.read_one_sample_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single 32-bit unsigned integer sample from a single
+counter input channel in a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates a single 32-bit unsigned integer sample from the
+task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_readers.CounterReader.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_readers.CounterReader.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalMultiChannelReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_readers.</span></span><span class="sig-name descname"><span class="pre">DigitalMultiChannelReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_in_stream</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalMultiChannelReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalMultiChannelReader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_readers.ChannelReaderBase</span></code></p>
+<p>Reads samples from one or more digital input channels in an ArtDAQ
+task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalMultiChannelReader.read_many_sample_port_byte">
+<span class="sig-name descname"><span class="pre">read_many_sample_port_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalMultiChannelReader.read_many_sample_port_byte"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalMultiChannelReader.read_many_sample_port_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more 8-bit unsigned integer samples from one or
+more digital input channel in a task.</p>
+<p>Use this method for devices with up to 8 lines per port.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 2D NumPy
+array of 8-bit unsigned integer values to hold the
+samples requested. The size of the array must be large
+enough to hold all requested samples from all channels
+in the task; otherwise, an error is thrown.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample from each channel. The
+order of the channels in the array corresponds to the
+order in which you add the channels to the task or to
+the order of the channels you specify with the
+“channels_to_read” property.</p>
+<p>If the size of the array is too large or the array is
+shaped incorrectly, the previous statement may not hold
+true as the samples read may not be separated into rows
+and columns properly. Set the “verify_array_shape”
+property on this channel reader object to True to
+validate that the NumPy array object is shaped properly.
+Setting this property may marginally adversely impact
+the performance of the method.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalMultiChannelReader.read_many_sample_port_uint16">
+<span class="sig-name descname"><span class="pre">read_many_sample_port_uint16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalMultiChannelReader.read_many_sample_port_uint16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalMultiChannelReader.read_many_sample_port_uint16" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more 16-bit unsigned integer samples from one or
+more digital input channels in a task.</p>
+<p>Use this method for devices with up to 16 lines per port.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 2D NumPy
+array of 16-bit unsigned integer values to hold the
+samples requested. The size of the array must be large
+enough to hold all requested samples from all channels
+in the task; otherwise, an error is thrown.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample from each channel. The
+order of the channels in the array corresponds to the
+order in which you add the channels to the task or to
+the order of the channels you specify with the
+“channels_to_read” property.</p>
+<p>If the size of the array is too large or the array is
+shaped incorrectly, the previous statement may not hold
+true as the samples read may not be separated into rows
+and columns properly. Set the “verify_array_shape”
+property on this channel reader object to True to
+validate that the NumPy array object is shaped properly.
+Setting this property may marginally adversely impact
+the performance of the method.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalMultiChannelReader.read_many_sample_port_uint32">
+<span class="sig-name descname"><span class="pre">read_many_sample_port_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalMultiChannelReader.read_many_sample_port_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalMultiChannelReader.read_many_sample_port_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more 32-bit unsigned integer samples from one or
+more digital input channels in a task.</p>
+<p>Use this method for devices with up to 32 lines per port.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 2D NumPy
+array of 32-bit unsigned integer values to hold the
+samples requested. The size of the array must be large
+enough to hold all requested samples from all channels
+in the task; otherwise, an error is thrown.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a sample from each channel. The
+order of the channels in the array corresponds to the
+order in which you add the channels to the task or to
+the order of the channels you specify with the
+“channels_to_read” property.</p>
+<p>If the size of the array is too large or the array is
+shaped incorrectly, the previous statement may not hold
+true as the samples read may not be separated into rows
+and columns properly. Set the “verify_array_shape”
+property on this channel reader object to True to
+validate that the NumPy array object is shaped properly.
+Setting this property may marginally adversely impact
+the performance of the method.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalMultiChannelReader.read_one_sample_multi_line">
+<span class="sig-name descname"><span class="pre">read_one_sample_multi_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalMultiChannelReader.read_one_sample_multi_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalMultiChannelReader.read_one_sample_multi_line" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single boolean sample from one or more digital input
+channels in a task. The channels can contain multiple digital
+lines.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 2D NumPy
+array of boolean values to hold the samples requested.
+The size of the array must be large enough to hold all
+requested samples from all channels in the task;
+otherwise, an error is thrown.</p>
+<p>Each row corresponds to a channel in the task. Each
+column corresponds to a line from each channel. The
+order of the channels in the array corresponds to the
+order in which you add the channels to the task or to
+the order of the channels you specify with the
+“channels_to_read” property.</p>
+<p>If the size of the array is too large or the array is
+shaped incorrectly, the previous statement may not hold
+true as the samples read may not be separated into rows
+and columns properly. Set the “verify_array_shape”
+property on this channel reader object to True to
+validate that the NumPy array object is shaped properly.
+Setting this property may marginally adversely impact
+the performance of the method.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalMultiChannelReader.read_one_sample_one_line">
+<span class="sig-name descname"><span class="pre">read_one_sample_one_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalMultiChannelReader.read_one_sample_one_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalMultiChannelReader.read_one_sample_one_line" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single boolean sample from one or more digital input
+channels in a task. The channel can contain only one digital
+line.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of boolean values to hold the samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+each channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalMultiChannelReader.read_one_sample_port_byte">
+<span class="sig-name descname"><span class="pre">read_one_sample_port_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalMultiChannelReader.read_one_sample_port_byte"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalMultiChannelReader.read_one_sample_port_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single 8-bit unsigned integer sample from one or more
+digital input channels in a task.</p>
+<p>Use this method for devices with up to 8 lines per port.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of 8-bit unsigned integer values to hold the
+samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+each channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalMultiChannelReader.read_one_sample_port_uint16">
+<span class="sig-name descname"><span class="pre">read_one_sample_port_uint16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalMultiChannelReader.read_one_sample_port_uint16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalMultiChannelReader.read_one_sample_port_uint16" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single 16-bit unsigned integer sample from one or more
+digital input channels in a task.</p>
+<p>Use this method for devices with up to 16 lines per port.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of 16-bit unsigned integer values to hold the
+samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+each channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalMultiChannelReader.read_one_sample_port_uint32">
+<span class="sig-name descname"><span class="pre">read_one_sample_port_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalMultiChannelReader.read_one_sample_port_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalMultiChannelReader.read_one_sample_port_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single 32-bit unsigned integer sample from one or more
+digital input channels in a task.</p>
+<p>Use this method for devices with up to 32 lines per port.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of 32-bit unsigned integer values to hold the
+samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+each channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalMultiChannelReader.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_readers.DigitalMultiChannelReader.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalSingleChannelReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.stream_readers.</span></span><span class="sig-name descname"><span class="pre">DigitalSingleChannelReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_in_stream</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalSingleChannelReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalSingleChannelReader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq.stream_readers.ChannelReaderBase</span></code></p>
+<p>Reads samples from a digital input channel in an ArtDAQ task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalSingleChannelReader.read_many_sample_port_byte">
+<span class="sig-name descname"><span class="pre">read_many_sample_port_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalSingleChannelReader.read_many_sample_port_byte"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalSingleChannelReader.read_many_sample_port_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more 8-bit unsigned integer samples from a single
+digital input channel in a task.</p>
+<p>Use this method for devices with up to 8 lines per port.</p>
+<p>This read method accepts a preallocated NumPy array to hold
+the samples requested, which can be advantageous for performance
+and interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of 8-bit unsigned integer values to hold the
+samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalSingleChannelReader.read_many_sample_port_uint16">
+<span class="sig-name descname"><span class="pre">read_many_sample_port_uint16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalSingleChannelReader.read_many_sample_port_uint16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalSingleChannelReader.read_many_sample_port_uint16" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more 16-bit unsigned integer samples from a single
+digital input channel in a task.</p>
+<p>Use this method for devices with up to 16 lines per port.</p>
+<p>This read method accepts a preallocated NumPy array to hold
+the samples requested, which can be advantageous for performance
+and interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of 16-bit unsigned integer values to hold the
+samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalSingleChannelReader.read_many_sample_port_uint32">
+<span class="sig-name descname"><span class="pre">read_many_sample_port_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_samples_per_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalSingleChannelReader.read_many_sample_port_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalSingleChannelReader.read_many_sample_port_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Reads one or more 32-bit unsigned integer samples from a single
+digital input channel in a task.</p>
+<p>Use this method for devices with up to 32 lines per port.</p>
+<p>This read method accepts a preallocated NumPy array to hold
+the samples requested, which can be advantageous for performance
+and interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of 32-bit unsigned integer values to hold the
+samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+the channel. The size of the array must be large enough
+to hold all requested samples from the channel in the
+task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>number_of_samples_per_channel</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – <p>Specifies the
+number of samples to read.</p>
+<p>If you set this input to artdaq.constants.
+READ_ALL_AVAILABLE, ArtDAQ determines how many samples
+to read based on if the task acquires samples
+continuously or acquires a finite number of samples.</p>
+<p>If the task acquires samples continuously and you set
+this input to artdaq.constants.READ_ALL_AVAILABLE, this
+method reads all the samples currently available in the
+buffer.</p>
+<p>If the task acquires a finite number of samples and you
+set this input to artdaq.constants.READ_ALL_AVAILABLE,
+the method waits for the task to acquire all requested
+samples, then reads those samples. If you set the
+“read_all_avail_samp” property to True, the method reads
+the samples currently available in the buffer and does
+not wait for the task to acquire all requested samples.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the number of samples acquired by each channel.
+ArtDAQ returns a single value because this value is the
+same for all channels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalSingleChannelReader.read_one_sample_multi_line">
+<span class="sig-name descname"><span class="pre">read_one_sample_multi_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalSingleChannelReader.read_one_sample_multi_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalSingleChannelReader.read_one_sample_multi_line" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single boolean sample from a single digital input
+channel in a task. The channel can contain multiple digital
+lines.</p>
+<p>This read method accepts a preallocated NumPy array to hold the
+samples requested, which can be advantageous for performance and
+interoperability with NumPy and SciPy.</p>
+<p>Passing in a preallocated array is valuable in continuous
+acquisition scenarios, where the same array can be used
+repeatedly in each call to the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – <p>Specifies a preallocated 1D NumPy
+array of boolean values to hold the samples requested.</p>
+<p>Each element in the array corresponds to a sample from
+a line in the channel. The size of the array must be
+large enough to hold all requested samples from the
+channel in the task; otherwise, an error is thrown.</p>
+</p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalSingleChannelReader.read_one_sample_one_line">
+<span class="sig-name descname"><span class="pre">read_one_sample_one_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalSingleChannelReader.read_one_sample_one_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalSingleChannelReader.read_one_sample_one_line" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single boolean sample from a single digital input
+channel in a task. The channel can contain only one digital
+line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates a single boolean sample from the task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalSingleChannelReader.read_one_sample_port_byte">
+<span class="sig-name descname"><span class="pre">read_one_sample_port_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalSingleChannelReader.read_one_sample_port_byte"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalSingleChannelReader.read_one_sample_port_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single 8-bit unsigned integer sample from a single
+digital input channel in a task.</p>
+<p>Use this method for devices with up to 8 lines per port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates a single 8-bit unsigned integer sample from the
+task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalSingleChannelReader.read_one_sample_port_uint16">
+<span class="sig-name descname"><span class="pre">read_one_sample_port_uint16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalSingleChannelReader.read_one_sample_port_uint16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalSingleChannelReader.read_one_sample_port_uint16" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single 16-bit unsigned integer sample from a single
+digital input channel in a task.</p>
+<p>Use this method for devices with up to 16 lines per port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates a single 16-bit unsigned integer sample from the
+task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalSingleChannelReader.read_one_sample_port_uint32">
+<span class="sig-name descname"><span class="pre">read_one_sample_port_uint32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/stream_readers.html#DigitalSingleChannelReader.read_one_sample_port_uint32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.stream_readers.DigitalSingleChannelReader.read_one_sample_port_uint32" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single 32-bit unsigned integer sample from a single
+digital input channel in a task.</p>
+<p>Use this method for devices with up to 32 lines per port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies the amount of time in
+seconds to wait for samples to become available. If the
+time elapses, the method returns an error and any
+samples read before the timeout elapsed. The default
+timeout is 10 seconds. If you set timeout to
+artdaq.constants.WAIT_INFINITELY, the method waits
+indefinitely. If you set timeout to 0, the method tries
+once to read the requested samples and returns an error
+if it is unable to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates a single 32-bit unsigned integer sample from the
+task.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq.stream_readers.DigitalSingleChannelReader.verify_array_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verify_array_shape</span></span><a class="headerlink" href="#artdaq.stream_readers.DigitalSingleChannelReader.verify_array_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates whether the size and shape of the user-defined
+NumPy arrays passed to read methods are verified. Defaults
+to True when this object is instantiated.</p>
+<p>Setting this property to True may marginally adversely
+impact the performance of read methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="error_codes.html" class="btn btn-neutral float-left" title="artdaq.error_codes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stream_writers.html" class="btn btn-neutral float-right" title="artdaq.stream_writers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

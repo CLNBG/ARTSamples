@@ -1,0 +1,8 @@
+artdaq.error\_codes 
+===================
+
+.. automodule:: artdaq.error_codes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:

@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq._task_modules.cio_channel_collection &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>artdaq._task_modules.cio_channel_collection</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for artdaq._task_modules.cio_channel_collection</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">ctypes</span>
+
+<span class="kn">from</span> <span class="nn">artdaq._lib</span> <span class="kn">import</span> <span class="n">lib_importer</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">c_bool32</span>
+<span class="kn">from</span> <span class="nn">artdaq.errors</span> <span class="kn">import</span> <span class="n">check_for_error</span>
+<span class="kn">from</span> <span class="nn">artdaq._task_modules.channels.channel</span> <span class="kn">import</span> <span class="n">Channel</span>
+<span class="kn">from</span> <span class="nn">artdaq._task_modules.channels.cio_channel</span> <span class="kn">import</span> <span class="n">CIOChannel</span>
+<span class="kn">from</span> <span class="nn">artdaq._task_modules.channel_collection</span> <span class="kn">import</span> <span class="n">ChannelCollection</span>
+<span class="kn">from</span> <span class="nn">artdaq.utils</span> <span class="kn">import</span> <span class="n">unflatten_channel_string</span>
+<span class="kn">from</span> <span class="nn">artdaq.constants</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AngleUnits</span><span class="p">,</span> <span class="n">CountDirection</span><span class="p">,</span> <span class="n">CounterFrequencyMethod</span><span class="p">,</span>
+    <span class="n">Edge</span><span class="p">,</span> <span class="n">EncoderType</span><span class="p">,</span> <span class="n">EncoderZIndexPhase</span><span class="p">,</span> <span class="n">LengthUnits</span><span class="p">,</span> <span class="n">UsageTypeCI</span><span class="p">,</span>
+    <span class="n">FrequencyUnits</span><span class="p">,</span> <span class="n">Level</span><span class="p">,</span> <span class="n">TimeUnits</span><span class="p">,</span> <span class="n">UsageTypeCO</span><span class="p">,</span> <span class="n">ChannelType</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="CIOChannelCollection"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection">[docs]</a><span class="k">class</span> <span class="nc">CIOChannelCollection</span><span class="p">(</span><span class="n">ChannelCollection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Contains the collection of counter input channels for a DAQ Task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_handle</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CIOChannelCollection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">task_handle</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_chan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates and returns a CIChannel object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the names of the counters to use to </span>
+<span class="sd">                create virtual channels.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name to </span>
+<span class="sd">                assign to the virtual channel this method creates.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel: </span>
+<span class="sd">            </span>
+<span class="sd">            Specifies the newly created CIChannel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name_to_assign_to_channel</span><span class="p">:</span>
+            <span class="n">num_counters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unflatten_channel_string</span><span class="p">(</span><span class="n">counter</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">num_counters</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">0:</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">num_counters</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">name_to_assign_to_channel</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">counter</span>
+
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+        <span class="k">return</span> <span class="n">CIOChannel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_freq_chan"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_freq_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_freq_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="o">=</span><span class="mf">2000000.0</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">FrequencyUnits</span><span class="o">.</span><span class="n">HZ</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="n">Edge</span><span class="o">.</span><span class="n">RISING</span><span class="p">,</span>
+            <span class="n">meas_method</span><span class="o">=</span><span class="n">CounterFrequencyMethod</span><span class="o">.</span><span class="n">LOW_FREQUENCY_1_COUNTER</span><span class="p">,</span>
+            <span class="n">meas_time</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">divisor</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel to measure the frequency of a digital signal.</span>
+<span class="sd">        With the exception of devices that support multi-counter tasks,</span>
+<span class="sd">        you can create only one counter input channel at a time with</span>
+<span class="sd">        this function because a task can contain only one counter input</span>
+<span class="sd">        channel. To read from multiple counters simultaneously, use a</span>
+<span class="sd">        separate task for each counter. Connect the input signal to the</span>
+<span class="sd">        default input terminal of the counter unless you select a</span>
+<span class="sd">        different input terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to measure.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to measure.</span>
+<span class="sd">            units (Optional[artdaq.constants.FrequencyUnits]):</span>
+<span class="sd">                Specifies the units to use to return frequency</span>
+<span class="sd">                measurements.</span>
+<span class="sd">            edge (Optional[artdaq.constants.Edge]): Specifies between</span>
+<span class="sd">                which edges to measure the frequency or period of the</span>
+<span class="sd">                signal.</span>
+<span class="sd">            meas_method (Optional[artdaq.constants.CounterFrequencyMethod]):</span>
+<span class="sd">                Specifies the method to use to calculate the period or</span>
+<span class="sd">                frequency of the signal.</span>
+<span class="sd">            meas_time (Optional[float]): Is the length of time in</span>
+<span class="sd">                seconds to measure the frequency or period of the signal</span>
+<span class="sd">                if **meas_method** is **HIGH_FREQUENCYWITH_2_COUNTERS**.</span>
+<span class="sd">                Leave this input unspecified if **meas_method** is not</span>
+<span class="sd">                **HIGH_FREQUENCYWITH_2_COUNTERS**.</span>
+<span class="sd">            divisor (Optional[int]): Is the value by which to divide the</span>
+<span class="sd">                input signal when **meas_method** is</span>
+<span class="sd">                **LARGE_RANGEWITH_2_COUNTERS**. Leave this input</span>
+<span class="sd">                unspecified if **meas_method** is not</span>
+<span class="sd">                **LARGE_RANGEWITH_2_COUNTERS**.</span>
+<span class="sd">            custom_scale_name (Optional[str]): Specifies the name of a</span>
+<span class="sd">                custom scale for the channel. If you want the channel to</span>
+<span class="sd">                use a custom scale, specify the name of the custom scale</span>
+<span class="sd">                to this input and set **units** to</span>
+<span class="sd">                **FROM_CUSTOM_SCALE**.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCIFreqChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">edge</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">meas_method</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">meas_time</span><span class="p">,</span>
+            <span class="n">divisor</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">FREQUENCY</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_period_chan"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_period_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_period_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mf">0.000001</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">TimeUnits</span><span class="o">.</span><span class="n">SECONDS</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="n">Edge</span><span class="o">.</span><span class="n">RISING</span><span class="p">,</span>
+            <span class="n">meas_method</span><span class="o">=</span><span class="n">CounterFrequencyMethod</span><span class="o">.</span><span class="n">LOW_FREQUENCY_1_COUNTER</span><span class="p">,</span>
+            <span class="n">meas_time</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">divisor</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel to measure the period of a digital signal.</span>
+<span class="sd">        With the exception of devices that support multi-counter tasks,</span>
+<span class="sd">        you can create only one counter input channel at a time with</span>
+<span class="sd">        this function because a task can contain only one counter input</span>
+<span class="sd">        channel. To read from multiple counters simultaneously, use a</span>
+<span class="sd">        separate task for each counter. Connect the input signal to the</span>
+<span class="sd">        default input terminal of the counter unless you select a</span>
+<span class="sd">        different input terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to measure.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to measure.</span>
+<span class="sd">            units (Optional[artdaq.constants.TimeUnits]): Specifies the</span>
+<span class="sd">                units to use to return time or period measurements.</span>
+<span class="sd">            edge (Optional[artdaq.constants.Edge]): Specifies between</span>
+<span class="sd">                which edges to measure the frequency or period of the</span>
+<span class="sd">                signal.</span>
+<span class="sd">            meas_method (Optional[artdaq.constants.CounterFrequencyMethod]):</span>
+<span class="sd">                Specifies the method to use to calculate the period or</span>
+<span class="sd">                frequency of the signal.</span>
+<span class="sd">            meas_time (Optional[float]): Is the length of time in</span>
+<span class="sd">                seconds to measure the frequency or period of the signal</span>
+<span class="sd">                if **meas_method** is **HIGH_FREQUENCYWITH_2_COUNTERS**.</span>
+<span class="sd">                Leave this input unspecified if **meas_method** is not</span>
+<span class="sd">                **HIGH_FREQUENCYWITH_2_COUNTERS**.</span>
+<span class="sd">            divisor (Optional[int]): Is the value by which to divide the</span>
+<span class="sd">                input signal when **meas_method** is</span>
+<span class="sd">                **LARGE_RANGEWITH_2_COUNTERS**. Leave this input</span>
+<span class="sd">                unspecified if **meas_method** is not</span>
+<span class="sd">                **LARGE_RANGEWITH_2_COUNTERS**.</span>
+<span class="sd">            custom_scale_name (Optional[str]): Specifies the name of a</span>
+<span class="sd">                custom scale for the channel. If you want the channel to</span>
+<span class="sd">                use a custom scale, specify the name of the custom scale</span>
+<span class="sd">                to this input and set **units** to</span>
+<span class="sd">                **FROM_CUSTOM_SCALE**.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCIPeriodChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">edge</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">meas_method</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">meas_time</span><span class="p">,</span>
+            <span class="n">divisor</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">PERIOD</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_count_edges_chan"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_count_edges_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_count_edges_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="n">Edge</span><span class="o">.</span><span class="n">RISING</span><span class="p">,</span>
+            <span class="n">initial_count</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">count_direction</span><span class="o">=</span><span class="n">CountDirection</span><span class="o">.</span><span class="n">COUNT_UP</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel to count the number of rising or falling edges</span>
+<span class="sd">        of a digital signal. With the exception of devices that support</span>
+<span class="sd">        multi-counter tasks, you can create only one counter input</span>
+<span class="sd">        channel at a time with this function because a task can contain</span>
+<span class="sd">        only one counter input channel. To read from multiple counters</span>
+<span class="sd">        simultaneously, use a separate task for each counter. Connect</span>
+<span class="sd">        the input signal to the default input terminal of the counter</span>
+<span class="sd">        unless you select a different input terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            edge (Optional[artdaq.constants.Edge]): Specifies on which</span>
+<span class="sd">                edges of the input signal to increment or decrement the</span>
+<span class="sd">                count.</span>
+<span class="sd">            initial_count (Optional[int]): Is the value from which to</span>
+<span class="sd">                start counting.</span>
+<span class="sd">            count_direction (Optional[artdaq.constants.CountDirection]):</span>
+<span class="sd">                Specifies whether to increment or decrement the counter</span>
+<span class="sd">                on each edge.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCICountEdgesChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">edge</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">initial_count</span><span class="p">,</span> <span class="n">count_direction</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">COUNT_EDGES</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">add_ci_pulse_chan_time</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">TimeUnits</span><span class="o">.</span><span class="n">SECONDS</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel to measure pulse specifications, returning the</span>
+<span class="sd">        measurements as pairs of high time and low time. With the</span>
+<span class="sd">        exception of devices that support multi-counter tasks, you can</span>
+<span class="sd">        create only one counter input channel at a time with this</span>
+<span class="sd">        function because a task can contain only one counter input</span>
+<span class="sd">        channel. To read from multiple counters simultaneously, use a</span>
+<span class="sd">        separate task for each counter. Connect the input signal to the</span>
+<span class="sd">        default input terminal of the counter unless you select a</span>
+<span class="sd">        different input terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to measure.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to measure.</span>
+<span class="sd">            units (Optional[artdaq.constants.TimeUnits]): Specifies the</span>
+<span class="sd">                units to use to return pulse specifications in terms of</span>
+<span class="sd">                high time and low time.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">DAQCreateCIPulseChanTime</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">PULSE_TIME</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_pulse_width_chan"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_width_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_pulse_width_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mf">0.000001</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">TimeUnits</span><span class="o">.</span><span class="n">SECONDS</span><span class="p">,</span> <span class="n">starting_edge</span><span class="o">=</span><span class="n">Edge</span><span class="o">.</span><span class="n">RISING</span><span class="p">,</span>
+            <span class="n">custom_scale_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel to measure the width of a digital pulse.</span>
+<span class="sd">        **starting_edge** determines whether to measure a high pulse or</span>
+<span class="sd">        low pulse. With the exception of devices that support multi-</span>
+<span class="sd">        counter tasks, you can create only one counter input channel at</span>
+<span class="sd">        a time with this function because a task can contain only one</span>
+<span class="sd">        counter input channel. To read from multiple counters</span>
+<span class="sd">        simultaneously, use a separate task for each counter. Connect</span>
+<span class="sd">        the input signal to the default input terminal of the counter</span>
+<span class="sd">        unless you select a different input terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to measure.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to measure.</span>
+<span class="sd">            units (Optional[artdaq.constants.TimeUnits]): Specifies the</span>
+<span class="sd">                units to use to return time or period measurements.</span>
+<span class="sd">            starting_edge (Optional[artdaq.constants.Edge]): Specifies</span>
+<span class="sd">                on which edge to begin measuring pulse width.</span>
+<span class="sd">            custom_scale_name (Optional[str]): Specifies the name of a</span>
+<span class="sd">                custom scale for the channel. If you want the channel to</span>
+<span class="sd">                use a custom scale, specify the name of the custom scale</span>
+<span class="sd">                to this input and set **units** to</span>
+<span class="sd">                **FROM_CUSTOM_SCALE**.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCIPulseWidthChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">starting_edge</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">PULSE_WIDTH_DIGITAL</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_semi_period_chan"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_semi_period_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_semi_period_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mf">0.000001</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">TimeUnits</span><span class="o">.</span><span class="n">SECONDS</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel to measure the time between state transitions</span>
+<span class="sd">        of a digital signal. With the exception of devices that support</span>
+<span class="sd">        multi-counter tasks, you can create only one counter input</span>
+<span class="sd">        channel at a time with this function because a task can contain</span>
+<span class="sd">        only one counter input channel. To read from multiple counters</span>
+<span class="sd">        simultaneously, use a separate task for each counter. Connect</span>
+<span class="sd">        the input signal to the default input terminal of the counter</span>
+<span class="sd">        unless you select a different input terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to measure.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to measure.</span>
+<span class="sd">            units (Optional[artdaq.constants.TimeUnits]): Specifies the</span>
+<span class="sd">                units to use to return time or period measurements.</span>
+<span class="sd">            custom_scale_name (Optional[str]): Specifies the name of a</span>
+<span class="sd">                custom scale for the channel. If you want the channel to</span>
+<span class="sd">                use a custom scale, specify the name of the custom scale</span>
+<span class="sd">                to this input and set **units** to</span>
+<span class="sd">                **FROM_CUSTOM_SCALE**.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCISemiPeriodChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">PULSE_WIDTH_DIGITAL_SEMI_PERIOD</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_two_edge_sep_chan"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_two_edge_sep_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_two_edge_sep_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mf">0.000001</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">TimeUnits</span><span class="o">.</span><span class="n">SECONDS</span><span class="p">,</span> <span class="n">first_edge</span><span class="o">=</span><span class="n">Edge</span><span class="o">.</span><span class="n">RISING</span><span class="p">,</span>
+            <span class="n">second_edge</span><span class="o">=</span><span class="n">Edge</span><span class="o">.</span><span class="n">FALLING</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel that measures the amount of time between the</span>
+<span class="sd">        rising or falling edge of one digital signal and the rising or</span>
+<span class="sd">        falling edge of another digital signal. With the exception of</span>
+<span class="sd">        devices that support multi-counter tasks, you can create only</span>
+<span class="sd">        one counter input channel at a time with this function because a</span>
+<span class="sd">        task can contain only one counter input channel. To read from</span>
+<span class="sd">        multiple counters simultaneously, use a separate task for each</span>
+<span class="sd">        counter. Connect the input signals to the default input</span>
+<span class="sd">        terminals of the counter unless you select different input</span>
+<span class="sd">        terminals.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to measure.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to measure.</span>
+<span class="sd">            units (Optional[artdaq.constants.TimeUnits]): Specifies the</span>
+<span class="sd">                units to use to return time or period measurements.</span>
+<span class="sd">            first_edge (Optional[artdaq.constants.Edge]): Specifies on</span>
+<span class="sd">                which edge of the first signal to start each</span>
+<span class="sd">                measurement.</span>
+<span class="sd">            second_edge (Optional[artdaq.constants.Edge]): Specifies on</span>
+<span class="sd">                which edge of the second signal to stop each</span>
+<span class="sd">                measurement.</span>
+<span class="sd">            custom_scale_name (Optional[str]): Specifies the name of a</span>
+<span class="sd">                custom scale for the channel. If you want the channel to</span>
+<span class="sd">                use a custom scale, specify the name of the custom scale</span>
+<span class="sd">                to this input and set **units** to</span>
+<span class="sd">                **FROM_CUSTOM_SCALE**.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCITwoEdgeSepChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">first_edge</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">second_edge</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">custom_scale_name</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">PULSE_WIDTH_DIGITAL_TWO_EDGE_SEPARATION</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_pulse_chan_freq"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_chan_freq">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_pulse_chan_freq</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="o">=</span><span class="mi">200000</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">FrequencyUnits</span><span class="o">.</span><span class="n">HZ</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel to measure pulse specifications, returning the</span>
+<span class="sd">        measurements as pairs of frequency and duty cycle. With the</span>
+<span class="sd">        exception of devices that support multi-counter tasks, you can</span>
+<span class="sd">        create only one counter input channel at a time with this</span>
+<span class="sd">        function because a task can contain only one counter input</span>
+<span class="sd">        channel. To read from multiple counters simultaneously, use a</span>
+<span class="sd">        separate task for each counter. Connect the input signal to the</span>
+<span class="sd">        default input terminal of the counter unless you select a</span>
+<span class="sd">        different input terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to measure.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to measure.</span>
+<span class="sd">            units (Optional[artdaq.constants.FrequencyUnits]):</span>
+<span class="sd">                Specifies the units to use to return pulse</span>
+<span class="sd">                specifications in terms of frequency.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCIPulseChanFreq</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">PULSE_FREQ</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_pulse_chan_time"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_chan_time">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_pulse_chan_time</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mf">0.000001</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">TimeUnits</span><span class="o">.</span><span class="n">SECONDS</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel to measure pulse specifications, returning the</span>
+<span class="sd">        measurements as pairs of high time and low time. With the</span>
+<span class="sd">        exception of devices that support multi-counter tasks, you can</span>
+<span class="sd">        create only one counter input channel at a time with this</span>
+<span class="sd">        function because a task can contain only one counter input</span>
+<span class="sd">        channel. To read from multiple counters simultaneously, use a</span>
+<span class="sd">        separate task for each counter. Connect the input signal to the</span>
+<span class="sd">        default input terminal of the counter unless you select a</span>
+<span class="sd">        different input terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to measure.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to measure.</span>
+<span class="sd">            units (Optional[artdaq.constants.TimeUnits]): Specifies the</span>
+<span class="sd">                units to use to return pulse specifications in terms of</span>
+<span class="sd">                high time and low time.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCIPulseChanTime</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">PULSE_TIME</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_pulse_chan_ticks"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_chan_ticks">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_pulse_chan_ticks</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">source_terminal</span><span class="o">=</span><span class="s2">&quot;100MHzTimebase&quot;</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_val</span><span class="o">=</span><span class="mi">2000000</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel to measure pulse specifications, returning the</span>
+<span class="sd">        measurements as pairs of high ticks and low ticks. With the</span>
+<span class="sd">        exception of devices that support multi-counter tasks, you can</span>
+<span class="sd">        create only one counter input channel at a time with this</span>
+<span class="sd">        function because a task can contain only one counter input</span>
+<span class="sd">        channel. To read from multiple counters simultaneously, use a</span>
+<span class="sd">        separate task for each counter. Connect the input signal to the</span>
+<span class="sd">        default input terminal of the counter unless you select a</span>
+<span class="sd">        different input terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            source_terminal (Optional[str]): Is the terminal to which</span>
+<span class="sd">                you connect a signal to use as the source of ticks. A</span>
+<span class="sd">                DAQ terminal constant lists all terminals available on</span>
+<span class="sd">                devices installed in the system. You also can specify a</span>
+<span class="sd">                source terminal by specifying a string that contains a</span>
+<span class="sd">                terminal name. If you specify OnboardClock, or do not</span>
+<span class="sd">                specify any terminal, ArtDAQ selects the fastest</span>
+<span class="sd">                onboard timebase available on the device.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to measure.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to measure.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCIPulseChanTicks</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">source_terminal</span><span class="p">,</span>
+            <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">PULSE_TICKS</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_lin_encoder_chan"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_lin_encoder_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_lin_encoder_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">decoding_type</span><span class="o">=</span><span class="n">EncoderType</span><span class="o">.</span><span class="n">X_4</span><span class="p">,</span> <span class="n">zidx_enable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zidx_val</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">zidx_phase</span><span class="o">=</span><span class="n">EncoderZIndexPhase</span><span class="o">.</span><span class="n">AHIGH_BHIGH</span><span class="p">,</span>
+            <span class="n">units</span><span class="o">=</span><span class="n">LengthUnits</span><span class="o">.</span><span class="n">METERS</span><span class="p">,</span> <span class="n">dist_per_pulse</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">initial_pos</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">custom_scale_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel that uses a linear encoder to measure linear</span>
+<span class="sd">        position. With the exception of devices that support multi-</span>
+<span class="sd">        counter tasks, you can create only one counter input channel at</span>
+<span class="sd">        a time with this function because a task can contain only one</span>
+<span class="sd">        counter input channel. To read from multiple counters</span>
+<span class="sd">        simultaneously, use a separate task for each counter. Connect</span>
+<span class="sd">        the input signals to the default input terminals of the counter</span>
+<span class="sd">        unless you select different input terminals.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            decoding_type (Optional[artdaq.constants.EncoderType]):</span>
+<span class="sd">                Specifies how to count and interpret the pulses the</span>
+<span class="sd">                encoder generates on signal A and signal B. **X_1**,</span>
+<span class="sd">                **X_2**, and **X_4** are valid for quadrature encoders</span>
+<span class="sd">                only. **TWO_PULSE_COUNTING** is valid only for two-pulse</span>
+<span class="sd">                encoders.</span>
+<span class="sd">            zidx_enable (Optional[bool]): Specifies whether to use Z</span>
+<span class="sd">                indexing for the channel.</span>
+<span class="sd">            zidx_val (Optional[float]): Specifies in **units** the value</span>
+<span class="sd">                to which to reset the measurement when signal Z is high</span>
+<span class="sd">                and signal A and signal B are at the states you specify</span>
+<span class="sd">                with **zidx_phase**.</span>
+<span class="sd">            zidx_phase (Optional[artdaq.constants.EncoderZIndexPhase]):</span>
+<span class="sd">                Specifies the states at which signal A and signal B must</span>
+<span class="sd">                be while signal Z is high for ArtDAQ to reset the</span>
+<span class="sd">                measurement. If signal Z is never high while signal A</span>
+<span class="sd">                and signal B are high, for example, you must choose a</span>
+<span class="sd">                phase other than **A_HIGH_B_HIGH**.</span>
+<span class="sd">            units (Optional[artdaq.constants.LengthUnits]): Specifies</span>
+<span class="sd">                the units to use to return linear position measurements</span>
+<span class="sd">                from the channel.</span>
+<span class="sd">            dist_per_pulse (Optional[float]): Is the distance to measure</span>
+<span class="sd">                for each pulse the encoder generates on signal A or</span>
+<span class="sd">                signal B. This value is in the units you specify with</span>
+<span class="sd">                the **units** input.</span>
+<span class="sd">            initial_pos (Optional[float]): Is the position of the</span>
+<span class="sd">                encoder when you begin the measurement. This value is in</span>
+<span class="sd">                the units you specify with the **units** input.</span>
+<span class="sd">            custom_scale_name (Optional[str]): Specifies the name of a</span>
+<span class="sd">                custom scale for the channel. If you want the channel to</span>
+<span class="sd">                use a custom scale, specify the name of the custom scale</span>
+<span class="sd">                to this input and set **units** to</span>
+<span class="sd">                **FROM_CUSTOM_SCALE**.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCILinEncoderChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">c_bool32</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span>
+            <span class="n">decoding_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">zidx_enable</span><span class="p">,</span> <span class="n">zidx_val</span><span class="p">,</span> <span class="n">zidx_phase</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">dist_per_pulse</span><span class="p">,</span> <span class="n">initial_pos</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">POSITION_LINEAR_ENCODER</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_ci_ang_encoder_chan"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_ang_encoder_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_ci_ang_encoder_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">decoding_type</span><span class="o">=</span><span class="n">EncoderType</span><span class="o">.</span><span class="n">X_4</span><span class="p">,</span> <span class="n">zidx_enable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zidx_val</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">zidx_phase</span><span class="o">=</span><span class="n">EncoderZIndexPhase</span><span class="o">.</span><span class="n">AHIGH_BHIGH</span><span class="p">,</span>
+            <span class="n">units</span><span class="o">=</span><span class="n">AngleUnits</span><span class="o">.</span><span class="n">DEGREES</span><span class="p">,</span> <span class="n">pulses_per_rev</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">initial_angle</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">custom_scale_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a channel that uses an angular encoder to measure</span>
+<span class="sd">        angular position. With the exception of devices that support</span>
+<span class="sd">        multi-counter tasks, you can create only one counter input</span>
+<span class="sd">        channel at a time with this function because a task can contain</span>
+<span class="sd">        only one counter input channel. To read from multiple counters</span>
+<span class="sd">        simultaneously, use a separate task for each counter. Connect</span>
+<span class="sd">        the input signals to the default input terminals of the counter</span>
+<span class="sd">        unless you select different input terminals.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the name of the counter to use to</span>
+<span class="sd">                create the virtual channel. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            decoding_type (Optional[artdaq.constants.EncoderType]):</span>
+<span class="sd">                Specifies how to count and interpret the pulses the</span>
+<span class="sd">                encoder generates on signal A and signal B. **X_1**,</span>
+<span class="sd">                **X_2**, and **X_4** are valid for quadrature encoders</span>
+<span class="sd">                only. **TWO_PULSE_COUNTING** is valid only for two-pulse</span>
+<span class="sd">                encoders.</span>
+<span class="sd">            zidx_enable (Optional[bool]): Specifies whether to use Z</span>
+<span class="sd">                indexing for the channel.</span>
+<span class="sd">            zidx_val (Optional[float]): Specifies in **units** the value</span>
+<span class="sd">                to which to reset the measurement when signal Z is high</span>
+<span class="sd">                and signal A and signal B are at the states you specify</span>
+<span class="sd">                with **zidx_phase**.</span>
+<span class="sd">            zidx_phase (Optional[artdaq.constants.EncoderZIndexPhase]):</span>
+<span class="sd">                Specifies the states at which signal A and signal B must</span>
+<span class="sd">                be while signal Z is high for ArtDAQ to reset the</span>
+<span class="sd">                measurement. If signal Z is never high while signal A</span>
+<span class="sd">                and signal B are high, for example, you must choose a</span>
+<span class="sd">                phase other than **A_HIGH_B_HIGH**.</span>
+<span class="sd">            units (Optional[artdaq.constants.AngleUnits]): Specifies</span>
+<span class="sd">                the units to use to return angular position measurements</span>
+<span class="sd">                from the channel.</span>
+<span class="sd">            pulses_per_rev (Optional[int]): Is the number of pulses the</span>
+<span class="sd">                encoder generates per revolution. This value is the</span>
+<span class="sd">                number of pulses on either signal A or signal B, not the</span>
+<span class="sd">                total number of pulses on both signal A and signal B.</span>
+<span class="sd">            initial_angle (Optional[float]): Is the starting angle of</span>
+<span class="sd">                the encoder. This value is in the units you specify with</span>
+<span class="sd">                the **units** input.</span>
+<span class="sd">            custom_scale_name (Optional[str]): Specifies the name of a</span>
+<span class="sd">                custom scale for the channel. If you want the channel to</span>
+<span class="sd">                use a custom scale, specify the name of the custom scale</span>
+<span class="sd">                to this input and set **units** to</span>
+<span class="sd">                **FROM_CUSTOM_SCALE**.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ci_channel.CIChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCIAngEncoderChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">c_bool32</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span>
+            <span class="n">decoding_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">zidx_enable</span><span class="p">,</span> <span class="n">zidx_val</span><span class="p">,</span> <span class="n">zidx_phase</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">pulses_per_rev</span><span class="p">,</span> <span class="n">initial_angle</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">ci_meas_type</span> <span class="o">=</span> <span class="n">UsageTypeCI</span><span class="o">.</span><span class="n">POSITION_ANGULAR_ENCODER</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_co_pulse_chan_freq"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_co_pulse_chan_freq">[docs]</a>    <span class="k">def</span> <span class="nf">add_co_pulse_chan_freq</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">units</span><span class="o">=</span><span class="n">FrequencyUnits</span><span class="o">.</span><span class="n">HZ</span><span class="p">,</span> <span class="n">idle_state</span><span class="o">=</span><span class="n">Level</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span> <span class="n">initial_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">freq</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates channel(s) to generate digital pulses that **freq** and</span>
+<span class="sd">        **duty_cycle** define. The pulses appear on the default output</span>
+<span class="sd">        terminal of the counter unless you select a different output</span>
+<span class="sd">        terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the names of the counters to use to</span>
+<span class="sd">                create the virtual channels. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            units (Optional[artdaq.constants.FrequencyUnits]):</span>
+<span class="sd">                Specifies the units in which to define pulse frequency.</span>
+<span class="sd">            idle_state (Optional[artdaq.constants.Level]): Specifies</span>
+<span class="sd">                the resting state of the output terminal.</span>
+<span class="sd">            initial_delay (Optional[float]): Is the amount of time in</span>
+<span class="sd">                seconds to wait before generating the first pulse.</span>
+<span class="sd">            freq (Optional[float]): Specifies at what frequency to</span>
+<span class="sd">                generate pulses.</span>
+<span class="sd">            duty_cycle (Optional[float]): Is the width of the pulse</span>
+<span class="sd">                divided by the pulse period. ArtDAQ uses this ratio</span>
+<span class="sd">                combined with frequency to determine pulse width and the</span>
+<span class="sd">                interval between pulses.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.co_channel.COChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCOPulseChanFreq</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">idle_state</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">initial_delay</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">co_output_type</span> <span class="o">=</span> <span class="n">UsageTypeCO</span><span class="o">.</span><span class="n">PULSE_FREQUENCY</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_co_pulse_chan_ticks"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_co_pulse_chan_ticks">[docs]</a>    <span class="k">def</span> <span class="nf">add_co_pulse_chan_ticks</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">source_terminal</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">idle_state</span><span class="o">=</span><span class="n">Level</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span> <span class="n">initial_delay</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">low_ticks</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+            <span class="n">high_ticks</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates channel(s) to generate digital pulses defined by the</span>
+<span class="sd">        number of timebase ticks that the pulse is at a high state and</span>
+<span class="sd">        the number of timebase ticks that the pulse is at a low state.</span>
+<span class="sd">        The pulses appear on the default output terminal of the counter</span>
+<span class="sd">        unless you select a different output terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the names of the counters to use to</span>
+<span class="sd">                create the virtual channels. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            source_terminal (str): Is the terminal to which you connect</span>
+<span class="sd">                an external timebase. A DAQ terminal constant lists</span>
+<span class="sd">                all terminals available on devices installed in the</span>
+<span class="sd">                system. You also can specify a source terminal by</span>
+<span class="sd">                specifying a string that contains a terminal name.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            idle_state (Optional[artdaq.constants.Level]): Specifies</span>
+<span class="sd">                the resting state of the output terminal.</span>
+<span class="sd">            initial_delay (Optional[int]): Is the number of timebase</span>
+<span class="sd">                ticks to wait before generating the first pulse.</span>
+<span class="sd">            low_ticks (Optional[int]): Is the number of ticks the pulse</span>
+<span class="sd">                is low.</span>
+<span class="sd">            high_ticks (Optional[int]): Is the number of ticks the pulse</span>
+<span class="sd">                is high.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.co_channel.COChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCOPulseChanTicks</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">source_terminal</span><span class="p">,</span>
+            <span class="n">idle_state</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">initial_delay</span><span class="p">,</span> <span class="n">low_ticks</span><span class="p">,</span> <span class="n">high_ticks</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">co_output_type</span> <span class="o">=</span> <span class="n">UsageTypeCO</span><span class="o">.</span><span class="n">PULSE_TICKS</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CIOChannelCollection.add_co_pulse_chan_time"><a class="viewcode-back" href="../../../cio_channel_collection.html#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_co_pulse_chan_time">[docs]</a>    <span class="k">def</span> <span class="nf">add_co_pulse_chan_time</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">units</span><span class="o">=</span><span class="n">TimeUnits</span><span class="o">.</span><span class="n">SECONDS</span><span class="p">,</span> <span class="n">idle_state</span><span class="o">=</span><span class="n">Level</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span> <span class="n">initial_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">low_time</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">high_time</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates channel(s) to generate digital pulses defined by the</span>
+<span class="sd">        amount of time the pulse is at a high state and the amount of</span>
+<span class="sd">        time the pulse is at a low state. The pulses appear on the</span>
+<span class="sd">        default output terminal of the counter unless you select a</span>
+<span class="sd">        different output terminal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            counter (str): Specifies the names of the counters to use to</span>
+<span class="sd">                create the virtual channels. The DAQ physical channel</span>
+<span class="sd">                constant lists all physical channels, including</span>
+<span class="sd">                counters, for devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            units (Optional[artdaq.constants.TimeUnits]): Specifies the</span>
+<span class="sd">                units in which to define pulse high and low time.</span>
+<span class="sd">            idle_state (Optional[artdaq.constants.Level]): Specifies</span>
+<span class="sd">                the resting state of the output terminal.</span>
+<span class="sd">            initial_delay (Optional[float]): Is the amount of time in</span>
+<span class="sd">                seconds to wait before generating the first pulse.</span>
+<span class="sd">            low_time (Optional[float]): Is the amount of time the pulse</span>
+<span class="sd">                is low.</span>
+<span class="sd">            high_time (Optional[float]): Is the amount of time the pulse</span>
+<span class="sd">                is high.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.co_channel.COChannel:</span>
+
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateCOPulseChanTime</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">idle_state</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">initial_delay</span><span class="p">,</span> <span class="n">low_time</span><span class="p">,</span> <span class="n">high_time</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">CIOChannel</span><span class="o">.</span><span class="n">co_output_type</span> <span class="o">=</span> <span class="n">UsageTypeCO</span><span class="o">.</span><span class="n">PULSE_TIME</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">COUNTER</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

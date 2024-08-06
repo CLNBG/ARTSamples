@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq._task_modules.export_signals &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>artdaq._task_modules.export_signals</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for artdaq._task_modules.export_signals</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">from</span> <span class="nn">artdaq._lib</span> <span class="kn">import</span> <span class="n">lib_importer</span><span class="p">,</span> <span class="n">ctypes_byte_str</span>
+<span class="kn">from</span> <span class="nn">artdaq.errors</span> <span class="kn">import</span> <span class="n">check_for_error</span>
+<span class="kn">from</span> <span class="nn">artdaq.constants</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Polarity</span><span class="p">,</span> <span class="n">ExportAction</span><span class="p">,</span> <span class="n">ToggleIdleState</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ExportSignals"><a class="viewcode-back" href="../../../export_signals.html#artdaq._task_modules.export_signals.ExportSignals">[docs]</a><span class="k">class</span> <span class="nc">ExportSignals</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents the exported signal configurations for a DAQ task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_handle</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">task_handle</span>
+
+<div class="viewcode-block" id="ExportSignals.export_signal"><a class="viewcode-back" href="../../../export_signals.html#artdaq._task_modules.export_signals.ExportSignals.export_signal">[docs]</a>    <span class="k">def</span> <span class="nf">export_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal_id</span><span class="p">,</span> <span class="n">output_terminal</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Routes a control signal to the terminal you specify. The output</span>
+<span class="sd">        terminal can reside on the device that generates the control</span>
+<span class="sd">        signal or on a different device. You can use this function to</span>
+<span class="sd">        share clocks and triggers among multiple tasks and devices. The</span>
+<span class="sd">        routes this function creates are task-based routes.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            signal_id (artdaq.constants.Signal): Is the name of the</span>
+<span class="sd">                trigger, clock, or event to export.</span>
+<span class="sd">            output_terminal (str): Is the destination of the exported</span>
+<span class="sd">                signal. A DAQ terminal constant lists all terminals on</span>
+<span class="sd">                installed devices. You can also specify a string</span>
+<span class="sd">                containing a comma-delimited list of terminal names.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_ExportSignal</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">signal_id</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">output_terminal</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ExportSignals.export_ctrOutEvent"><a class="viewcode-back" href="../../../export_signals.html#artdaq._task_modules.export_signals.ExportSignals.export_ctrOutEvent">[docs]</a>    <span class="k">def</span> <span class="nf">export_ctrOutEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_terminal</span><span class="p">,</span> <span class="n">output_behavior</span><span class="o">=</span><span class="n">ExportAction</span><span class="o">.</span><span class="n">PULSE</span><span class="p">,</span>
+                           <span class="n">pulse_polarity</span><span class="o">=</span><span class="n">Polarity</span><span class="o">.</span><span class="n">ACTIVE_HIGH</span><span class="p">,</span> <span class="n">toggle_idlestate</span><span class="o">=</span><span class="n">ToggleIdleState</span><span class="o">.</span><span class="n">HIGH</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">             Routes the counter output event to the terminal you specify.</span>
+
+<span class="sd">             Args:</span>
+<span class="sd">                 output_terminal (str): Is the destination of the exported</span>
+<span class="sd">                     signal. A DAQ terminal constant lists all terminals on</span>
+<span class="sd">                     installed devices. You can also specify a string</span>
+<span class="sd">                     containing a comma-delimited list of terminal names.</span>
+
+<span class="sd">                 output_behavior(artdaq.constants.ExportAction): define the output behavior is pulse or toggle.</span>
+
+<span class="sd">                 pulse_polarity(artdaq.constants.Polarity): If output_behavior defined as pulse, this param defines</span>
+<span class="sd">                 the output event is high level or low level.</span>
+
+<span class="sd">                 toggle_idlestate(artdaq.constants.ToggleIdleState): If output_behavior defined as toggle,</span>
+<span class="sd">                 this param defines the toggleIdleState is high or low.</span>
+<span class="sd">             &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_ExportCtrOutEvent</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">output_terminal</span><span class="p">,</span> <span class="n">output_behavior</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">pulse_polarity</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">toggle_idlestate</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

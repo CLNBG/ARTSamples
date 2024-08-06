@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.utils &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>artdaq.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for artdaq.utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">artdaq.errors</span> <span class="kn">import</span> <span class="n">DaqError</span>
+
+<span class="c1"># Method logic adapted from</span>
+
+<span class="n">_invalid_range_syntax_message</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;Syntax for a range of objects in the input string is invalid.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;For ranges of objects, specify a number immediately before and after &quot;</span>
+    <span class="s2">&quot;every colon (&#39;:&#39;) in the input string. Or, if a name is specified after &quot;</span>
+    <span class="s2">&quot;the colon, it must be identical to the name specified immediately before &quot;</span>
+    <span class="s2">&quot;the colon. Colons are not allowed within the names of the individual &quot;</span>
+    <span class="s2">&quot;objects.&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="flatten_channel_string"><a class="viewcode-back" href="../../utils.html#artdaq.utils.flatten_channel_string">[docs]</a><span class="k">def</span> <span class="nf">flatten_channel_string</span><span class="p">(</span><span class="n">channel_names</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a list of channel names to a comma-delimited list of names.</span>
+
+<span class="sd">    You can use this method to convert a list of physical or virtual channel</span>
+<span class="sd">    names to a single string prior to using the DAQ Create Channel methods or</span>
+<span class="sd">    instantiating a DAQ Task object.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        channel_names (List[str]): The list of physical or virtual channel</span>
+<span class="sd">            names.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str:</span>
+<span class="sd">        </span>
+<span class="sd">        The resulting comma-delimited list of physical or virtual channel</span>
+<span class="sd">        names.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">unflattened_channel_names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">channel_name</span> <span class="ow">in</span> <span class="n">channel_names</span><span class="p">:</span>
+        <span class="n">unflattened_channel_names</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">unflatten_channel_string</span><span class="p">(</span><span class="n">channel_name</span><span class="p">))</span>
+
+    <span class="c1"># Go through the channel names and flatten them.</span>
+    <span class="n">flattened_channel_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">previous</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;base_name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;start_index&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;end_index&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="k">for</span> <span class="n">channel_name</span> <span class="ow">in</span> <span class="n">unflattened_channel_names</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;(.*[^0-9])?([0-9]+)$&#39;</span><span class="p">,</span> <span class="n">channel_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+            <span class="c1"># If the channel name doesn&#39;t end in a valid number, just use the</span>
+            <span class="c1"># channel name as-is.</span>
+            <span class="n">flattened_channel_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">_channel_info_to_flattened_name</span><span class="p">(</span><span class="n">previous</span><span class="p">))</span>
+            <span class="n">previous</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;base_name&#39;</span><span class="p">:</span> <span class="n">channel_name</span><span class="p">,</span>
+                <span class="s1">&#39;start_index&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;end_index&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># If the channel name ends in a valid number, we may need to flatten</span>
+            <span class="c1"># this channel with subsequent channels in the x:y format.</span>
+            <span class="n">current_base_name</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">current_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">current_base_name</span> <span class="o">==</span> <span class="n">previous</span><span class="p">[</span><span class="s1">&#39;base_name&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">current_index</span> <span class="o">==</span> <span class="n">previous</span><span class="p">[</span><span class="s1">&#39;end_index&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">and</span>
+                 <span class="n">previous</span><span class="p">[</span><span class="s1">&#39;end_index&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">previous</span><span class="p">[</span><span class="s1">&#39;start_index&#39;</span><span class="p">])</span> <span class="ow">or</span>
+                <span class="p">(</span><span class="n">current_index</span> <span class="o">==</span> <span class="n">previous</span><span class="p">[</span><span class="s1">&#39;end_index&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span>
+                 <span class="n">previous</span><span class="p">[</span><span class="s1">&#39;end_index&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">previous</span><span class="p">[</span><span class="s1">&#39;start_index&#39;</span><span class="p">])):</span>
+                <span class="c1"># If the current channel name has the same base name as the</span>
+                <span class="c1"># previous and it&#39;s end index differs by 1, change the end</span>
+                <span class="c1"># index value. It gets flattened later.</span>
+                <span class="n">previous</span><span class="p">[</span><span class="s1">&#39;end_index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_index</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># If the current channel name has the same base name as the</span>
+                <span class="c1"># previous or it&#39;s end index differs by more than 1, it doesn&#39;t</span>
+                <span class="c1"># get flattened with the previous channel.</span>
+                <span class="n">flattened_channel_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">_channel_info_to_flattened_name</span><span class="p">(</span><span class="n">previous</span><span class="p">))</span>
+                <span class="n">previous</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;base_name&#39;</span><span class="p">:</span> <span class="n">current_base_name</span><span class="p">,</span>
+                    <span class="s1">&#39;start_index&#39;</span><span class="p">:</span> <span class="n">current_index</span><span class="p">,</span>
+                    <span class="s1">&#39;end_index&#39;</span><span class="p">:</span> <span class="n">current_index</span>
+                    <span class="p">}</span>
+
+    <span class="c1"># Convert the final channel dictionary to a flattened string</span>
+    <span class="n">flattened_channel_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">_channel_info_to_flattened_name</span><span class="p">(</span><span class="n">previous</span><span class="p">))</span>
+
+    <span class="c1"># Remove empty strings in list, convert to comma-delimited string, then trim</span>
+    <span class="c1"># whitespace.</span>
+    <span class="k">return</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">_f</span> <span class="k">for</span> <span class="n">_f</span> <span class="ow">in</span> <span class="n">flattened_channel_list</span> <span class="k">if</span> <span class="n">_f</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+    
+<span class="k">def</span> <span class="nf">_channel_info_to_flattened_name</span><span class="p">(</span><span class="n">channel_info</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simple method to generate a flattened channel name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">channel_info</span><span class="p">[</span><span class="s1">&#39;start_index&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">channel_info</span><span class="p">[</span><span class="s1">&#39;base_name&#39;</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">channel_info</span><span class="p">[</span><span class="s1">&#39;start_index&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">channel_info</span><span class="p">[</span><span class="s1">&#39;end_index&#39;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel_info</span><span class="p">[</span><span class="s1">&#39;base_name&#39;</span><span class="p">],</span>
+                               <span class="n">channel_info</span><span class="p">[</span><span class="s1">&#39;start_index&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}{1}</span><span class="s1">:</span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel_info</span><span class="p">[</span><span class="s1">&#39;base_name&#39;</span><span class="p">],</span>
+                                   <span class="n">channel_info</span><span class="p">[</span><span class="s1">&#39;start_index&#39;</span><span class="p">],</span>
+                                   <span class="n">channel_info</span><span class="p">[</span><span class="s1">&#39;end_index&#39;</span><span class="p">])</span>
+
+                                   
+<div class="viewcode-block" id="unflatten_channel_string"><a class="viewcode-back" href="../../utils.html#artdaq.utils.unflatten_channel_string">[docs]</a><span class="k">def</span> <span class="nf">unflatten_channel_string</span><span class="p">(</span><span class="n">channel_names</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a comma-delimited list of channel names to a list of names.</span>
+
+<span class="sd">    You can use this method to convert a comma-delimited list or range of</span>
+<span class="sd">    physical or virtual channels into a list of physical or virtual channel</span>
+<span class="sd">    names.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        channel_names (str): The list or range of physical or virtual channels.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        List[str]: </span>
+<span class="sd">        </span>
+<span class="sd">        The list of physical or virtual channel names. Each element of the </span>
+<span class="sd">        list contains a single channel.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">channel_list_to_return</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">channel_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">channel_names</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channel_list</span><span class="p">:</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">colon_index</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">colon_index</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">channel_list_to_return</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">before</span> <span class="o">=</span> <span class="n">channel</span><span class="p">[:</span><span class="n">colon_index</span><span class="p">]</span>
+            <span class="n">after</span> <span class="o">=</span> <span class="n">channel</span><span class="p">[</span><span class="n">colon_index</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+
+            <span class="n">m_before</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;(.*?)([0-9]+)$&#39;</span><span class="p">,</span> <span class="n">before</span><span class="p">)</span>
+            <span class="n">m_after</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;(.*?)([0-9]+)$&#39;</span><span class="p">,</span> <span class="n">after</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">m_before</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">m_after</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">DaqError</span><span class="p">(</span><span class="n">_invalid_range_syntax_message</span><span class="p">,</span>
+                               <span class="n">error_code</span><span class="o">=-</span><span class="mi">200498</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">m_after</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m_before</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="n">m_after</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+                <span class="k">raise</span> <span class="n">DaqError</span><span class="p">(</span><span class="n">_invalid_range_syntax_message</span><span class="p">,</span>
+                               <span class="n">error_code</span><span class="o">=-</span><span class="mi">200498</span><span class="p">)</span>
+
+            <span class="n">num_before</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m_before</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="n">num_after</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m_after</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="n">num_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">num_before</span><span class="p">,</span> <span class="n">num_after</span><span class="p">])</span>
+            <span class="n">num_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">([</span><span class="n">num_before</span><span class="p">,</span> <span class="n">num_after</span><span class="p">])</span>
+            <span class="n">number_of_channels</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_max</span> <span class="o">-</span> <span class="n">num_min</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">number_of_channels</span> <span class="o">&gt;=</span> <span class="mi">15000</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">DaqError</span><span class="p">(</span><span class="n">_invalid_range_syntax_message</span><span class="p">,</span>
+                               <span class="n">error_code</span><span class="o">=-</span><span class="mi">200498</span><span class="p">)</span>
+
+            <span class="n">colon_expanded_channel</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_channels</span><span class="p">):</span>
+                <span class="n">colon_expanded_channel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="s1">&#39;</span><span class="si">{0}{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">m_before</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">num_min</span> <span class="o">+</span> <span class="n">i</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">num_after</span> <span class="o">&lt;</span> <span class="n">num_before</span><span class="p">:</span>
+                <span class="n">colon_expanded_channel</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+            <span class="n">channel_list_to_return</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">colon_expanded_channel</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">channel_list_to_return</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

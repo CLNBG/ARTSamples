@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq._task_modules.ao_channel_collection &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>artdaq._task_modules.ao_channel_collection</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for artdaq._task_modules.ao_channel_collection</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">ctypes</span>
+
+<span class="kn">from</span> <span class="nn">artdaq._lib</span> <span class="kn">import</span> <span class="n">lib_importer</span><span class="p">,</span> <span class="n">ctypes_byte_str</span>
+<span class="kn">from</span> <span class="nn">artdaq.errors</span> <span class="kn">import</span> <span class="n">check_for_error</span>
+<span class="kn">from</span> <span class="nn">artdaq._task_modules.channels.channel</span> <span class="kn">import</span> <span class="n">Channel</span>
+<span class="kn">from</span> <span class="nn">artdaq._task_modules.channels.ao_channel</span> <span class="kn">import</span> <span class="n">AOChannel</span>
+<span class="kn">from</span> <span class="nn">artdaq._task_modules.channel_collection</span> <span class="kn">import</span> <span class="n">ChannelCollection</span>
+<span class="kn">from</span> <span class="nn">artdaq.utils</span> <span class="kn">import</span> <span class="n">unflatten_channel_string</span>
+<span class="kn">from</span> <span class="nn">artdaq.constants</span> <span class="kn">import</span> <span class="p">(</span><span class="n">CurrentUnits</span><span class="p">,</span> <span class="n">VoltageUnits</span><span class="p">,</span> <span class="n">ChannelType</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="AOChannelCollection"><a class="viewcode-back" href="../../../ao_channel_collection.html#artdaq._task_modules.ao_channel_collection.AOChannelCollection">[docs]</a><span class="k">class</span> <span class="nc">AOChannelCollection</span><span class="p">(</span><span class="n">ChannelCollection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Contains the collection of analog output channels for a DAQ Task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_handle</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AOChannelCollection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">task_handle</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_chan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">physical_channel</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates and returns an AOChannel object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            physical_channel (str): Specifies the names of the physical</span>
+<span class="sd">                channels to use to create virtual channels.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name to</span>
+<span class="sd">                assign to the virtual channel this method creates.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ao_channel.AOChannel: </span>
+<span class="sd">            </span>
+<span class="sd">            Specifies the newly created AOChannel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name_to_assign_to_channel</span><span class="p">:</span>
+            <span class="n">num_channels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unflatten_channel_string</span><span class="p">(</span><span class="n">physical_channel</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">num_channels</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">0:</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">name_to_assign_to_channel</span><span class="p">,</span> <span class="n">num_channels</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">name_to_assign_to_channel</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">physical_channel</span>
+
+        <span class="k">return</span> <span class="n">AOChannel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AOChannelCollection.add_ao_current_chan"><a class="viewcode-back" href="../../../ao_channel_collection.html#artdaq._task_modules.ao_channel_collection.AOChannelCollection.add_ao_current_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_ao_current_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">physical_channel</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">max_val</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">CurrentUnits</span><span class="o">.</span><span class="n">AMPS</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates channel(s) to generate current.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            physical_channel (str): Specifies the names of the physical</span>
+<span class="sd">                channels to use to create virtual channels. The DAQ</span>
+<span class="sd">                physical channel constant lists all physical channels on</span>
+<span class="sd">                devices and modules installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to measure.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to measure.</span>
+<span class="sd">            units (Optional[artdaq.constants.CurrentUnits]): Specifies</span>
+<span class="sd">                the units to use to generate current.</span>
+<span class="sd">            custom_scale_name (Optional[str]): Specifies the name of a</span>
+<span class="sd">                custom scale for the channel. If you want the channel to</span>
+<span class="sd">                use a custom scale, specify the name of the custom scale</span>
+<span class="sd">                to this input and set **units** to</span>
+<span class="sd">                **FROM_CUSTOM_SCALE**.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ao_channel.AOChannel:</span>
+<span class="sd">            </span>
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateAOCurrentChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">physical_channel</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span>
+            <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">ANALOG_OUTPUT</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">physical_channel</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AOChannelCollection.add_ao_voltage_chan"><a class="viewcode-back" href="../../../ao_channel_collection.html#artdaq._task_modules.ao_channel_collection.AOChannelCollection.add_ao_voltage_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_ao_voltage_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">physical_channel</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">min_val</span><span class="o">=-</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">max_val</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">VoltageUnits</span><span class="o">.</span><span class="n">VOLTS</span><span class="p">,</span>
+            <span class="n">custom_scale_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates channel(s) to generate voltage.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            physical_channel (str): Specifies the names of the physical</span>
+<span class="sd">                channels to use to create virtual channels. The DAQ</span>
+<span class="sd">                physical channel constant lists all physical channels on</span>
+<span class="sd">                devices and modules installed in the system.</span>
+<span class="sd">            name_to_assign_to_channel (Optional[str]): Specifies a name</span>
+<span class="sd">                to assign to the virtual channel this function creates.</span>
+<span class="sd">                If you do not specify a value for this input, ArtDAQ</span>
+<span class="sd">                uses the physical channel name as the virtual channel</span>
+<span class="sd">                name.</span>
+<span class="sd">            min_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                minimum value you expect to generate.</span>
+<span class="sd">            max_val (Optional[float]): Specifies in **units** the</span>
+<span class="sd">                maximum value you expect to generate.</span>
+<span class="sd">            units (Optional[artdaq.constants.VoltageUnits]): Specifies</span>
+<span class="sd">                the units to use to generate voltage.</span>
+<span class="sd">            custom_scale_name (Optional[str]): Specifies the name of a</span>
+<span class="sd">                custom scale for the channel. If you want the channel to</span>
+<span class="sd">                use a custom scale, specify the name of the custom scale</span>
+<span class="sd">                to this input and set **units** to</span>
+<span class="sd">                **FROM_CUSTOM_SCALE**.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.ao_channel.AOChannel:</span>
+<span class="sd">            </span>
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateAOVoltageChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">physical_channel</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">,</span>
+            <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">custom_scale_name</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">ANALOG_OUTPUT</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">physical_channel</span><span class="p">,</span> <span class="n">name_to_assign_to_channel</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

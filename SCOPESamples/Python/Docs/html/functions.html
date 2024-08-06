@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>functions &mdash; ArtScope 1.20.0032 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="error_codes" href="error_codes.html" />
+    <link rel="prev" title="constants" href="constants.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ArtScope
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">constants</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">errors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ArtScope</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-ART_SCOPE_Lib.functions">
+<span id="functions"></span><h1>functions<a class="headerlink" href="#module-ART_SCOPE_Lib.functions" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.functions.Functions">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.functions.</span></code><code class="sig-name descname"><span class="pre">Functions</span></code><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_AcquisitionStatus">
+<code class="sig-name descname"><span class="pre">ArtScope_AcquisitionStatus</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_AcquisitionStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_AcquisitionStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>get acquisition status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>status</strong> (<a class="reference internal" href="constants.html#ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD" title="ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD"><em>ARTSCOPE_STATUS_AD</em></a>) – status</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ActualNumWfms">
+<code class="sig-name descname"><span class="pre">ArtScope_ActualNumWfms</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numWfms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ActualNumWfms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ActualNumWfms" title="Permalink to this definition">¶</a></dt>
+<dd><p>get acquisition channel count</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>numWfms</strong> (<em>c_uint32</em>) – channel count</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ActualRecordLength">
+<code class="sig-name descname"><span class="pre">ArtScope_ActualRecordLength</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actualRecordLength</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ActualRecordLength"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ActualRecordLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>get actual sample length</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Args:</dt><dd><p>taskHandle(c_void_p):task handle
+actualRecordLength(c_uint32):actual sample length</p>
+</dd>
+<dt>Returns:</dt><dd><p>c_int32:
+0-right,&lt;0-error</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_AutoSaveFile">
+<code class="sig-name descname"><span class="pre">ArtScope_AutoSaveFile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bIsAutoSave</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chFileName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_AutoSaveFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_AutoSaveFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>auto save file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>bIsAutoSave</strong> (<em>c_uint32</em>) – if 1,save file,if 0,not save</p></li>
+<li><p><strong>chFileName</strong> (<em>c_char_p</em>) – path of the save file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_Calibration">
+<code class="sig-name descname"><span class="pre">ArtScope_Calibration</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_Calibration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_Calibration" title="Permalink to this definition">¶</a></dt>
+<dd><p>calibrate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_Close">
+<code class="sig-name descname"><span class="pre">ArtScope_Close</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_Close" title="Permalink to this definition">¶</a></dt>
+<dd><p>close task</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureAcquisitionMode">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureAcquisitionMode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">acquisitionMode=&lt;SampleMode.FINITE:</span> <span class="pre">0&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureAcquisitionMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureAcquisitionMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>set acquisition mode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle；</p></li>
+<li><p><strong>acquisitionMode</strong> (<em>c_int32</em>) – mode，=0:finite, =1:continuous</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureChanCharacteristics">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureChanCharacteristics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">channelList</span></em>, <em class="sig-param"><span class="pre">inputImpedance=&lt;InputImpedance.AI_IMPEND_1M:</span> <span class="pre">0&gt;</span></em>, <em class="sig-param"><span class="pre">maxInputFrequency=&lt;BandWidth.BANDWIDTH_DEFAULT:</span> <span class="pre">0&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureChanCharacteristics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureChanCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>set channel parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>channelList</strong> (<em>c_char_p</em>) – channel name list</p></li>
+<li><p><strong>inputImpedance</strong> (<em>c_int32</em>) – impedance</p></li>
+<li><p><strong>maxInputFrequency</strong> (<em>c_int32</em>) – bandwidth</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureClock">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureClock</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">inputClockSource=&lt;InputClockSource.CLK_ONBOARD:</span> <span class="pre">'VAL_CLK_INTERNAL'&gt;</span></em>, <em class="sig-param"><span class="pre">freqDivision=1</span></em>, <em class="sig-param"><span class="pre">masterEnabled=0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureClock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureClock" title="Permalink to this definition">¶</a></dt>
+<dd><p>set clock parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>inputClockSource</strong> (<em>c_char_p</em>) – input clock source</p></li>
+<li><p><strong>freqDivision</strong> (<em>c_int32</em>) – frequency division coefficient,only inputClockSource is ARTSCOPE_VAL_CLK_IN,this parameter takes effect</p></li>
+<li><p><strong>masterEnabled</strong> (<em>c_uint32</em>) – multi card synchronization,set the main card</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureHorizontalTiming">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureHorizontalTiming</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minSampleRate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minNumPts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refPosition</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureHorizontalTiming"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureHorizontalTiming" title="Permalink to this definition">¶</a></dt>
+<dd><p>set horizontal parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>minSampleRate</strong> (<em>c_double</em>) – sample rate</p></li>
+<li><p><strong>minNumPts</strong> (<em>c_int32</em>) – sample length</p></li>
+<li><p><strong>refPosition</strong> (<em>c_double</em>) – trigger position</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerDigital">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureTriggerDigital</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">triggerSource=&lt;TriggerSource.TRIGSRC_CH0:</span> <span class="pre">'VAL_TRIGGER_CH0'&gt;</span></em>, <em class="sig-param"><span class="pre">slope=&lt;TriggerSlope.TRIGDIR_NEGATIVE:</span> <span class="pre">0&gt;</span></em>, <em class="sig-param"><span class="pre">triggerCount=1</span></em>, <em class="sig-param"><span class="pre">triggerSensitivity=50</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureTriggerDigital"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerDigital" title="Permalink to this definition">¶</a></dt>
+<dd><p>set trigger digital parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>triggerSource</strong> (<em>c_char_p</em>) – trigger source</p></li>
+<li><p><strong>slope</strong> (<em>c_int32</em>) – trigger slope</p></li>
+<li><p><strong>triggerCount</strong> (<em>c_int32</em>) – trigger count</p></li>
+<li><p><strong>triggerSensitivity</strong> (<em>c_int32</em>) – trigger sensitivity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerEdge">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureTriggerEdge</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">triggerSource=&lt;TriggerSource.TRIGSRC_CH0:</span> <span class="pre">'VAL_TRIGGER_CH0'&gt;</span></em>, <em class="sig-param"><span class="pre">level=0.0</span></em>, <em class="sig-param"><span class="pre">slope=&lt;TriggerSlope.TRIGDIR_NEGATIVE:</span> <span class="pre">0&gt;</span></em>, <em class="sig-param"><span class="pre">triggerCoupling=&lt;TriggerCoupling.TRIGCOUP_DC:</span> <span class="pre">0&gt;</span></em>, <em class="sig-param"><span class="pre">triggerCount=1</span></em>, <em class="sig-param"><span class="pre">triggerSensitivity=50</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureTriggerEdge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>set trigger edge parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>triggerSource</strong> (<em>c_char_p</em>) – trigger source</p></li>
+<li><p><strong>level</strong> (<em>c_double</em>) – trigger level</p></li>
+<li><p><strong>slope</strong> (<em>c_int32</em>) – trigger slope</p></li>
+<li><p><strong>triggerCoupling</strong> (<em>c_int32</em>) – trigger coupling</p></li>
+<li><p><strong>triggerCount</strong> (<em>c_int32</em>) – trigger count</p></li>
+<li><p><strong>triggerSensitivity</strong> (<em>c_int32</em>) – trigger sensitivity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerHardwareDelay">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureTriggerHardwareDelay</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delayPoints</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureTriggerHardwareDelay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerHardwareDelay" title="Permalink to this definition">¶</a></dt>
+<dd><p>set hardware trigger parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHadle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>delayPoints</strong> (<em>c_int32</em>) – delay points</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerPulse">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureTriggerPulse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">triggerSource=&lt;TriggerSource.TRIGSRC_CH0:</span> <span class="pre">'VAL_TRIGGER_CH0'&gt;</span></em>, <em class="sig-param"><span class="pre">level=0.0</span></em>, <em class="sig-param"><span class="pre">polarity=&lt;TriggerPolarity.TRIGPOLAR_NEGATIVE:</span> <span class="pre">1&gt;</span></em>, <em class="sig-param"><span class="pre">slope=&lt;TriggerSlope.TRIGDIR_NEGATIVE:</span> <span class="pre">0&gt;</span></em>, <em class="sig-param"><span class="pre">width=4</span></em>, <em class="sig-param"><span class="pre">triggerCoupling=&lt;TriggerCoupling.TRIGCOUP_DC:</span> <span class="pre">0&gt;</span></em>, <em class="sig-param"><span class="pre">triggerCount=1</span></em>, <em class="sig-param"><span class="pre">triggerSensitivity=50</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureTriggerPulse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerPulse" title="Permalink to this definition">¶</a></dt>
+<dd><p>set trigger pulse parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>triggerSource</strong> (<em>c_char_p</em>) – trigger source</p></li>
+<li><p><strong>level</strong> (<em>c_double</em>) – trigger level</p></li>
+<li><p><strong>polarity</strong> (<em>c_int32</em>) – trigger polarity</p></li>
+<li><p><strong>slope</strong> (<em>c_int32</em>) – trigger slope</p></li>
+<li><p><strong>width</strong> (<em>c_int32</em>) – pulse width</p></li>
+<li><p><strong>triggerCoupling</strong> (<em>c_int32</em>) – trigger coupling</p></li>
+<li><p><strong>triggerCount</strong> (<em>c_int32</em>) – trigger count</p></li>
+<li><p><strong>triggerSensitivity</strong> (<em>c_int32</em>) – trigger sensitivity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerSoftWare">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureTriggerSoftWare</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureTriggerSoftWare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerSoftWare" title="Permalink to this definition">¶</a></dt>
+<dd><p>set software trigger</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerSyncSrc">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureTriggerSyncSrc</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">triggerSyncSource=&lt;TriggerSyncSrc.TRIG_SYNC_0:</span> <span class="pre">'VAL_SYNC_TRIGGER0'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureTriggerSyncSrc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerSyncSrc" title="Permalink to this definition">¶</a></dt>
+<dd><p>set synchronous trigger parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>triggerSyncSource</strong> (<em>c_char_p</em>) – synchronous trigger source</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerWindow">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureTriggerWindow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">triggerSource=&lt;TriggerSource.TRIGSRC_CH0:</span> <span class="pre">'VAL_TRIGGER_CH0'&gt;</span></em>, <em class="sig-param"><span class="pre">lowLevel=0.0</span></em>, <em class="sig-param"><span class="pre">highLevel=0.0</span></em>, <em class="sig-param"><span class="pre">windowMode=&lt;TriggerWindowType.WINDOW_ENTERING:</span> <span class="pre">0&gt;</span></em>, <em class="sig-param"><span class="pre">triggerCoupling=&lt;TriggerCoupling.TRIGCOUP_DC:</span> <span class="pre">0&gt;</span></em>, <em class="sig-param"><span class="pre">triggerCount=1</span></em>, <em class="sig-param"><span class="pre">triggerSensitivity=50</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureTriggerWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>trigger window parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>triggerSource</strong> (<em>c_char_p</em>) – trigger source</p></li>
+<li><p><strong>lowLevel</strong> (<em>c_double</em>) – trigger low level</p></li>
+<li><p><strong>highLevel</strong> (<em>c_double</em>) – trigger high level</p></li>
+<li><p><strong>windowMode</strong> (<em>c_int32</em>) – window type</p></li>
+<li><p><strong>triggerCoupling</strong> (<em>c_int32</em>) – trigger coupling</p></li>
+<li><p><strong>triggerCount</strong> (<em>c_int32</em>) – trigger count</p></li>
+<li><p><strong>triggerSensitivity</strong> (<em>c_int32</em>) – trigger sensitivity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureVertical">
+<code class="sig-name descname"><span class="pre">ArtScope_ConfigureVertical</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">channelList</span></em>, <em class="sig-param"><span class="pre">range=&lt;InputRange.RANGE_2VPP:</span> <span class="pre">2&gt;</span></em>, <em class="sig-param"><span class="pre">offset=0</span></em>, <em class="sig-param"><span class="pre">coupling=&lt;CouplingType.DC:</span> <span class="pre">0&gt;</span></em>, <em class="sig-param"><span class="pre">probeAttenuation=1</span></em>, <em class="sig-param"><span class="pre">enabled=1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ConfigureVertical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureVertical" title="Permalink to this definition">¶</a></dt>
+<dd><p>set vertical parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>channelList</strong> (<em>c_char_p</em>) – channel name list</p></li>
+<li><p><strong>range</strong> (<em>c_int32</em>) – range</p></li>
+<li><p><strong>offset</strong> (<em>c_int32</em>) – offset</p></li>
+<li><p><strong>coupling</strong> (<em>c_int32</em>) – coupling</p></li>
+<li><p><strong>probeAttenuation</strong> (<em>c_int32</em>) – not used</p></li>
+<li><p><strong>enabled</strong> (<em>c_uint16</em>) – channel enable or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ExportClock">
+<code class="sig-name descname"><span class="pre">ArtScope_ExportClock</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">signal=&lt;ExportClockType.CLK_REF:</span> <span class="pre">0&gt;</span></em>, <em class="sig-param"><span class="pre">signalIdentifier=''</span></em>, <em class="sig-param"><span class="pre">outputTerminal=''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ExportClock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ExportClock" title="Permalink to this definition">¶</a></dt>
+<dd><p>export clock</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>signal</strong> (<em>c_int32</em>) – export signal type</p></li>
+<li><p><strong>signalIdentifier</strong> (<em>c_char_p</em>) – Describes the signal being exported not used for now</p></li>
+<li><p><strong>outputTerminal</strong> (<em>c_char_p</em>) – not used for now</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ExportTrigger">
+<code class="sig-name descname"><span class="pre">ArtScope_ExportTrigger</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">trigOutWidth</span></em>, <em class="sig-param"><span class="pre">trigOutPolarity=&lt;TriggerOutPolarity.TRIGOUT_POLAR_NEGATIVE:</span> <span class="pre">0&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ExportTrigger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ExportTrigger" title="Permalink to this definition">¶</a></dt>
+<dd><p>export trigger</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>trigOutWidth</strong> (<em>c_int32</em>) – export trigger width</p></li>
+<li><p><strong>trigOutPolarity</strong> (<em>c_int32</em>) – export trigger polarity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_FetchBinary16">
+<code class="sig-name descname"><span class="pre">ArtScope_FetchBinary16</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numSamples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfmBinary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfmInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_FetchBinary16"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_FetchBinary16" title="Permalink to this definition">¶</a></dt>
+<dd><p>read binary data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>timeout</strong> (<em>c_double</em>) – timeout</p></li>
+<li><p><strong>numSamples</strong> (<em>c_uint32</em>) – read length</p></li>
+<li><p><strong>wfmBinary</strong> (<em>uint16</em>) – data buffer</p></li>
+<li><p><strong>wfmInfo</strong> (<a class="reference internal" href="constants.html#ART_SCOPE_Lib.constants.ArtScope_wfmInfo" title="ART_SCOPE_Lib.constants.ArtScope_wfmInfo"><em>ArtScope_wfmInfo</em></a>) – information for analyze</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_FetchBinary8">
+<code class="sig-name descname"><span class="pre">ArtScope_FetchBinary8</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numSamples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfmBinary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfmInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_FetchBinary8"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_FetchBinary8" title="Permalink to this definition">¶</a></dt>
+<dd><p>read binary data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>timeout</strong> (<em>c_double</em>) – timeout</p></li>
+<li><p><strong>numSamples</strong> (<em>c_uint32</em>) – read length</p></li>
+<li><p><strong>wfmBinary</strong> (<em>uint8</em>) – data buffer</p></li>
+<li><p><strong>wfmInfo</strong> (<a class="reference internal" href="constants.html#ART_SCOPE_Lib.constants.ArtScope_wfmInfo" title="ART_SCOPE_Lib.constants.ArtScope_wfmInfo"><em>ArtScope_wfmInfo</em></a>) – information for analyze</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_FetchVoltage">
+<code class="sig-name descname"><span class="pre">ArtScope_FetchVoltage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numSamples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfmVoltage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfmInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_FetchVoltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_FetchVoltage" title="Permalink to this definition">¶</a></dt>
+<dd><p>read voltage data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>timeout</strong> (<em>c_double</em>) – timeout</p></li>
+<li><p><strong>numSamples</strong> (<em>c_uint32</em>) – read length</p></li>
+<li><p><strong>wfmVoltage</strong> (<em>double</em>) – data buffer</p></li>
+<li><p><strong>wfmInfo</strong> (<a class="reference internal" href="constants.html#ART_SCOPE_Lib.constants.ArtScope_wfmInfo" title="ART_SCOPE_Lib.constants.ArtScope_wfmInfo"><em>ArtScope_wfmInfo</em></a>) – information for analyze</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_GetDevInformation">
+<code class="sig-name descname"><span class="pre">ArtScope_GetDevInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channelCount</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxSampleRate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_GetDevInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_GetDevInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>get channel count and max sample rate the card supported</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resourceName</strong> (<em>c_char_p</em>) – task name</p></li>
+<li><p><strong>channelCount</strong> (<em>c_int32</em>) – channel count</p></li>
+<li><p><strong>maxSampleRate</strong> (<em>c_float</em>) – maximum sample rate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_GetDeviceEEPInfo">
+<code class="sig-name descname"><span class="pre">ArtScope_GetDeviceEEPInfo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pEEPInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_GetDeviceEEPInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_GetDeviceEEPInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>get version information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devName</strong> (<em>c_char_p</em>) – task name</p></li>
+<li><p><strong>pEEPInfo</strong> (<a class="reference internal" href="constants.html#ART_SCOPE_Lib.constants.DEVICE_EEP_INFO" title="ART_SCOPE_Lib.constants.DEVICE_EEP_INFO"><em>DEVICE_EEP_INFO</em></a>) – dll version,firmware version and calibrate information</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_GetErrorString">
+<code class="sig-name descname"><span class="pre">ArtScope_GetErrorString</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">errorString</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bufferSize</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_GetErrorString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_GetErrorString" title="Permalink to this definition">¶</a></dt>
+<dd><p>get error information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>errorCode</strong> (<em>c_int32</em>) – error code</p></li>
+<li><p><strong>errorString</strong> (<em>c_char_p</em>) – error message</p></li>
+<li><p><strong>bufferSize</strong> (<em>c_uint32</em>) – buffer size</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_GetExtendedErrorInfo">
+<code class="sig-name descname"><span class="pre">ArtScope_GetExtendedErrorInfo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bufferSize</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_GetExtendedErrorInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_GetExtendedErrorInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>get accumulation error</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>errorString</strong> (<em>c_char_p</em>) – error message</p></li>
+<li><p><strong>bufferSize</strong> (<em>c_uint32</em>) – buffer size</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_GetExtenedType">
+<code class="sig-name descname"><span class="pre">ArtScope_GetExtenedType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seriesKey</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_GetExtenedType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_GetExtenedType" title="Permalink to this definition">¶</a></dt>
+<dd><p>get series number the card belongs to</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>seriesKey</strong> (<em>c_uint32</em>) – series number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_GetInfoFromAutoSaveFile">
+<code class="sig-name descname"><span class="pre">ArtScope_GetInfoFromAutoSaveFile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileHeaderSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfmInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_GetInfoFromAutoSaveFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_GetInfoFromAutoSaveFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>get information from auto saved file,include the file header size,information used for conversion</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chFileName</strong> (<em>c_char_p</em>) – file name</p></li>
+<li><p><strong>fileHeaderSize</strong> (<em>c_int32</em>) – file header size</p></li>
+<li><p><strong>wfmInfo</strong> (<a class="reference internal" href="constants.html#ART_SCOPE_Lib.constants.ArtScope_wfmInfo" title="ART_SCOPE_Lib.constants.ArtScope_wfmInfo"><em>ArtScope_wfmInfo</em></a>) – parameters for conversion</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_InitiateAcquisition">
+<code class="sig-name descname"><span class="pre">ArtScope_InitiateAcquisition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_InitiateAcquisition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_InitiateAcquisition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize Acquisition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_ReleaseAcquisition">
+<code class="sig-name descname"><span class="pre">ArtScope_ReleaseAcquisition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_ReleaseAcquisition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_ReleaseAcquisition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Release Acquisition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_Reset">
+<code class="sig-name descname"><span class="pre">ArtScope_Reset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_Reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_Reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>reset device</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resourceName</strong> (<em>c_char_p</em>) – task name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_SampleRate">
+<code class="sig-name descname"><span class="pre">ArtScope_SampleRate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actualSampleRate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_SampleRate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_SampleRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>get actual sample rate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+<li><p><strong>actualSampleRate</strong> (<em>c_double</em>) – actual sample rate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_SendSoftwareTrigger">
+<code class="sig-name descname"><span class="pre">ArtScope_SendSoftwareTrigger</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_SendSoftwareTrigger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_SendSoftwareTrigger" title="Permalink to this definition">¶</a></dt>
+<dd><p>send software trigger</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_StartAcquisition">
+<code class="sig-name descname"><span class="pre">ArtScope_StartAcquisition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_StartAcquisition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_StartAcquisition" title="Permalink to this definition">¶</a></dt>
+<dd><p>// Start Acquisition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_StopAcquisition">
+<code class="sig-name descname"><span class="pre">ArtScope_StopAcquisition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_StopAcquisition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_StopAcquisition" title="Permalink to this definition">¶</a></dt>
+<dd><p>stop acquisition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taskHandle</strong> – task handle</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ART_SCOPE_Lib.functions.Functions.ArtScope_init">
+<code class="sig-name descname"><span class="pre">ArtScope_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taskHandle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/functions.html#Functions.ArtScope_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.functions.Functions.ArtScope_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>create task</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resourceName</strong> (<em>c_char_p</em>) – task name</p></li>
+<li><p><strong>taskHandle</strong> (<em>c_void_p</em>) – task handle</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0-right,&lt;0-error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>c_int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="constants.html" class="btn btn-neutral float-left" title="constants" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="error_codes.html" class="btn btn-neutral float-right" title="error_codes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

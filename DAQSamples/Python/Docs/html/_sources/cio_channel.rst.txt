@@ -1,0 +1,7 @@
+artdaq.task.cio_channel
+=======================
+
+.. automodule:: artdaq._task_modules.channels.cio_channel
+    :members:
+    :inherited-members:
+    :show-inheritance:

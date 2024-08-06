@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.task.export_signals &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.task.in_stream" href="in_stream.html" />
+    <link rel="prev" title="artdaq.task.do_channel_collection" href="do_channel_collection.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="task.html">artdaq.task</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="channel.html">artdaq.task.channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channel_collection.html">artdaq.task.channel_collection</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">artdaq.task.export_signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in_stream.html">artdaq.task.in_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="out_stream.html">artdaq.task.out_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing.html">artdaq.task.timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html">artdaq.task.triggers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="task.html">artdaq.task</a> &raquo;</li>
+      <li>artdaq.task.export_signals</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/export_signals.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-artdaq._task_modules.export_signals">
+<span id="artdaq-task-export-signals"></span><h1>artdaq.task.export_signals<a class="headerlink" href="#module-artdaq._task_modules.export_signals" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq._task_modules.export_signals.ExportSignals">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq._task_modules.export_signals.</span></span><span class="sig-name descname"><span class="pre">ExportSignals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_handle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/export_signals.html#ExportSignals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.export_signals.ExportSignals" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the exported signal configurations for a DAQ task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.export_signals.ExportSignals.export_ctrOutEvent">
+<span class="sig-name descname"><span class="pre">export_ctrOutEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_terminal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_behavior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ExportAction.PULSE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulse_polarity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Polarity.ACTIVE_HIGH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toggle_idlestate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ToggleIdleState.HIGH</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/export_signals.html#ExportSignals.export_ctrOutEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.export_signals.ExportSignals.export_ctrOutEvent" title="Permalink to this definition"></a></dt>
+<dd><p>Routes the counter output event to the terminal you specify.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_terminal</strong> (<em>str</em>) – Is the destination of the exported
+signal. A DAQ terminal constant lists all terminals on
+installed devices. You can also specify a string
+containing a comma-delimited list of terminal names.</p></li>
+<li><p><strong>output_behavior</strong> (<a class="reference internal" href="constants.html#artdaq.constants.ExportAction" title="artdaq.constants.ExportAction"><em>artdaq.constants.ExportAction</em></a>) – define the output behavior is pulse or toggle.</p></li>
+<li><p><strong>pulse_polarity</strong> (<a class="reference internal" href="constants.html#artdaq.constants.Polarity" title="artdaq.constants.Polarity"><em>artdaq.constants.Polarity</em></a>) – If output_behavior defined as pulse, this param defines</p></li>
+<li><p><strong>level.</strong> (<em>the output event is high level</em><em> or </em><em>low</em>) – </p></li>
+<li><p><strong>toggle_idlestate</strong> (<a class="reference internal" href="constants.html#artdaq.constants.ToggleIdleState" title="artdaq.constants.ToggleIdleState"><em>artdaq.constants.ToggleIdleState</em></a>) – If output_behavior defined as toggle,</p></li>
+<li><p><strong>low.</strong> (<em>this param defines the toggleIdleState is high or</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.export_signals.ExportSignals.export_signal">
+<span class="sig-name descname"><span class="pre">export_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_terminal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/export_signals.html#ExportSignals.export_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.export_signals.ExportSignals.export_signal" title="Permalink to this definition"></a></dt>
+<dd><p>Routes a control signal to the terminal you specify. The output
+terminal can reside on the device that generates the control
+signal or on a different device. You can use this function to
+share clocks and triggers among multiple tasks and devices. The
+routes this function creates are task-based routes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal_id</strong> (<a class="reference internal" href="constants.html#artdaq.constants.Signal" title="artdaq.constants.Signal"><em>artdaq.constants.Signal</em></a>) – Is the name of the
+trigger, clock, or event to export.</p></li>
+<li><p><strong>output_terminal</strong> (<em>str</em>) – Is the destination of the exported
+signal. A DAQ terminal constant lists all terminals on
+installed devices. You can also specify a string
+containing a comma-delimited list of terminal names.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="do_channel_collection.html" class="btn btn-neutral float-left" title="artdaq.task.do_channel_collection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="in_stream.html" class="btn btn-neutral float-right" title="artdaq.task.in_stream" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

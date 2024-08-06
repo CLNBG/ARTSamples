@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to ART-DAQ’s documentation! &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.constants" href="constants.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>Welcome to ART-DAQ’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-art-daq-s-documentation">
+<h1>Welcome to ART-DAQ’s documentation!<a class="headerlink" href="#welcome-to-art-daq-s-documentation" title="Permalink to this headline"></a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 92%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Info</p></td>
+<td><p>Contains a Python API for interacting with ART-DAQ.</p></td>
+</tr>
+<tr class="row-even"><td><p>Author</p></td>
+<td><p>ART</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="about">
+<h1>About<a class="headerlink" href="#about" title="Permalink to this headline"></a></h1>
+<p>The <strong>artdaq</strong> package contains an API (Application Programming Interface)
+for interacting with the ART-DAQ driver. The package is implemented in Python.
+This package was created and is supported by ART. The package is implemented as a
+complex, highly object-oriented wrapper around the ART-DAQ C API using the
+<a class="reference external" href="https://docs.python.org/2/library/ctypes.html">ctypes</a> Python library.</p>
+<p><strong>artdaq</strong> 1.0 supports all versions of the ART-DAQ driver that ships with the
+C API. The C API is included in any version of the driver that supports it. The
+<strong>artdaq</strong> package does not require installation of the C header files.</p>
+<p><strong>artdaq</strong> supports only the Windows operating system.</p>
+<p><strong>artdaq</strong> supports CPython 2.7, 3.4+, PyPy2, and PyPy3.</p>
+</section>
+<section id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h1>
+<p>The following represents a non-exhaustive list of supported features for <strong>artdaq</strong>:</p>
+<ul class="simple">
+<li><p>Fully-object oriented</p></li>
+<li><p>Fully-featured Task class</p></li>
+<li><p>ART-DAQ Errors</p></li>
+<li><p>ART-DAQ Events</p></li>
+<li><p>ART-DAQ Streams</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/enum.html">Enums</a> support in both Python 2 and 3</p></li>
+<li><p>Exceptions support</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/2/library/warnings.html">Warnings</a> support</p></li>
+<li><p>Collections that emulate Python container types</p></li>
+<li><p>Single, dynamic read and write methods</p></li>
+<li><p>Performant, NumPy-based reader and writer classes</p></li>
+<li><p>Optional parameters</p></li>
+</ul>
+</section>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
+<p>Running <strong>artdaq</strong> requires ART-DAQ or ART-DAQ Runtime. Visit the
+<a class="reference external" href="http://www.art-control.com/FileUPLoad/DownLoadFile/ArtDAQ_1_8_26.zip">ArtDAQ_1_8_26</a> to download the latest version
+of ART-DAQ.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="task.html">artdaq.task</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="channel.html">artdaq.task.channel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ai_channel.html">artdaq.task.ai_channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ao_channel.html">artdaq.task.ao_channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cio_channel.html">artdaq.task.cio_channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="di_channel.html">artdaq.task.di_channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="do_channel.html">artdaq.task.do_channel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="channel_collection.html">artdaq.task.channel_collection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ai_channel_collection.html">artdaq.task.ai_channel_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ao_channel_collection.html">artdaq.task.ao_channel_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cio_channel_collection.html">artdaq.task.cio_channel_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="di_channel_collection.html">artdaq.task.di_channel_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="do_channel_collection.html">artdaq.task.do_channel_collection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="export_signals.html">artdaq.task.export_signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in_stream.html">artdaq.task.in_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="out_stream.html">artdaq.task.out_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing.html">artdaq.task.timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html">artdaq.task.triggers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pause_trigger.html">artdaq.task.pause_trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference_trigger.html">artdaq.task.reference_trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="start_trigger.html">artdaq.task.start_trigger</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="constants.html" class="btn btn-neutral float-right" title="artdaq.constants" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

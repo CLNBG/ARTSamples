@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq._task_modules.di_channel_collection &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>artdaq._task_modules.di_channel_collection</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for artdaq._task_modules.di_channel_collection</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">ctypes</span>
+
+<span class="kn">from</span> <span class="nn">artdaq._lib</span> <span class="kn">import</span> <span class="n">lib_importer</span><span class="p">,</span> <span class="n">ctypes_byte_str</span>
+<span class="kn">from</span> <span class="nn">artdaq.errors</span> <span class="kn">import</span> <span class="n">check_for_error</span>
+<span class="kn">from</span> <span class="nn">artdaq._task_modules.channels.channel</span> <span class="kn">import</span> <span class="n">Channel</span>
+<span class="kn">from</span> <span class="nn">artdaq._task_modules.channels.dio_channel</span> <span class="kn">import</span> <span class="n">DIOChannel</span>
+<span class="kn">from</span> <span class="nn">artdaq._task_modules.channel_collection</span> <span class="kn">import</span> <span class="n">ChannelCollection</span>
+<span class="kn">from</span> <span class="nn">artdaq.utils</span> <span class="kn">import</span> <span class="n">unflatten_channel_string</span>
+<span class="kn">from</span> <span class="nn">artdaq.constants</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LineGrouping</span><span class="p">,</span> <span class="n">ChannelType</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="DIChannelCollection"><a class="viewcode-back" href="../../../di_channel_collection.html#artdaq._task_modules.di_channel_collection.DIChannelCollection">[docs]</a><span class="k">class</span> <span class="nc">DIChannelCollection</span><span class="p">(</span><span class="n">ChannelCollection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Contains the collection of digital input channels for a DAQ Task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_handle</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DIChannelCollection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">task_handle</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_chan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">line_grouping</span><span class="p">,</span> <span class="n">name_to_assign_to_lines</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates and returns a DIChannel object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lines (str): Specifies the names of the lines to use to </span>
+<span class="sd">                create virtual channels.</span>
+<span class="sd">            line_grouping (Optional[artdaq.constants.LineGrouping]):</span>
+<span class="sd">                Specifies how to group digital lines into one or more</span>
+<span class="sd">                virtual channels.</span>
+<span class="sd">            name_to_assign_to_lines (Optional[str]): Specifies a name to </span>
+<span class="sd">                assign to the virtual channel this method creates.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.di_channel.DIChannel: </span>
+<span class="sd">            </span>
+<span class="sd">            Specifies the newly created DIChannel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unflattened_lines</span> <span class="o">=</span> <span class="n">unflatten_channel_string</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+        <span class="n">num_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unflattened_lines</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">line_grouping</span> <span class="o">==</span> <span class="n">LineGrouping</span><span class="o">.</span><span class="n">CHAN_FOR_ALL_LINES</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name_to_assign_to_lines</span> <span class="ow">or</span> <span class="n">num_lines</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">lines</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">unflattened_lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;...&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name_to_assign_to_lines</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">num_lines</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">0:</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">name_to_assign_to_lines</span><span class="p">,</span> <span class="n">num_lines</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">name_to_assign_to_lines</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">lines</span>
+
+        <span class="k">return</span> <span class="n">DIOChannel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DIChannelCollection.add_di_chan"><a class="viewcode-back" href="../../../di_channel_collection.html#artdaq._task_modules.di_channel_collection.DIChannelCollection.add_di_chan">[docs]</a>    <span class="k">def</span> <span class="nf">add_di_chan</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">name_to_assign_to_lines</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">line_grouping</span><span class="o">=</span><span class="n">LineGrouping</span><span class="o">.</span><span class="n">CHAN_FOR_ALL_LINES</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates channel(s) to measure digital signals. You can group</span>
+<span class="sd">        digital lines into one digital channel or separate them into</span>
+<span class="sd">        multiple digital channels. If you specify one or more entire</span>
+<span class="sd">        ports in the **lines** input by using port physical channel</span>
+<span class="sd">        names, you cannot separate the ports into multiple channels. To</span>
+<span class="sd">        separate ports into multiple channels, use this function</span>
+<span class="sd">        multiple times with a different port each time.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lines (str): Specifies the names of the digital lines or</span>
+<span class="sd">                ports to use to create virtual channels. The DAQ</span>
+<span class="sd">                physical channel constant lists all lines and ports for</span>
+<span class="sd">                devices installed in the system.</span>
+<span class="sd">            name_to_assign_to_lines (Optional[str]): Specifies a name to</span>
+<span class="sd">                assign to the virtual channel this function creates. If</span>
+<span class="sd">                you do not specify a value for this input, ArtDAQ uses</span>
+<span class="sd">                the physical channel name as the virtual channel name.</span>
+<span class="sd">            line_grouping (Optional[artdaq.constants.LineGrouping]): </span>
+<span class="sd">                Specifies how to group digital lines into one or more</span>
+<span class="sd">                virtual channels. If you specify one or more entire</span>
+<span class="sd">                ports with the **lines** input, you must set this input</span>
+<span class="sd">                to **one channel for all lines**.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            artdaq._task_modules.channels.di_channel.DIChannel:</span>
+<span class="sd">            </span>
+<span class="sd">            Indicates the newly created channel object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CreateDIChan</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">name_to_assign_to_lines</span><span class="p">,</span> <span class="n">line_grouping</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">chan_type</span> <span class="o">=</span> <span class="n">ChannelType</span><span class="o">.</span><span class="n">DIGITAL_IN</span>
+        <span class="n">Channel</span><span class="o">.</span><span class="n">line_grouping</span> <span class="o">=</span> <span class="n">line_grouping</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_chan</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">line_grouping</span><span class="p">,</span> <span class="n">name_to_assign_to_lines</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

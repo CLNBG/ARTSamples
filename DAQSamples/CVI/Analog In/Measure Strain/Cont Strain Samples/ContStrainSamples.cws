@@ -1,0 +1,177 @@
+[Workspace Header]
+Version = 1500
+Pathname Line0001 = "/c/Program Files (x86)/ART Technology/ArtDAQ/Samples/CVI/Analog In/Measure Strai"
+Pathname Line0002 = "n/Measure Strain/Cont Strain Samples/VC_ContStrainSamples.cws"
+CVI Dir = "/f/cvi/cvi2015"
+CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
+CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2015"
+CVI Pub Global Dir = "/C/ProgramData/National Instruments/CVI"
+IVI Standard Root Dir = "/C/Program Files (x86)/IVI Foundation/IVI"
+IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
+VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
+VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
+Number of Projects = 1
+Active Project = 1
+Project 0001 = "VC_ContStrainSamples.prj"
+Project 0001 Folder Include Files Collapsed = True
+Project 0001 FolderId 0 Collapsed = True
+Drag Bar Left = 260
+Window Top = 68
+Window Left = 1
+Window Bottom = 1419
+Window Right = 1279
+Maximized = False
+Maximized Children = True
+Max32 Number Of Errors = 20
+Track Include File Dependencies = True
+Prompt For Missing Includes = True
+Stop On First Error File = False
+Bring Up Err Win At Start = True
+Bring Up Err Win For Errors = False
+Save Changes Before Running = "Always"
+Save Changes Before Compiling = "Always"
+Hide Windows = False
+Break At First Statement = False
+Sort Type = "File Name"
+Number of Opened Files = 2
+Window Confinement Region Enabled = True
+MainColumnWidth = 243
+FileDateColumnWidth = 70
+FileSizeColumnWidth = 70
+
+[Project Header 0001]
+Version = 1500
+Don't Update DistKit = False
+Platform Code = 4
+Build Configuration = "Debug"
+Warn User If Debugging Release = 1
+Batch Build Release = False
+Batch Build Debug = False
+
+[File 0001]
+Path Line0001 = "/c/Program Files (x86)/ART Technology/ArtDAQ/Samples/CVI/Analog In/Measure Strai"
+Path Line0002 = "n/Measure Strain/Cont Strain Samples/CONIO.H"
+File Type = "Include"
+Disk Date = 3324535308
+In Projects = "1,"
+Window Top = 40
+Window Left = 11
+Window Z-Order = 2
+Source Window State = "1,0,0,0,0,0,0,0,0,52,0,0,0,0,0,13,0,0,0,0,323,517,1,0,"
+
+[File 0002]
+Path = "/c/Program Files (x86)/ART Technology/ArtDAQ/Samples/Include/Art_DAQ.h"
+File Type = "Include"
+Disk Date = 0
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0003]
+Path = "/c/Program Files (x86)/ART Technology/ArtDAQ/Samples/Lib/win32/Art_DAQ.lib"
+File Type = "Library"
+Disk Date = 0
+In Projects = "1,"
+
+[File 0004]
+Path Line0001 = "/c/Program Files (x86)/ART Technology/ArtDAQ/Samples/CVI/Analog In/Measure Strai"
+Path Line0002 = "n/Measure Strain/Cont Strain Samples/VC_ContStrainSamples.c"
+File Type = "CSource"
+Disk Date = 3769991627
+In Projects = "1,"
+Window Z-Order = 1
+Source Window State = "1,0,0,0,0,0,0,0,0,108,0,0,0,0,0,58,0,0,120,81,400,600,0,0,"
+
+[Tab Order]
+Tab 0001 Line0001 = "/c/Program Files (x86)/ART Technology/ArtDAQ/Samples/CVI/Analog In/Measure Strai"
+Tab 0001 Line0002 = "n/Measure Strain/Cont Strain Samples/CONIO.H"
+Tab 0002 Line0001 = "/c/Program Files (x86)/ART Technology/ArtDAQ/Samples/CVI/Analog In/Measure Strai"
+Tab 0002 Line0002 = "n/Measure Strain/Cont Strain Samples/VC_ContStrainSamples.c"
+
+[Default Build Config 0001 Debug]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Default Build Config 0001 Release]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Default Build Config 0001 Debug64]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Default Build Config 0001 Release64]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Build Dependencies 0001]
+Number of Dependencies = 0
+
+[Build Options 0001]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Execution Trace = "Disabled"
+Profile = "Disabled"
+Debugging Level = "Standard"
+Break On Library Errors = True
+Break On First Chance Exceptions = False
+
+[Execution Target 0001]
+Execution Target Address = "Local desktop computer"
+Execution Target Port = 0
+Execution Target Type = 0
+
+[SCC Options 0001]
+Use global settings = True
+SCC Provider = ""
+SCC Project = ""
+Local Path = ""
+Auxiliary Path = ""
+Perform Same Action For .h File As For .uir File = "Ask"
+Perform Same Action For .cds File As For .prj File = "Ask"
+Username = ""
+Comment = ""
+Use Default Username = False
+Use Default Comment = False
+Suppress CVI Error Messages = False
+Always show confirmation dialog = True
+
+[DLL Debugging Support 0001]
+External Process Path = ""
+
+[Command Line Args 0001]
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+

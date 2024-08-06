@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.task.di_channel_collection &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.task.do_channel_collection" href="do_channel_collection.html" />
+    <link rel="prev" title="artdaq.task.cio_channel_collection" href="cio_channel_collection.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="task.html">artdaq.task</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="channel.html">artdaq.task.channel</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="channel_collection.html">artdaq.task.channel_collection</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ai_channel_collection.html">artdaq.task.ai_channel_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ao_channel_collection.html">artdaq.task.ao_channel_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cio_channel_collection.html">artdaq.task.cio_channel_collection</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">artdaq.task.di_channel_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="do_channel_collection.html">artdaq.task.do_channel_collection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="export_signals.html">artdaq.task.export_signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in_stream.html">artdaq.task.in_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="out_stream.html">artdaq.task.out_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing.html">artdaq.task.timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html">artdaq.task.triggers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="task.html">artdaq.task</a> &raquo;</li>
+          <li><a href="channel_collection.html">artdaq.task.channel_collection</a> &raquo;</li>
+      <li>artdaq.task.di_channel_collection</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/di_channel_collection.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-artdaq._task_modules.di_channel_collection">
+<span id="artdaq-task-di-channel-collection"></span><h1>artdaq.task.di_channel_collection<a class="headerlink" href="#module-artdaq._task_modules.di_channel_collection" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq._task_modules.di_channel_collection.DIChannelCollection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq._task_modules.di_channel_collection.</span></span><span class="sig-name descname"><span class="pre">DIChannelCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_handle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/di_channel_collection.html#DIChannelCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.di_channel_collection.DIChannelCollection" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="channel_collection.html#artdaq._task_modules.channel_collection.ChannelCollection" title="artdaq._task_modules.channel_collection.ChannelCollection"><code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq._task_modules.channel_collection.ChannelCollection</span></code></a></p>
+<p>Contains the collection of digital input channels for a DAQ Task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.di_channel_collection.DIChannelCollection.add_di_chan">
+<span class="sig-name descname"><span class="pre">add_di_chan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_lines</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_grouping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LineGrouping.CHAN_FOR_ALL_LINES</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/di_channel_collection.html#DIChannelCollection.add_di_chan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.di_channel_collection.DIChannelCollection.add_di_chan" title="Permalink to this definition"></a></dt>
+<dd><p>Creates channel(s) to measure digital signals. You can group
+digital lines into one digital channel or separate them into
+multiple digital channels. If you specify one or more entire
+ports in the <strong>lines</strong> input by using port physical channel
+names, you cannot separate the ports into multiple channels. To
+separate ports into multiple channels, use this function
+multiple times with a different port each time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lines</strong> (<em>str</em>) – Specifies the names of the digital lines or
+ports to use to create virtual channels. The DAQ
+physical channel constant lists all lines and ports for
+devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_lines</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name to
+assign to the virtual channel this function creates. If
+you do not specify a value for this input, ArtDAQ uses
+the physical channel name as the virtual channel name.</p></li>
+<li><p><strong>line_grouping</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.LineGrouping" title="artdaq.constants.LineGrouping"><em>artdaq.constants.LineGrouping</em></a><em>]</em>) – Specifies how to group digital lines into one or more
+virtual channels. If you specify one or more entire
+ports with the <strong>lines</strong> input, you must set this input
+to <strong>one channel for all lines</strong>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.di_channel.DIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.di_channel_collection.DIChannelCollection.all">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">all</span></span><a class="headerlink" href="#artdaq._task_modules.di_channel_collection.DIChannelCollection.all" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference internal" href="channel.html#artdaq._task_modules.channels.channel.Channel" title="artdaq._task_modules.channels.channel.Channel"><code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq._task_modules.channels.channel.Channel</span></code></a>:
+Specifies a channel object that represents the entire list of
+virtual channels on this channel collection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.di_channel_collection.DIChannelCollection.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">integer</span> <span class="pre">--</span> <span class="pre">return</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">occurrences</span> <span class="pre">of</span> <span class="pre">value</span></span></span><a class="headerlink" href="#artdaq._task_modules.di_channel_collection.DIChannelCollection.count" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.di_channel_collection.DIChannelCollection.index">
+<span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">integer</span> <span class="pre">--</span> <span class="pre">return</span> <span class="pre">first</span> <span class="pre">index</span> <span class="pre">of</span> <span class="pre">value.</span></span></span><a class="headerlink" href="#artdaq._task_modules.di_channel_collection.DIChannelCollection.index" title="Permalink to this definition"></a></dt>
+<dd><p>Raises ValueError if the value is not present.</p>
+<p>Supporting start and stop arguments is optional, but
+recommended.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cio_channel_collection.html" class="btn btn-neutral float-left" title="artdaq.task.cio_channel_collection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="do_channel_collection.html" class="btn btn-neutral float-right" title="artdaq.task.do_channel_collection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

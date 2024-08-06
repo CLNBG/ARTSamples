@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq._task_modules.timing &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>artdaq._task_modules.timing</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for artdaq._task_modules.timing</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">from</span> <span class="nn">artdaq._lib</span> <span class="kn">import</span> <span class="n">lib_importer</span><span class="p">,</span> <span class="n">ctypes_byte_str</span>
+<span class="kn">from</span> <span class="nn">artdaq.errors</span> <span class="kn">import</span> <span class="n">check_for_error</span>
+<span class="kn">from</span> <span class="nn">artdaq.constants</span> <span class="kn">import</span> <span class="n">AcquisitionType</span><span class="p">,</span> <span class="n">Edge</span>
+
+
+<div class="viewcode-block" id="Timing"><a class="viewcode-back" href="../../../timing.html#artdaq._task_modules.timing.Timing">[docs]</a><span class="k">class</span> <span class="nc">Timing</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents the timing configurations for a DAQ task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_handle</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">task_handle</span>
+
+    <span class="k">def</span> <span class="nf">ai_conv_src</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">active_edge</span><span class="o">=</span><span class="n">Edge</span><span class="o">.</span><span class="n">RISING</span><span class="p">):</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_SetAIConvClk</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">active_edge</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">samp_clk_timebase_src</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_SetSampClkTimebaseSrc</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">samp_clk_timebase_outputterm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_SetExportedSampClkTimebaseOutputTerm</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ref_clk_src</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_SetRefClkSrc</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sync_pulse_src</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_SetSyncPulseSrc</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">samp_sync_pulse_Event_outputterm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_SetExportedSyncPulseEventOutputTerm</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">]</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Timing.cfg_implicit_timing"><a class="viewcode-back" href="../../../timing.html#artdaq._task_modules.timing.Timing.cfg_implicit_timing">[docs]</a>    <span class="k">def</span> <span class="nf">cfg_implicit_timing</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">sample_mode</span><span class="o">=</span><span class="n">AcquisitionType</span><span class="o">.</span><span class="n">FINITE</span><span class="p">,</span> <span class="n">samps_per_chan</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets only the number of samples to acquire or generate without</span>
+<span class="sd">        specifying timing. Typically, you should use this instance when</span>
+<span class="sd">        the task does not require sample timing, such as tasks that use</span>
+<span class="sd">        counters for buffered frequency measurement, buffered period</span>
+<span class="sd">        measurement, or pulse train generation. For finite counter</span>
+<span class="sd">        output tasks, **samps_per_chan** is the number of pulses to</span>
+<span class="sd">        generate.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sample_mode (Optional[artdaq.constants.AcquisitionType]): </span>
+<span class="sd">                Specifies if the task acquires or generates samples</span>
+<span class="sd">                continuously or if it acquires or generates a finite</span>
+<span class="sd">                number of samples.</span>
+<span class="sd">            samps_per_chan (Optional[long]): Specifies the number of</span>
+<span class="sd">                samples to acquire or generate for each channel in the</span>
+<span class="sd">                task if **sample_mode** is **FINITE_SAMPLES**. If</span>
+<span class="sd">                **sample_mode** is **CONTINUOUS_SAMPLES**, DAQ uses</span>
+<span class="sd">                this value to determine the buffer size. This function</span>
+<span class="sd">                returns an error if the specified value is negative.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CfgImplicitTiming</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulonglong</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">sample_mode</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">samps_per_chan</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Timing.cfg_samp_clk_timing"><a class="viewcode-back" href="../../../timing.html#artdaq._task_modules.timing.Timing.cfg_samp_clk_timing">[docs]</a>    <span class="k">def</span> <span class="nf">cfg_samp_clk_timing</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">active_edge</span><span class="o">=</span><span class="n">Edge</span><span class="o">.</span><span class="n">RISING</span><span class="p">,</span>
+            <span class="n">sample_mode</span><span class="o">=</span><span class="n">AcquisitionType</span><span class="o">.</span><span class="n">FINITE</span><span class="p">,</span> <span class="n">samps_per_chan</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the source of the Sample Clock, the rate of the Sample</span>
+<span class="sd">        Clock, and the number of samples to acquire or generate.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            rate (float): Specifies the sampling rate in samples per</span>
+<span class="sd">                channel per second. If you use an external source for</span>
+<span class="sd">                the Sample Clock, set this input to the maximum expected</span>
+<span class="sd">                rate of that clock.</span>
+<span class="sd">            source (Optional[str]): Specifies the source terminal of the</span>
+<span class="sd">                Sample Clock. Leave this input unspecified to use the</span>
+<span class="sd">                default onboard clock of the device.</span>
+<span class="sd">            active_edge (Optional[artdaq.constants.Edge]): Specifies on</span>
+<span class="sd">                which edges of Sample Clock pulses to acquire or</span>
+<span class="sd">                generate samples.</span>
+<span class="sd">            sample_mode (Optional[artdaq.constants.AcquisitionType]): </span>
+<span class="sd">                Specifies if the task acquires or generates samples</span>
+<span class="sd">                continuously or if it acquires or generates a finite</span>
+<span class="sd">                number of samples.</span>
+<span class="sd">            samps_per_chan (Optional[long]): Specifies the number of</span>
+<span class="sd">                samples to acquire or generate for each channel in the</span>
+<span class="sd">                task if **sample_mode** is **FINITE_SAMPLES**. If</span>
+<span class="sd">                **sample_mode** is **CONTINUOUS_SAMPLES**, DAQ uses</span>
+<span class="sd">                this value to determine the buffer size. This function</span>
+<span class="sd">                returns an error if the specified value is negative.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtDAQ_CfgSampClkTiming</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">arglock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">,</span> <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">active_edge</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">sample_mode</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">samps_per_chan</span><span class="p">)</span>
+        <span class="n">check_for_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

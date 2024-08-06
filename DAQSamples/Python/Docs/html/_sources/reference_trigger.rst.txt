@@ -1,0 +1,6 @@
+artdaq.task.reference_trigger
+==============================
+
+.. automodule:: artdaq._task_modules.triggering.reference_trigger
+    :members:
+    :show-inheritance:

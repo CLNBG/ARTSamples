@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.error_codes &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>artdaq.error_codes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for artdaq.error_codes</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Errors&#39;</span><span class="p">,</span> <span class="s1">&#39;Warnings&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Errors"><a class="viewcode-back" href="../../error_codes.html#artdaq.error_codes.Errors">[docs]</a><span class="k">class</span> <span class="nc">Errors</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">SERVICES_CAN_NOT_CONNECT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">229779</span>
+    <span class="n">SEND_SERVICES_DATA</span> <span class="o">=</span> <span class="o">-</span><span class="mi">229778</span>
+    <span class="n">RECEIVE_SERVICES_DATA</span> <span class="o">=</span> <span class="o">-</span><span class="mi">229776</span>
+    <span class="n">SERVICES_RESPONSE_ERROR</span> <span class="o">=</span> <span class="o">-</span><span class="mi">229775</span>
+
+    <span class="n">PAL_COMMUNICATIONS_FAULT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50401</span>
+    <span class="n">PAL_DEVICE_INITIALIZATION_FAULT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50303</span>
+    <span class="n">PAL_DEVICE_NOT_SUPPORTED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50302</span>
+    <span class="n">PAL_DEVICE_UNKNOWN</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50301</span>
+    <span class="n">PAL_MEMORY_CONFIGURATION_FAULT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50350</span>
+    <span class="n">PAL_RESOURCE_RESERVED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50103</span>
+    <span class="n">PAL_FUNCTION_NOT_FOUND</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50255</span>
+
+    <span class="n">BUFFER_TOO_SMALL_FOR_STRING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200228</span>
+    <span class="n">READ_BUFFER_TOO_SMALL</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200229</span>
+    <span class="n">NULL_PTR</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200604</span>
+    <span class="n">DUPLICATE_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200089</span>
+    <span class="n">INVALID_TASK_NAME</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201340</span>
+    <span class="n">INVALID_DEVICE_NAME</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201339</span>
+    <span class="n">DEVICE_NOT_EXIST</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200220</span>
+
+    <span class="n">INVALID_PHYS_CHANNEL_STRING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201237</span>
+    <span class="n">PHYSICAL_CHANNEL_DOES_NOT_EXIT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200170</span>
+    <span class="n">DEV_ALREADY_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200481</span>
+    <span class="n">CHANNEL_ALREADY_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200489</span>
+    <span class="n">CHANNEL_NOT_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200486</span>
+    <span class="n">DEV_NOT_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200482</span>
+    <span class="n">INVALID_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200088</span>
+    <span class="n">INVALID_CHANNEL</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200087</span>
+    <span class="n">INVALID_SYNTAX_FOR_PHYSICAL_CHANNEL_RANGE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200086</span>
+    <span class="n">MULTI_CHANNEL_TYPES_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200559</span>
+    <span class="n">MULTI_DEVS_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200558</span>
+    <span class="n">PHYS_CHANNEL_DEV_NOT_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200648</span>
+    <span class="n">REF_AND_PAUSE_TRIG_CONFIGURED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200628</span>
+    <span class="n">ACTIVE_PHYS_CHANNEL_TOO_MANY_LINES_SPECD_WHEN_GETTING_PRPTY</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200625</span>
+    <span class="n">ACTIVE_DEV_NOT_SUPPORTED_WITH_MULTI_DEV_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201207</span>
+    <span class="n">REAL_DEV_AND_SIM_DEV_NOT_SUPPORTED_IN_SAME_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201206</span>
+    <span class="n">DEVS_WITHOUT_SYNC_STRATEGIES</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201426</span>
+    <span class="n">DEV_CANNOT_BE_ACCESSED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201003</span>
+    <span class="n">SAMPLE_RATE_NUM_CHANNELS_CONVERT_PERIOD_COMBO</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200081</span>
+    <span class="n">INVALID_ATTRIBUTE_VALUE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200077</span>
+    <span class="n">CAN_NOT_PERFORM_OP_WHILE_TASK_RUNNING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200479</span>
+    <span class="n">CAN_NOT_PERFORM_OP_WHEN_NO_CHANS_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200478</span>
+    <span class="n">CAN_NOT_PERFORM_OP_WHEN_NO_DEV_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200477</span>
+    <span class="n">ERROR_OPERATION_TIMED_OUT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200474</span>
+    <span class="n">CAN_NOT_SET_PROPERTY_WHEN_TASK_RUNNING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200557</span>
+    <span class="n">WHITE_FALIS_BUFFER_SIZE_AUTO_CONFIGURED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200547</span>
+    <span class="n">CAN_NOT_READ_WHEN_AUTO_START_FALSE_AND_TASK_NOT_RUNNING_OR_COMMITTED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200473</span>
+    <span class="n">CAN_NOT_WRITE_WHEN_AUTO_START_FALSE_AND_TASK_NOT_RUNNING_OR_COMMITTED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200472</span>
+    <span class="n">CAN_NOT_WRITE_NOT_STARTED_AUTO_START_FALSE_NOT_ON_DEMAND_BUF_SIZE_ZERO</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200802</span>
+    <span class="n">CAN_NOT_WRITE_TO_FINITE_CO_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201291</span>
+    <span class="n">SAMPLES_NOT_YET_AVALIABLE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200284</span>
+    <span class="n">SAMPLES_NO_LONGER_AVAILABLE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200279</span>
+    <span class="n">SAMPLES_WILL_NEVER_BE_AVAILABLE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200278</span>
+    <span class="n">RUNTIME_ABORTED_ROUTING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">88709</span>
+    <span class="n">TIMEOUT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">26802</span>
+    <span class="n">MIN_NOT_LESS_THAN_MAX</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200082</span>
+    <span class="n">INVALID_NUMBER_SAMPLES_TO_READ</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200096</span>
+    <span class="n">INVAILD_NUM_SAMPS_TO_WRITE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200622</span>
+    <span class="n">DEVICE_NAME_NOT_FOUND_ROUTING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">88717</span>
+    <span class="n">INVALID_ROUNTING_SOURCE_TERMINAL_NAME_ROUTING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">89120</span>
+    <span class="n">INVALID_TERM_ROUTING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">89129</span>
+    <span class="n">UNSUPPORTED_SIGNAL_TYPE_EXPORT_SIGNAL</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200375</span>
+    <span class="n">CHANNEL_SIZE_TOO_BIG_FOR_U16_PORT_WRITE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200879</span>
+    <span class="n">CHANNEL_SIZE_TOO_BIG_FOR_U16_PORT_READ</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200878</span>
+    <span class="n">CHANNEL_SIZE_TOO_BIG_FOR_U32_PORT_WRITE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200566</span>
+    <span class="n">CHANNEL_SIZE_TOO_BIG_FOR_U8_PORT_WRITE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200565</span>
+    <span class="n">CHANNEL_SIZE_TOO_BIG_FOR_U32_PORT_READ</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200564</span>
+    <span class="n">CHANNEL_SIZE_TOO_BIG_FOR_U8_PORT_READ</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200563</span>
+    <span class="n">WAIT_UNTIL_DONE_DOES_NOT_INDICATE_DONE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200560</span>
+    <span class="n">AUTO_START_WRITE_NOT_ALLOWED_EVENT_REGISTERED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200985</span>
+    <span class="n">AUTO_START_READ_NOT_ALLOWED_EVENT_REGISTERED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200984</span>
+    <span class="n">EVERY_N_SAMPLES_ACQ_INTO_BUFFER_EVENT_NOT_SUPPORTED_BY_DEVICE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200981</span>
+    <span class="n">EVERY_N_SAMPLES_TRANSFERRED_FROM_BUFFER_EVENT_NOT_SUPPORTED_BY_DEVICE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200980</span>
+    <span class="n">CAN_NOT_REGISTER_ART_DAQ_SOFTWARE_EVENT_WHILE_TASK_RUNNING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200960</span>
+    <span class="n">EVERY_N_SAMPLES_EVENT_NOT_SUPPORTED_FOR_NON_BUFFERED_TASKS</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200848</span>
+    <span class="n">EVERY_N_SAMPLES_EVENT_NOT_SUPPORTED</span> <span class="o">=</span> <span class="mi">200489</span>
+    <span class="n">BUFFER_SIZE_NOT_MULTIPLE_OF_EVERY_N_SAMPS_EVENT_INTERVAL_WHEN_DMA</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200877</span>
+    <span class="n">EVERY_N_SAMPS_TRANSFERRED_FROM_BUFFER_NOT_FOR_INPUT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200965</span>
+    <span class="n">EVERY_N_SAMPS_ACQ_INTO_BUFFER_NOT_FOR_OUTPUT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200964</span>
+    <span class="n">READ_NO_INPUT_CHANS_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200460</span>
+    <span class="n">WRITE_NO_OUTPUT_CHANS_IN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200459</span>
+    <span class="n">INVALID_TIMEOUT_VAL</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200453</span>
+    <span class="n">ATTRIBUTE_NOT_SUPPORTED_IN_TASK_CONTEXT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200452</span>
+    <span class="n">NO_MORE_SPACE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200293</span>
+    <span class="n">SAMPLES_CAN_NOT_YET_BE_WRITTEN</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200292</span>
+    <span class="n">GEN_STOPPED_TO_PREVENT_REGEN_OF_OLD_SAMPLES</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200290</span>
+    <span class="n">SAMPLES_WILL_NEVER_BE_GENERATED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200288</span>
+    <span class="n">CANNOT_READ_RELATIVE_TO_REF_TRIG_UNTIL_DONE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200281</span>
+    <span class="n">EXT_SAMP_CLK_SRC_NOT_SPECIFIED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200303</span>
+    <span class="n">CANNOT_UPDATE_PULSE_GEN_PROPERTY</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200301</span>
+    <span class="n">INVALID_TIMING_TYPE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200300</span>
+    <span class="n">INVALID_ANALOG_TRIG_SRC</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200265</span>
+    <span class="n">TRIG_WHEN_ON_DEMAND_SAMP_TIMING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200262</span>
+    <span class="n">REF_TRIG_WHEN_CONTINUOUS</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200358</span>
+    <span class="n">SPECIFIED_ATTR_NOT_VALID</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200233</span>
+    <span class="n">OUTPUT_BUFFER_EMPTY</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200462</span>
+    <span class="n">INVALID_OPTION_FOR_DIGITAL_PORT_CHANNEL</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200376</span>
+    <span class="n">CTR_MIN_MAX</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200527</span>
+    <span class="n">WRITE_CHAN_TYPE_MISMATCH</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200526</span>
+    <span class="n">READ_CHAN_TYPE_MISMATCH</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200525</span>
+    <span class="n">WRITE_NUM_CHANS_MISMATCH</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200524</span>
+    <span class="n">ONE_CHAN_READ_FOR_MULTI_CHAN_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200523</span>
+    <span class="n">MULTIPLE_COUNTER_INPUT_TASK</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200147</span>
+    <span class="n">COUNTER_START_PAUSE_TRIGGER_CONFLICT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200146</span>
+    <span class="n">COUNTER_INPUT_PAUSE_TRIGGER_AND_SAMPLE_CLOCK_INVALID</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200145</span>
+    <span class="n">COUNTER_OUTPUT_PAUSE_TRIGGER_INVALID</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200144</span>
+    <span class="n">FILE_NOT_FOUND</span> <span class="o">=</span> <span class="o">-</span><span class="mi">26103</span>
+    <span class="n">NONBUFFERED_OR_NO_CHANNELS</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201395</span>
+    <span class="n">BUFFERED_OPERATIONS_NOT_SUPPORTED_ON_SELECTED_LINES</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201062</span>
+    <span class="n">CALIBRATION_FAILED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200157</span>
+    <span class="n">INVALID_FILL_MODE_PARAMETER</span> <span class="o">=</span> <span class="o">-</span><span class="mi">300001</span>
+    <span class="n">PHYS_CHAN_OUTPUT_TYPE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200432</span>
+    <span class="n">PHYS_CHAN_MEAS_TYPE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200431</span>
+    <span class="n">INVALID_PHYS_CHAN_TYPE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200430</span>
+    <span class="n">SUITABLE_TIMEBASE_NOT_FOUND_TIME_COMBO_2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200746</span>
+    <span class="n">SUITABLE_TIMEBASE_NOT_FOUND_FREQUENCY_COMBO_2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200745</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="Warnings"><a class="viewcode-back" href="../../error_codes.html#artdaq.error_codes.Warnings">[docs]</a><span class="k">class</span> <span class="nc">Warnings</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">Returned_DATA_IS_NOT_ENOUGH</span> <span class="o">=</span> <span class="mi">30014</span>
+    <span class="n">CAPI_STRING_TRUNCATED_TO_FIT_BUFFER</span> <span class="o">=</span> <span class="mi">200026</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

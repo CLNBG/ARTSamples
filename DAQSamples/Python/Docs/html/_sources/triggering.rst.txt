@@ -1,0 +1,37 @@
+triggering package
+==================
+
+Submodules
+----------
+
+triggering.pause\_trigger module
+--------------------------------
+
+.. automodule:: triggering.pause_trigger
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+triggering.reference\_trigger module
+------------------------------------
+
+.. automodule:: triggering.reference_trigger
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+triggering.start\_trigger module
+--------------------------------
+
+.. automodule:: triggering.start_trigger
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: triggering
+   :members:
+   :undoc-members:
+   :show-inheritance:

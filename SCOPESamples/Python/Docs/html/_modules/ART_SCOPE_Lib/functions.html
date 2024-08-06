@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ART_SCOPE_Lib.functions &mdash; ArtScope 1.20.0032 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ArtScope
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../functions.html">functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../error_codes.html">error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors.html">errors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ArtScope</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ART_SCOPE_Lib.functions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ART_SCOPE_Lib.functions</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">ART_SCOPE_Lib.lib</span> <span class="kn">import</span> <span class="n">lib_importer</span><span class="p">,</span> <span class="n">wrapped_ndpointer</span><span class="p">,</span> <span class="n">ctypes_byte_str</span>
+<span class="kn">from</span> <span class="nn">ART_SCOPE_Lib.constants</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="Functions"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions">[docs]</a><span class="k">class</span> <span class="nc">Functions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Functions.ArtScope_init"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_init">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_init</span><span class="p">(</span><span class="n">resourceName</span><span class="p">,</span> <span class="n">taskHandle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create task</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resourceName(c_char_p): task name</span>
+<span class="sd">            taskHandle(c_void_p): task handle</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_init</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">lib_importer</span><span class="o">.</span><span class="n">task_handle</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">resourceName</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_Close"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_Close">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_Close</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        close task</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_Close</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureAcquisitionMode"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureAcquisitionMode">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureAcquisitionMode</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">acquisitionMode</span><span class="o">=</span><span class="n">SampleMode</span><span class="o">.</span><span class="n">FINITE</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set acquisition mode</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p): task handle；</span>
+<span class="sd">            acquisitionMode(c_int32): mode，=0:finite, =1:continuous</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureAcquisitionMode</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">acquisitionMode</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureVertical"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureVertical">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureVertical</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">channelList</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="n">InputRange</span><span class="o">.</span><span class="n">RANGE_2VPP</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="n">CouplingType</span><span class="o">.</span><span class="n">DC</span><span class="p">,</span> <span class="n">probeAttenuation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set vertical parameters</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            channelList(c_char_p):channel name list</span>
+<span class="sd">            range(c_int32):range</span>
+<span class="sd">            offset(c_int32):offset</span>
+<span class="sd">            coupling(c_int32):coupling</span>
+<span class="sd">            probeAttenuation(c_int32):not used</span>
+<span class="sd">            enabled(c_uint16):channel enable or not</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureVertical</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint16</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">channelList</span><span class="p">,</span> <span class="nb">range</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">coupling</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">probeAttenuation</span><span class="p">,</span> <span class="n">enabled</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureChanCharacteristics"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureChanCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureChanCharacteristics</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">channelList</span><span class="p">,</span> <span class="n">inputImpedance</span><span class="o">=</span><span class="n">InputImpedance</span><span class="o">.</span><span class="n">AI_IMPEND_1M</span><span class="p">,</span> <span class="n">maxInputFrequency</span><span class="o">=</span><span class="n">BandWidth</span><span class="o">.</span><span class="n">BANDWIDTH_DEFAULT</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set channel parameters</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            channelList(c_char_p):channel name list</span>
+<span class="sd">            inputImpedance(c_int32):impedance</span>
+<span class="sd">            maxInputFrequency(c_int32):bandwidth</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureChanCharacteristics</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">channelList</span><span class="p">,</span> <span class="n">inputImpedance</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">maxInputFrequency</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureHorizontalTiming"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureHorizontalTiming">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureHorizontalTiming</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">minSampleRate</span><span class="p">,</span> <span class="n">minNumPts</span><span class="p">,</span> <span class="n">refPosition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set horizontal parameters</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            minSampleRate(c_double):sample rate</span>
+<span class="sd">            minNumPts(c_int32):sample length</span>
+<span class="sd">            refPosition(c_double):trigger position</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureHorizontalTiming</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">minSampleRate</span><span class="p">,</span> <span class="n">minNumPts</span><span class="p">,</span> <span class="n">refPosition</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureTriggerEdge"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerEdge">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureTriggerEdge</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">triggerSource</span><span class="o">=</span><span class="n">TriggerSource</span><span class="o">.</span><span class="n">TRIGSRC_CH0</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="n">TriggerSlope</span><span class="o">.</span><span class="n">TRIGDIR_NEGATIVE</span><span class="p">,</span> <span class="n">triggerCoupling</span><span class="o">=</span><span class="n">TriggerCoupling</span><span class="o">.</span><span class="n">TRIGCOUP_DC</span><span class="p">,</span> <span class="n">triggerCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">triggerSensitivity</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set trigger edge parameters</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            triggerSource(c_char_p):trigger source</span>
+<span class="sd">            level(c_double):trigger level</span>
+<span class="sd">            slope(c_int32):trigger slope</span>
+<span class="sd">            triggerCoupling(c_int32):trigger coupling</span>
+<span class="sd">            triggerCount(c_int32):trigger count</span>
+<span class="sd">            triggerSensitivity(c_int32):trigger sensitivity</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureTriggerEdge</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">triggerSource</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">slope</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">triggerCoupling</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">triggerCount</span><span class="p">,</span> <span class="n">triggerSensitivity</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureTriggerWindow"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerWindow">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureTriggerWindow</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">triggerSource</span><span class="o">=</span><span class="n">TriggerSource</span><span class="o">.</span><span class="n">TRIGSRC_CH0</span><span class="p">,</span> <span class="n">lowLevel</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">highLevel</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">windowMode</span><span class="o">=</span><span class="n">TriggerWindowType</span><span class="o">.</span><span class="n">WINDOW_ENTERING</span><span class="p">,</span> <span class="n">triggerCoupling</span><span class="o">=</span><span class="n">TriggerCoupling</span><span class="o">.</span><span class="n">TRIGCOUP_DC</span><span class="p">,</span> <span class="n">triggerCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">triggerSensitivity</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        trigger window parameters</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            triggerSource(c_char_p):trigger source</span>
+<span class="sd">            lowLevel(c_double):trigger low level</span>
+<span class="sd">            highLevel(c_double):trigger high level</span>
+<span class="sd">            windowMode(c_int32):window type</span>
+<span class="sd">            triggerCoupling(c_int32):trigger coupling</span>
+<span class="sd">            triggerCount(c_int32):trigger count</span>
+<span class="sd">            triggerSensitivity(c_int32):trigger sensitivity</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureTriggerWindow</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">triggerSource</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">lowLevel</span><span class="p">,</span> <span class="n">highLevel</span><span class="p">,</span> <span class="n">windowMode</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">triggerCoupling</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">triggerCount</span><span class="p">,</span> <span class="n">triggerSensitivity</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureTriggerPulse"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerPulse">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureTriggerPulse</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">triggerSource</span><span class="o">=</span><span class="n">TriggerSource</span><span class="o">.</span><span class="n">TRIGSRC_CH0</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">polarity</span><span class="o">=</span><span class="n">TriggerPolarity</span><span class="o">.</span><span class="n">TRIGPOLAR_NEGATIVE</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="n">TriggerSlope</span><span class="o">.</span><span class="n">TRIGDIR_NEGATIVE</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">triggerCoupling</span><span class="o">=</span><span class="n">TriggerCoupling</span><span class="o">.</span><span class="n">TRIGCOUP_DC</span><span class="p">,</span> <span class="n">triggerCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">triggerSensitivity</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set trigger pulse parameters</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            triggerSource(c_char_p):trigger source</span>
+<span class="sd">            level(c_double):trigger level</span>
+<span class="sd">            polarity(c_int32):trigger polarity</span>
+<span class="sd">            slope(c_int32):trigger slope</span>
+<span class="sd">            width(c_int32):pulse width</span>
+<span class="sd">            triggerCoupling(c_int32):trigger coupling</span>
+<span class="sd">            triggerCount(c_int32):trigger count</span>
+<span class="sd">            triggerSensitivity(c_int32):trigger sensitivity</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureTriggerPulse</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">triggerSource</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">polarity</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">slope</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">triggerCoupling</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">triggerCount</span><span class="p">,</span> <span class="n">triggerSensitivity</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureTriggerDigital"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerDigital">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureTriggerDigital</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">triggerSource</span><span class="o">=</span><span class="n">TriggerSource</span><span class="o">.</span><span class="n">TRIGSRC_CH0</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="n">TriggerSlope</span><span class="o">.</span><span class="n">TRIGDIR_NEGATIVE</span><span class="p">,</span> <span class="n">triggerCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">triggerSensitivity</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set trigger digital parameters</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            triggerSource(c_char_p):trigger source</span>
+<span class="sd">            slope(c_int32):trigger slope</span>
+<span class="sd">            triggerCount(c_int32):trigger count</span>
+<span class="sd">            triggerSensitivity(c_int32):trigger sensitivity</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureTriggerDigital</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">triggerSource</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">slope</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">triggerCount</span><span class="p">,</span> <span class="n">triggerSensitivity</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureTriggerHardwareDelay"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerHardwareDelay">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureTriggerHardwareDelay</span><span class="p">(</span><span class="n">taskHadle</span><span class="p">,</span> <span class="n">delayPoints</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set hardware trigger parameters</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHadle(c_void_p):task handle</span>
+<span class="sd">            delayPoints(c_int32):delay points</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureTriggerHardwareDelay</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHadle</span><span class="p">,</span> <span class="n">delayPoints</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureTriggerSoftWare"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerSoftWare">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureTriggerSoftWare</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set software trigger</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureTriggerSoftWare</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureTriggerSyncSrc"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureTriggerSyncSrc">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureTriggerSyncSrc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">triggerSyncSource</span><span class="o">=</span><span class="n">TriggerSyncSrc</span><span class="o">.</span><span class="n">TRIG_SYNC_0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set synchronous trigger parameters</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            triggerSyncSource(c_char_p):synchronous trigger source</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureTriggerSyncSrc</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">triggerSyncSource</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ConfigureClock"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ConfigureClock">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ConfigureClock</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">inputClockSource</span><span class="o">=</span><span class="n">InputClockSource</span><span class="o">.</span><span class="n">CLK_ONBOARD</span><span class="p">,</span> <span class="n">freqDivision</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">masterEnabled</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set clock parameters</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            inputClockSource(c_char_p):input clock source</span>
+<span class="sd">            freqDivision(c_int32):frequency division coefficient,only inputClockSource is ARTSCOPE_VAL_CLK_IN,this parameter takes effect</span>
+<span class="sd">            masterEnabled(c_uint32):multi card synchronization,set the main card</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ConfigureClock</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">inputClockSource</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">freqDivision</span><span class="p">,</span> <span class="n">masterEnabled</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ExportClock"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ExportClock">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ExportClock</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="n">ExportClockType</span><span class="o">.</span><span class="n">CLK_REF</span><span class="p">,</span> <span class="n">signalIdentifier</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">outputTerminal</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        export clock</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            signal(c_int32):export signal type</span>
+<span class="sd">            signalIdentifier(c_char_p):Describes the signal being exported not used for now</span>
+<span class="sd">            outputTerminal(c_char_p):not used for now</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ExportClock</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">signalIdentifier</span><span class="p">,</span> <span class="n">outputTerminal</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ExportTrigger"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ExportTrigger">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ExportTrigger</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">trigOutWidth</span><span class="p">,</span> <span class="n">trigOutPolarity</span><span class="o">=</span><span class="n">TriggerOutPolarity</span><span class="o">.</span><span class="n">TRIGOUT_POLAR_NEGATIVE</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        export trigger</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            trigOutWidth(c_int32):export trigger width</span>
+<span class="sd">            trigOutPolarity(c_int32):export trigger polarity</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ExportTrigger</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">trigOutWidth</span><span class="p">,</span> <span class="n">trigOutPolarity</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_AutoSaveFile"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_AutoSaveFile">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_AutoSaveFile</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">bIsAutoSave</span><span class="p">,</span> <span class="n">chFileName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        auto save file</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            bIsAutoSave(c_uint32):if 1,save file,if 0,not save</span>
+<span class="sd">            chFileName(c_char_p):path of the save file</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_AutoSaveFile</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">bIsAutoSave</span><span class="p">,</span> <span class="n">chFileName</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_InitiateAcquisition"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_InitiateAcquisition">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_InitiateAcquisition</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize Acquisition</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_InitiateAcquisition</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_StartAcquisition"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_StartAcquisition">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_StartAcquisition</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        // Start Acquisition</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_StartAcquisition</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_SendSoftwareTrigger"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_SendSoftwareTrigger">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_SendSoftwareTrigger</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        send software trigger</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_SendSoftwareTrigger</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_AcquisitionStatus"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_AcquisitionStatus">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_AcquisitionStatus</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get acquisition status</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle (c_void_p):task handle</span>
+<span class="sd">            status (ARTSCOPE_STATUS_AD):status</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_AcquisitionStatus</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ARTSCOPE_STATUS_AD</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_FetchBinary8"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_FetchBinary8">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_FetchBinary8</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">numSamples</span><span class="p">,</span> <span class="n">wfmBinary</span><span class="p">,</span> <span class="n">wfmInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        read binary data</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            timeout(c_double):timeout</span>
+<span class="sd">            numSamples(c_uint32):read length</span>
+<span class="sd">            wfmBinary(uint8):data buffer</span>
+<span class="sd">            wfmInfo(ArtScope_wfmInfo):information for analyze</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_FetchBinary8</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">,</span>
+                              <span class="n">wrapped_ndpointer</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">)),</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ArtScope_wfmInfo</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">numSamples</span><span class="p">,</span> <span class="n">wfmBinary</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">wfmInfo</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_FetchBinary16"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_FetchBinary16">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_FetchBinary16</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">numSamples</span><span class="p">,</span> <span class="n">wfmBinary</span><span class="p">,</span> <span class="n">wfmInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        read binary data</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            timeout(c_double):timeout</span>
+<span class="sd">            numSamples(c_uint32):read length</span>
+<span class="sd">            wfmBinary(uint16):data buffer</span>
+<span class="sd">            wfmInfo(ArtScope_wfmInfo):information for analyze</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_FetchBinary16</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">,</span>
+                              <span class="n">wrapped_ndpointer</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint16</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;W&#39;</span><span class="p">)),</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ArtScope_wfmInfo</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">numSamples</span><span class="p">,</span> <span class="n">wfmBinary</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">wfmInfo</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_FetchVoltage"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_FetchVoltage">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_FetchVoltage</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">numSamples</span><span class="p">,</span> <span class="n">wfmVoltage</span><span class="p">,</span> <span class="n">wfmInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        read voltage data</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            timeout(c_double):timeout</span>
+<span class="sd">            numSamples(c_uint32):read length</span>
+<span class="sd">            wfmVoltage(double):data buffer</span>
+<span class="sd">            wfmInfo(ArtScope_wfmInfo):information for analyze</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_FetchVoltage</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">,</span>
+                              <span class="n">wrapped_ndpointer</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">double</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;W&#39;</span><span class="p">)),</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ArtScope_wfmInfo</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">numSamples</span><span class="p">,</span> <span class="n">wfmVoltage</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">wfmInfo</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_StopAcquisition"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_StopAcquisition">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_StopAcquisition</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        stop acquisition</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle:task handle</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_StopAcquisition</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ReleaseAcquisition"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ReleaseAcquisition">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ReleaseAcquisition</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Release Acquisition</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ReleaseAcquisition</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ActualNumWfms"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ActualNumWfms">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ActualNumWfms</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">numWfms</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get acquisition channel count</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            numWfms(c_uint32):channel count</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ActualNumWfms</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">numWfms</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_ActualRecordLength"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_ActualRecordLength">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_ActualRecordLength</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">actualRecordLength</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">       get actual sample length</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            actualRecordLength(c_uint32):actual sample length</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_ActualRecordLength</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">actualRecordLength</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_SampleRate"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_SampleRate">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_SampleRate</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">actualSampleRate</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get actual sample rate</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            actualSampleRate(c_double):actual sample rate</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_SampleRate</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">actualSampleRate</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_Calibration"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_Calibration">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_Calibration</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        calibrate</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_Calibration</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_Reset"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_Reset">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_Reset</span><span class="p">(</span><span class="n">resourceName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        reset device</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resourceName(c_char_p):task name</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_Reset</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes_byte_str</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">resourceName</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_GetInfoFromAutoSaveFile"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_GetInfoFromAutoSaveFile">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_GetInfoFromAutoSaveFile</span><span class="p">(</span><span class="n">chFileName</span><span class="p">,</span> <span class="n">fileHeaderSize</span><span class="p">,</span> <span class="n">wfmInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get information from auto saved file,include the file header size,information used for conversion</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            chFileName(c_char_p):file name</span>
+<span class="sd">            fileHeaderSize(c_int32):file header size</span>
+<span class="sd">            wfmInfo(ArtScope_wfmInfo):parameters for conversion</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_GetInfoFromAutoSaveFile</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ArtScope_wfmInfo</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">chFileName</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">fileHeaderSize</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">wfmInfo</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+    <span class="c1"># error handle</span>
+<div class="viewcode-block" id="Functions.ArtScope_GetErrorString"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_GetErrorString">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_GetErrorString</span><span class="p">(</span><span class="n">errorCode</span><span class="p">,</span> <span class="n">errorString</span><span class="p">,</span> <span class="n">bufferSize</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get error information</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            errorCode(c_int32):error code</span>
+<span class="sd">            errorString(c_char_p):error message</span>
+<span class="sd">            bufferSize(c_uint32):buffer size</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_GetErrorString</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">,</span>
+                              <span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">errorCode</span><span class="p">,</span> <span class="n">errorString</span><span class="p">,</span> <span class="n">bufferSize</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_GetExtendedErrorInfo"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_GetExtendedErrorInfo">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_GetExtendedErrorInfo</span><span class="p">(</span><span class="n">errorString</span><span class="p">,</span> <span class="n">bufferSize</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get accumulation error</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            errorString(c_char_p):error message</span>
+<span class="sd">            bufferSize(c_uint32):buffer size</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_GetExtendedErrorInfo</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">errorString</span><span class="p">,</span> <span class="n">bufferSize</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_GetDeviceEEPInfo"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_GetDeviceEEPInfo">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_GetDeviceEEPInfo</span><span class="p">(</span><span class="n">devName</span><span class="p">,</span> <span class="n">pEEPInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get version information</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            devName(c_char_p):task name</span>
+<span class="sd">            pEEPInfo(DEVICE_EEP_INFO):dll version,firmware version and calibrate information</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_GetDeviceEEPInfo</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">DEVICE_EEP_INFO</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">devName</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">pEEPInfo</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_GetDevInformation"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_GetDevInformation">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_GetDevInformation</span><span class="p">(</span><span class="n">resourceName</span><span class="p">,</span> <span class="n">channelCount</span><span class="p">,</span> <span class="n">maxSampleRate</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get channel count and max sample rate the card supported</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resourceName(c_char_p):task name</span>
+<span class="sd">            channelCount(c_int32):channel count</span>
+<span class="sd">            maxSampleRate(c_float):maximum sample rate</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_GetDevInformation</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes_byte_str</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_float</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">resourceName</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">channelCount</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">maxSampleRate</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div>
+
+<div class="viewcode-block" id="Functions.ArtScope_GetExtenedType"><a class="viewcode-back" href="../../functions.html#ART_SCOPE_Lib.functions.Functions.ArtScope_GetExtenedType">[docs]</a>    <span class="k">def</span> <span class="nf">ArtScope_GetExtenedType</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">seriesKey</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get series number the card belongs to</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            taskHandle(c_void_p):task handle</span>
+<span class="sd">            seriesKey(c_uint32):series number</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            c_int32:</span>
+<span class="sd">            0-right,&lt;0-error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfunc</span> <span class="o">=</span> <span class="n">lib_importer</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">ArtScope_GetExtenedType</span>
+        <span class="k">if</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                              <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">)]</span>
+        <span class="n">cfunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span>
+        <span class="n">error_code</span> <span class="o">=</span> <span class="n">cfunc</span><span class="p">(</span><span class="n">taskHandle</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">seriesKey</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error_code</span></div></div>
+
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

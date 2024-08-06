@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.task.timing &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.task.triggers" href="triggers.html" />
+    <link rel="prev" title="artdaq.task.out_stream" href="out_stream.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="task.html">artdaq.task</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="channel.html">artdaq.task.channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channel_collection.html">artdaq.task.channel_collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export_signals.html">artdaq.task.export_signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in_stream.html">artdaq.task.in_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="out_stream.html">artdaq.task.out_stream</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">artdaq.task.timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html">artdaq.task.triggers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="task.html">artdaq.task</a> &raquo;</li>
+      <li>artdaq.task.timing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/timing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-artdaq._task_modules.timing">
+<span id="artdaq-task-timing"></span><h1>artdaq.task.timing<a class="headerlink" href="#module-artdaq._task_modules.timing" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq._task_modules.timing.Timing">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq._task_modules.timing.</span></span><span class="sig-name descname"><span class="pre">Timing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_handle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/timing.html#Timing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.timing.Timing" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the timing configurations for a DAQ task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.timing.Timing.cfg_implicit_timing">
+<span class="sig-name descname"><span class="pre">cfg_implicit_timing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">AcquisitionType.FINITE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samps_per_chan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/timing.html#Timing.cfg_implicit_timing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.timing.Timing.cfg_implicit_timing" title="Permalink to this definition"></a></dt>
+<dd><p>Sets only the number of samples to acquire or generate without
+specifying timing. Typically, you should use this instance when
+the task does not require sample timing, such as tasks that use
+counters for buffered frequency measurement, buffered period
+measurement, or pulse train generation. For finite counter
+output tasks, <strong>samps_per_chan</strong> is the number of pulses to
+generate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sample_mode</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.AcquisitionType" title="artdaq.constants.AcquisitionType"><em>artdaq.constants.AcquisitionType</em></a><em>]</em>) – Specifies if the task acquires or generates samples
+continuously or if it acquires or generates a finite
+number of samples.</p></li>
+<li><p><strong>samps_per_chan</strong> (<em>Optional</em><em>[</em><em>long</em><em>]</em>) – Specifies the number of
+samples to acquire or generate for each channel in the
+task if <strong>sample_mode</strong> is <strong>FINITE_SAMPLES</strong>. If
+<strong>sample_mode</strong> is <strong>CONTINUOUS_SAMPLES</strong>, DAQ uses
+this value to determine the buffer size. This function
+returns an error if the specified value is negative.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.timing.Timing.cfg_samp_clk_timing">
+<span class="sig-name descname"><span class="pre">cfg_samp_clk_timing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Edge.RISING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">AcquisitionType.FINITE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samps_per_chan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/timing.html#Timing.cfg_samp_clk_timing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.timing.Timing.cfg_samp_clk_timing" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the source of the Sample Clock, the rate of the Sample
+Clock, and the number of samples to acquire or generate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rate</strong> (<em>float</em>) – Specifies the sampling rate in samples per
+channel per second. If you use an external source for
+the Sample Clock, set this input to the maximum expected
+rate of that clock.</p></li>
+<li><p><strong>source</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies the source terminal of the
+Sample Clock. Leave this input unspecified to use the
+default onboard clock of the device.</p></li>
+<li><p><strong>active_edge</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Edge" title="artdaq.constants.Edge"><em>artdaq.constants.Edge</em></a><em>]</em>) – Specifies on
+which edges of Sample Clock pulses to acquire or
+generate samples.</p></li>
+<li><p><strong>sample_mode</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.AcquisitionType" title="artdaq.constants.AcquisitionType"><em>artdaq.constants.AcquisitionType</em></a><em>]</em>) – Specifies if the task acquires or generates samples
+continuously or if it acquires or generates a finite
+number of samples.</p></li>
+<li><p><strong>samps_per_chan</strong> (<em>Optional</em><em>[</em><em>long</em><em>]</em>) – Specifies the number of
+samples to acquire or generate for each channel in the
+task if <strong>sample_mode</strong> is <strong>FINITE_SAMPLES</strong>. If
+<strong>sample_mode</strong> is <strong>CONTINUOUS_SAMPLES</strong>, DAQ uses
+this value to determine the buffer size. This function
+returns an error if the specified value is negative.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="out_stream.html" class="btn btn-neutral float-left" title="artdaq.task.out_stream" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="triggers.html" class="btn btn-neutral float-right" title="artdaq.task.triggers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

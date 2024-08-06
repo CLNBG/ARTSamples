@@ -1,0 +1,6 @@
+artdaq.errors
+==============
+.. automodule:: artdaq.errors
+    :members:
+    :undoc-members:
+    :show-inheritance:

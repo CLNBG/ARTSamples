@@ -1,0 +1,14 @@
+artdaq.task.channel
+====================
+
+.. automodule:: artdaq._task_modules.channels.channel
+    :members:
+    :show-inheritance:
+
+.. toctree::
+   
+   ai_channel
+   ao_channel
+   cio_channel
+   di_channel
+   do_channel

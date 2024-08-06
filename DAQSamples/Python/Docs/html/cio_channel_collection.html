@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.task.cio_channel_collection &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.task.di_channel_collection" href="di_channel_collection.html" />
+    <link rel="prev" title="artdaq.task.ao_channel_collection" href="ao_channel_collection.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="task.html">artdaq.task</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="channel.html">artdaq.task.channel</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="channel_collection.html">artdaq.task.channel_collection</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ai_channel_collection.html">artdaq.task.ai_channel_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ao_channel_collection.html">artdaq.task.ao_channel_collection</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">artdaq.task.cio_channel_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="di_channel_collection.html">artdaq.task.di_channel_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="do_channel_collection.html">artdaq.task.do_channel_collection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="export_signals.html">artdaq.task.export_signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in_stream.html">artdaq.task.in_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="out_stream.html">artdaq.task.out_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing.html">artdaq.task.timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html">artdaq.task.triggers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="task.html">artdaq.task</a> &raquo;</li>
+          <li><a href="channel_collection.html">artdaq.task.channel_collection</a> &raquo;</li>
+      <li>artdaq.task.cio_channel_collection</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cio_channel_collection.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-artdaq._task_modules.cio_channel_collection">
+<span id="artdaq-task-cio-channel-collection"></span><h1>artdaq.task.cio_channel_collection<a class="headerlink" href="#module-artdaq._task_modules.cio_channel_collection" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq._task_modules.cio_channel_collection.</span></span><span class="sig-name descname"><span class="pre">CIOChannelCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_handle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="channel_collection.html#artdaq._task_modules.channel_collection.ChannelCollection" title="artdaq._task_modules.channel_collection.ChannelCollection"><code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq._task_modules.channel_collection.ChannelCollection</span></code></a></p>
+<p>Contains the collection of counter input channels for a DAQ Task.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_ang_encoder_chan">
+<span class="sig-name descname"><span class="pre">add_ci_ang_encoder_chan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoding_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EncoderType.X_4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zidx_enable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zidx_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zidx_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EncoderZIndexPhase.AHIGH_BHIGH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">AngleUnits.DEGREES</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulses_per_rev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_scale_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_ang_encoder_chan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_ang_encoder_chan" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel that uses an angular encoder to measure
+angular position. With the exception of devices that support
+multi-counter tasks, you can create only one counter input
+channel at a time with this function because a task can contain
+only one counter input channel. To read from multiple counters
+simultaneously, use a separate task for each counter. Connect
+the input signals to the default input terminals of the counter
+unless you select different input terminals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>decoding_type</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.EncoderType" title="artdaq.constants.EncoderType"><em>artdaq.constants.EncoderType</em></a><em>]</em>) – Specifies how to count and interpret the pulses the
+encoder generates on signal A and signal B. <strong>X_1</strong>,
+<strong>X_2</strong>, and <strong>X_4</strong> are valid for quadrature encoders
+only. <strong>TWO_PULSE_COUNTING</strong> is valid only for two-pulse
+encoders.</p></li>
+<li><p><strong>zidx_enable</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Specifies whether to use Z
+indexing for the channel.</p></li>
+<li><p><strong>zidx_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the value
+to which to reset the measurement when signal Z is high
+and signal A and signal B are at the states you specify
+with <strong>zidx_phase</strong>.</p></li>
+<li><p><strong>zidx_phase</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.EncoderZIndexPhase" title="artdaq.constants.EncoderZIndexPhase"><em>artdaq.constants.EncoderZIndexPhase</em></a><em>]</em>) – Specifies the states at which signal A and signal B must
+be while signal Z is high for ArtDAQ to reset the
+measurement. If signal Z is never high while signal A
+and signal B are high, for example, you must choose a
+phase other than <strong>A_HIGH_B_HIGH</strong>.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.AngleUnits" title="artdaq.constants.AngleUnits"><em>artdaq.constants.AngleUnits</em></a><em>]</em>) – Specifies
+the units to use to return angular position measurements
+from the channel.</p></li>
+<li><p><strong>pulses_per_rev</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Is the number of pulses the
+encoder generates per revolution. This value is the
+number of pulses on either signal A or signal B, not the
+total number of pulses on both signal A and signal B.</p></li>
+<li><p><strong>initial_angle</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Is the starting angle of
+the encoder. This value is in the units you specify with
+the <strong>units</strong> input.</p></li>
+<li><p><strong>custom_scale_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies the name of a
+custom scale for the channel. If you want the channel to
+use a custom scale, specify the name of the custom scale
+to this input and set <strong>units</strong> to
+<strong>FROM_CUSTOM_SCALE</strong>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_count_edges_chan">
+<span class="sig-name descname"><span class="pre">add_ci_count_edges_chan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Edge.RISING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count_direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">CountDirection.COUNT_UP</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_count_edges_chan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_count_edges_chan" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel to count the number of rising or falling edges
+of a digital signal. With the exception of devices that support
+multi-counter tasks, you can create only one counter input
+channel at a time with this function because a task can contain
+only one counter input channel. To read from multiple counters
+simultaneously, use a separate task for each counter. Connect
+the input signal to the default input terminal of the counter
+unless you select a different input terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>edge</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Edge" title="artdaq.constants.Edge"><em>artdaq.constants.Edge</em></a><em>]</em>) – Specifies on which
+edges of the input signal to increment or decrement the
+count.</p></li>
+<li><p><strong>initial_count</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Is the value from which to
+start counting.</p></li>
+<li><p><strong>count_direction</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.CountDirection" title="artdaq.constants.CountDirection"><em>artdaq.constants.CountDirection</em></a><em>]</em>) – Specifies whether to increment or decrement the counter
+on each edge.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_freq_chan">
+<span class="sig-name descname"><span class="pre">add_ci_freq_chan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FrequencyUnits.HZ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Edge.RISING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">CounterFrequencyMethod.LOW_FREQUENCY_1_COUNTER</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divisor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_scale_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_freq_chan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_freq_chan" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel to measure the frequency of a digital signal.
+With the exception of devices that support multi-counter tasks,
+you can create only one counter input channel at a time with
+this function because a task can contain only one counter input
+channel. To read from multiple counters simultaneously, use a
+separate task for each counter. Connect the input signal to the
+default input terminal of the counter unless you select a
+different input terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>min_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+minimum value you expect to measure.</p></li>
+<li><p><strong>max_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+maximum value you expect to measure.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.FrequencyUnits" title="artdaq.constants.FrequencyUnits"><em>artdaq.constants.FrequencyUnits</em></a><em>]</em>) – Specifies the units to use to return frequency
+measurements.</p></li>
+<li><p><strong>edge</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Edge" title="artdaq.constants.Edge"><em>artdaq.constants.Edge</em></a><em>]</em>) – Specifies between
+which edges to measure the frequency or period of the
+signal.</p></li>
+<li><p><strong>meas_method</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.CounterFrequencyMethod" title="artdaq.constants.CounterFrequencyMethod"><em>artdaq.constants.CounterFrequencyMethod</em></a><em>]</em>) – Specifies the method to use to calculate the period or
+frequency of the signal.</p></li>
+<li><p><strong>meas_time</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Is the length of time in
+seconds to measure the frequency or period of the signal
+if <strong>meas_method</strong> is <strong>HIGH_FREQUENCYWITH_2_COUNTERS</strong>.
+Leave this input unspecified if <strong>meas_method</strong> is not
+<strong>HIGH_FREQUENCYWITH_2_COUNTERS</strong>.</p></li>
+<li><p><strong>divisor</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Is the value by which to divide the
+input signal when <strong>meas_method</strong> is
+<strong>LARGE_RANGEWITH_2_COUNTERS</strong>. Leave this input
+unspecified if <strong>meas_method</strong> is not
+<strong>LARGE_RANGEWITH_2_COUNTERS</strong>.</p></li>
+<li><p><strong>custom_scale_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies the name of a
+custom scale for the channel. If you want the channel to
+use a custom scale, specify the name of the custom scale
+to this input and set <strong>units</strong> to
+<strong>FROM_CUSTOM_SCALE</strong>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_lin_encoder_chan">
+<span class="sig-name descname"><span class="pre">add_ci_lin_encoder_chan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoding_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EncoderType.X_4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zidx_enable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zidx_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zidx_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EncoderZIndexPhase.AHIGH_BHIGH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LengthUnits.METERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_per_pulse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_scale_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_lin_encoder_chan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_lin_encoder_chan" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel that uses a linear encoder to measure linear
+position. With the exception of devices that support multi-
+counter tasks, you can create only one counter input channel at
+a time with this function because a task can contain only one
+counter input channel. To read from multiple counters
+simultaneously, use a separate task for each counter. Connect
+the input signals to the default input terminals of the counter
+unless you select different input terminals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>decoding_type</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.EncoderType" title="artdaq.constants.EncoderType"><em>artdaq.constants.EncoderType</em></a><em>]</em>) – Specifies how to count and interpret the pulses the
+encoder generates on signal A and signal B. <strong>X_1</strong>,
+<strong>X_2</strong>, and <strong>X_4</strong> are valid for quadrature encoders
+only. <strong>TWO_PULSE_COUNTING</strong> is valid only for two-pulse
+encoders.</p></li>
+<li><p><strong>zidx_enable</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Specifies whether to use Z
+indexing for the channel.</p></li>
+<li><p><strong>zidx_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the value
+to which to reset the measurement when signal Z is high
+and signal A and signal B are at the states you specify
+with <strong>zidx_phase</strong>.</p></li>
+<li><p><strong>zidx_phase</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.EncoderZIndexPhase" title="artdaq.constants.EncoderZIndexPhase"><em>artdaq.constants.EncoderZIndexPhase</em></a><em>]</em>) – Specifies the states at which signal A and signal B must
+be while signal Z is high for ArtDAQ to reset the
+measurement. If signal Z is never high while signal A
+and signal B are high, for example, you must choose a
+phase other than <strong>A_HIGH_B_HIGH</strong>.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.LengthUnits" title="artdaq.constants.LengthUnits"><em>artdaq.constants.LengthUnits</em></a><em>]</em>) – Specifies
+the units to use to return linear position measurements
+from the channel.</p></li>
+<li><p><strong>dist_per_pulse</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Is the distance to measure
+for each pulse the encoder generates on signal A or
+signal B. This value is in the units you specify with
+the <strong>units</strong> input.</p></li>
+<li><p><strong>initial_pos</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Is the position of the
+encoder when you begin the measurement. This value is in
+the units you specify with the <strong>units</strong> input.</p></li>
+<li><p><strong>custom_scale_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies the name of a
+custom scale for the channel. If you want the channel to
+use a custom scale, specify the name of the custom scale
+to this input and set <strong>units</strong> to
+<strong>FROM_CUSTOM_SCALE</strong>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_period_chan">
+<span class="sig-name descname"><span class="pre">add_ci_period_chan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">TimeUnits.SECONDS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Edge.RISING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">CounterFrequencyMethod.LOW_FREQUENCY_1_COUNTER</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divisor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_scale_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_period_chan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_period_chan" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel to measure the period of a digital signal.
+With the exception of devices that support multi-counter tasks,
+you can create only one counter input channel at a time with
+this function because a task can contain only one counter input
+channel. To read from multiple counters simultaneously, use a
+separate task for each counter. Connect the input signal to the
+default input terminal of the counter unless you select a
+different input terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>min_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+minimum value you expect to measure.</p></li>
+<li><p><strong>max_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+maximum value you expect to measure.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.TimeUnits" title="artdaq.constants.TimeUnits"><em>artdaq.constants.TimeUnits</em></a><em>]</em>) – Specifies the
+units to use to return time or period measurements.</p></li>
+<li><p><strong>edge</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Edge" title="artdaq.constants.Edge"><em>artdaq.constants.Edge</em></a><em>]</em>) – Specifies between
+which edges to measure the frequency or period of the
+signal.</p></li>
+<li><p><strong>meas_method</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.CounterFrequencyMethod" title="artdaq.constants.CounterFrequencyMethod"><em>artdaq.constants.CounterFrequencyMethod</em></a><em>]</em>) – Specifies the method to use to calculate the period or
+frequency of the signal.</p></li>
+<li><p><strong>meas_time</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Is the length of time in
+seconds to measure the frequency or period of the signal
+if <strong>meas_method</strong> is <strong>HIGH_FREQUENCYWITH_2_COUNTERS</strong>.
+Leave this input unspecified if <strong>meas_method</strong> is not
+<strong>HIGH_FREQUENCYWITH_2_COUNTERS</strong>.</p></li>
+<li><p><strong>divisor</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Is the value by which to divide the
+input signal when <strong>meas_method</strong> is
+<strong>LARGE_RANGEWITH_2_COUNTERS</strong>. Leave this input
+unspecified if <strong>meas_method</strong> is not
+<strong>LARGE_RANGEWITH_2_COUNTERS</strong>.</p></li>
+<li><p><strong>custom_scale_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies the name of a
+custom scale for the channel. If you want the channel to
+use a custom scale, specify the name of the custom scale
+to this input and set <strong>units</strong> to
+<strong>FROM_CUSTOM_SCALE</strong>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_chan_freq">
+<span class="sig-name descname"><span class="pre">add_ci_pulse_chan_freq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FrequencyUnits.HZ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_pulse_chan_freq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_chan_freq" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel to measure pulse specifications, returning the
+measurements as pairs of frequency and duty cycle. With the
+exception of devices that support multi-counter tasks, you can
+create only one counter input channel at a time with this
+function because a task can contain only one counter input
+channel. To read from multiple counters simultaneously, use a
+separate task for each counter. Connect the input signal to the
+default input terminal of the counter unless you select a
+different input terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>min_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+minimum value you expect to measure.</p></li>
+<li><p><strong>max_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+maximum value you expect to measure.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.FrequencyUnits" title="artdaq.constants.FrequencyUnits"><em>artdaq.constants.FrequencyUnits</em></a><em>]</em>) – Specifies the units to use to return pulse
+specifications in terms of frequency.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_chan_ticks">
+<span class="sig-name descname"><span class="pre">add_ci_pulse_chan_ticks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'100MHzTimebase'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_pulse_chan_ticks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_chan_ticks" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel to measure pulse specifications, returning the
+measurements as pairs of high ticks and low ticks. With the
+exception of devices that support multi-counter tasks, you can
+create only one counter input channel at a time with this
+function because a task can contain only one counter input
+channel. To read from multiple counters simultaneously, use a
+separate task for each counter. Connect the input signal to the
+default input terminal of the counter unless you select a
+different input terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>source_terminal</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Is the terminal to which
+you connect a signal to use as the source of ticks. A
+DAQ terminal constant lists all terminals available on
+devices installed in the system. You also can specify a
+source terminal by specifying a string that contains a
+terminal name. If you specify OnboardClock, or do not
+specify any terminal, ArtDAQ selects the fastest
+onboard timebase available on the device.</p></li>
+<li><p><strong>min_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+minimum value you expect to measure.</p></li>
+<li><p><strong>max_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+maximum value you expect to measure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_chan_time">
+<span class="sig-name descname"><span class="pre">add_ci_pulse_chan_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">TimeUnits.SECONDS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_pulse_chan_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_chan_time" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel to measure pulse specifications, returning the
+measurements as pairs of high time and low time. With the
+exception of devices that support multi-counter tasks, you can
+create only one counter input channel at a time with this
+function because a task can contain only one counter input
+channel. To read from multiple counters simultaneously, use a
+separate task for each counter. Connect the input signal to the
+default input terminal of the counter unless you select a
+different input terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>min_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+minimum value you expect to measure.</p></li>
+<li><p><strong>max_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+maximum value you expect to measure.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.TimeUnits" title="artdaq.constants.TimeUnits"><em>artdaq.constants.TimeUnits</em></a><em>]</em>) – Specifies the
+units to use to return pulse specifications in terms of
+high time and low time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_width_chan">
+<span class="sig-name descname"><span class="pre">add_ci_pulse_width_chan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">TimeUnits.SECONDS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starting_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Edge.RISING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_scale_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_pulse_width_chan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_pulse_width_chan" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel to measure the width of a digital pulse.
+<strong>starting_edge</strong> determines whether to measure a high pulse or
+low pulse. With the exception of devices that support multi-
+counter tasks, you can create only one counter input channel at
+a time with this function because a task can contain only one
+counter input channel. To read from multiple counters
+simultaneously, use a separate task for each counter. Connect
+the input signal to the default input terminal of the counter
+unless you select a different input terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>min_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+minimum value you expect to measure.</p></li>
+<li><p><strong>max_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+maximum value you expect to measure.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.TimeUnits" title="artdaq.constants.TimeUnits"><em>artdaq.constants.TimeUnits</em></a><em>]</em>) – Specifies the
+units to use to return time or period measurements.</p></li>
+<li><p><strong>starting_edge</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Edge" title="artdaq.constants.Edge"><em>artdaq.constants.Edge</em></a><em>]</em>) – Specifies
+on which edge to begin measuring pulse width.</p></li>
+<li><p><strong>custom_scale_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies the name of a
+custom scale for the channel. If you want the channel to
+use a custom scale, specify the name of the custom scale
+to this input and set <strong>units</strong> to
+<strong>FROM_CUSTOM_SCALE</strong>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_semi_period_chan">
+<span class="sig-name descname"><span class="pre">add_ci_semi_period_chan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">TimeUnits.SECONDS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_scale_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_semi_period_chan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_semi_period_chan" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel to measure the time between state transitions
+of a digital signal. With the exception of devices that support
+multi-counter tasks, you can create only one counter input
+channel at a time with this function because a task can contain
+only one counter input channel. To read from multiple counters
+simultaneously, use a separate task for each counter. Connect
+the input signal to the default input terminal of the counter
+unless you select a different input terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>min_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+minimum value you expect to measure.</p></li>
+<li><p><strong>max_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+maximum value you expect to measure.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.TimeUnits" title="artdaq.constants.TimeUnits"><em>artdaq.constants.TimeUnits</em></a><em>]</em>) – Specifies the
+units to use to return time or period measurements.</p></li>
+<li><p><strong>custom_scale_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies the name of a
+custom scale for the channel. If you want the channel to
+use a custom scale, specify the name of the custom scale
+to this input and set <strong>units</strong> to
+<strong>FROM_CUSTOM_SCALE</strong>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_two_edge_sep_chan">
+<span class="sig-name descname"><span class="pre">add_ci_two_edge_sep_chan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">TimeUnits.SECONDS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Edge.RISING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">second_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Edge.FALLING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_scale_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_ci_two_edge_sep_chan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_ci_two_edge_sep_chan" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a channel that measures the amount of time between the
+rising or falling edge of one digital signal and the rising or
+falling edge of another digital signal. With the exception of
+devices that support multi-counter tasks, you can create only
+one counter input channel at a time with this function because a
+task can contain only one counter input channel. To read from
+multiple counters simultaneously, use a separate task for each
+counter. Connect the input signals to the default input
+terminals of the counter unless you select different input
+terminals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the name of the counter to use to
+create the virtual channel. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>min_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+minimum value you expect to measure.</p></li>
+<li><p><strong>max_val</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies in <strong>units</strong> the
+maximum value you expect to measure.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.TimeUnits" title="artdaq.constants.TimeUnits"><em>artdaq.constants.TimeUnits</em></a><em>]</em>) – Specifies the
+units to use to return time or period measurements.</p></li>
+<li><p><strong>first_edge</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Edge" title="artdaq.constants.Edge"><em>artdaq.constants.Edge</em></a><em>]</em>) – Specifies on
+which edge of the first signal to start each
+measurement.</p></li>
+<li><p><strong>second_edge</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Edge" title="artdaq.constants.Edge"><em>artdaq.constants.Edge</em></a><em>]</em>) – Specifies on
+which edge of the second signal to stop each
+measurement.</p></li>
+<li><p><strong>custom_scale_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies the name of a
+custom scale for the channel. If you want the channel to
+use a custom scale, specify the name of the custom scale
+to this input and set <strong>units</strong> to
+<strong>FROM_CUSTOM_SCALE</strong>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.ci_channel.CIChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_co_pulse_chan_freq">
+<span class="sig-name descname"><span class="pre">add_co_pulse_chan_freq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FrequencyUnits.HZ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idle_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Level.LOW</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duty_cycle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_co_pulse_chan_freq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_co_pulse_chan_freq" title="Permalink to this definition"></a></dt>
+<dd><p>Creates channel(s) to generate digital pulses that <strong>freq</strong> and
+<strong>duty_cycle</strong> define. The pulses appear on the default output
+terminal of the counter unless you select a different output
+terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the names of the counters to use to
+create the virtual channels. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.FrequencyUnits" title="artdaq.constants.FrequencyUnits"><em>artdaq.constants.FrequencyUnits</em></a><em>]</em>) – Specifies the units in which to define pulse frequency.</p></li>
+<li><p><strong>idle_state</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Level" title="artdaq.constants.Level"><em>artdaq.constants.Level</em></a><em>]</em>) – Specifies
+the resting state of the output terminal.</p></li>
+<li><p><strong>initial_delay</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Is the amount of time in
+seconds to wait before generating the first pulse.</p></li>
+<li><p><strong>freq</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Specifies at what frequency to
+generate pulses.</p></li>
+<li><p><strong>duty_cycle</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Is the width of the pulse
+divided by the pulse period. ArtDAQ uses this ratio
+combined with frequency to determine pulse width and the
+interval between pulses.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.co_channel.COChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_co_pulse_chan_ticks">
+<span class="sig-name descname"><span class="pre">add_co_pulse_chan_ticks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_terminal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idle_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Level.LOW</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_ticks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high_ticks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_co_pulse_chan_ticks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_co_pulse_chan_ticks" title="Permalink to this definition"></a></dt>
+<dd><p>Creates channel(s) to generate digital pulses defined by the
+number of timebase ticks that the pulse is at a high state and
+the number of timebase ticks that the pulse is at a low state.
+The pulses appear on the default output terminal of the counter
+unless you select a different output terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the names of the counters to use to
+create the virtual channels. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>source_terminal</strong> (<em>str</em>) – Is the terminal to which you connect
+an external timebase. A DAQ terminal constant lists
+all terminals available on devices installed in the
+system. You also can specify a source terminal by
+specifying a string that contains a terminal name.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>idle_state</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Level" title="artdaq.constants.Level"><em>artdaq.constants.Level</em></a><em>]</em>) – Specifies
+the resting state of the output terminal.</p></li>
+<li><p><strong>initial_delay</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Is the number of timebase
+ticks to wait before generating the first pulse.</p></li>
+<li><p><strong>low_ticks</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Is the number of ticks the pulse
+is low.</p></li>
+<li><p><strong>high_ticks</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Is the number of ticks the pulse
+is high.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.co_channel.COChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_co_pulse_chan_time">
+<span class="sig-name descname"><span class="pre">add_co_pulse_chan_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_to_assign_to_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">TimeUnits.SECONDS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idle_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Level.LOW</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/_task_modules/cio_channel_collection.html#CIOChannelCollection.add_co_pulse_chan_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.add_co_pulse_chan_time" title="Permalink to this definition"></a></dt>
+<dd><p>Creates channel(s) to generate digital pulses defined by the
+amount of time the pulse is at a high state and the amount of
+time the pulse is at a low state. The pulses appear on the
+default output terminal of the counter unless you select a
+different output terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter</strong> (<em>str</em>) – Specifies the names of the counters to use to
+create the virtual channels. The DAQ physical channel
+constant lists all physical channels, including
+counters, for devices installed in the system.</p></li>
+<li><p><strong>name_to_assign_to_channel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Specifies a name
+to assign to the virtual channel this function creates.
+If you do not specify a value for this input, ArtDAQ
+uses the physical channel name as the virtual channel
+name.</p></li>
+<li><p><strong>units</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.TimeUnits" title="artdaq.constants.TimeUnits"><em>artdaq.constants.TimeUnits</em></a><em>]</em>) – Specifies the
+units in which to define pulse high and low time.</p></li>
+<li><p><strong>idle_state</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="constants.html#artdaq.constants.Level" title="artdaq.constants.Level"><em>artdaq.constants.Level</em></a><em>]</em>) – Specifies
+the resting state of the output terminal.</p></li>
+<li><p><strong>initial_delay</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Is the amount of time in
+seconds to wait before generating the first pulse.</p></li>
+<li><p><strong>low_time</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Is the amount of time the pulse
+is low.</p></li>
+<li><p><strong>high_time</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Is the amount of time the pulse
+is high.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indicates the newly created channel object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>artdaq._task_modules.channels.co_channel.COChannel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.all">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">all</span></span><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.all" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference internal" href="channel.html#artdaq._task_modules.channels.channel.Channel" title="artdaq._task_modules.channels.channel.Channel"><code class="xref py py-class docutils literal notranslate"><span class="pre">artdaq._task_modules.channels.channel.Channel</span></code></a>:
+Specifies a channel object that represents the entire list of
+virtual channels on this channel collection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">integer</span> <span class="pre">--</span> <span class="pre">return</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">occurrences</span> <span class="pre">of</span> <span class="pre">value</span></span></span><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.count" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artdaq._task_modules.cio_channel_collection.CIOChannelCollection.index">
+<span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">integer</span> <span class="pre">--</span> <span class="pre">return</span> <span class="pre">first</span> <span class="pre">index</span> <span class="pre">of</span> <span class="pre">value.</span></span></span><a class="headerlink" href="#artdaq._task_modules.cio_channel_collection.CIOChannelCollection.index" title="Permalink to this definition"></a></dt>
+<dd><p>Raises ValueError if the value is not present.</p>
+<p>Supporting start and stop arguments is optional, but
+recommended.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ao_channel_collection.html" class="btn btn-neutral float-left" title="artdaq.task.ao_channel_collection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="di_channel_collection.html" class="btn btn-neutral float-right" title="artdaq.task.di_channel_collection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+artdaq.task.timing
+===================
+
+.. automodule:: artdaq._task_modules.timing
+    :members:
+    :show-inheritance:

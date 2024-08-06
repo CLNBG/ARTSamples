@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.error_codes &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="artdaq.stream_readers" href="stream_readers.html" />
+    <link rel="prev" title="artdaq.errors" href="errors.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">artdaq.errors</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>artdaq.error_codes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/error_codes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-artdaq.error_codes">
+<span id="artdaq-error-codes"></span><h1>artdaq.error_codes<a class="headerlink" href="#module-artdaq.error_codes" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.error_codes.</span></span><span class="sig-name descname"><span class="pre">Errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/error_codes.html#Errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.error_codes.Errors" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.ACTIVE_DEV_NOT_SUPPORTED_WITH_MULTI_DEV_TASK">
+<span class="sig-name descname"><span class="pre">ACTIVE_DEV_NOT_SUPPORTED_WITH_MULTI_DEV_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-201207</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.ACTIVE_DEV_NOT_SUPPORTED_WITH_MULTI_DEV_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.ACTIVE_PHYS_CHANNEL_TOO_MANY_LINES_SPECD_WHEN_GETTING_PRPTY">
+<span class="sig-name descname"><span class="pre">ACTIVE_PHYS_CHANNEL_TOO_MANY_LINES_SPECD_WHEN_GETTING_PRPTY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200625</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.ACTIVE_PHYS_CHANNEL_TOO_MANY_LINES_SPECD_WHEN_GETTING_PRPTY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.ATTRIBUTE_NOT_SUPPORTED_IN_TASK_CONTEXT">
+<span class="sig-name descname"><span class="pre">ATTRIBUTE_NOT_SUPPORTED_IN_TASK_CONTEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200452</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.ATTRIBUTE_NOT_SUPPORTED_IN_TASK_CONTEXT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.AUTO_START_READ_NOT_ALLOWED_EVENT_REGISTERED">
+<span class="sig-name descname"><span class="pre">AUTO_START_READ_NOT_ALLOWED_EVENT_REGISTERED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200984</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.AUTO_START_READ_NOT_ALLOWED_EVENT_REGISTERED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.AUTO_START_WRITE_NOT_ALLOWED_EVENT_REGISTERED">
+<span class="sig-name descname"><span class="pre">AUTO_START_WRITE_NOT_ALLOWED_EVENT_REGISTERED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200985</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.AUTO_START_WRITE_NOT_ALLOWED_EVENT_REGISTERED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.BUFFERED_OPERATIONS_NOT_SUPPORTED_ON_SELECTED_LINES">
+<span class="sig-name descname"><span class="pre">BUFFERED_OPERATIONS_NOT_SUPPORTED_ON_SELECTED_LINES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-201062</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.BUFFERED_OPERATIONS_NOT_SUPPORTED_ON_SELECTED_LINES" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.BUFFER_SIZE_NOT_MULTIPLE_OF_EVERY_N_SAMPS_EVENT_INTERVAL_WHEN_DMA">
+<span class="sig-name descname"><span class="pre">BUFFER_SIZE_NOT_MULTIPLE_OF_EVERY_N_SAMPS_EVENT_INTERVAL_WHEN_DMA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200877</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.BUFFER_SIZE_NOT_MULTIPLE_OF_EVERY_N_SAMPS_EVENT_INTERVAL_WHEN_DMA" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.BUFFER_TOO_SMALL_FOR_STRING">
+<span class="sig-name descname"><span class="pre">BUFFER_TOO_SMALL_FOR_STRING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200228</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.BUFFER_TOO_SMALL_FOR_STRING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CALIBRATION_FAILED">
+<span class="sig-name descname"><span class="pre">CALIBRATION_FAILED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200157</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CALIBRATION_FAILED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CANNOT_READ_RELATIVE_TO_REF_TRIG_UNTIL_DONE">
+<span class="sig-name descname"><span class="pre">CANNOT_READ_RELATIVE_TO_REF_TRIG_UNTIL_DONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200281</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CANNOT_READ_RELATIVE_TO_REF_TRIG_UNTIL_DONE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CANNOT_UPDATE_PULSE_GEN_PROPERTY">
+<span class="sig-name descname"><span class="pre">CANNOT_UPDATE_PULSE_GEN_PROPERTY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200301</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CANNOT_UPDATE_PULSE_GEN_PROPERTY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CAN_NOT_PERFORM_OP_WHEN_NO_CHANS_IN_TASK">
+<span class="sig-name descname"><span class="pre">CAN_NOT_PERFORM_OP_WHEN_NO_CHANS_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200478</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CAN_NOT_PERFORM_OP_WHEN_NO_CHANS_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CAN_NOT_PERFORM_OP_WHEN_NO_DEV_IN_TASK">
+<span class="sig-name descname"><span class="pre">CAN_NOT_PERFORM_OP_WHEN_NO_DEV_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200477</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CAN_NOT_PERFORM_OP_WHEN_NO_DEV_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CAN_NOT_PERFORM_OP_WHILE_TASK_RUNNING">
+<span class="sig-name descname"><span class="pre">CAN_NOT_PERFORM_OP_WHILE_TASK_RUNNING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200479</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CAN_NOT_PERFORM_OP_WHILE_TASK_RUNNING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CAN_NOT_READ_WHEN_AUTO_START_FALSE_AND_TASK_NOT_RUNNING_OR_COMMITTED">
+<span class="sig-name descname"><span class="pre">CAN_NOT_READ_WHEN_AUTO_START_FALSE_AND_TASK_NOT_RUNNING_OR_COMMITTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200473</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CAN_NOT_READ_WHEN_AUTO_START_FALSE_AND_TASK_NOT_RUNNING_OR_COMMITTED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CAN_NOT_REGISTER_ART_DAQ_SOFTWARE_EVENT_WHILE_TASK_RUNNING">
+<span class="sig-name descname"><span class="pre">CAN_NOT_REGISTER_ART_DAQ_SOFTWARE_EVENT_WHILE_TASK_RUNNING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200960</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CAN_NOT_REGISTER_ART_DAQ_SOFTWARE_EVENT_WHILE_TASK_RUNNING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CAN_NOT_SET_PROPERTY_WHEN_TASK_RUNNING">
+<span class="sig-name descname"><span class="pre">CAN_NOT_SET_PROPERTY_WHEN_TASK_RUNNING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200557</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CAN_NOT_SET_PROPERTY_WHEN_TASK_RUNNING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CAN_NOT_WRITE_NOT_STARTED_AUTO_START_FALSE_NOT_ON_DEMAND_BUF_SIZE_ZERO">
+<span class="sig-name descname"><span class="pre">CAN_NOT_WRITE_NOT_STARTED_AUTO_START_FALSE_NOT_ON_DEMAND_BUF_SIZE_ZERO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200802</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CAN_NOT_WRITE_NOT_STARTED_AUTO_START_FALSE_NOT_ON_DEMAND_BUF_SIZE_ZERO" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CAN_NOT_WRITE_TO_FINITE_CO_TASK">
+<span class="sig-name descname"><span class="pre">CAN_NOT_WRITE_TO_FINITE_CO_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-201291</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CAN_NOT_WRITE_TO_FINITE_CO_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CAN_NOT_WRITE_WHEN_AUTO_START_FALSE_AND_TASK_NOT_RUNNING_OR_COMMITTED">
+<span class="sig-name descname"><span class="pre">CAN_NOT_WRITE_WHEN_AUTO_START_FALSE_AND_TASK_NOT_RUNNING_OR_COMMITTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200472</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CAN_NOT_WRITE_WHEN_AUTO_START_FALSE_AND_TASK_NOT_RUNNING_OR_COMMITTED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CHANNEL_ALREADY_IN_TASK">
+<span class="sig-name descname"><span class="pre">CHANNEL_ALREADY_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200489</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CHANNEL_ALREADY_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CHANNEL_NOT_IN_TASK">
+<span class="sig-name descname"><span class="pre">CHANNEL_NOT_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200486</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CHANNEL_NOT_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U16_PORT_READ">
+<span class="sig-name descname"><span class="pre">CHANNEL_SIZE_TOO_BIG_FOR_U16_PORT_READ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200878</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U16_PORT_READ" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U16_PORT_WRITE">
+<span class="sig-name descname"><span class="pre">CHANNEL_SIZE_TOO_BIG_FOR_U16_PORT_WRITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200879</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U16_PORT_WRITE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U32_PORT_READ">
+<span class="sig-name descname"><span class="pre">CHANNEL_SIZE_TOO_BIG_FOR_U32_PORT_READ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200564</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U32_PORT_READ" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U32_PORT_WRITE">
+<span class="sig-name descname"><span class="pre">CHANNEL_SIZE_TOO_BIG_FOR_U32_PORT_WRITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200566</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U32_PORT_WRITE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U8_PORT_READ">
+<span class="sig-name descname"><span class="pre">CHANNEL_SIZE_TOO_BIG_FOR_U8_PORT_READ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200563</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U8_PORT_READ" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U8_PORT_WRITE">
+<span class="sig-name descname"><span class="pre">CHANNEL_SIZE_TOO_BIG_FOR_U8_PORT_WRITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200565</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CHANNEL_SIZE_TOO_BIG_FOR_U8_PORT_WRITE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.COUNTER_INPUT_PAUSE_TRIGGER_AND_SAMPLE_CLOCK_INVALID">
+<span class="sig-name descname"><span class="pre">COUNTER_INPUT_PAUSE_TRIGGER_AND_SAMPLE_CLOCK_INVALID</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200145</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.COUNTER_INPUT_PAUSE_TRIGGER_AND_SAMPLE_CLOCK_INVALID" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.COUNTER_OUTPUT_PAUSE_TRIGGER_INVALID">
+<span class="sig-name descname"><span class="pre">COUNTER_OUTPUT_PAUSE_TRIGGER_INVALID</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200144</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.COUNTER_OUTPUT_PAUSE_TRIGGER_INVALID" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.COUNTER_START_PAUSE_TRIGGER_CONFLICT">
+<span class="sig-name descname"><span class="pre">COUNTER_START_PAUSE_TRIGGER_CONFLICT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200146</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.COUNTER_START_PAUSE_TRIGGER_CONFLICT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.CTR_MIN_MAX">
+<span class="sig-name descname"><span class="pre">CTR_MIN_MAX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200527</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.CTR_MIN_MAX" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.DEVICE_NAME_NOT_FOUND_ROUTING">
+<span class="sig-name descname"><span class="pre">DEVICE_NAME_NOT_FOUND_ROUTING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-88717</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.DEVICE_NAME_NOT_FOUND_ROUTING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.DEVICE_NOT_EXIST">
+<span class="sig-name descname"><span class="pre">DEVICE_NOT_EXIST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200220</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.DEVICE_NOT_EXIST" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.DEVS_WITHOUT_SYNC_STRATEGIES">
+<span class="sig-name descname"><span class="pre">DEVS_WITHOUT_SYNC_STRATEGIES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-201426</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.DEVS_WITHOUT_SYNC_STRATEGIES" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.DEV_ALREADY_IN_TASK">
+<span class="sig-name descname"><span class="pre">DEV_ALREADY_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200481</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.DEV_ALREADY_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.DEV_CANNOT_BE_ACCESSED">
+<span class="sig-name descname"><span class="pre">DEV_CANNOT_BE_ACCESSED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-201003</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.DEV_CANNOT_BE_ACCESSED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.DEV_NOT_IN_TASK">
+<span class="sig-name descname"><span class="pre">DEV_NOT_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200482</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.DEV_NOT_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.DUPLICATE_TASK">
+<span class="sig-name descname"><span class="pre">DUPLICATE_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200089</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.DUPLICATE_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.ERROR_OPERATION_TIMED_OUT">
+<span class="sig-name descname"><span class="pre">ERROR_OPERATION_TIMED_OUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200474</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.ERROR_OPERATION_TIMED_OUT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.EVERY_N_SAMPLES_ACQ_INTO_BUFFER_EVENT_NOT_SUPPORTED_BY_DEVICE">
+<span class="sig-name descname"><span class="pre">EVERY_N_SAMPLES_ACQ_INTO_BUFFER_EVENT_NOT_SUPPORTED_BY_DEVICE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200981</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.EVERY_N_SAMPLES_ACQ_INTO_BUFFER_EVENT_NOT_SUPPORTED_BY_DEVICE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.EVERY_N_SAMPLES_EVENT_NOT_SUPPORTED">
+<span class="sig-name descname"><span class="pre">EVERY_N_SAMPLES_EVENT_NOT_SUPPORTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">200489</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.EVERY_N_SAMPLES_EVENT_NOT_SUPPORTED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.EVERY_N_SAMPLES_EVENT_NOT_SUPPORTED_FOR_NON_BUFFERED_TASKS">
+<span class="sig-name descname"><span class="pre">EVERY_N_SAMPLES_EVENT_NOT_SUPPORTED_FOR_NON_BUFFERED_TASKS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200848</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.EVERY_N_SAMPLES_EVENT_NOT_SUPPORTED_FOR_NON_BUFFERED_TASKS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.EVERY_N_SAMPLES_TRANSFERRED_FROM_BUFFER_EVENT_NOT_SUPPORTED_BY_DEVICE">
+<span class="sig-name descname"><span class="pre">EVERY_N_SAMPLES_TRANSFERRED_FROM_BUFFER_EVENT_NOT_SUPPORTED_BY_DEVICE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200980</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.EVERY_N_SAMPLES_TRANSFERRED_FROM_BUFFER_EVENT_NOT_SUPPORTED_BY_DEVICE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.EVERY_N_SAMPS_ACQ_INTO_BUFFER_NOT_FOR_OUTPUT">
+<span class="sig-name descname"><span class="pre">EVERY_N_SAMPS_ACQ_INTO_BUFFER_NOT_FOR_OUTPUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200964</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.EVERY_N_SAMPS_ACQ_INTO_BUFFER_NOT_FOR_OUTPUT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.EVERY_N_SAMPS_TRANSFERRED_FROM_BUFFER_NOT_FOR_INPUT">
+<span class="sig-name descname"><span class="pre">EVERY_N_SAMPS_TRANSFERRED_FROM_BUFFER_NOT_FOR_INPUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200965</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.EVERY_N_SAMPS_TRANSFERRED_FROM_BUFFER_NOT_FOR_INPUT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.EXT_SAMP_CLK_SRC_NOT_SPECIFIED">
+<span class="sig-name descname"><span class="pre">EXT_SAMP_CLK_SRC_NOT_SPECIFIED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200303</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.EXT_SAMP_CLK_SRC_NOT_SPECIFIED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.FILE_NOT_FOUND">
+<span class="sig-name descname"><span class="pre">FILE_NOT_FOUND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-26103</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.FILE_NOT_FOUND" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.GEN_STOPPED_TO_PREVENT_REGEN_OF_OLD_SAMPLES">
+<span class="sig-name descname"><span class="pre">GEN_STOPPED_TO_PREVENT_REGEN_OF_OLD_SAMPLES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200290</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.GEN_STOPPED_TO_PREVENT_REGEN_OF_OLD_SAMPLES" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVAILD_NUM_SAMPS_TO_WRITE">
+<span class="sig-name descname"><span class="pre">INVAILD_NUM_SAMPS_TO_WRITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200622</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVAILD_NUM_SAMPS_TO_WRITE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_ANALOG_TRIG_SRC">
+<span class="sig-name descname"><span class="pre">INVALID_ANALOG_TRIG_SRC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200265</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_ANALOG_TRIG_SRC" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_ATTRIBUTE_VALUE">
+<span class="sig-name descname"><span class="pre">INVALID_ATTRIBUTE_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200077</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_ATTRIBUTE_VALUE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_CHANNEL">
+<span class="sig-name descname"><span class="pre">INVALID_CHANNEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200087</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_CHANNEL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_DEVICE_NAME">
+<span class="sig-name descname"><span class="pre">INVALID_DEVICE_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-201339</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_DEVICE_NAME" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_FILL_MODE_PARAMETER">
+<span class="sig-name descname"><span class="pre">INVALID_FILL_MODE_PARAMETER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-300001</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_FILL_MODE_PARAMETER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_NUMBER_SAMPLES_TO_READ">
+<span class="sig-name descname"><span class="pre">INVALID_NUMBER_SAMPLES_TO_READ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200096</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_NUMBER_SAMPLES_TO_READ" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_OPTION_FOR_DIGITAL_PORT_CHANNEL">
+<span class="sig-name descname"><span class="pre">INVALID_OPTION_FOR_DIGITAL_PORT_CHANNEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200376</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_OPTION_FOR_DIGITAL_PORT_CHANNEL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_PHYS_CHANNEL_STRING">
+<span class="sig-name descname"><span class="pre">INVALID_PHYS_CHANNEL_STRING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-201237</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_PHYS_CHANNEL_STRING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_PHYS_CHAN_TYPE">
+<span class="sig-name descname"><span class="pre">INVALID_PHYS_CHAN_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200430</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_PHYS_CHAN_TYPE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_ROUNTING_SOURCE_TERMINAL_NAME_ROUTING">
+<span class="sig-name descname"><span class="pre">INVALID_ROUNTING_SOURCE_TERMINAL_NAME_ROUTING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-89120</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_ROUNTING_SOURCE_TERMINAL_NAME_ROUTING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_SYNTAX_FOR_PHYSICAL_CHANNEL_RANGE">
+<span class="sig-name descname"><span class="pre">INVALID_SYNTAX_FOR_PHYSICAL_CHANNEL_RANGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200086</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_SYNTAX_FOR_PHYSICAL_CHANNEL_RANGE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_TASK">
+<span class="sig-name descname"><span class="pre">INVALID_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200088</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_TASK_NAME">
+<span class="sig-name descname"><span class="pre">INVALID_TASK_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-201340</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_TASK_NAME" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_TERM_ROUTING">
+<span class="sig-name descname"><span class="pre">INVALID_TERM_ROUTING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-89129</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_TERM_ROUTING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_TIMEOUT_VAL">
+<span class="sig-name descname"><span class="pre">INVALID_TIMEOUT_VAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200453</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_TIMEOUT_VAL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.INVALID_TIMING_TYPE">
+<span class="sig-name descname"><span class="pre">INVALID_TIMING_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200300</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.INVALID_TIMING_TYPE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.MIN_NOT_LESS_THAN_MAX">
+<span class="sig-name descname"><span class="pre">MIN_NOT_LESS_THAN_MAX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200082</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.MIN_NOT_LESS_THAN_MAX" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.MULTIPLE_COUNTER_INPUT_TASK">
+<span class="sig-name descname"><span class="pre">MULTIPLE_COUNTER_INPUT_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200147</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.MULTIPLE_COUNTER_INPUT_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.MULTI_CHANNEL_TYPES_IN_TASK">
+<span class="sig-name descname"><span class="pre">MULTI_CHANNEL_TYPES_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200559</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.MULTI_CHANNEL_TYPES_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.MULTI_DEVS_IN_TASK">
+<span class="sig-name descname"><span class="pre">MULTI_DEVS_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200558</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.MULTI_DEVS_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.NONBUFFERED_OR_NO_CHANNELS">
+<span class="sig-name descname"><span class="pre">NONBUFFERED_OR_NO_CHANNELS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-201395</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.NONBUFFERED_OR_NO_CHANNELS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.NO_MORE_SPACE">
+<span class="sig-name descname"><span class="pre">NO_MORE_SPACE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200293</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.NO_MORE_SPACE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.NULL_PTR">
+<span class="sig-name descname"><span class="pre">NULL_PTR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200604</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.NULL_PTR" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.ONE_CHAN_READ_FOR_MULTI_CHAN_TASK">
+<span class="sig-name descname"><span class="pre">ONE_CHAN_READ_FOR_MULTI_CHAN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200523</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.ONE_CHAN_READ_FOR_MULTI_CHAN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.OUTPUT_BUFFER_EMPTY">
+<span class="sig-name descname"><span class="pre">OUTPUT_BUFFER_EMPTY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200462</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.OUTPUT_BUFFER_EMPTY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PAL_COMMUNICATIONS_FAULT">
+<span class="sig-name descname"><span class="pre">PAL_COMMUNICATIONS_FAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-50401</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PAL_COMMUNICATIONS_FAULT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PAL_DEVICE_INITIALIZATION_FAULT">
+<span class="sig-name descname"><span class="pre">PAL_DEVICE_INITIALIZATION_FAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-50303</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PAL_DEVICE_INITIALIZATION_FAULT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PAL_DEVICE_NOT_SUPPORTED">
+<span class="sig-name descname"><span class="pre">PAL_DEVICE_NOT_SUPPORTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-50302</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PAL_DEVICE_NOT_SUPPORTED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PAL_DEVICE_UNKNOWN">
+<span class="sig-name descname"><span class="pre">PAL_DEVICE_UNKNOWN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-50301</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PAL_DEVICE_UNKNOWN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PAL_FUNCTION_NOT_FOUND">
+<span class="sig-name descname"><span class="pre">PAL_FUNCTION_NOT_FOUND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-50255</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PAL_FUNCTION_NOT_FOUND" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PAL_MEMORY_CONFIGURATION_FAULT">
+<span class="sig-name descname"><span class="pre">PAL_MEMORY_CONFIGURATION_FAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-50350</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PAL_MEMORY_CONFIGURATION_FAULT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PAL_RESOURCE_RESERVED">
+<span class="sig-name descname"><span class="pre">PAL_RESOURCE_RESERVED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-50103</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PAL_RESOURCE_RESERVED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PHYSICAL_CHANNEL_DOES_NOT_EXIT">
+<span class="sig-name descname"><span class="pre">PHYSICAL_CHANNEL_DOES_NOT_EXIT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200170</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PHYSICAL_CHANNEL_DOES_NOT_EXIT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PHYS_CHANNEL_DEV_NOT_IN_TASK">
+<span class="sig-name descname"><span class="pre">PHYS_CHANNEL_DEV_NOT_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200648</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PHYS_CHANNEL_DEV_NOT_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PHYS_CHAN_MEAS_TYPE">
+<span class="sig-name descname"><span class="pre">PHYS_CHAN_MEAS_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200431</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PHYS_CHAN_MEAS_TYPE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.PHYS_CHAN_OUTPUT_TYPE">
+<span class="sig-name descname"><span class="pre">PHYS_CHAN_OUTPUT_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200432</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.PHYS_CHAN_OUTPUT_TYPE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.READ_BUFFER_TOO_SMALL">
+<span class="sig-name descname"><span class="pre">READ_BUFFER_TOO_SMALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200229</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.READ_BUFFER_TOO_SMALL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.READ_CHAN_TYPE_MISMATCH">
+<span class="sig-name descname"><span class="pre">READ_CHAN_TYPE_MISMATCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200525</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.READ_CHAN_TYPE_MISMATCH" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.READ_NO_INPUT_CHANS_IN_TASK">
+<span class="sig-name descname"><span class="pre">READ_NO_INPUT_CHANS_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200460</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.READ_NO_INPUT_CHANS_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.REAL_DEV_AND_SIM_DEV_NOT_SUPPORTED_IN_SAME_TASK">
+<span class="sig-name descname"><span class="pre">REAL_DEV_AND_SIM_DEV_NOT_SUPPORTED_IN_SAME_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-201206</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.REAL_DEV_AND_SIM_DEV_NOT_SUPPORTED_IN_SAME_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.RECEIVE_SERVICES_DATA">
+<span class="sig-name descname"><span class="pre">RECEIVE_SERVICES_DATA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-229776</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.RECEIVE_SERVICES_DATA" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.REF_AND_PAUSE_TRIG_CONFIGURED">
+<span class="sig-name descname"><span class="pre">REF_AND_PAUSE_TRIG_CONFIGURED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200628</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.REF_AND_PAUSE_TRIG_CONFIGURED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.REF_TRIG_WHEN_CONTINUOUS">
+<span class="sig-name descname"><span class="pre">REF_TRIG_WHEN_CONTINUOUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200358</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.REF_TRIG_WHEN_CONTINUOUS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.RUNTIME_ABORTED_ROUTING">
+<span class="sig-name descname"><span class="pre">RUNTIME_ABORTED_ROUTING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-88709</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.RUNTIME_ABORTED_ROUTING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SAMPLES_CAN_NOT_YET_BE_WRITTEN">
+<span class="sig-name descname"><span class="pre">SAMPLES_CAN_NOT_YET_BE_WRITTEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200292</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SAMPLES_CAN_NOT_YET_BE_WRITTEN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SAMPLES_NOT_YET_AVALIABLE">
+<span class="sig-name descname"><span class="pre">SAMPLES_NOT_YET_AVALIABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200284</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SAMPLES_NOT_YET_AVALIABLE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SAMPLES_NO_LONGER_AVAILABLE">
+<span class="sig-name descname"><span class="pre">SAMPLES_NO_LONGER_AVAILABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200279</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SAMPLES_NO_LONGER_AVAILABLE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SAMPLES_WILL_NEVER_BE_AVAILABLE">
+<span class="sig-name descname"><span class="pre">SAMPLES_WILL_NEVER_BE_AVAILABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200278</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SAMPLES_WILL_NEVER_BE_AVAILABLE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SAMPLES_WILL_NEVER_BE_GENERATED">
+<span class="sig-name descname"><span class="pre">SAMPLES_WILL_NEVER_BE_GENERATED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200288</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SAMPLES_WILL_NEVER_BE_GENERATED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SAMPLE_RATE_NUM_CHANNELS_CONVERT_PERIOD_COMBO">
+<span class="sig-name descname"><span class="pre">SAMPLE_RATE_NUM_CHANNELS_CONVERT_PERIOD_COMBO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200081</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SAMPLE_RATE_NUM_CHANNELS_CONVERT_PERIOD_COMBO" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SEND_SERVICES_DATA">
+<span class="sig-name descname"><span class="pre">SEND_SERVICES_DATA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-229778</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SEND_SERVICES_DATA" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SERVICES_CAN_NOT_CONNECT">
+<span class="sig-name descname"><span class="pre">SERVICES_CAN_NOT_CONNECT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-229779</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SERVICES_CAN_NOT_CONNECT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SERVICES_RESPONSE_ERROR">
+<span class="sig-name descname"><span class="pre">SERVICES_RESPONSE_ERROR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-229775</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SERVICES_RESPONSE_ERROR" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SPECIFIED_ATTR_NOT_VALID">
+<span class="sig-name descname"><span class="pre">SPECIFIED_ATTR_NOT_VALID</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200233</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SPECIFIED_ATTR_NOT_VALID" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SUITABLE_TIMEBASE_NOT_FOUND_FREQUENCY_COMBO_2">
+<span class="sig-name descname"><span class="pre">SUITABLE_TIMEBASE_NOT_FOUND_FREQUENCY_COMBO_2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200745</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SUITABLE_TIMEBASE_NOT_FOUND_FREQUENCY_COMBO_2" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.SUITABLE_TIMEBASE_NOT_FOUND_TIME_COMBO_2">
+<span class="sig-name descname"><span class="pre">SUITABLE_TIMEBASE_NOT_FOUND_TIME_COMBO_2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200746</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.SUITABLE_TIMEBASE_NOT_FOUND_TIME_COMBO_2" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.TIMEOUT">
+<span class="sig-name descname"><span class="pre">TIMEOUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-26802</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.TIMEOUT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.TRIG_WHEN_ON_DEMAND_SAMP_TIMING">
+<span class="sig-name descname"><span class="pre">TRIG_WHEN_ON_DEMAND_SAMP_TIMING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200262</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.TRIG_WHEN_ON_DEMAND_SAMP_TIMING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.UNKNOWN">
+<span class="sig-name descname"><span class="pre">UNKNOWN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.UNKNOWN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.UNSUPPORTED_SIGNAL_TYPE_EXPORT_SIGNAL">
+<span class="sig-name descname"><span class="pre">UNSUPPORTED_SIGNAL_TYPE_EXPORT_SIGNAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200375</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.UNSUPPORTED_SIGNAL_TYPE_EXPORT_SIGNAL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.WAIT_UNTIL_DONE_DOES_NOT_INDICATE_DONE">
+<span class="sig-name descname"><span class="pre">WAIT_UNTIL_DONE_DOES_NOT_INDICATE_DONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200560</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.WAIT_UNTIL_DONE_DOES_NOT_INDICATE_DONE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.WHITE_FALIS_BUFFER_SIZE_AUTO_CONFIGURED">
+<span class="sig-name descname"><span class="pre">WHITE_FALIS_BUFFER_SIZE_AUTO_CONFIGURED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200547</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.WHITE_FALIS_BUFFER_SIZE_AUTO_CONFIGURED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.WRITE_CHAN_TYPE_MISMATCH">
+<span class="sig-name descname"><span class="pre">WRITE_CHAN_TYPE_MISMATCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200526</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.WRITE_CHAN_TYPE_MISMATCH" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.WRITE_NO_OUTPUT_CHANS_IN_TASK">
+<span class="sig-name descname"><span class="pre">WRITE_NO_OUTPUT_CHANS_IN_TASK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200459</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.WRITE_NO_OUTPUT_CHANS_IN_TASK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Errors.WRITE_NUM_CHANS_MISMATCH">
+<span class="sig-name descname"><span class="pre">WRITE_NUM_CHANS_MISMATCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-200524</span></em><a class="headerlink" href="#artdaq.error_codes.Errors.WRITE_NUM_CHANS_MISMATCH" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="artdaq.error_codes.Warnings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artdaq.error_codes.</span></span><span class="sig-name descname"><span class="pre">Warnings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/artdaq/error_codes.html#Warnings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artdaq.error_codes.Warnings" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Warnings.CAPI_STRING_TRUNCATED_TO_FIT_BUFFER">
+<span class="sig-name descname"><span class="pre">CAPI_STRING_TRUNCATED_TO_FIT_BUFFER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">200026</span></em><a class="headerlink" href="#artdaq.error_codes.Warnings.CAPI_STRING_TRUNCATED_TO_FIT_BUFFER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Warnings.Returned_DATA_IS_NOT_ENOUGH">
+<span class="sig-name descname"><span class="pre">Returned_DATA_IS_NOT_ENOUGH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30014</span></em><a class="headerlink" href="#artdaq.error_codes.Warnings.Returned_DATA_IS_NOT_ENOUGH" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artdaq.error_codes.Warnings.UNKNOWN">
+<span class="sig-name descname"><span class="pre">UNKNOWN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#artdaq.error_codes.Warnings.UNKNOWN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="errors.html" class="btn btn-neutral float-left" title="artdaq.errors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stream_readers.html" class="btn btn-neutral float-right" title="artdaq.stream_readers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

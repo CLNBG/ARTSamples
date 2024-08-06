@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ART_SCOPE_Lib.constants &mdash; ArtScope 1.20.0032 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ArtScope
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../functions.html">functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../error_codes.html">error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors.html">errors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ArtScope</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ART_SCOPE_Lib.constants</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ART_SCOPE_Lib.constants</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="SampleMode"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.SampleMode">[docs]</a><span class="k">class</span> <span class="nc">SampleMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    acquisition mode</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">FINITE</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1">#: finite</span>
+    <span class="n">CONTINUOUS</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: continuous</span></div>
+
+<div class="viewcode-block" id="CouplingType"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.CouplingType">[docs]</a><span class="k">class</span> <span class="nc">CouplingType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    coupling</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">DC</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: dc</span>
+    <span class="n">AC</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: ac</span></div>
+
+<div class="viewcode-block" id="InputImpedance"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.InputImpedance">[docs]</a><span class="k">class</span> <span class="nc">InputImpedance</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    input impedance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">AI_IMPEND_1M</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: 1M</span>
+    <span class="n">AI_IMPEND_50</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: 50</span></div>
+
+<div class="viewcode-block" id="BandWidth"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.BandWidth">[docs]</a><span class="k">class</span> <span class="nc">BandWidth</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    bandwidth</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">BANDWIDTH_ALL</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>    <span class="c1">#: full bandwidth</span>
+    <span class="n">BANDWIDTH_DEFAULT</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#: default bandwidth</span>
+    <span class="n">BANDWIDTH_100M</span> <span class="o">=</span> <span class="mi">1</span>    <span class="c1">#: 100MHz</span>
+    <span class="n">BANDWIDTH_20M</span> <span class="o">=</span> <span class="mi">2</span>     <span class="c1">#: 20MHz</span></div>
+
+<div class="viewcode-block" id="InputRange"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.InputRange">[docs]</a><span class="k">class</span> <span class="nc">InputRange</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    range</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">RANGE_20VPP</span> <span class="o">=</span> <span class="mi">0</span>     <span class="c1">#: ±10V</span>
+    <span class="n">RANGE_10VPP</span> <span class="o">=</span> <span class="mi">1</span>     <span class="c1">#: ±5V</span>
+    <span class="n">RANGE_2VPP</span> <span class="o">=</span> <span class="mi">2</span>      <span class="c1">#: ±1V</span>
+    <span class="n">RANGE_40VPP</span> <span class="o">=</span> <span class="mi">3</span>     <span class="c1">#: 5V/Div(40Vpp)</span>
+    <span class="n">RANGE_16VPP</span> <span class="o">=</span> <span class="mi">4</span>     <span class="c1">#: 2V/Div(16Vpp)</span>
+    <span class="n">RANGE_8VPP</span> <span class="o">=</span> <span class="mi">5</span>      <span class="c1">#: 1V/Div(8Vpp)</span>
+    <span class="n">RANGE_4VPP</span> <span class="o">=</span> <span class="mi">6</span>      <span class="c1">#: 500mV/Div(4Vpp)</span>
+    <span class="n">RANGE_1600MVPP</span> <span class="o">=</span> <span class="mi">7</span>  <span class="c1">#: 200mV/Div(1.6Vpp)</span>
+    <span class="n">RANGE_800MVPP</span> <span class="o">=</span> <span class="mi">8</span>   <span class="c1">#: 100mV/Div(800mVpp)</span>
+    <span class="n">RANGE_400MVPP</span> <span class="o">=</span> <span class="mi">9</span>   <span class="c1">#: 50mV/Div(400mVpp)</span>
+    <span class="n">RANGE_160MVPP</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1">#: 20mV/Div(160mVpp)</span>
+    <span class="n">RANGE_80MVPP</span> <span class="o">=</span> <span class="mi">11</span>   <span class="c1">#: 10mV/Div(80mVpp)</span>
+    <span class="n">RANGE_40MVPP</span> <span class="o">=</span> <span class="mi">12</span>   <span class="c1">#: 5mV/Div(40mVpp)</span></div>
+
+<div class="viewcode-block" id="TriggerSource"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.TriggerSource">[docs]</a><span class="k">class</span> <span class="nc">TriggerSource</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    trigger source</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">TRIGSRC_DTR</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_DTR&quot;</span>             <span class="c1">#: external digital trigger</span>
+    <span class="n">TRIGSRC_ATR</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_ATR&quot;</span>             <span class="c1">#: external analog trigger</span>
+    <span class="n">TRIGSRC_SYNC</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_SYNCTRIGGER&quot;</span>    <span class="c1">#: synchronous trigger</span>
+    <span class="n">TRIGSRC_CH0</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_CH0&quot;</span>             <span class="c1">#: ch0 trigger</span>
+    <span class="n">TRIGSRC_CH1</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_CH1&quot;</span>             <span class="c1">#: ch1 trigger</span>
+    <span class="n">TRIGSRC_CH2</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_CH2&quot;</span>             <span class="c1">#: ch2 trigger</span>
+    <span class="n">TRIGSRC_CH3</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_CH3&quot;</span>             <span class="c1">#: ch3 trigger</span>
+    <span class="n">TRIGSRC_CH4</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_CH4&quot;</span>             <span class="c1">#: ch4 trigger</span>
+    <span class="n">TRIGSRC_CH5</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_CH5&quot;</span>             <span class="c1">#: ch5 trigger</span>
+    <span class="n">TRIGSRC_CH6</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_CH6&quot;</span>             <span class="c1">#: ch6 trigger</span>
+    <span class="n">TRIGSRC_CH7</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_CH7&quot;</span>             <span class="c1">#: ch7 trigger</span>
+    <span class="n">TRIGSRC_PFI</span> <span class="o">=</span> <span class="s2">&quot;VAL_TRIGGER_PFI&quot;</span>             <span class="c1">#: PFI digital trigger(only 8582 8584 8586 8582A 8584A 8586A support)</span></div>
+
+<div class="viewcode-block" id="TriggerSyncSrc"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.TriggerSyncSrc">[docs]</a><span class="k">class</span> <span class="nc">TriggerSyncSrc</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    synchronous trigger source</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">TRIG_SYNC_0</span> <span class="o">=</span> <span class="s2">&quot;VAL_SYNC_TRIGGER0&quot;</span>  <span class="c1">#: synchronous trigger 0</span>
+    <span class="n">TRIG_SYNC_1</span> <span class="o">=</span> <span class="s2">&quot;VAL_SYNC_TRIGGER1&quot;</span>  <span class="c1">#: synchronous trigger 1</span>
+    <span class="n">TRIG_SYNC_2</span> <span class="o">=</span> <span class="s2">&quot;VAL_SYNC_TRIGGER2&quot;</span>  <span class="c1">#: synchronous trigger 2</span>
+    <span class="n">TRIG_SYNC_3</span> <span class="o">=</span> <span class="s2">&quot;VAL_SYNC_TRIGGER3&quot;</span>  <span class="c1">#: synchronous trigger 3</span>
+    <span class="n">TRIG_SYNC_4</span> <span class="o">=</span> <span class="s2">&quot;VAL_SYNC_TRIGGER4&quot;</span>  <span class="c1">#: synchronous trigger 4</span>
+    <span class="n">TRIG_SYNC_5</span> <span class="o">=</span> <span class="s2">&quot;VAL_SYNC_TRIGGER5&quot;</span>  <span class="c1">#: synchronous trigger 5</span>
+    <span class="n">TRIG_SYNC_6</span> <span class="o">=</span> <span class="s2">&quot;VAL_SYNC_TRIGGER6&quot;</span>  <span class="c1">#: synchronous trigger 6</span>
+    <span class="n">TRIG_SYNC_7</span> <span class="o">=</span> <span class="s2">&quot;VAL_SYNC_TRIGGER7&quot;</span>  <span class="c1">#: synchronous trigger 7</span></div>
+
+<div class="viewcode-block" id="TriggerSlope"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.TriggerSlope">[docs]</a><span class="k">class</span> <span class="nc">TriggerSlope</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    trigger direction</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">TRIGDIR_NEGATIVE</span> <span class="o">=</span> <span class="mi">0</span>    <span class="c1">#: negative</span>
+    <span class="n">TRIGDIR_POSITIVE</span> <span class="o">=</span> <span class="mi">1</span>    <span class="c1">#: positive</span>
+    <span class="n">TRIGDIR_NEGATPOSIT</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: negative and positive</span></div>
+
+<div class="viewcode-block" id="TriggerPolarity"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.TriggerPolarity">[docs]</a><span class="k">class</span> <span class="nc">TriggerPolarity</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    trigger polarity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">TRIGPOLAR_POSITIVE</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: positive</span>
+    <span class="n">TRIGPOLAR_NEGATIVE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: negative</span></div>
+
+<div class="viewcode-block" id="TriggerCoupling"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.TriggerCoupling">[docs]</a><span class="k">class</span> <span class="nc">TriggerCoupling</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    trigger coupling</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">TRIGCOUP_DC</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1">#: dc</span>
+    <span class="n">TRIGCOUP_AC</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1">#: ac</span>
+    <span class="n">TRIGCOUP_HIG</span> <span class="o">=</span> <span class="mi">2</span>     <span class="c1">#: HF reject</span>
+    <span class="n">TRIGCOUP_LOW</span> <span class="o">=</span> <span class="mi">3</span>     <span class="c1">#: LF reject</span></div>
+
+<div class="viewcode-block" id="TriggerWindowType"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.TriggerWindowType">[docs]</a><span class="k">class</span> <span class="nc">TriggerWindowType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    trigger window type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">WINDOW_ENTERING</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: in</span>
+    <span class="n">WINDOW_LEAVING</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1">#: out</span></div>
+
+<div class="viewcode-block" id="TriggerPulseDirection"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.TriggerPulseDirection">[docs]</a><span class="k">class</span> <span class="nc">TriggerPulseDirection</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    trigger pulse slope</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">TRIGDIR_PULSE_GREATER</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1">#: greater than the set pulse width</span>
+    <span class="n">TRIGDIR_PULSE_LESS</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1">#: lower than the set pulse width</span>
+    <span class="n">TRIGDIR_PULSE_EQUAL</span> <span class="o">=</span> <span class="mi">2</span>     <span class="c1">#: equal to the set pulse width</span>
+    <span class="n">TRIGDIR_PULSE_NEQUAL</span> <span class="o">=</span> <span class="mi">3</span>    <span class="c1">#: not equal to the set pulse width</span></div>
+
+<div class="viewcode-block" id="TriggerOutPolarity"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.TriggerOutPolarity">[docs]</a><span class="k">class</span> <span class="nc">TriggerOutPolarity</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    trigger out polarity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">TRIGOUT_POLAR_NEGATIVE</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: negative</span>
+    <span class="n">TRIGOUT_POLAR_POSITIVE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: positive</span></div>
+
+<div class="viewcode-block" id="InputClockSource"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.InputClockSource">[docs]</a><span class="k">class</span> <span class="nc">InputClockSource</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    input clock source</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">CLK_IN</span> <span class="o">=</span> <span class="s2">&quot;VAL_CLK_IN&quot;</span>                <span class="c1">#: external clock(CLK_IN)(8582 8584 8586 don&#39;t support)</span>
+    <span class="n">CLK_ONBOARD</span> <span class="o">=</span> <span class="s2">&quot;VAL_CLK_INTERNAL&quot;</span>     <span class="c1">#: on board clock</span>
+    <span class="n">CLK10M_EXT</span> <span class="o">=</span> <span class="s2">&quot;VAL_CLK10M_EXT&quot;</span>        <span class="c1">#: external 10M clock(CLK_IN)(8582 8584 8586 don&#39;t support)</span>
+    <span class="n">CLK10M_PXI</span> <span class="o">=</span> <span class="s2">&quot;VAL_CLK10M_PXI&quot;</span>        <span class="c1">#: PXIe_CLK10M(PXIE)/Master 10M(PCIE)</span>
+    <span class="n">CLK10M_MASTER</span> <span class="o">=</span> <span class="s2">&quot;VAL_CLK10M_MASTER&quot;</span>  <span class="c1">#: Master 10M clock(PCIE or USB)</span>
+    <span class="n">CLK100M_PXIE</span> <span class="o">=</span> <span class="s2">&quot;VAL_CLK100M_PXIE&quot;</span>    <span class="c1">#: PXIe_CLK100M(PCIE and USB don&#39;t support)</span></div>
+
+<div class="viewcode-block" id="ExportClockType"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.ExportClockType">[docs]</a><span class="k">class</span> <span class="nc">ExportClockType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    export clock type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">CLK_REF</span> <span class="o">=</span> <span class="mi">0</span>     <span class="c1">#: reference clock</span>
+    <span class="n">CLK_SAMPLE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: time base</span></div>
+
+<div class="viewcode-block" id="ARTSCOPE_STATUS_AD"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD">[docs]</a><span class="k">class</span> <span class="nc">ARTSCOPE_STATUS_AD</span><span class="p">(</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    acquisition status</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        bADEanble(c_int32):AD enable or not =1 yes =0 no</span>
+<span class="sd">        bTrigger(c_int32):AD trigger or not =1 trigger =0 not trigger</span>
+<span class="sd">        bComplete(c_int32):AD acquisition done or not =1 yes =0 no(only finite mode support)</span>
+<span class="sd">        bAheadTrig(c_int32):AD pre-trigger or not =1 yes =0 no</span>
+<span class="sd">        lCanReadPoint(c_uint64):readable number(only finite mode support)</span>
+<span class="sd">        lSavePoints(c_uint64):saved number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;bADEanble&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;bTrigger&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;bComplete&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;bAheadTrig&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;lCanReadPoint&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;lSavePoints&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="ArtScope_wfmInfo"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.ArtScope_wfmInfo">[docs]</a><span class="k">class</span> <span class="nc">ArtScope_wfmInfo</span><span class="p">(</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    acquisition struct</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fLsbs(c_double):each code value corresponding to the amplitude</span>
+<span class="sd">        rangevalue(c_double):range</span>
+<span class="sd">        wMaxLSB(c_uint32):maximum code</span>
+<span class="sd">        TriggerMode(c_int32):trigger mode</span>
+<span class="sd">        actualSamples(c_uint32):actual sample number</span>
+<span class="sd">        pAvailSampsPoints(c_uint32):available points to read</span>
+<span class="sd">        channelCount(c_int32):channel count</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;fLsbs&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">8</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;rangevalue&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">8</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;wMaxLSB&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;TriggerMode&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;actualSamples&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;pAvailSampsPoints&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;channelCount&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="DEVICE_EEP_INFO"><a class="viewcode-back" href="../../constants.html#ART_SCOPE_Lib.constants.DEVICE_EEP_INFO">[docs]</a><span class="k">class</span> <span class="nc">DEVICE_EEP_INFO</span><span class="p">(</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    information about software：</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        nDLLVer(c_uint32):DLL version</span>
+<span class="sd">        nSysVer(c_uint32):program version</span>
+<span class="sd">        nFirmwareVer(c_uint32):firmware version</span>
+<span class="sd">        nCaled(c_uint32):calibrate or not</span>
+<span class="sd">        nCalDate(c_uint64):calibrate date</span>
+<span class="sd">        nReserved(c_byte):reserve</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;nDLLVer&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;nSysVer&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;nFirmwareVer&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;nCaled&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;nCalDate&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;nReserved&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_byte</span><span class="o">*</span><span class="mi">40</span><span class="p">)]</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>artdaq.stream_writers &mdash; ART-DAQ 1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ART-DAQ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">artdaq.constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors.html">artdaq.errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../error_codes.html">artdaq.error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stream_readers.html">artdaq.stream_readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stream_writers.html">artdaq.stream_writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">artdaq.task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">artdaq.types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">artdaq.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ART-DAQ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>artdaq.stream_writers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for artdaq.stream_writers</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">artdaq</span> <span class="kn">import</span> <span class="n">DaqError</span>
+<span class="kn">from</span> <span class="nn">artdaq._task_modules.write_functions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_write_analog_f_64</span><span class="p">,</span> <span class="n">_write_analog_scalar_f_64</span><span class="p">,</span> <span class="n">_write_binary_i_16</span><span class="p">,</span> <span class="n">_write_binary_u_16</span><span class="p">,</span>
+    <span class="n">_write_ctr_freq</span><span class="p">,</span> <span class="n">_write_ctr_ticks</span><span class="p">,</span> <span class="n">_write_ctr_time</span><span class="p">,</span> <span class="n">_write_ctr_freq_scalar</span><span class="p">,</span>
+    <span class="n">_write_ctr_ticks_scalar</span><span class="p">,</span> <span class="n">_write_ctr_time_scalar</span><span class="p">,</span> <span class="n">_write_digital_u_8</span><span class="p">,</span>
+    <span class="n">_write_digital_u_16</span><span class="p">,</span> <span class="n">_write_digital_u_32</span><span class="p">,</span> <span class="n">_write_digital_lines</span><span class="p">,</span>
+    <span class="n">_write_digital_scalar_u_32</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">artdaq.error_codes</span> <span class="kn">import</span> <span class="n">Errors</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AnalogSingleChannelWriter&#39;</span><span class="p">,</span> <span class="s1">&#39;AnalogMultiChannelWriter&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;AnalogUnscaledWriter&#39;</span><span class="p">,</span> <span class="s1">&#39;CounterWriter&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;DigitalSingleChannelWriter&#39;</span><span class="p">,</span> <span class="s1">&#39;DigitalMultiChannelWriter&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">UnsetAutoStartSentinel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="n">AUTO_START_UNSET</span> <span class="o">=</span> <span class="n">UnsetAutoStartSentinel</span><span class="p">()</span>
+
+<span class="k">del</span> <span class="n">UnsetAutoStartSentinel</span>
+
+
+<span class="k">class</span> <span class="nc">ChannelWriterBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines base class for all ArtDAQ stream writers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_out_stream</span><span class="p">,</span> <span class="n">auto_start</span><span class="o">=</span><span class="n">AUTO_START_UNSET</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            task_out_stream: Specifies the output stream associated with</span>
+<span class="sd">                an ArtDAQ task which to write samples.</span>
+<span class="sd">                If you do not specify a value for this parameter,</span>
+<span class="sd">                ArtDAQ determines its value based on the type of write</span>
+<span class="sd">                method used. If you use a one sample write method, the</span>
+<span class="sd">                value is True; conversely, if you use a many sample</span>
+<span class="sd">                write method, the value is False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_out_stream</span> <span class="o">=</span> <span class="n">task_out_stream</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_task</span> <span class="o">=</span> <span class="n">task_out_stream</span><span class="o">.</span><span class="n">_task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">task_out_stream</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">_handle</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array_shape</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="o">=</span> <span class="n">auto_start</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">auto_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        bool: Specifies if the write method automatically starts the</span>
+<span class="sd">            task if you did not explicitly start it with the Start</span>
+<span class="sd">            Task method.</span>
+
+<span class="sd">            If you do not specify a value for this parameter, ArtDAQ</span>
+<span class="sd">            determines its value based on the type of write method used.</span>
+<span class="sd">            If you use a one sample write method, its value is True;</span>
+<span class="sd">            conversely, if you use a many sample write method, its value</span>
+<span class="sd">            is False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span>
+
+    <span class="nd">@auto_start</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">auto_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="nd">@auto_start</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">auto_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="o">=</span> <span class="n">AUTO_START_UNSET</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">verify_array_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        bool: Indicates whether the size and shape of the user-defined</span>
+<span class="sd">            NumPy arrays passed to read methods are verified. Defaults</span>
+<span class="sd">            to True when this object is instantiated.</span>
+
+<span class="sd">            Setting this property to True may marginally adversely</span>
+<span class="sd">            impact the performance of read methods.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array_shape</span>
+
+    <span class="nd">@verify_array_shape</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">verify_array_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array_shape</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">_verify_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">is_many_chan</span><span class="p">,</span> <span class="n">is_many_samp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifies that the shape of the specified NumPy array can be used</span>
+<span class="sd">        with the specified write method type, if the</span>
+<span class="sd">        &quot;verify_array_shape&quot; property is set to True.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Specifies the NumPy array to verify.</span>
+<span class="sd">            is_many_chan (bool): Specifies if the write method is a many</span>
+<span class="sd">                channel version.</span>
+<span class="sd">            is_many_samp (bool): Specifies if the write method is a many</span>
+<span class="sd">                sample version.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array_shape</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">channels_to_write</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">channels</span>
+        <span class="n">number_of_channels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels_to_write</span><span class="o">.</span><span class="n">channel_names</span><span class="p">)</span>
+
+        <span class="n">expected_num_dimensions</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">is_many_chan</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_many_samp</span><span class="p">:</span>
+                <span class="n">expected_num_dimensions</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">expected_num_dimensions</span> <span class="o">=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">number_of_channels</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">_raise_invalid_write_num_chans_error</span><span class="p">(</span>
+                    <span class="n">number_of_channels</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_many_samp</span><span class="p">:</span>
+                <span class="n">expected_num_dimensions</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">expected_num_dimensions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_error_if_invalid_write_dimensions</span><span class="p">(</span>
+                <span class="n">expected_num_dimensions</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_verify_array_digital_lines</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">is_many_chan</span><span class="p">,</span> <span class="n">is_many_line</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifies that the shape of the specified NumPy array can be used</span>
+<span class="sd">        to read samples from the current task which contains one or more</span>
+<span class="sd">        channels that have one or more digital lines per channel, if the</span>
+<span class="sd">        &quot;verify_array_shape&quot; property is set to True.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Specifies the NumPy array to verify.</span>
+<span class="sd">            is_many_chan (bool): Specifies if the write method is a</span>
+<span class="sd">                many channel version.</span>
+<span class="sd">            is_many_line (bool): Specifies if the write method is a</span>
+<span class="sd">                many line version.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array_shape</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">channels_to_write</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">channels</span>
+        <span class="n">number_of_channels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels_to_write</span><span class="o">.</span><span class="n">channel_names</span><span class="p">)</span>
+        <span class="n">number_of_lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_out_stream</span><span class="o">.</span><span class="n">do_num_booleans_per_chan</span>
+
+        <span class="n">expected_num_dimensions</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">is_many_chan</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">number_of_channels</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">_raise_invalid_write_num_chans_error</span><span class="p">(</span>
+                    <span class="n">number_of_channels</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">is_many_line</span><span class="p">:</span>
+                <span class="n">expected_num_dimensions</span> <span class="o">=</span> <span class="mi">2</span>
+                <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">number_of_lines</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">_raise_invalid_num_lines_error</span><span class="p">(</span>
+                        <span class="n">number_of_lines</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">expected_num_dimensions</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_many_line</span><span class="p">:</span>
+                <span class="n">expected_num_dimensions</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">number_of_lines</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">_raise_invalid_num_lines_error</span><span class="p">(</span>
+                        <span class="n">number_of_lines</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">expected_num_dimensions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_error_if_invalid_write_dimensions</span><span class="p">(</span>
+                <span class="n">expected_num_dimensions</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_raise_error_if_invalid_write_dimensions</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">num_dimensions_expected</span><span class="p">,</span> <span class="n">num_dimensions_in_data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">num_dimensions_expected</span> <span class="o">!=</span> <span class="n">num_dimensions_in_data</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaqError</span><span class="p">(</span>
+                <span class="s1">&#39;Write cannot be performed because the NumPy array passed &#39;</span>
+                <span class="s1">&#39;into this function is not shaped correctly. &#39;</span>
+                <span class="s1">&#39;You must pass in a NumPy array of the correct number of &#39;</span>
+                <span class="s1">&#39;dimensions based on the write method you use.</span><span class="se">\n\n</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;No. of dimensions of NumPy Array provided: </span><span class="si">{0}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;No. of dimensions of NumPy Array required: </span><span class="si">{1}</span><span class="s1">&#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_dimensions_in_data</span><span class="p">,</span> <span class="n">num_dimensions_expected</span><span class="p">),</span>
+                <span class="n">Errors</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">task_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="AnalogSingleChannelWriter"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.AnalogSingleChannelWriter">[docs]</a><span class="k">class</span> <span class="nc">AnalogSingleChannelWriter</span><span class="p">(</span><span class="n">ChannelWriterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes samples to an analog output channel in an ArtDAQ task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AnalogSingleChannelWriter.write_many_sample"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.AnalogSingleChannelWriter.write_many_sample">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more floating-point samples to a single analog</span>
+<span class="sd">        output channel in a task.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 1D NumPy array of</span>
+<span class="sd">                floating-point samples to write to the task. Each</span>
+<span class="sd">                element of the array corresponds to a sample to write.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_analog_f_64</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AnalogSingleChannelWriter.write_one_sample"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.AnalogSingleChannelWriter.write_one_sample">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single floating-point sample to a single analog output</span>
+<span class="sd">        channel in a task.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (float): Specifies the floating-point sample to write</span>
+<span class="sd">                to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_analog_scalar_f_64</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="AnalogMultiChannelWriter"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.AnalogMultiChannelWriter">[docs]</a><span class="k">class</span> <span class="nc">AnalogMultiChannelWriter</span><span class="p">(</span><span class="n">ChannelWriterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes samples to one or more analog output channels in an ArtDAQ</span>
+<span class="sd">    task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AnalogMultiChannelWriter.write_many_sample"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.AnalogMultiChannelWriter.write_many_sample">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more floating-point samples to one or more analog</span>
+<span class="sd">        output channels in a task.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 2D NumPy array of</span>
+<span class="sd">                floating-point samples to write to the task.</span>
+
+<span class="sd">                Each row corresponds to a channel in the task. Each</span>
+<span class="sd">                column corresponds to a sample to write to each channel.</span>
+<span class="sd">                The order of the channels in the array corresponds to</span>
+<span class="sd">                the order in which you add the channels to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote to each channel in the task.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_analog_f_64</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AnalogMultiChannelWriter.write_one_sample"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.AnalogMultiChannelWriter.write_one_sample">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single floating-point sample to one or more analog</span>
+<span class="sd">        output channels in a task.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 1D NumPy array of</span>
+<span class="sd">                floating-point samples to write to the task.</span>
+
+<span class="sd">                Each element of the array corresponds to a channel in</span>
+<span class="sd">                the task. The order of the channels in the array</span>
+<span class="sd">                corresponds to the order in which you add the channels</span>
+<span class="sd">                to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_analog_f_64</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="AnalogUnscaledWriter"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.AnalogUnscaledWriter">[docs]</a><span class="k">class</span> <span class="nc">AnalogUnscaledWriter</span><span class="p">(</span><span class="n">ChannelWriterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes unscaled samples to one or more analog output channels in</span>
+<span class="sd">    an ArtDAQ task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AnalogUnscaledWriter.write_int16"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.AnalogUnscaledWriter.write_int16">[docs]</a>    <span class="k">def</span> <span class="nf">write_int16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more unscaled 16-bit integer samples to one or</span>
+<span class="sd">        more analog output channels in a task.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 2D NumPy array of unscaled</span>
+<span class="sd">                16-bit integer samples to write to the task.</span>
+
+<span class="sd">                Each row corresponds to a channel in the task. Each</span>
+<span class="sd">                column corresponds to a sample to write to each channel.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote to each channel in the task.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_binary_i_16</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AnalogUnscaledWriter.write_uint16"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.AnalogUnscaledWriter.write_uint16">[docs]</a>    <span class="k">def</span> <span class="nf">write_uint16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more unscaled 16-bit unsigned integer samples to</span>
+<span class="sd">        one or more analog output channels in a task.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 2D NumPy array of unscaled</span>
+<span class="sd">                16-bit unsigned integer samples to write to the task.</span>
+
+<span class="sd">                Each row corresponds to a channel in the task. Each</span>
+<span class="sd">                column corresponds to a sample to write to each channel.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote to each channel in the task.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_binary_u_16</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="CounterWriter"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.CounterWriter">[docs]</a><span class="k">class</span> <span class="nc">CounterWriter</span><span class="p">(</span><span class="n">ChannelWriterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes samples to a counter output channel in an ArtDAQ task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CounterWriter.write_many_sample_pulse_frequency"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.CounterWriter.write_many_sample_pulse_frequency">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample_pulse_frequency</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">duty_cycles</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more pulse samples in terms of frequency to a</span>
+<span class="sd">        single counter output channel in a task.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            frequencies (numpy.ndarray): Contains a 1D NumPy array of</span>
+<span class="sd">                floating-point values that holds the frequency portion</span>
+<span class="sd">                of the pulse samples to write to the task. Each element</span>
+<span class="sd">                of the array corresponds to a sample to write.</span>
+<span class="sd">            duty_cycles (numpy.ndarray): Contains a 1D NumPy array of</span>
+<span class="sd">                floating-point values that holds the duty cycle portion</span>
+<span class="sd">                of the pulse samples to write to the task. Each element</span>
+<span class="sd">                of the array corresponds to a sample to write.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">frequencies</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">duty_cycles</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_ctr_freq</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">duty_cycles</span><span class="p">,</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CounterWriter.write_many_sample_pulse_ticks"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.CounterWriter.write_many_sample_pulse_ticks">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample_pulse_ticks</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">high_ticks</span><span class="p">,</span> <span class="n">low_ticks</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more pulse samples in terms of ticks to a single</span>
+<span class="sd">        counter output channel in a task.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            high_ticks (numpy.ndarray): Contains a 1D NumPy array of</span>
+<span class="sd">                32-bit unsigned integer values that holds the high ticks</span>
+<span class="sd">                portion of the pulse samples to write to the task. Each</span>
+<span class="sd">                element of the array corresponds to a sample to write.</span>
+<span class="sd">            low_ticks (numpy.ndarray): Contains a 1D NumPy array of</span>
+<span class="sd">                32-bit unsigned integer values that holds the low ticks</span>
+<span class="sd">                portion of the pulse samples to write to the task. Each</span>
+<span class="sd">                element of the array corresponds to a sample to write.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">high_ticks</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">low_ticks</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_ctr_ticks</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">high_ticks</span><span class="p">,</span> <span class="n">low_ticks</span><span class="p">,</span> <span class="n">high_ticks</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CounterWriter.write_many_sample_pulse_time"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.CounterWriter.write_many_sample_pulse_time">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample_pulse_time</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">high_times</span><span class="p">,</span> <span class="n">low_times</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more pulse samples in terms of time to a single</span>
+<span class="sd">        counter output channel in a task.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            high_times (numpy.ndarray): Contains a 1D NumPy array of</span>
+<span class="sd">                floating-point values that holds the high time portion</span>
+<span class="sd">                of the pulse samples to write to the task. Each element</span>
+<span class="sd">                of the array corresponds to a sample to write.</span>
+<span class="sd">            low_times (numpy.ndarray): Contains a 1D NumPy array of</span>
+<span class="sd">                floating-point values that holds the low time portion</span>
+<span class="sd">                of the pulse samples to write to the task. Each element</span>
+<span class="sd">                of the array corresponds to a sample to write.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">high_times</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">low_times</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_ctr_time</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">high_times</span><span class="p">,</span> <span class="n">low_times</span><span class="p">,</span> <span class="n">high_times</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CounterWriter.write_one_sample_pulse_frequency"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.CounterWriter.write_one_sample_pulse_frequency">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_pulse_frequency</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a new pulse frequency and duty cycle to a single counter</span>
+<span class="sd">        output channel in a task.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            frequency (float): Specifies at what frequency to generate</span>
+<span class="sd">                pulses.</span>
+<span class="sd">            duty_cycle (float): Specifies the width of the pulse divided</span>
+<span class="sd">                by the pulse period. ArtDAQ uses this ratio combined</span>
+<span class="sd">                with frequency to determine pulse width and the interval</span>
+<span class="sd">                between pulses.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_ctr_freq_scalar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CounterWriter.write_one_sample_pulse_ticks"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.CounterWriter.write_one_sample_pulse_ticks">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_pulse_ticks</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">high_ticks</span><span class="p">,</span> <span class="n">low_ticks</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a new pulse high tick count and low tick count to a</span>
+<span class="sd">        single counter output channel in a task.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            high_ticks (float): Specifies the number of ticks the pulse</span>
+<span class="sd">                is high.</span>
+<span class="sd">            low_ticks (float): Specifies the number of ticks the pulse</span>
+<span class="sd">                is low.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_ctr_ticks_scalar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">high_ticks</span><span class="p">,</span> <span class="n">low_ticks</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CounterWriter.write_one_sample_pulse_time"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.CounterWriter.write_one_sample_pulse_time">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_pulse_time</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">high_time</span><span class="p">,</span> <span class="n">low_time</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a new pulse high time and low time to a single counter</span>
+<span class="sd">        output channel in a task.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            high_time (float): Specifies the amount of time the pulse</span>
+<span class="sd">                is high.</span>
+<span class="sd">            low_time (float): Specifies the amount of time the pulse</span>
+<span class="sd">                is low.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_ctr_time_scalar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">high_time</span><span class="p">,</span> <span class="n">low_time</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="DigitalSingleChannelWriter"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalSingleChannelWriter">[docs]</a><span class="k">class</span> <span class="nc">DigitalSingleChannelWriter</span><span class="p">(</span><span class="n">ChannelWriterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes samples to a single digital output channel in an ArtDAQ</span>
+<span class="sd">    task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DigitalSingleChannelWriter.write_many_sample_port_byte"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalSingleChannelWriter.write_many_sample_port_byte">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample_port_byte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more 8-bit unsigned integer samples to a single</span>
+<span class="sd">        digital output channel in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 8 lines per port.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 1D NumPy array of 8-bit</span>
+<span class="sd">                unsigned integer samples to write to the task. Each</span>
+<span class="sd">                element of the array corresponds to a sample to write.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_8</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalSingleChannelWriter.write_many_sample_port_uint16"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalSingleChannelWriter.write_many_sample_port_uint16">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample_port_uint16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more 16-bit unsigned integer samples to a single</span>
+<span class="sd">        digital output channel in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 16 lines per port.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 1D NumPy array of 16-bit</span>
+<span class="sd">                unsigned integer samples to write to the task. Each</span>
+<span class="sd">                element of the array corresponds to a sample to write.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_16</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalSingleChannelWriter.write_many_sample_port_uint32"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalSingleChannelWriter.write_many_sample_port_uint32">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample_port_uint32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more 32-bit unsigned integer samples to a single</span>
+<span class="sd">        digital output channel in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 32 lines per port.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 1D NumPy array of 32-bit</span>
+<span class="sd">                unsigned integer samples to write to the task. Each</span>
+<span class="sd">                element of the array corresponds to a sample to write.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_32</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalSingleChannelWriter.write_one_sample_multi_line"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_multi_line">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_multi_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single boolean sample to a single digital output</span>
+<span class="sd">        channel in a task. The channel can contain multiple digital</span>
+<span class="sd">        lines.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 1D NumPy array of boolean</span>
+<span class="sd">                samples to write to the task. Each element of the array</span>
+<span class="sd">                corresponds to a line in the channel.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array_digital_lines</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_lines</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalSingleChannelWriter.write_one_sample_one_line"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_one_line">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_one_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single boolean sample to a single digital output</span>
+<span class="sd">        channel in a task. The channel can contain only one digital</span>
+<span class="sd">        line.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (int): Specifies the boolean sample to write to the</span>
+<span class="sd">                task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">numpy_array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">data</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_lines</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">numpy_array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalSingleChannelWriter.write_one_sample_port_byte"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_port_byte">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_port_byte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single 8-bit unsigned integer sample to a single</span>
+<span class="sd">        digital output channel in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 8 lines per port.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (int): Specifies the 8-bit unsigned integer sample to</span>
+<span class="sd">                write to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">numpy_array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">data</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_8</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">numpy_array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalSingleChannelWriter.write_one_sample_port_uint16"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_port_uint16">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_port_uint16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single 16-bit unsigned integer sample to a single</span>
+<span class="sd">        digital output channel in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 16 lines per port.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (int): Specifies the 16-bit unsigned integer sample to</span>
+<span class="sd">                write to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">numpy_array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">data</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_16</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">numpy_array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalSingleChannelWriter.write_one_sample_port_uint32"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalSingleChannelWriter.write_one_sample_port_uint32">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_port_uint32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single 32-bit unsigned integer sample to a single</span>
+<span class="sd">        digital output channel in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 32 lines per port.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (int): Specifies the 32-bit unsigned integer sample to</span>
+<span class="sd">                write to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_scalar_u_32</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="DigitalMultiChannelWriter"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalMultiChannelWriter">[docs]</a><span class="k">class</span> <span class="nc">DigitalMultiChannelWriter</span><span class="p">(</span><span class="n">ChannelWriterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes samples to one or more digital output channels in an ArtDAQ</span>
+<span class="sd">    task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DigitalMultiChannelWriter.write_many_sample_port_byte"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalMultiChannelWriter.write_many_sample_port_byte">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample_port_byte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more 8-bit unsigned integer samples to one or more</span>
+<span class="sd">        digital output channels in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 8 lines per port.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 2D NumPy array of 8-bit</span>
+<span class="sd">                unsigned integer samples to write to the task.</span>
+
+<span class="sd">                Each row corresponds to a channel in the task. Each</span>
+<span class="sd">                column corresponds to a sample to write to each channel.</span>
+<span class="sd">                The order of the channels in the array corresponds to</span>
+<span class="sd">                the order in which you add the channels to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote to each channel in the task.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_8</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalMultiChannelWriter.write_many_sample_port_uint16"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalMultiChannelWriter.write_many_sample_port_uint16">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample_port_uint16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more 16-bit unsigned integer samples to one or</span>
+<span class="sd">        more digital output channels in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 16 lines per port.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 2D NumPy array of 16-bit</span>
+<span class="sd">                unsigned integer samples to write to the task.</span>
+
+<span class="sd">                Each row corresponds to a channel in the task. Each</span>
+<span class="sd">                column corresponds to a sample to write to each channel.</span>
+<span class="sd">                The order of the channels in the array corresponds to</span>
+<span class="sd">                the order in which you add the channels to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote to each channel in the task.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_16</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalMultiChannelWriter.write_many_sample_port_uint32"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalMultiChannelWriter.write_many_sample_port_uint32">[docs]</a>    <span class="k">def</span> <span class="nf">write_many_sample_port_uint32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes one or more 32-bit unsigned integer samples to one or</span>
+<span class="sd">        more digital output channels in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 32 lines per port.</span>
+
+<span class="sd">        If the task uses on-demand timing, this method returns only</span>
+<span class="sd">        after the device generates all samples. On-demand is the default</span>
+<span class="sd">        timing type if you do not use the timing property on the task to</span>
+<span class="sd">        configure a sample timing type. If the task uses any timing type</span>
+<span class="sd">        other than on-demand, this method returns immediately and does</span>
+<span class="sd">        not wait for the device to generate all samples. Your</span>
+<span class="sd">        application must determine if the task is done to ensure that</span>
+<span class="sd">        the device generated all samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 2D NumPy array of 32-bit</span>
+<span class="sd">                unsigned integer samples to write to the task.</span>
+
+<span class="sd">                Each row corresponds to a channel in the task. Each</span>
+<span class="sd">                column corresponds to a sample to write to each channel.</span>
+<span class="sd">                The order of the channels in the array corresponds to</span>
+<span class="sd">                the order in which you add the channels to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int:</span>
+
+<span class="sd">            Specifies the actual number of samples this method</span>
+<span class="sd">            successfully wrote to each channel in the task.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_32</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalMultiChannelWriter.write_one_sample_multi_line"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_multi_line">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_multi_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single boolean sample to one or more digital output</span>
+<span class="sd">        channels in a task. The channel can contain multiple digital</span>
+<span class="sd">        lines.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 2D NumPy array of boolean</span>
+<span class="sd">                samples to write to the task.</span>
+
+<span class="sd">                Each row corresponds to a channel in the task. Each</span>
+<span class="sd">                column corresponds to a line from each channel. The</span>
+<span class="sd">                order of the channels in the array corresponds to the</span>
+<span class="sd">                order in which you add the channels to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array_digital_lines</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_lines</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalMultiChannelWriter.write_one_sample_one_line"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_one_line">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_one_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single boolean sample to one or more digital output</span>
+<span class="sd">        channels in a task. The channel can contain only one digital</span>
+<span class="sd">        line.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 1D NumPy array of boolean</span>
+<span class="sd">                samples to write to the task.</span>
+
+<span class="sd">                Each element in the array corresponds to a channel in</span>
+<span class="sd">                the task. The order of the channels in the array</span>
+<span class="sd">                corresponds to the order in which you add the channels</span>
+<span class="sd">                to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array_digital_lines</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_lines</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalMultiChannelWriter.write_one_sample_port_byte"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_port_byte">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_port_byte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single 8-bit unsigned integer sample to one or more</span>
+<span class="sd">        digital output channels in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 8 lines per port.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 1D NumPy array of 8-bit</span>
+<span class="sd">                unsigned integer samples to write to the task.</span>
+
+<span class="sd">                Each element in the array corresponds to a channel in</span>
+<span class="sd">                the task. The order of the channels in the array</span>
+<span class="sd">                corresponds to the order in which you add the channels</span>
+<span class="sd">                to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_8</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalMultiChannelWriter.write_one_sample_port_uint16"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_port_uint16">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_port_uint16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single 16-bit unsigned integer sample to one or more</span>
+<span class="sd">        digital output channels in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 16 lines per port.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 1D NumPy array of 16-bit</span>
+<span class="sd">                unsigned integer samples to write to the task.</span>
+
+<span class="sd">                Each element in the array corresponds to a channel in</span>
+<span class="sd">                the task. The order of the channels in the array</span>
+<span class="sd">                corresponds to the order in which you add the channels</span>
+<span class="sd">                to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_16</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DigitalMultiChannelWriter.write_one_sample_port_uint32"><a class="viewcode-back" href="../../stream_writers.html#artdaq.stream_writers.DigitalMultiChannelWriter.write_one_sample_port_uint32">[docs]</a>    <span class="k">def</span> <span class="nf">write_one_sample_port_uint32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a single 32-bit unsigned integer sample to one or more</span>
+<span class="sd">        digital output channels in a task.</span>
+
+<span class="sd">        Use this method for devices with up to 32 lines per port.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (numpy.ndarray): Contains a 1D NumPy array of 32-bit</span>
+<span class="sd">                unsigned integer samples to write to the task.</span>
+
+<span class="sd">                Each element in the array corresponds to a channel in</span>
+<span class="sd">                the task. The order of the channels in the array</span>
+<span class="sd">                corresponds to the order in which you add the channels</span>
+<span class="sd">                to the task.</span>
+<span class="sd">            timeout (Optional[float]): Specifies the amount of time in</span>
+<span class="sd">                seconds to wait for the method to write all samples.</span>
+<span class="sd">                ArtDAQ performs a timeout check only if the method</span>
+<span class="sd">                must wait before it writes data. This method returns an</span>
+<span class="sd">                error if the time elapses. The default timeout is 10</span>
+<span class="sd">                seconds. If you set timeout to</span>
+<span class="sd">                artdaq.constants.WAIT_INFINITELY, the method waits</span>
+<span class="sd">                indefinitely. If you set timeout to 0, the method tries</span>
+<span class="sd">                once to write the submitted samples. If the method could</span>
+<span class="sd">                not write all the submitted samples, it returns an error</span>
+<span class="sd">                and the number of samples successfully written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">auto_start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_start</span> <span class="ow">is</span> <span class="ow">not</span>
+                      <span class="n">AUTO_START_UNSET</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_write_digital_u_32</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auto_start</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

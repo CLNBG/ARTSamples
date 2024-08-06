@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>constants &mdash; ArtScope 1.20.0032 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="functions" href="functions.html" />
+    <link rel="prev" title="Welcome to ArtScope’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ArtScope
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error_codes.html">error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">errors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ArtScope</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">constants</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/constants.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-ART_SCOPE_Lib.constants">
+<span id="constants"></span><h1>constants<a class="headerlink" href="#module-ART_SCOPE_Lib.constants" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">ARTSCOPE_STATUS_AD</span></code><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#ARTSCOPE_STATUS_AD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ctypes.Structure</span></code></p>
+<p>acquisition status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bADEanble</strong> (<em>c_int32</em>) – AD enable or not =1 yes =0 no</p></li>
+<li><p><strong>bTrigger</strong> (<em>c_int32</em>) – AD trigger or not =1 trigger =0 not trigger</p></li>
+<li><p><strong>bComplete</strong> (<em>c_int32</em>) – AD acquisition done or not =1 yes =0 no(only finite mode support)</p></li>
+<li><p><strong>bAheadTrig</strong> (<em>c_int32</em>) – AD pre-trigger or not =1 yes =0 no</p></li>
+<li><p><strong>lCanReadPoint</strong> (<em>c_uint64</em>) – readable number(only finite mode support)</p></li>
+<li><p><strong>lSavePoints</strong> (<em>c_uint64</em>) – saved number</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.bADEanble">
+<code class="sig-name descname"><span class="pre">bADEanble</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.bADEanble" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.bAheadTrig">
+<code class="sig-name descname"><span class="pre">bAheadTrig</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.bAheadTrig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.bComplete">
+<code class="sig-name descname"><span class="pre">bComplete</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.bComplete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.bTrigger">
+<code class="sig-name descname"><span class="pre">bTrigger</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.bTrigger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.lCanReadPoint">
+<code class="sig-name descname"><span class="pre">lCanReadPoint</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.lCanReadPoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.lSavePoints">
+<code class="sig-name descname"><span class="pre">lSavePoints</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ARTSCOPE_STATUS_AD.lSavePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.ArtScope_wfmInfo">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">ArtScope_wfmInfo</span></code><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#ArtScope_wfmInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.ArtScope_wfmInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ctypes.Structure</span></code></p>
+<p>acquisition struct</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fLsbs</strong> (<em>c_double</em>) – each code value corresponding to the amplitude</p></li>
+<li><p><strong>rangevalue</strong> (<em>c_double</em>) – range</p></li>
+<li><p><strong>wMaxLSB</strong> (<em>c_uint32</em>) – maximum code</p></li>
+<li><p><strong>TriggerMode</strong> (<em>c_int32</em>) – trigger mode</p></li>
+<li><p><strong>actualSamples</strong> (<em>c_uint32</em>) – actual sample number</p></li>
+<li><p><strong>pAvailSampsPoints</strong> (<em>c_uint32</em>) – available points to read</p></li>
+<li><p><strong>channelCount</strong> (<em>c_int32</em>) – channel count</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ArtScope_wfmInfo.TriggerMode">
+<code class="sig-name descname"><span class="pre">TriggerMode</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ArtScope_wfmInfo.TriggerMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ArtScope_wfmInfo.actualSamples">
+<code class="sig-name descname"><span class="pre">actualSamples</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ArtScope_wfmInfo.actualSamples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ArtScope_wfmInfo.channelCount">
+<code class="sig-name descname"><span class="pre">channelCount</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ArtScope_wfmInfo.channelCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ArtScope_wfmInfo.fLsbs">
+<code class="sig-name descname"><span class="pre">fLsbs</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ArtScope_wfmInfo.fLsbs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ArtScope_wfmInfo.pAvailSampsPoints">
+<code class="sig-name descname"><span class="pre">pAvailSampsPoints</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ArtScope_wfmInfo.pAvailSampsPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ArtScope_wfmInfo.rangevalue">
+<code class="sig-name descname"><span class="pre">rangevalue</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ArtScope_wfmInfo.rangevalue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ArtScope_wfmInfo.wMaxLSB">
+<code class="sig-name descname"><span class="pre">wMaxLSB</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.ArtScope_wfmInfo.wMaxLSB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.BandWidth">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">BandWidth</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#BandWidth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.BandWidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>bandwidth</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.BandWidth.BANDWIDTH_100M">
+<code class="sig-name descname"><span class="pre">BANDWIDTH_100M</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.BandWidth.BANDWIDTH_100M" title="Permalink to this definition">¶</a></dt>
+<dd><p>100MHz</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.BandWidth.BANDWIDTH_20M">
+<code class="sig-name descname"><span class="pre">BANDWIDTH_20M</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.BandWidth.BANDWIDTH_20M" title="Permalink to this definition">¶</a></dt>
+<dd><p>20MHz</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.BandWidth.BANDWIDTH_ALL">
+<code class="sig-name descname"><span class="pre">BANDWIDTH_ALL</span></code><em class="property"> <span class="pre">=</span> <span class="pre">-1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.BandWidth.BANDWIDTH_ALL" title="Permalink to this definition">¶</a></dt>
+<dd><p>full bandwidth</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.BandWidth.BANDWIDTH_DEFAULT">
+<code class="sig-name descname"><span class="pre">BANDWIDTH_DEFAULT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.BandWidth.BANDWIDTH_DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd><p>default bandwidth</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.CouplingType">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">CouplingType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#CouplingType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.CouplingType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>coupling</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.CouplingType.AC">
+<code class="sig-name descname"><span class="pre">AC</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.CouplingType.AC" title="Permalink to this definition">¶</a></dt>
+<dd><p>ac</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.CouplingType.DC">
+<code class="sig-name descname"><span class="pre">DC</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.CouplingType.DC" title="Permalink to this definition">¶</a></dt>
+<dd><p>dc</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.DEVICE_EEP_INFO">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">DEVICE_EEP_INFO</span></code><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#DEVICE_EEP_INFO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.DEVICE_EEP_INFO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ctypes.Structure</span></code></p>
+<p>information about software：</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nDLLVer</strong> (<em>c_uint32</em>) – DLL version</p></li>
+<li><p><strong>nSysVer</strong> (<em>c_uint32</em>) – program version</p></li>
+<li><p><strong>nFirmwareVer</strong> (<em>c_uint32</em>) – firmware version</p></li>
+<li><p><strong>nCaled</strong> (<em>c_uint32</em>) – calibrate or not</p></li>
+<li><p><strong>nCalDate</strong> (<em>c_uint64</em>) – calibrate date</p></li>
+<li><p><strong>nReserved</strong> (<em>c_byte</em>) – reserve</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nCalDate">
+<code class="sig-name descname"><span class="pre">nCalDate</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nCalDate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nCaled">
+<code class="sig-name descname"><span class="pre">nCaled</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nCaled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nDLLVer">
+<code class="sig-name descname"><span class="pre">nDLLVer</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nDLLVer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nFirmwareVer">
+<code class="sig-name descname"><span class="pre">nFirmwareVer</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nFirmwareVer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nReserved">
+<code class="sig-name descname"><span class="pre">nReserved</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nReserved" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nSysVer">
+<code class="sig-name descname"><span class="pre">nSysVer</span></code><a class="headerlink" href="#ART_SCOPE_Lib.constants.DEVICE_EEP_INFO.nSysVer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.ExportClockType">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">ExportClockType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#ExportClockType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.ExportClockType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>export clock type</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ExportClockType.CLK_REF">
+<code class="sig-name descname"><span class="pre">CLK_REF</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.ExportClockType.CLK_REF" title="Permalink to this definition">¶</a></dt>
+<dd><p>reference clock</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.ExportClockType.CLK_SAMPLE">
+<code class="sig-name descname"><span class="pre">CLK_SAMPLE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.ExportClockType.CLK_SAMPLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>time base</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.InputClockSource">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">InputClockSource</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#InputClockSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputClockSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>input clock source</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputClockSource.CLK100M_PXIE">
+<code class="sig-name descname"><span class="pre">CLK100M_PXIE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_CLK100M_PXIE'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputClockSource.CLK100M_PXIE" title="Permalink to this definition">¶</a></dt>
+<dd><p>PXIe_CLK100M(PCIE and USB don’t support)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputClockSource.CLK10M_EXT">
+<code class="sig-name descname"><span class="pre">CLK10M_EXT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_CLK10M_EXT'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputClockSource.CLK10M_EXT" title="Permalink to this definition">¶</a></dt>
+<dd><p>external 10M clock(CLK_IN)(8582 8584 8586 don’t support)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputClockSource.CLK10M_MASTER">
+<code class="sig-name descname"><span class="pre">CLK10M_MASTER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_CLK10M_MASTER'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputClockSource.CLK10M_MASTER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Master 10M clock(PCIE or USB)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputClockSource.CLK10M_PXI">
+<code class="sig-name descname"><span class="pre">CLK10M_PXI</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_CLK10M_PXI'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputClockSource.CLK10M_PXI" title="Permalink to this definition">¶</a></dt>
+<dd><p>PXIe_CLK10M(PXIE)/Master 10M(PCIE)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputClockSource.CLK_IN">
+<code class="sig-name descname"><span class="pre">CLK_IN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_CLK_IN'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputClockSource.CLK_IN" title="Permalink to this definition">¶</a></dt>
+<dd><p>external clock(CLK_IN)(8582 8584 8586 don’t support)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputClockSource.CLK_ONBOARD">
+<code class="sig-name descname"><span class="pre">CLK_ONBOARD</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_CLK_INTERNAL'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputClockSource.CLK_ONBOARD" title="Permalink to this definition">¶</a></dt>
+<dd><p>on board clock</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.InputImpedance">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">InputImpedance</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#InputImpedance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputImpedance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>input impedance</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputImpedance.AI_IMPEND_1M">
+<code class="sig-name descname"><span class="pre">AI_IMPEND_1M</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputImpedance.AI_IMPEND_1M" title="Permalink to this definition">¶</a></dt>
+<dd><p>1M</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputImpedance.AI_IMPEND_50">
+<code class="sig-name descname"><span class="pre">AI_IMPEND_50</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputImpedance.AI_IMPEND_50" title="Permalink to this definition">¶</a></dt>
+<dd><p>50</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.InputRange">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">InputRange</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#InputRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>range</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_10VPP">
+<code class="sig-name descname"><span class="pre">RANGE_10VPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_10VPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>±5V</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_1600MVPP">
+<code class="sig-name descname"><span class="pre">RANGE_1600MVPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">7</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_1600MVPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>200mV/Div(1.6Vpp)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_160MVPP">
+<code class="sig-name descname"><span class="pre">RANGE_160MVPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_160MVPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>20mV/Div(160mVpp)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_16VPP">
+<code class="sig-name descname"><span class="pre">RANGE_16VPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_16VPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>2V/Div(16Vpp)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_20VPP">
+<code class="sig-name descname"><span class="pre">RANGE_20VPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_20VPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>±10V</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_2VPP">
+<code class="sig-name descname"><span class="pre">RANGE_2VPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_2VPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>±1V</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_400MVPP">
+<code class="sig-name descname"><span class="pre">RANGE_400MVPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">9</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_400MVPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>50mV/Div(400mVpp)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_40MVPP">
+<code class="sig-name descname"><span class="pre">RANGE_40MVPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">12</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_40MVPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>5mV/Div(40mVpp)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_40VPP">
+<code class="sig-name descname"><span class="pre">RANGE_40VPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_40VPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>5V/Div(40Vpp)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_4VPP">
+<code class="sig-name descname"><span class="pre">RANGE_4VPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_4VPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>500mV/Div(4Vpp)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_800MVPP">
+<code class="sig-name descname"><span class="pre">RANGE_800MVPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_800MVPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>100mV/Div(800mVpp)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_80MVPP">
+<code class="sig-name descname"><span class="pre">RANGE_80MVPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">11</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_80MVPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>10mV/Div(80mVpp)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.InputRange.RANGE_8VPP">
+<code class="sig-name descname"><span class="pre">RANGE_8VPP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.InputRange.RANGE_8VPP" title="Permalink to this definition">¶</a></dt>
+<dd><p>1V/Div(8Vpp)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.SampleMode">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">SampleMode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#SampleMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.SampleMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>acquisition mode</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.SampleMode.CONTINUOUS">
+<code class="sig-name descname"><span class="pre">CONTINUOUS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.SampleMode.CONTINUOUS" title="Permalink to this definition">¶</a></dt>
+<dd><p>continuous</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.SampleMode.FINITE">
+<code class="sig-name descname"><span class="pre">FINITE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.SampleMode.FINITE" title="Permalink to this definition">¶</a></dt>
+<dd><p>finite</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.TriggerCoupling">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">TriggerCoupling</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#TriggerCoupling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerCoupling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>trigger coupling</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerCoupling.TRIGCOUP_AC">
+<code class="sig-name descname"><span class="pre">TRIGCOUP_AC</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerCoupling.TRIGCOUP_AC" title="Permalink to this definition">¶</a></dt>
+<dd><p>ac</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerCoupling.TRIGCOUP_DC">
+<code class="sig-name descname"><span class="pre">TRIGCOUP_DC</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerCoupling.TRIGCOUP_DC" title="Permalink to this definition">¶</a></dt>
+<dd><p>dc</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerCoupling.TRIGCOUP_HIG">
+<code class="sig-name descname"><span class="pre">TRIGCOUP_HIG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerCoupling.TRIGCOUP_HIG" title="Permalink to this definition">¶</a></dt>
+<dd><p>HF reject</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerCoupling.TRIGCOUP_LOW">
+<code class="sig-name descname"><span class="pre">TRIGCOUP_LOW</span></code><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerCoupling.TRIGCOUP_LOW" title="Permalink to this definition">¶</a></dt>
+<dd><p>LF reject</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.TriggerOutPolarity">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">TriggerOutPolarity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#TriggerOutPolarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerOutPolarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>trigger out polarity</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerOutPolarity.TRIGOUT_POLAR_NEGATIVE">
+<code class="sig-name descname"><span class="pre">TRIGOUT_POLAR_NEGATIVE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerOutPolarity.TRIGOUT_POLAR_NEGATIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>negative</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerOutPolarity.TRIGOUT_POLAR_POSITIVE">
+<code class="sig-name descname"><span class="pre">TRIGOUT_POLAR_POSITIVE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerOutPolarity.TRIGOUT_POLAR_POSITIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>positive</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.TriggerPolarity">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">TriggerPolarity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#TriggerPolarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerPolarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>trigger polarity</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerPolarity.TRIGPOLAR_NEGATIVE">
+<code class="sig-name descname"><span class="pre">TRIGPOLAR_NEGATIVE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerPolarity.TRIGPOLAR_NEGATIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>negative</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerPolarity.TRIGPOLAR_POSITIVE">
+<code class="sig-name descname"><span class="pre">TRIGPOLAR_POSITIVE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerPolarity.TRIGPOLAR_POSITIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>positive</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.TriggerPulseDirection">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">TriggerPulseDirection</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#TriggerPulseDirection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerPulseDirection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>trigger pulse slope</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerPulseDirection.TRIGDIR_PULSE_EQUAL">
+<code class="sig-name descname"><span class="pre">TRIGDIR_PULSE_EQUAL</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerPulseDirection.TRIGDIR_PULSE_EQUAL" title="Permalink to this definition">¶</a></dt>
+<dd><p>equal to the set pulse width</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerPulseDirection.TRIGDIR_PULSE_GREATER">
+<code class="sig-name descname"><span class="pre">TRIGDIR_PULSE_GREATER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerPulseDirection.TRIGDIR_PULSE_GREATER" title="Permalink to this definition">¶</a></dt>
+<dd><p>greater than the set pulse width</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerPulseDirection.TRIGDIR_PULSE_LESS">
+<code class="sig-name descname"><span class="pre">TRIGDIR_PULSE_LESS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerPulseDirection.TRIGDIR_PULSE_LESS" title="Permalink to this definition">¶</a></dt>
+<dd><p>lower than the set pulse width</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerPulseDirection.TRIGDIR_PULSE_NEQUAL">
+<code class="sig-name descname"><span class="pre">TRIGDIR_PULSE_NEQUAL</span></code><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerPulseDirection.TRIGDIR_PULSE_NEQUAL" title="Permalink to this definition">¶</a></dt>
+<dd><p>not equal to the set pulse width</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.TriggerSlope">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">TriggerSlope</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#TriggerSlope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSlope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>trigger direction</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSlope.TRIGDIR_NEGATIVE">
+<code class="sig-name descname"><span class="pre">TRIGDIR_NEGATIVE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSlope.TRIGDIR_NEGATIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>negative</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSlope.TRIGDIR_NEGATPOSIT">
+<code class="sig-name descname"><span class="pre">TRIGDIR_NEGATPOSIT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSlope.TRIGDIR_NEGATPOSIT" title="Permalink to this definition">¶</a></dt>
+<dd><p>negative and positive</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSlope.TRIGDIR_POSITIVE">
+<code class="sig-name descname"><span class="pre">TRIGDIR_POSITIVE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSlope.TRIGDIR_POSITIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>positive</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">TriggerSource</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#TriggerSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>trigger source</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_ATR">
+<code class="sig-name descname"><span class="pre">TRIGSRC_ATR</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_ATR'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_ATR" title="Permalink to this definition">¶</a></dt>
+<dd><p>external analog trigger</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH0">
+<code class="sig-name descname"><span class="pre">TRIGSRC_CH0</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_CH0'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH0" title="Permalink to this definition">¶</a></dt>
+<dd><p>ch0 trigger</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH1">
+<code class="sig-name descname"><span class="pre">TRIGSRC_CH1</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_CH1'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH1" title="Permalink to this definition">¶</a></dt>
+<dd><p>ch1 trigger</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH2">
+<code class="sig-name descname"><span class="pre">TRIGSRC_CH2</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_CH2'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH2" title="Permalink to this definition">¶</a></dt>
+<dd><p>ch2 trigger</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH3">
+<code class="sig-name descname"><span class="pre">TRIGSRC_CH3</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_CH3'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH3" title="Permalink to this definition">¶</a></dt>
+<dd><p>ch3 trigger</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH4">
+<code class="sig-name descname"><span class="pre">TRIGSRC_CH4</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_CH4'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH4" title="Permalink to this definition">¶</a></dt>
+<dd><p>ch4 trigger</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH5">
+<code class="sig-name descname"><span class="pre">TRIGSRC_CH5</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_CH5'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH5" title="Permalink to this definition">¶</a></dt>
+<dd><p>ch5 trigger</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH6">
+<code class="sig-name descname"><span class="pre">TRIGSRC_CH6</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_CH6'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH6" title="Permalink to this definition">¶</a></dt>
+<dd><p>ch6 trigger</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH7">
+<code class="sig-name descname"><span class="pre">TRIGSRC_CH7</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_CH7'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_CH7" title="Permalink to this definition">¶</a></dt>
+<dd><p>ch7 trigger</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_DTR">
+<code class="sig-name descname"><span class="pre">TRIGSRC_DTR</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_DTR'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_DTR" title="Permalink to this definition">¶</a></dt>
+<dd><p>external digital trigger</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_PFI">
+<code class="sig-name descname"><span class="pre">TRIGSRC_PFI</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_PFI'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_PFI" title="Permalink to this definition">¶</a></dt>
+<dd><p>PFI digital trigger(only 8582 8584 8586 8582A 8584A 8586A support)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_SYNC">
+<code class="sig-name descname"><span class="pre">TRIGSRC_SYNC</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_TRIGGER_SYNCTRIGGER'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSource.TRIGSRC_SYNC" title="Permalink to this definition">¶</a></dt>
+<dd><p>synchronous trigger</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.TriggerSyncSrc">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">TriggerSyncSrc</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#TriggerSyncSrc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSyncSrc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>synchronous trigger source</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_0">
+<code class="sig-name descname"><span class="pre">TRIG_SYNC_0</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_SYNC_TRIGGER0'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>synchronous trigger 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_1">
+<code class="sig-name descname"><span class="pre">TRIG_SYNC_1</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_SYNC_TRIGGER1'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>synchronous trigger 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_2">
+<code class="sig-name descname"><span class="pre">TRIG_SYNC_2</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_SYNC_TRIGGER2'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>synchronous trigger 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_3">
+<code class="sig-name descname"><span class="pre">TRIG_SYNC_3</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_SYNC_TRIGGER3'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>synchronous trigger 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_4">
+<code class="sig-name descname"><span class="pre">TRIG_SYNC_4</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_SYNC_TRIGGER4'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_4" title="Permalink to this definition">¶</a></dt>
+<dd><p>synchronous trigger 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_5">
+<code class="sig-name descname"><span class="pre">TRIG_SYNC_5</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_SYNC_TRIGGER5'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_5" title="Permalink to this definition">¶</a></dt>
+<dd><p>synchronous trigger 5</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_6">
+<code class="sig-name descname"><span class="pre">TRIG_SYNC_6</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_SYNC_TRIGGER6'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_6" title="Permalink to this definition">¶</a></dt>
+<dd><p>synchronous trigger 6</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_7">
+<code class="sig-name descname"><span class="pre">TRIG_SYNC_7</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'VAL_SYNC_TRIGGER7'</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerSyncSrc.TRIG_SYNC_7" title="Permalink to this definition">¶</a></dt>
+<dd><p>synchronous trigger 7</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ART_SCOPE_Lib.constants.TriggerWindowType">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ART_SCOPE_Lib.constants.</span></code><code class="sig-name descname"><span class="pre">TriggerWindowType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ART_SCOPE_Lib/constants.html#TriggerWindowType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerWindowType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>trigger window type</p>
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerWindowType.WINDOW_ENTERING">
+<code class="sig-name descname"><span class="pre">WINDOW_ENTERING</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerWindowType.WINDOW_ENTERING" title="Permalink to this definition">¶</a></dt>
+<dd><p>in</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ART_SCOPE_Lib.constants.TriggerWindowType.WINDOW_LEAVING">
+<code class="sig-name descname"><span class="pre">WINDOW_LEAVING</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#ART_SCOPE_Lib.constants.TriggerWindowType.WINDOW_LEAVING" title="Permalink to this definition">¶</a></dt>
+<dd><p>out</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to ArtScope’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="functions.html" class="btn btn-neutral float-right" title="functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

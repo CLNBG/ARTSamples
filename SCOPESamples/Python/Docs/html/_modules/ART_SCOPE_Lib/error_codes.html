@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ART_SCOPE_Lib.error_codes &mdash; ArtScope 1.20.0032 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ArtScope
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../functions.html">functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../error_codes.html">error_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors.html">errors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ArtScope</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ART_SCOPE_Lib.error_codes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ART_SCOPE_Lib.error_codes</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Errors&#39;</span><span class="p">,</span> <span class="s1">&#39;Warnings&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Errors"><a class="viewcode-back" href="../../error_codes.html#ART_SCOPE_Lib.error_codes.Errors">[docs]</a><span class="k">class</span> <span class="nc">Errors</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    error code</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ArtSCOPError_AllocateMemoryError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">171298</span>
+    <span class="n">ArtSCOPError_CardNotSupport</span> <span class="o">=</span> <span class="o">-</span><span class="mi">229774</span>
+    <span class="n">ArtSCOPError_OpenFileError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">229773</span>
+    <span class="n">ArtSCOPError_FileTypeError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">229772</span>
+    <span class="n">ArtSCOPError_FileSaveError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">229771</span>
+    <span class="n">ArtSCOPError_ConfigureNotSupport</span> <span class="o">=</span> <span class="o">-</span><span class="mi">229770</span>
+    <span class="n">ArtSCOPError_BufferTooSmallForString</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200228</span>
+    <span class="n">ArtSCOPError_NULLPtr</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200604</span>
+    <span class="n">ArtSCOPError_InvalidTaskName</span> <span class="o">=</span> <span class="o">-</span><span class="mi">201340</span>
+    <span class="n">ArtSCOPError_DeviceNotExist</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200220</span>
+    <span class="n">ArtSCOPError_ReleaseDeviceError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200219</span>
+    <span class="n">ArtSCOPError_ChanDisable</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200218</span>
+    <span class="n">ArtSCOPError_InvalidRecord</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200217</span>
+    <span class="n">ArtSCOPError_InitAcquisitionError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200216</span>
+    <span class="n">ArtSCOPError_SoftwareTriggerError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200215</span>
+    <span class="n">ArtSCOPError_GetStatusError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200214</span>
+    <span class="n">ArtSCOPError_ReadDataError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200213</span>
+    <span class="n">ArtSCOPError_ReadDataTimeout</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200299</span>
+    <span class="n">ArtSCOPError_StopError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200212</span>
+    <span class="n">ArtSCOPError_GetMainInfoError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200211</span>
+    <span class="n">ArtSCOPError_InvalidSampleRate</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200210</span>
+    <span class="n">ArtSCOPError_InvalidRange</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200209</span>
+    <span class="n">ArtSCOPError_InvalidPhysChanString</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200208</span>
+    <span class="n">ArtSCOPError_InvalidSampleMode</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200207</span>
+    <span class="n">ArtSCOPError_InvalidCoupling</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200206</span>
+    <span class="n">ArtSCOPError_InvalidTriggerPara</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200205</span>
+    <span class="n">ArtSCOPError_InvalidRefposition</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200204</span>
+    <span class="n">ArtSCOPError_DevAlreadyInTask</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200481</span>
+    <span class="n">ArtSCOPError_InvalidTask</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200088</span>
+    <span class="n">ArtSCOPError_InvalidTimeOut</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200087</span>
+    <span class="n">ArtSCOPError_ClearTaskError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200086</span>
+    <span class="n">ArtSCOPError_SubmitVIError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200085</span>
+    <span class="n">ArtSCOPError_GetVIError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200084</span>
+    <span class="n">ArtSCOPError_ReadBufferTooSmall</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200083</span>
+    <span class="n">ArtSCOPErroe_ADCalibrationError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200082</span>
+    <span class="n">ArtSCOPError_GetActualSampleRateError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200081</span>
+    <span class="n">ArtSCOPError_InvalidFileSavePath</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200080</span>
+    <span class="n">ArtSCOPError_StartAcquisitionError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200079</span>
+    <span class="n">ArtSCOPError_ReleaseADError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200078</span>
+    <span class="n">ArtSCOPError_GetVersionError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200077</span>
+    <span class="n">ArtSCOPError_InvalidReadLength</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200076</span>
+    <span class="n">ArtSCOPError_GetBusInfoError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200075</span>
+    <span class="n">ArtSCOPError_GetSerialNumberError</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200074</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, art.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

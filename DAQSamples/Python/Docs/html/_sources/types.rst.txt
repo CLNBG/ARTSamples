@@ -1,0 +1,6 @@
+artdaq.types
+=============
+.. automodule:: artdaq.types
+    :members:
+    :undoc-members:
+    :show-inheritance:

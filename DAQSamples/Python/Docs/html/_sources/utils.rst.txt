@@ -1,0 +1,6 @@
+artdaq.utils
+=============
+
+.. automodule:: artdaq.utils
+    :members:
+    :show-inheritance:

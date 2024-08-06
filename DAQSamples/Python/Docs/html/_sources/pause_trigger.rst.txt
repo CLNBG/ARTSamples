@@ -1,0 +1,6 @@
+artdaq.task.pause_trigger
+==========================
+
+.. automodule:: artdaq._task_modules.triggering.pause_trigger
+    :members:
+    :show-inheritance:
