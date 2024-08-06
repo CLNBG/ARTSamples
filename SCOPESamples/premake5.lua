@@ -1,0 +1,1 @@
+include "VC/VoltageAcquisition/ContinueAcq_IntClk_TrigSoft"
