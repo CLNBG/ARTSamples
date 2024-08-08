@@ -32,45 +32,45 @@
 *********************************************************************/
 
 #include <stdio.h>
-#include "Art_DAQ.h"
+#include "DAQ/Art_DAQ.h"
 
 #define ArtDAQErrChk(functionCall) if( ArtDAQFailed(error=(functionCall)) ) goto Error; else
 
 int main(void)
 {
-	int32       error=0;
-	TaskHandle  taskHandle=0;
-	char        errBuff[2048]={'\0'};
-	float64     data[1] = {1.0};
-	
+	int32       error = 0;
+	TaskHandle  taskHandle = 0;
+	char        errBuff[2048] = { '\0' };
+	float64     data[1] = { 1.0 };
+
 	/*********************************************/
 	// ArtDAQ Configure Code
 	/*********************************************/
-	ArtDAQErrChk (ArtDAQ_CreateTask("",&taskHandle));
-	ArtDAQErrChk (ArtDAQ_CreateAOVoltageChan(taskHandle,"Dev1/ao0","",-10.0,10.0,ArtDAQ_Val_Volts,""));
-	
+	ArtDAQErrChk(ArtDAQ_CreateTask("", &taskHandle));
+	ArtDAQErrChk(ArtDAQ_CreateAOVoltageChan(taskHandle, "Dev1/ao0", "", -10.0, 10.0, ArtDAQ_Val_Volts, ""));
+
 	/*********************************************/
 	// ArtDAQ Start Code
 	/*********************************************/
-	ArtDAQErrChk (ArtDAQ_StartTask(taskHandle));
-	
+	ArtDAQErrChk(ArtDAQ_StartTask(taskHandle));
+
 	/*********************************************/
 	// ArtDAQ Write Code
 	/*********************************************/
-	ArtDAQErrChk (ArtDAQ_WriteAnalogF64(taskHandle,1,0,10.0,ArtDAQ_Val_GroupByChannel,data,NULL,NULL));
-	
+	ArtDAQErrChk(ArtDAQ_WriteAnalogF64(taskHandle, 1, 0, 10.0, ArtDAQ_Val_GroupByChannel, data, NULL, NULL));
+
 Error:
-	if( ArtDAQFailed(error) )
-		ArtDAQ_GetExtendedErrorInfo(errBuff,2048);
-	if( taskHandle!=0 ) {
+	if (ArtDAQFailed(error))
+		ArtDAQ_GetExtendedErrorInfo(errBuff, 2048);
+	if (taskHandle != 0) {
 		/*********************************************/
 		// ArtDAQ Stop Code
 		/*********************************************/
 		ArtDAQ_StopTask(taskHandle);
 		ArtDAQ_ClearTask(taskHandle);
 	}
-	if( ArtDAQFailed(error) )
-		printf("ArtDAQ_ Error: %s\n",errBuff);
+	if (ArtDAQFailed(error))
+		printf("ArtDAQ_ Error: %s\n", errBuff);
 	printf("End of program, press Enter key to quit\n");
 	getchar();
 	return 0;
