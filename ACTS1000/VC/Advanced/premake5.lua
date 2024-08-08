@@ -7,7 +7,7 @@ project "Sys_8916"
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
     
     pchheader "StdAfx.h"
-    pchsource "%{wks.location}/NMROSCore/vendor/ART/ARTSamples/ACTS1000/VC/Advanced/StdAfx.cpp"
+    pchsource "%{wks.location}/NMROSCore/vendor/ART/ARTSamples/PCI8501/VC/Advanced/StdAfx.cpp"
     
     characterset ("Unicode")
     
@@ -27,12 +27,17 @@ project "Sys_8916"
     }
     libdirs
     {
-        "%{wks.location}/NMROSCore/vendor/ART/libs/ACTS1000",
+        "%{wks.location}/NMROSCore/vendor/ART/libs/PCI8501",
     }
     links
     {
-        "ACTS1000_64.lib",
+        "PCI8501_64.lib",
     }
+		debugenvs
+  	{
+    		"path=" .. os.getenv("path") .. ";" .. "%{dllDir.PCI8501}"
+  	}
+
     files
     {
         "**.h",
