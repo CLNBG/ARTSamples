@@ -1,3 +1,10 @@
-include  "VC/Analog In/Measure Voltage/VC_Acq_IntClk"
-include  "VC/Analog Out/Generate Voltage/VC_ContGen_IntClk"
-include  "VC/Analog Out/Generate Voltage/VC_Volt_Update"
+group "HardwareVendorDemo/ART/ArtDAQ"
+	include  "VC/Analog In/Measure Voltage/VC_Acq_IntClk"
+	include  "VC/Analog In/Measure Voltage/VC_ContAcq_IntClk"
+	include  "VC/Analog In/Measure Voltage/VC_SingleAcq_IntClk"
+group ""
+
+group "HardwareVendorDemo/ART/ArtAO"
+	include  "VC/Analog Out/Generate Voltage/VC_ContGen_IntClk"
+	include  "VC/Analog Out/Generate Voltage/VC_Volt_Update"
+group ""

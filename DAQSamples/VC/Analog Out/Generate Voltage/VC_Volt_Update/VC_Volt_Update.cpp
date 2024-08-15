@@ -72,6 +72,7 @@ Error:
 	if (ArtDAQFailed(error))
 		printf("ArtDAQ_ Error: %s\n", errBuff);
 	printf("End of program, press Enter key to quit\n");
-	getchar();
+	auto x = getchar();
+
 	return 0;
 }
