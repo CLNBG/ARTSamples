@@ -3,9 +3,11 @@ group "HardwareVendorDemo/ART"
   include "ACTS1000/VC/Advanced"
   include "PCI8501/VC/Advanced"
   include "PCI8510/VC/Advanced"
-	group "HardwareVendorDemo/ART"
+
+	group "HardwareVendorDemo/ART/DAQ"
 		include "DAQSamples"
 	group""
+
 	group "HardwareVendorDemo/ART/ArtSCOPE"
 		include "SCOPESamples"
 	group""
