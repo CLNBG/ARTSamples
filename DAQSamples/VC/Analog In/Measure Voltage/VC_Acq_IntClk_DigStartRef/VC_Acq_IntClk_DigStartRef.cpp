@@ -48,51 +48,51 @@
 *********************************************************************/
 
 #include <stdio.h>
-#include "Art_DAQ.h"
+#include "DAQ/Art_DAQ.h"
 
 #define ArtDAQErrChk(functionCall) if( ArtDAQFailed(error=(functionCall)) ) goto Error; else
 
 int main(void)
 {
-	int32       error=0;
-	TaskHandle  taskHandle=0;
+	int32       error = 0;
+	TaskHandle  taskHandle = 0;
 	int32       read;
 	float64     data[1000];
-	char        errBuff[2048]={'\0'};
-	
+	char        errBuff[2048] = { '\0' };
+
 	/*********************************************/
 	// ArtDAQ Configure Code
 	/*********************************************/
-	ArtDAQErrChk (ArtDAQ_CreateTask("",&taskHandle));
-	ArtDAQErrChk (ArtDAQ_CreateAIVoltageChan(taskHandle,"Dev1/ai0","",ArtDAQ_Val_Cfg_Default,-10.0,10.0,ArtDAQ_Val_Volts,NULL));
-    ArtDAQErrChk (ArtDAQ_CfgSampClkTiming(taskHandle,"",10000.0,ArtDAQ_Val_Rising,ArtDAQ_Val_FiniteSamps,1000));
-    ArtDAQErrChk (ArtDAQ_CfgDigEdgeStartTrig(taskHandle,"/Dev1/PFI0",ArtDAQ_Val_Rising));
-    ArtDAQErrChk (ArtDAQ_CfgDigEdgeRefTrig(taskHandle,"/Dev1/PFI0",ArtDAQ_Val_Rising,100));
-	
+	ArtDAQErrChk(ArtDAQ_CreateTask("", &taskHandle));
+	ArtDAQErrChk(ArtDAQ_CreateAIVoltageChan(taskHandle, "Dev1/ai0", "", ArtDAQ_Val_Cfg_Default, -10.0, 10.0, ArtDAQ_Val_Volts, NULL));
+	ArtDAQErrChk(ArtDAQ_CfgSampClkTiming(taskHandle, "", 10000.0, ArtDAQ_Val_Rising, ArtDAQ_Val_FiniteSamps, 1000));
+	ArtDAQErrChk(ArtDAQ_CfgDigEdgeStartTrig(taskHandle, "/Dev1/PFI0", ArtDAQ_Val_Rising));
+	ArtDAQErrChk(ArtDAQ_CfgDigEdgeRefTrig(taskHandle, "/Dev1/PFI0", ArtDAQ_Val_Rising, 100));
+
 	/*********************************************/
 	// ArtDAQ Start Code
 	/*********************************************/
-	ArtDAQErrChk (ArtDAQ_StartTask(taskHandle));
-	
+	ArtDAQErrChk(ArtDAQ_StartTask(taskHandle));
+
 	/*********************************************/
 	// ArtDAQ Read Code
 	/*********************************************/
-	ArtDAQErrChk (ArtDAQ_ReadAnalogF64(taskHandle,1000,10.0,ArtDAQ_Val_GroupByChannel,data,1000,&read,NULL));
-	
-	printf("Acquired %d samples\n",(int)read);
-	
+	ArtDAQErrChk(ArtDAQ_ReadAnalogF64(taskHandle, 1000, 10.0, ArtDAQ_Val_GroupByChannel, data, 1000, &read, NULL));
+
+	printf("Acquired %d samples\n", (int)read);
+
 Error:
-	if( ArtDAQFailed(error) )
-		ArtDAQ_GetExtendedErrorInfo(errBuff,2048);
-	if( taskHandle!=0 ) {
+	if (ArtDAQFailed(error))
+		ArtDAQ_GetExtendedErrorInfo(errBuff, 2048);
+	if (taskHandle != 0) {
 		/*********************************************/
 		// ArtDAQ Stop Code
 		/*********************************************/
 		ArtDAQ_StopTask(taskHandle);
 		ArtDAQ_ClearTask(taskHandle);
 	}
-	if( ArtDAQFailed(error) )
-		printf("ArtDAQ_ Error: %s\n",errBuff);
+	if (ArtDAQFailed(error))
+		printf("ArtDAQ_ Error: %s\n", errBuff);
 	printf("End of program, press Enter key to quit\n");
 	getchar();
 	return 0;

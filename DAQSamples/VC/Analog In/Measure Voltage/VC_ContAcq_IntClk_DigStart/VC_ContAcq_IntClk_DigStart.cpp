@@ -50,99 +50,99 @@
 *********************************************************************/
 
 #include <stdio.h>
-#include "Art_DAQ.h"
+#include "DAQ/Art_DAQ.h"
 
 #define ArtDAQErrChk(functionCall) if( ArtDAQFailed(error=(functionCall)) ) goto Error; else
 
-int32 ART_CALLBACK EveryNCallback(TaskHandle taskHandle, int32 everyNsamplesEventType, uInt32 nSamples, void *callbackData);
-int32 ART_CALLBACK DoneCallback(TaskHandle taskHandle, int32 status, void *callbackData);
+int32 ART_CALLBACK EveryNCallback(TaskHandle taskHandle, int32 everyNsamplesEventType, uInt32 nSamples, void* callbackData);
+int32 ART_CALLBACK DoneCallback(TaskHandle taskHandle, int32 status, void* callbackData);
 
 int main(void)
 {
-    int32       error=0;
-    TaskHandle  taskHandle=0;
-    char        errBuff[2048]={'\0'};
+	int32       error = 0;
+	TaskHandle  taskHandle = 0;
+	char        errBuff[2048] = { '\0' };
 
-    /*********************************************/
-    // ArtDAQ_ Configure Code
-    /*********************************************/
-    ArtDAQErrChk (ArtDAQ_CreateTask("",&taskHandle));
-    ArtDAQErrChk (ArtDAQ_CreateAIVoltageChan(taskHandle,"Dev1/ai0","",ArtDAQ_Val_Cfg_Default,-10.0,10.0,ArtDAQ_Val_Volts,NULL));
-    ArtDAQErrChk (ArtDAQ_CfgSampClkTiming(taskHandle,"",10000.0,ArtDAQ_Val_Rising,ArtDAQ_Val_ContSamps,1000));
-    ArtDAQErrChk (ArtDAQ_CfgDigEdgeStartTrig(taskHandle,"/Dev1/PFI1",ArtDAQ_Val_Rising));
-    ArtDAQErrChk (ArtDAQ_SetStartTrigDigFltrMinPulseWidth(taskHandle, 0.0001));// 0.1ms
+	/*********************************************/
+	// ArtDAQ_ Configure Code
+	/*********************************************/
+	ArtDAQErrChk(ArtDAQ_CreateTask("", &taskHandle));
+	ArtDAQErrChk(ArtDAQ_CreateAIVoltageChan(taskHandle, "Dev1/ai0", "", ArtDAQ_Val_Cfg_Default, -10.0, 10.0, ArtDAQ_Val_Volts, NULL));
+	ArtDAQErrChk(ArtDAQ_CfgSampClkTiming(taskHandle, "", 10000.0, ArtDAQ_Val_Rising, ArtDAQ_Val_ContSamps, 1000));
+	ArtDAQErrChk(ArtDAQ_CfgDigEdgeStartTrig(taskHandle, "/Dev1/PFI1", ArtDAQ_Val_Rising));
+	ArtDAQErrChk(ArtDAQ_SetStartTrigDigFltrMinPulseWidth(taskHandle, 0.0001));// 0.1ms
 
-    ArtDAQErrChk (ArtDAQ_RegisterEveryNSamplesEvent(taskHandle,ArtDAQ_Val_Acquired_Into_Buffer,1000,0,EveryNCallback,NULL));
-    ArtDAQErrChk (ArtDAQ_RegisterDoneEvent(taskHandle,0,DoneCallback,NULL));
+	ArtDAQErrChk(ArtDAQ_RegisterEveryNSamplesEvent(taskHandle, ArtDAQ_Val_Acquired_Into_Buffer, 1000, 0, EveryNCallback, NULL));
+	ArtDAQErrChk(ArtDAQ_RegisterDoneEvent(taskHandle, 0, DoneCallback, NULL));
 
-    /*********************************************/
-    // ArtDAQ_ Start Code
-    /*********************************************/
-    ArtDAQErrChk (ArtDAQ_StartTask(taskHandle));
+	/*********************************************/
+	// ArtDAQ_ Start Code
+	/*********************************************/
+	ArtDAQErrChk(ArtDAQ_StartTask(taskHandle));
 
-    printf("Acquiring samples continuously. Press Enter to interrupt\n");
-    getchar();
+	printf("Acquiring samples continuously. Press Enter to interrupt\n");
+	getchar();
 
 Error:
-    if( ArtDAQFailed(error) )
-        ArtDAQ_GetExtendedErrorInfo(errBuff,2048);
-    if( taskHandle!=0 ) {
-        /*********************************************/
-        // ArtDAQ_ Stop Code
-        /*********************************************/
-        ArtDAQ_StopTask(taskHandle);
-        ArtDAQ_ClearTask(taskHandle);
-    }
-    if( ArtDAQFailed(error) )
-        printf("ArtDAQ_ Error: %s\n",errBuff);
-    printf("End of program, press Enter key to quit\n");
-    getchar();
-    return 0;
+	if (ArtDAQFailed(error))
+		ArtDAQ_GetExtendedErrorInfo(errBuff, 2048);
+	if (taskHandle != 0) {
+		/*********************************************/
+		// ArtDAQ_ Stop Code
+		/*********************************************/
+		ArtDAQ_StopTask(taskHandle);
+		ArtDAQ_ClearTask(taskHandle);
+	}
+	if (ArtDAQFailed(error))
+		printf("ArtDAQ_ Error: %s\n", errBuff);
+	printf("End of program, press Enter key to quit\n");
+	getchar();
+	return 0;
 }
 
-int32 ART_CALLBACK EveryNCallback(TaskHandle taskHandle, int32 everyNsamplesEventType, uInt32 nSamples, void *callbackData)
+int32 ART_CALLBACK EveryNCallback(TaskHandle taskHandle, int32 everyNsamplesEventType, uInt32 nSamples, void* callbackData)
 {
-    int32       error=0;
-    char        errBuff[2048]={'\0'};
-    static int  totalRead=0;
-    int32       read=0;
-    float64     data[1000];
+	int32       error = 0;
+	char        errBuff[2048] = { '\0' };
+	static int  totalRead = 0;
+	int32       read = 0;
+	float64     data[1000];
 
-    /*********************************************/
-    // ArtDAQ_ Read Code
-    /*********************************************/
-    ArtDAQErrChk (ArtDAQ_ReadAnalogF64(taskHandle,1000,10.0,ArtDAQ_Val_GroupByScanNumber,data,1000,&read,NULL));
-    if( read>0 ) {
-        printf("Acquired %d samples. Total %d\r",(int)read,(int)(totalRead+=read));
-        fflush(stdout);
-    }
+	/*********************************************/
+	// ArtDAQ_ Read Code
+	/*********************************************/
+	ArtDAQErrChk(ArtDAQ_ReadAnalogF64(taskHandle, 1000, 10.0, ArtDAQ_Val_GroupByScanNumber, data, 1000, &read, NULL));
+	if (read > 0) {
+		printf("Acquired %d samples. Total %d\r", (int)read, (int)(totalRead += read));
+		fflush(stdout);
+	}
 
 Error:
-    if( ArtDAQFailed(error) ) {
-        ArtDAQ_GetExtendedErrorInfo(errBuff,2048);
-        /*********************************************/
-        // ArtDAQ_ Stop Code
-        /*********************************************/
-        ArtDAQ_StopTask(taskHandle);
-        ArtDAQ_ClearTask(taskHandle);
-        printf("ArtDAQ_ Error: %s\n",errBuff);
-    }
-    return 0;
+	if (ArtDAQFailed(error)) {
+		ArtDAQ_GetExtendedErrorInfo(errBuff, 2048);
+		/*********************************************/
+		// ArtDAQ_ Stop Code
+		/*********************************************/
+		ArtDAQ_StopTask(taskHandle);
+		ArtDAQ_ClearTask(taskHandle);
+		printf("ArtDAQ_ Error: %s\n", errBuff);
+	}
+	return 0;
 }
 
-int32 ART_CALLBACK DoneCallback(TaskHandle taskHandle, int32 status, void *callbackData)
+int32 ART_CALLBACK DoneCallback(TaskHandle taskHandle, int32 status, void* callbackData)
 {
-    int32   error=0;
-    char    errBuff[2048]={'\0'};
+	int32   error = 0;
+	char    errBuff[2048] = { '\0' };
 
-    // Check to see if an error stopped the task.
-    ArtDAQErrChk (status);
+	// Check to see if an error stopped the task.
+	ArtDAQErrChk(status);
 
 Error:
-    if( ArtDAQFailed(error) ) {
-        ArtDAQ_GetExtendedErrorInfo(errBuff,2048);
-        ArtDAQ_ClearTask(taskHandle);
-        printf("ArtDAQ_ Error: %s\n",errBuff);
-    }
-    return 0;
+	if (ArtDAQFailed(error)) {
+		ArtDAQ_GetExtendedErrorInfo(errBuff, 2048);
+		ArtDAQ_ClearTask(taskHandle);
+		printf("ArtDAQ_ Error: %s\n", errBuff);
+	}
+	return 0;
 }

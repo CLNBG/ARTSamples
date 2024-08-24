@@ -1,6 +1,13 @@
 group "HardwareVendorDemo/ART/ArtDAQ"
+	include  "VC/Analog In/Measure Voltage/VC_Acq_ExtClk"
 	include  "VC/Analog In/Measure Voltage/VC_Acq_IntClk"
+	include  "VC/Analog In/Measure Voltage/VC_Acq_IntClk_AnlgStart"
+	include  "VC/Analog In/Measure Voltage/VC_Acq_IntClk_DigRef"
+	include  "VC/Analog In/Measure Voltage/VC_Acq_IntClk_DigStartRef"
 	include  "VC/Analog In/Measure Voltage/VC_ContAcq_IntClk"
+	include  "VC/Analog In/Measure Voltage/VC_ContAcq_IntClk_AnlgStart"
+	include  "VC/Analog In/Measure Voltage/VC_ContAcq_IntClk_DigStart"
+	include  "VC/Analog In/Measure Voltage/VC_ContAcq_ExtClk_DigStart"
 	include  "VC/Analog In/Measure Voltage/VC_SingleAcq_IntClk"
 group ""
 
