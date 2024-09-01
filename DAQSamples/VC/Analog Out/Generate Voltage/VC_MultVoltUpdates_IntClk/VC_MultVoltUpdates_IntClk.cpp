@@ -50,6 +50,7 @@
 
 #include <stdio.h>
 #include "DAQ/Art_DAQ.h"
+#include <vector>
 
 #define ArtDAQErrChk(functionCall) if( ArtDAQFailed(error=(functionCall)) ) goto Error; else
 
@@ -59,23 +60,49 @@ int main(void)
 	TaskHandle  taskHandle = 0;
 	float64     data[4000];
 	char        errBuff[2048] = { '\0' };
-	int			i = 0;
 	int32   	written;
 
-	for (; i < 4000; i++)
+	std::vector<double> dataVec;
+
+	for (int i = 0; i < 4000; i++)
 		data[i] = 5.0 * (double)i / 4000.0;
 
+	for (int i = 0; i < 15000; i++)
+		dataVec.push_back(-7.5  + i * 0.001 );
 	/*********************************************/
 	// ArtDAQ Configure Code
 	/*********************************************/
 	ArtDAQErrChk(ArtDAQ_CreateTask("", &taskHandle));
-	ArtDAQErrChk(ArtDAQ_CreateAOVoltageChan(taskHandle, "Dev1/ao0", "", -10.0, 10.0, ArtDAQ_Val_Volts, ""));
-	ArtDAQErrChk(ArtDAQ_CfgSampClkTiming(taskHandle, "", 1000, ArtDAQ_Val_Rising, ArtDAQ_Val_FiniteSamps, 4000));
+	ArtDAQErrChk(ArtDAQ_CreateAOVoltageChan(taskHandle, 
+		"Dev1/ao0", 
+		"", 
+		-10.0, 
+		10.0, 
+		ArtDAQ_Val_Volts, 
+		""
+	));
+	ArtDAQErrChk(ArtDAQ_CfgSampClkTiming(taskHandle, 
+		"", 
+		25600, 
+		ArtDAQ_Val_Rising, 
+		ArtDAQ_Val_FiniteSamps, 
+		15000
+	));
+
+	while (1)
+	{
 
 	/*********************************************/
 	// ArtDAQ Write Code
 	/*********************************************/
-	ArtDAQErrChk(ArtDAQ_WriteAnalogF64(taskHandle, 4000, 0, 10.0, ArtDAQ_Val_GroupByChannel, data, &written, NULL));
+	ArtDAQErrChk(ArtDAQ_WriteAnalogF64(taskHandle, 
+		15000, 
+		0, 
+		10.0, 
+		ArtDAQ_Val_GroupByChannel, 
+		dataVec.data(), 
+		&written, 
+		NULL));
 
 	/*********************************************/
 	// ArtDAQ Start Code
@@ -86,6 +113,8 @@ int main(void)
 	// ArtDAQ_ Wait Code
 	/*********************************************/
 	ArtDAQErrChk(ArtDAQ_WaitUntilTaskDone(taskHandle, 10.0));
+		ArtDAQ_StopTask(taskHandle);
+	}
 
 Error:
 	if (ArtDAQFailed(error))
