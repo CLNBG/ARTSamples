@@ -6,12 +6,12 @@
 #include <string.h>
 #include <stdio.h>
 #include <conio.h>
-#include <ART_SCOPE.h>
+#include <SCOPE/ART_SCOPE.h>
 
-int ProcessEvent (int32 *stop);
-int GetDeviceNameFromConsole (char* resourceName);
-int GetParametersFromConsole (char* channel, int32* verticalRange, double* minSampleRate, int32* perRecordLength, double* refPosotion);
-int DisplayErrorMessageInConsole (int32 error, const char* errorMessage);
+int ProcessEvent(int32* stop);
+int GetDeviceNameFromConsole(char* resourceName);
+int GetParametersFromConsole(char* channel, int32* verticalRange, double* minSampleRate, int32* perRecordLength, double* refPosotion);
+int DisplayErrorMessageInConsole(int32 error, const char* errorMessage);
 
 
 int main()
@@ -28,7 +28,7 @@ int main()
 	char resourceName[_MAX_PATH];
 	char channelName[_MAX_PATH];
 
-	int32 acquisitionMode = ARTSCOPE_SAMPMODE_FINITE;	
+	int32 acquisitionMode = ARTSCOPE_SAMPMODE_FINITE;
 
 	int32 verticalRange = ARTSCOPE_RANGE_10Vpp;
 	int32 verticalOffset = 0;
@@ -52,9 +52,9 @@ int main()
 	int32 chunksFetched = 0;
 
 	uInt32  perRecordLength = 0;
-	
+
 	ArtScope_wfmInfo wfmInfo;
-	double *waveformPtr = NULL;
+	double* waveformPtr = NULL;
 	int32 stop = FALSE;
 
 	memset(triggerSource, 0, sizeof(triggerSource));
@@ -63,15 +63,15 @@ int main()
 	GetDeviceNameFromConsole(resourceName);
 
 	GetParametersFromConsole(channelName, &verticalRange, &minSampleRate, &minNumPts, &refPosition);
-	
- 	handleErr(ArtScope_init(resourceName, &taskHandle));
+
+	handleErr(ArtScope_init(resourceName, &taskHandle));
 
 	handleErr(ArtScope_ConfigureAcquisitionMode(taskHandle, acquisitionMode));
 
 	handleErr(ArtScope_ConfigureVertical(taskHandle, channelName, verticalRange, verticalOffset, verticalCoupling, 1, TRUE));
 
 	handleErr(ArtScope_ConfigureHorizontalTiming(taskHandle, minSampleRate, minNumPts, refPosition));
-	
+
 	handleErr(ArtScope_ConfigureTriggerDigital(taskHandle, triggerSource, triggerSlope, triggerCount, triggerSensitivity));
 
 	handleErr(ArtScope_ActualNumWfms(taskHandle, &numWfms));
@@ -83,7 +83,7 @@ int main()
 	handleErr(ArtScope_ActualRecordLength(taskHandle, &perRecordLength));
 	waveformPtr = (double*)malloc(sizeof(double) * perRecordLength * numWfms);
 	if (waveformPtr == NULL)
-		handleErr (ArtSCOPError_AllocateMemoryError);
+		handleErr(ArtSCOPError_AllocateMemoryError);
 
 	handleErr(ArtScope_StartAcquisition(taskHandle));
 
@@ -91,35 +91,35 @@ int main()
 
 	pointsFetched += wfmInfo.actualSamples;
 	chunksFetched++;
-	
+
 	printf("Chunks Fetched : %d\tPoints Fetched : %d\n", chunksFetched, pointsFetched);
-	for(k=0;k<numWfms;k++)
+	for (k = 0; k < numWfms; k++)
 	{
 		printf("%.4f(mV)\t", waveformPtr[k]);
 	}
 	printf("\n");
-	
+
 	ArtScope_StopAcquisition(taskHandle);
 
 Error:
 	if (waveformPtr)
-		free (waveformPtr);
-	
+		free(waveformPtr);
+
 	// get error information
 	if (error == -1)
-		strcpy (errorMessage, "This example only supports 1 channel.");
- 	else if (error != ArtSCOPESuccess)
- 		ArtScope_GetErrorString (error, errorMessage, sizeof(errorMessage));   
+		strcpy(errorMessage, "This example only supports 1 channel.");
+	else if (error != ArtSCOPESuccess)
+		ArtScope_GetErrorString(error, errorMessage, sizeof(errorMessage));
 	else
-		strcpy (errorMessage, "Acquisition successful!");
-	
-	DisplayErrorMessageInConsole (error, errorMessage);
-	
+		strcpy(errorMessage, "Acquisition successful!");
+
+	DisplayErrorMessageInConsole(error, errorMessage);
+
 	// stop and release task
 	if (taskHandle)
-	{	
+	{
 		ArtScope_ReleaseAcquisition(taskHandle);
-		ArtScope_Close (taskHandle);
+		ArtScope_Close(taskHandle);
 	}
 
 	// Wait and exit
@@ -130,21 +130,21 @@ Error:
 
 
 // Obtain the resource name of the device from the user
-int GetDeviceNameFromConsole (char* resourceName)
+int GetDeviceNameFromConsole(char* resourceName)
 {
-   //Get the device name from the user
-   printf("Type the device name (e.g., Dev1) from DMC: ");
-   scanf("%s", resourceName);
-   
-   return 0;
+	//Get the device name from the user
+	printf("Type the device name (e.g., Dev1) from DMC: ");
+	scanf("%s", resourceName);
+
+	return 0;
 }
 
 // Obtain the necessary parameters
-int GetParametersFromConsole (char* channel,
-						int32* verticalRange,
-						double* minSampleRate,
-						int32* perRecordLength,
-						double* refPosition)
+int GetParametersFromConsole(char* channel,
+	int32* verticalRange,
+	double* minSampleRate,
+	int32* perRecordLength,
+	double* refPosition)
 {
 	double	sampleRate;
 
@@ -159,24 +159,24 @@ int GetParametersFromConsole (char* channel,
 	scanf("%lf", &sampleRate);
 	*minSampleRate = sampleRate;
 
- 	printf("Input sample length:");
- 	scanf("%d", perRecordLength);
+	printf("Input sample length:");
+	scanf("%d", perRecordLength);
 
 	printf("Input trigger position(0-post triggger;1-pre trigger;2-middle trigger):");
- 	scanf("%f", refPosition);
+	scanf("%f", refPosition);
 
 	return 0;
 }
 
 // Display message - do a printf
-int DisplayErrorMessageInConsole (int32 error,
-                              const char* errorMessage)
+int DisplayErrorMessageInConsole(int32 error,
+	const char* errorMessage)
 {
-   printf("%s\n",errorMessage);
-   return 0;
+	printf("%s\n", errorMessage);
+	return 0;
 }
 
-int ProcessEvent (int *stopPtr)
+int ProcessEvent(int* stopPtr)
 {
 	// Stop when keyboard is pressed
 	if (_kbhit())
@@ -192,6 +192,6 @@ int ProcessEvent (int *stopPtr)
 
 /*************************************************************************************\
 
-                              End of example
+							  End of example
 
 \*************************************************************************************/

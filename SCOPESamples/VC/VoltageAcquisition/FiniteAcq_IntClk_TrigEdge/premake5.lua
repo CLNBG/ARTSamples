@@ -1,4 +1,4 @@
-project "VC_ContGen_IntClk"
+project "FiniteAcq_IntClk_TrigEdge"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
@@ -9,7 +9,7 @@ project "VC_ContGen_IntClk"
 
 	files
 	{
-      "VC_ContGen_IntClk.cpp",
+      "**.cpp",
   }
     
   includedirs
@@ -30,13 +30,13 @@ project "VC_ContGen_IntClk"
 
   libdirs
   {
-			"%{LinkDir.ARTDAQ64}"
+			"%{LinkDir.ARTSCOPE64}"
   }
     
   links
   {
 			"NMROSCore",
-			"%{libsName.ARTDAQ}"
+			"Art_SCOPE.lib",
   }
 
   filter "system:windows"

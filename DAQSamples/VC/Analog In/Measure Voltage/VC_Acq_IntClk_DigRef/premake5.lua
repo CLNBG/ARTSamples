@@ -4,8 +4,8 @@ project "VC_Acq_IntClk_DigRef"
 	cppdialect "C++17"
 
 
-	targetdir ("../../../../bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("../../../../bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir (ARTSamplesBaseDir .. "/bin/" .. outputdir .. "/%{prj.name}")
+	objdir (ARTSamplesBaseDir .. "/bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
@@ -18,7 +18,6 @@ project "VC_Acq_IntClk_DigRef"
       "%{IncludeDir.EIGEN}",
       "%{IncludeDir.MagicEnum}",
       "%{IncludeDir.ART}",
-      "%{wks.location}/NMROSCore/vendor/DAQSys/ArtDAQ/src",
       "%{wks.location}/NMROSCore/src",
       "%{wks.location}/NMROSCore/vendor/spdlog/include",
   }
