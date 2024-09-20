@@ -66,8 +66,8 @@ int main(void)
 	// ArtDAQ Configure Code
 	/*********************************************/
 	ArtDAQErrChk(ArtDAQ_CreateTask("", &taskHandle));
-	ArtDAQErrChk(ArtDAQ_CreateAOVoltageChan(taskHandle, "Dev1/ao0", "", -10.0, 10.0, ArtDAQ_Val_Volts, ""));
-	ArtDAQErrChk(ArtDAQ_CfgSampClkTiming(taskHandle, "", 1000, ArtDAQ_Val_Rising, ArtDAQ_Val_ContSamps, 1000));
+	ArtDAQErrChk(ArtDAQ_CreateAOVoltageChan(taskHandle, "Stere/ao0", "", -10.0, 10.0, ArtDAQ_Val_Volts, ""));
+	ArtDAQErrChk(ArtDAQ_CfgSampClkTiming(taskHandle, "", 25600, ArtDAQ_Val_Rising, ArtDAQ_Val_ContSamps, 1000));
 
 	ArtDAQErrChk(ArtDAQ_RegisterDoneEvent(taskHandle, 0, DoneCallback, NULL));
 

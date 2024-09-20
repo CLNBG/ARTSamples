@@ -56,8 +56,20 @@ int main(void)
 	// ArtDAQ Configure Code
 	/*********************************************/
 	ArtDAQErrChk(ArtDAQ_CreateTask("", &taskHandle));
-	ArtDAQErrChk(ArtDAQ_CreateAIVoltageChan(taskHandle, "Dev1/ai0", "", ArtDAQ_Val_Cfg_Default, -10.0, 10.0, ArtDAQ_Val_Volts, NULL));
-	ArtDAQErrChk(ArtDAQ_CfgSampClkTiming(taskHandle, "", 10000.0, ArtDAQ_Val_Rising, ArtDAQ_Val_FiniteSamps, 1000));
+	ArtDAQErrChk(ArtDAQ_CreateAIVoltageChan(taskHandle, 
+		"Plane/ai0", 
+		"", 
+		ArtDAQ_Val_Cfg_Default, 
+		-10.0, 
+		10.0, 
+		ArtDAQ_Val_Volts, 
+		NULL));
+	ArtDAQErrChk(ArtDAQ_CfgSampClkTiming(taskHandle, 
+		"", 
+		10000.0, 
+		ArtDAQ_Val_Rising, 
+		ArtDAQ_Val_FiniteSamps, 
+		1000));
 
 	/*********************************************/
 	// ArtDAQ Start Code
@@ -67,7 +79,14 @@ int main(void)
 	/*********************************************/
 	// ArtDAQ Read Code
 	/*********************************************/
-	ArtDAQErrChk(ArtDAQ_ReadAnalogF64(taskHandle, 1000, 10.0, ArtDAQ_Val_GroupByChannel, data, 1000, &read, NULL));
+	ArtDAQErrChk(ArtDAQ_ReadAnalogF64(taskHandle, 
+		1000, 
+		10.0, 
+		ArtDAQ_Val_GroupByChannel, 
+		data, 
+		1000, 
+		&read, 
+		NULL));
 
 	printf("Acquired %d samples\n", (int)read);
 

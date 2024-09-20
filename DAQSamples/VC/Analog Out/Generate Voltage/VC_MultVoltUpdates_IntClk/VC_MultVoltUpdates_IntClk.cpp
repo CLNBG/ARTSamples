@@ -58,7 +58,7 @@ int main(void)
 {
 	int         error = 0;
 	TaskHandle  taskHandle = 0;
-	float64     data[4000];
+	float64     data[25600 * 2] = {0};
 	char        errBuff[2048] = { '\0' };
 	int32   	written;
 
