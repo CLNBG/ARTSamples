@@ -1,15 +1,14 @@
-project "VC_ContGen_IntClk"
+project "ContinueAcq_IntClk_TrigHardwareDelay"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
-
 
 	targetdir (ARTSamplesBaseDir .. "/bin/" .. outputdir .. "/%{prj.name}")
 	objdir (ARTSamplesBaseDir .. "/bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
-      "VC_ContGen_IntClk.cpp",
+      "**.cpp",
   }
     
   includedirs
@@ -30,13 +29,13 @@ project "VC_ContGen_IntClk"
 
   libdirs
   {
-			"%{LinkDir.ARTDAQ64}"
+			"%{LinkDir.ARTSCOPE64}"
   }
     
   links
   {
 			"NMROSCore",
-			"%{libsName.ARTDAQ}"
+			"Art_SCOPE.lib",
   }
 
   filter "system:windows"

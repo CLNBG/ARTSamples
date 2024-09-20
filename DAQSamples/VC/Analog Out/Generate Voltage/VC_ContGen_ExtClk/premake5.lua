@@ -4,8 +4,8 @@ project "VC_ContGen_ExtClk"
 	cppdialect "C++17"
 
 
-	targetdir ("../bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("../bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir (ARTSamplesBaseDir .. "/bin/" .. outputdir .. "/%{prj.name}")
+	objdir (ARTSamplesBaseDir .. "/bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{

@@ -4,12 +4,12 @@ project "ContinueAcq_IntClk_TrigSoft"
 	cppdialect "C++17"
 
 
-	targetdir ("../../../../bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("../../../../bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir (ARTSamplesBaseDir .. "/bin/" .. outputdir .. "/%{prj.name}")
+	objdir (ARTSamplesBaseDir .. "/bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
-      "VC_VoltageAcquisition.cpp",
+      "**.cpp",
   }
     
   includedirs
