@@ -57,25 +57,24 @@ int main(void)
 {
 	int         error = 0;
 	TaskHandle  taskHandle = 0;
-	float64     data[4000];
+	float64     data[25600 * 2] = {0};
 	char        errBuff[2048] = { '\0' };
 	int			i = 0;
 	int32   	written;
 
-	for (; i < 4000; i++)
-		data[i] = 5.0 * (double)i / 4000.0;
-
+	for(int i=0;i<25600;i++) data[i]=1.0;
+	for(int i=25600;i<25600*2;i++) data[i]=5.0;
 	/*********************************************/
 	// ArtDAQ Configure Code
 	/*********************************************/
 	ArtDAQErrChk(ArtDAQ_CreateTask("", &taskHandle));
-	ArtDAQErrChk(ArtDAQ_CreateAOVoltageChan(taskHandle, "Dev1/ao0", "", -10.0, 10.0, ArtDAQ_Val_Volts, ""));
-	ArtDAQErrChk(ArtDAQ_CfgSampClkTiming(taskHandle, "", 1000, ArtDAQ_Val_Rising, ArtDAQ_Val_FiniteSamps, 4000));
+	ArtDAQErrChk(ArtDAQ_CreateAOVoltageChan(taskHandle, "Stere/ao0:1", "", -10.0, 10.0, ArtDAQ_Val_Volts, ""));
+	ArtDAQErrChk(ArtDAQ_CfgSampClkTiming(taskHandle, "", 100000, ArtDAQ_Val_Rising, ArtDAQ_Val_FiniteSamps, 25600));
 
 	/*********************************************/
 	// ArtDAQ Write Code
 	/*********************************************/
-	ArtDAQErrChk(ArtDAQ_WriteAnalogF64(taskHandle, 4000, 0, 10.0, ArtDAQ_Val_GroupByChannel, data, &written, NULL));
+	ArtDAQErrChk(ArtDAQ_WriteAnalogF64(taskHandle, 25600, 0, 10.0, ArtDAQ_Val_GroupByChannel, data, &written, NULL));
 
 	/*********************************************/
 	// ArtDAQ Start Code
