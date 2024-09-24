@@ -1,26 +1,25 @@
-project "HDPS_2C"
-    kind "WindowedApp"
+project "Simple_PCI8501"
+    kind "ConsoleApp"
     language "C++"
     cppdialect "C++11"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-    
-    pchheader "StdAfx.h"
-    pchsource "%{wks.location}/NMROSCore/vendor/Camera/HDPS/StdAfx.cpp"
-    
-    characterset ("ASCII")
-    
-    defines
-    {
-      "_AFXDLL"
-    }
 
-    flags
-    {
-      "MFC"
-    }
+		includedirs
+		{
+			"%{IncludeDir.ART}"
+		}
 
+		libdirs
+		{
+			"%{LinkDir.ART8501}"
+		}
+
+		links
+		{
+			"PCI8501_64.lib"
+		}
     files
     {
         "**.h",
