@@ -47,7 +47,7 @@ int main(void)
 	// ArtDAQ Configure Code
 	/*********************************************/
 	ArtDAQErrChk(ArtDAQ_CreateTask("", &taskHandle));
-	ArtDAQErrChk(ArtDAQ_CreateAOVoltageChan(taskHandle, "Dev1/ao0", "", -10.0, 10.0, ArtDAQ_Val_Volts, ""));
+	ArtDAQErrChk(ArtDAQ_CreateAOVoltageChan(taskHandle, "Stere/ao0", "", -10.0, 10.0, ArtDAQ_Val_Volts, ""));
 
 	/*********************************************/
 	// ArtDAQ Start Code
