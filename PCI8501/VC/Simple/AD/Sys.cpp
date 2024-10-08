@@ -1,17 +1,17 @@
-// ËµÃ÷£º ±¾³ÌĞòÑİÊ¾ÁËÈçºÎÓÃ³ÌĞò²éÑ¯·½Ê½¶ÁÈ¡ADÊı¾İ
+// è¯´æ˜ï¼š æœ¬ç¨‹åºæ¼”ç¤ºäº†å¦‚ä½•ç”¨ç¨‹åºæŸ¥è¯¢æ–¹å¼è¯»å–ADæ•°æ®
 
 #include "stdafx.h"
 #include "windows.h"
 #include "stdio.h"
 #include "conio.h"
 
-#include "PCI8501.h"
+#include "PCI8501/PCI8501.h"
 
 int InputRange;
 int SelectInputRange(void);
 
-#define AD_DATA_LEN 1024 // Òª¶ÁÈ¡ºÍ´¦ÀíµÄADÊı¾İ³¤¶È£¨µã»ò×Ö£©
-USHORT ADBuffer[AD_DATA_LEN]; // ·ÖÅä»º³åÇø(´æ´¢Ô­Ê¼Êı¾İ)
+#define AD_DATA_LEN 1024 // è¦è¯»å–å’Œå¤„ç†çš„ADæ•°æ®é•¿åº¦ï¼ˆç‚¹æˆ–å­—ï¼‰
+USHORT ADBuffer[AD_DATA_LEN]; // åˆ†é…ç¼“å†²åŒº(å­˜å‚¨åŸå§‹æ•°æ®)
 
 int main(int argc, char* argv[])
 {
@@ -19,184 +19,184 @@ int main(int argc, char* argv[])
 	int DeviceLgcID;
 	ULONG ulDDR2Length = 0;
 
-	PCI8501_PARA_AD ADPara; // Ó²¼ş²ÎÊı
+	PCI8501_PARA_AD ADPara; // ç¡¬ä»¶å‚æ•°
 	PCI8501_STATUS_AD ADStatus;
-	LONG nReadSizeWords;   // Ã¿´Î¶ÁÈ¡ADÊı¾İµÄ³¤¶È(×Ö)
+	LONG nReadSizeWords;   // æ¯æ¬¡è¯»å–ADæ•°æ®çš„é•¿åº¦(å­—)
 	LONG nRetSizeWords;
 	LONG nReadSize;
-	
-	int nCurrentChannel = 0,nADChannel = 0;
+
+	int nCurrentChannel = 0, nADChannel = 0;
 	WORD ADData;
 	float fVolt;
-	
+
 	DeviceLgcID = 0;
-	hDevice = PCI8501_CreateDevice(DeviceLgcID); // ´´½¨Éè±¸¶ÔÏó
-	if(hDevice == INVALID_HANDLE_VALUE)
+	hDevice = PCI8501_CreateDevice(DeviceLgcID); // åˆ›å»ºè®¾å¤‡å¯¹è±¡
+	if (hDevice == INVALID_HANDLE_VALUE)
 	{
 		printf("CreateDevice error...\n");
 		_getch();
-		return 0; // Èç¹û´´½¨Éè±¸¶ÔÏóÊ§°Ü£¬Ôò·µ»Ø
+		return 0; // å¦‚æœåˆ›å»ºè®¾å¤‡å¯¹è±¡å¤±è´¥ï¼Œåˆ™è¿”å›
 	}
 
 	PCI8501_GetDDR2Length(hDevice, &ulDDR2Length);
 
-	InputRange = SelectInputRange(); // ÒªÇóÓÃ»§´Ó¼üÅÌÉÏÑ¡ÔñÊäÈëÁ¿³Ì
+	InputRange = SelectInputRange(); // è¦æ±‚ç”¨æˆ·ä»é”®ç›˜ä¸Šé€‰æ‹©è¾“å…¥é‡ç¨‹
 
-	memset(&ADPara, 0x00, sizeof(ADPara)); // ½«¸÷Ïî²ÎÊı¸´Î»ÖÁÈ·¶¨Öµ0(Ç¿ÁÒ½¨Òé)
+	memset(&ADPara, 0x00, sizeof(ADPara)); // å°†å„é¡¹å‚æ•°å¤ä½è‡³ç¡®å®šå€¼0(å¼ºçƒˆå»ºè®®)
 
-	// Ô¤ÖÃÓ²¼ş²ÎÊı
-	ADPara.Frequency			= 100000;				// ²ÉÑùÆµÂÊ(Hz)
-	for (int iChannel=0; iChannel<8; iChannel++)
+	// é¢„ç½®ç¡¬ä»¶å‚æ•°
+	ADPara.Frequency = 100000;				// é‡‡æ ·é¢‘ç‡(Hz)
+	for (int iChannel = 0; iChannel < 8; iChannel++)
 	{
-		ADPara.InputRange[iChannel]	= InputRange;			// Ä£ÄâÁ¿ÊäÈëÁ¿³Ì·¶Î§
-		ADPara.Gains[iChannel]	= PCI8501_GAINS_1MULT;
+		ADPara.InputRange[iChannel] = InputRange;			// æ¨¡æ‹Ÿé‡è¾“å…¥é‡ç¨‹èŒƒå›´
+		ADPara.Gains[iChannel] = PCI8501_GAINS_1MULT;
 	}
-	ADPara.M_Length				= 0;						// M³¤¶È
-	ADPara.N_Length				= 1024;				// N³¤¶È
-	ADPara.TriggerMode			= PCI8501_TRIGMODE_MIDL;	// Ó²¼şÖĞ¼ä´¥·¢(°üÀ¨Ô¤´¥·¢¡¢ºó´¥·¢¹¦ÄÜ)
-	ADPara.TriggerSource		= PCI8501_TRIGMODE_SOFT;	// Èí¼ş´¥·¢
-	ADPara.TriggerDir			= PCI8501_TRIGDIR_NEGATIVE; // ÏÂ½µÑØ´¥·¢
-	ADPara.TrigLevelVolt		= 0;
-	ADPara.ClockSource			= PCI8501_CLOCKSRC_IN;		// Ê¹ÓÃÄÚ²¿Ê±ÖÓ
-	ADPara.bClockSourceDir		= FALSE;
-	ADPara.OutClockSource		= PCI8501_OUTCLOCKSRC_TRIGGER0;
+	ADPara.M_Length = 0;						// Mé•¿åº¦
+	ADPara.N_Length = 1024;				// Né•¿åº¦
+	ADPara.TriggerMode = PCI8501_TRIGMODE_MIDL;	// ç¡¬ä»¶ä¸­é—´è§¦å‘(åŒ…æ‹¬é¢„è§¦å‘ã€åè§¦å‘åŠŸèƒ½)
+	ADPara.TriggerSource = PCI8501_TRIGMODE_SOFT;	// è½¯ä»¶è§¦å‘
+	ADPara.TriggerDir = PCI8501_TRIGDIR_NEGATIVE; // ä¸‹é™æ²¿è§¦å‘
+	ADPara.TrigLevelVolt = 0;
+	ADPara.ClockSource = PCI8501_CLOCKSRC_IN;		// ä½¿ç”¨å†…éƒ¨æ—¶é’Ÿ
+	ADPara.bClockSourceDir = FALSE;
+	ADPara.OutClockSource = PCI8501_OUTCLOCKSRC_TRIGGER0;
 
-	if(!PCI8501_InitDeviceAD(hDevice, &ADPara)) // ³õÊ¼»¯Ó²¼ş
+	if (!PCI8501_InitDeviceAD(hDevice, &ADPara)) // åˆå§‹åŒ–ç¡¬ä»¶
 	{
 		printf("InitDeviceAD error...\n");
 		_getch();
-		return 0; // Èç¹û´´½¨Éè±¸¶ÔÏóÊ§°Ü£¬Ôò·µ»Ø
+		return 0; // å¦‚æœåˆ›å»ºè®¾å¤‡å¯¹è±¡å¤±è´¥ï¼Œåˆ™è¿”å›
 	}
-	
-	nReadSizeWords = (ADPara.M_Length + ADPara.N_Length)*8; // M¼ÓN³¤¶ÈÎª¶ÁÈ¡Êı¾İµÄ³¤¶È
 
-	ULONG ulStartAddr=0;
-	BOOL bFirstWait = TRUE; // ÎªÃ¿´ÎµÈ´ıÖ»ÏÔÊ¾Ò»´ÎÌáÊ¾
-	while ( !_kbhit() )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-	{			
-		if(!PCI8501_StartDeviceAD(hDevice)) // Æô¶¯Éè±¸
+	nReadSizeWords = (ADPara.M_Length + ADPara.N_Length) * 8; // MåŠ Né•¿åº¦ä¸ºè¯»å–æ•°æ®çš„é•¿åº¦
+
+	ULONG ulStartAddr = 0;
+	BOOL bFirstWait = TRUE; // ä¸ºæ¯æ¬¡ç­‰å¾…åªæ˜¾ç¤ºä¸€æ¬¡æç¤º
+	while (!_kbhit())
+	{
+		if (!PCI8501_StartDeviceAD(hDevice)) // å¯åŠ¨è®¾å¤‡
 		{
 			printf("StartDeviceAD Error...\n");
 			_getch();
 		}
-		if(!PCI8501_SetDeviceTrigAD(hDevice)) // ´¥·¢AD
+		if (!PCI8501_SetDeviceTrigAD(hDevice)) // è§¦å‘AD
 		{
 			printf("SetDeviceTrigAD Error...\n");
 			_getch();
 		}
-		ulStartAddr=0;
+		ulStartAddr = 0;
 		nReadSize = nReadSizeWords;
-		bFirstWait = TRUE; 
-		while(TRUE) // ²éÑ¯µ±Ç°ÎïÀí»º³åÇøÊı¾İÊÇ·ñÒÑ×¼±¸¾ÍĞ÷
+		bFirstWait = TRUE;
+		while (TRUE) // æŸ¥è¯¢å½“å‰ç‰©ç†ç¼“å†²åŒºæ•°æ®æ˜¯å¦å·²å‡†å¤‡å°±ç»ª
 		{
-			if(!PCI8501_GetDevStatusAD(hDevice, &ADStatus))
+			if (!PCI8501_GetDevStatusAD(hDevice, &ADStatus))
 			{
 				printf("GetDevStatusAD error...\n");
 				_getch();
 				goto ExitRead;
 			}
-			
-			if(ADStatus.bComplete)
+
+			if (ADStatus.bComplete)
 			{
-				break;  // Èô°åÔØFIFO´æ´¢Æ÷Êı¾İÁ¿´ïµ½°ëÂúÒÔÉÏ£¬ÔòÍË³ö×´Ì¬²éÑ¯,¿ªÊ¼¶ÁÈ¡°ëÂúÊı¾İ
+				break;  // è‹¥æ¿è½½FIFOå­˜å‚¨å™¨æ•°æ®é‡è¾¾åˆ°åŠæ»¡ä»¥ä¸Šï¼Œåˆ™é€€å‡ºçŠ¶æ€æŸ¥è¯¢,å¼€å§‹è¯»å–åŠæ»¡æ•°æ®
 			}
-			else		
+			else
 			{
-				if(bFirstWait)
+				if (bFirstWait)
 				{
-					printf("ÇëµÈ´ı£¬Äú¿ÉÒÔ°´ÈÎÒâ¼üÍË³ö£¬µ«Çë²»ÒªÖ±½Ó¹Ø±Õ´°¿ÚÇ¿ÖÆÍË³ö...\n");
+					printf("è¯·ç­‰å¾…ï¼Œæ‚¨å¯ä»¥æŒ‰ä»»æ„é”®é€€å‡ºï¼Œä½†è¯·ä¸è¦ç›´æ¥å…³é—­çª—å£å¼ºåˆ¶é€€å‡º...\n");
 					bFirstWait = FALSE;
 				}
-				if(_kbhit()) goto ExitRead; // Èç¹ûÓÃ»§°´¼ü£¬ÔòÍË³ö
+				if (_kbhit()) goto ExitRead; // å¦‚æœç”¨æˆ·æŒ‰é”®ï¼Œåˆ™é€€å‡º
 			}
 		}
-		
-		if(!PCI8501_StopDeviceAD(hDevice)) // Æô¶¯Éè±¸
+
+		if (!PCI8501_StopDeviceAD(hDevice)) // å¯åŠ¨è®¾å¤‡
 		{
 			printf("StartDeviceAD Error...\n");
 			_getch();
 		}
-		
-		LONG offsetAddr	= ADStatus.lEndAddr - nReadSizeWords*sizeof(USHORT) + 4;
-		if (offsetAddr<0)
+
+		LONG offsetAddr = ADStatus.lEndAddr - nReadSizeWords * sizeof(USHORT) + 4;
+		if (offsetAddr < 0)
 		{
-			ulStartAddr = ulDDR2Length*1024*1024 + (ADStatus.lEndAddr - nReadSizeWords*sizeof(USHORT) + 4);
+			ulStartAddr = ulDDR2Length * 1024 * 1024 + (ADStatus.lEndAddr - nReadSizeWords * sizeof(USHORT) + 4);
 		}
 		else
 			ulStartAddr = (ULONG)offsetAddr;
-		
-		while (nReadSize>0)
+
+		while (nReadSize > 0)
 		{
-			if(!PCI8501_ReadDeviceAD(hDevice, ADBuffer, AD_DATA_LEN, ulStartAddr, &nRetSizeWords))
+			if (!PCI8501_ReadDeviceAD(hDevice, ADBuffer, AD_DATA_LEN, ulStartAddr, &nRetSizeWords))
 			{
 				printf("ReadDeviceDmaAD error...\n");
 				_getch();
 				goto ExitRead;
 			}
- 			nReadSize = nReadSize-AD_DATA_LEN;
-			ulStartAddr = ulStartAddr + AD_DATA_LEN*sizeof(USHORT);
-			
-			for(int Index=0; Index<64;)
-			{			
-				for(nADChannel=0; nADChannel<8; nADChannel++)
+			nReadSize = nReadSize - AD_DATA_LEN;
+			ulStartAddr = ulStartAddr + AD_DATA_LEN * sizeof(USHORT);
+
+			for (int Index = 0; Index < 64;)
+			{
+				for (nADChannel = 0; nADChannel < 8; nADChannel++)
 				{
-					if(_kbhit()) goto ExitRead;
-					
-					ADData = ADBuffer[Index]&0xFFFF;
-					// ½«Ô­Âë×ª»»ÎªµçÑ¹Öµ
-					switch(InputRange)
+					if (_kbhit()) goto ExitRead;
+
+					ADData = ADBuffer[Index] & 0xFFFF;
+					// å°†åŸç è½¬æ¢ä¸ºç”µå‹å€¼
+					switch (InputRange)
 					{
 					case PCI8501_INPUT_N10000_P10000mV: // -10000mV - +10000mV
-						fVolt = (float)((20000.0/65536) * ADData - 10000.0);
+						fVolt = (float)((20000.0 / 65536) * ADData - 10000.0);
 						break;
 					case PCI8501_INPUT_N5000_P5000mV:	// -5000mV - +5000mV
-						fVolt = (float)((10000.0/65536) * ADData - 5000.0);
+						fVolt = (float)((10000.0 / 65536) * ADData - 5000.0);
 						break;
 					case PCI8501_INPUT_N2500_P2500mV:	// -2500mV - +2500mV
-						fVolt = (float)((5000.0/65536) * ADData - 2500.0);
+						fVolt = (float)((5000.0 / 65536) * ADData - 2500.0);
 						break;
 					case PCI8501_INPUT_0_P10000mV:	// 0mV - +10000mV
-						fVolt = (float)((10000.0/65536) * ADData);
+						fVolt = (float)((10000.0 / 65536) * ADData);
 						break;
 					case PCI8501_INPUT_0_P5000mV:	// 0mV - +5000mV
-						fVolt = (float)((5000.0/65536) * ADData);
+						fVolt = (float)((5000.0 / 65536) * ADData);
 						break;
 					default:
 						break;
 					}
-					
-					printf("CH%02d=%6.2f\t", nADChannel, fVolt); // ÏÔÊ¾µçÑ¹Öµ
+
+					printf("CH%02d=%6.2f\t", nADChannel, fVolt); // æ˜¾ç¤ºç”µå‹å€¼
 					Index++;
 				}
 				printf("\n");
 			} // for(Index=0; Index<64; Index++)
 		}
-		
+
 	}
-	
+
 ExitRead:
-	PCI8501_StopDeviceAD(hDevice); // Í£Ö¹AD
-	PCI8501_ReleaseDeviceAD(hDevice); // ÊÍ·ÅAD
-	PCI8501_ReleaseDevice(hDevice); // ÊÍ·ÅÉè±¸¶ÔÏó
+	PCI8501_StopDeviceAD(hDevice); // åœæ­¢AD
+	PCI8501_ReleaseDeviceAD(hDevice); // é‡Šæ”¾AD
+	PCI8501_ReleaseDevice(hDevice); // é‡Šæ”¾è®¾å¤‡å¯¹è±¡
 	return 0;
 }
 
 
 //////////////////////////////////////////////////////
-// »ñÈ¡ÓÃ»§Ñ¡ÔñµÄÊäÈëÁ¿³Ì
+// è·å–ç”¨æˆ·é€‰æ‹©çš„è¾“å…¥é‡ç¨‹
 int SelectInputRange(void)
 {
 	LONG InputRange;
 Repeat:
 	printf("\n");
-	printf("0. -10V ¡« +10V\n");
-	printf("1. -5V ¡« +5V\n");
-	printf("2. -2500V ¡« +2500V\n");
-	printf("3. 0mV ¡« +10000mV\n");
-	printf("4. 0mV ¡« +5000mV\n");
+	printf("0. -10V ï½ +10V\n");
+	printf("1. -5V ï½ +5V\n");
+	printf("2. -2500V ï½ +2500V\n");
+	printf("3. 0mV ï½ +10000mV\n");
+	printf("4. 0mV ï½ +5000mV\n");
 
 	printf("Please Select Input Range[0-4]:");
 	scanf_s("%d", &InputRange);
-	if(InputRange<0 || InputRange>4) goto Repeat; // ÅĞ¶ÏÓÃ»§Ñ¡ÔñµÄÁ¿³ÌÊÇ·ñºÏ·¨£¬²»ºÏ·¨£¬ÔòÖØĞÂÑ¡Ôñ
+	if (InputRange < 0 || InputRange>4) goto Repeat; // åˆ¤æ–­ç”¨æˆ·é€‰æ‹©çš„é‡ç¨‹æ˜¯å¦åˆæ³•ï¼Œä¸åˆæ³•ï¼Œåˆ™é‡æ–°é€‰æ‹©
 	return InputRange;
 }
